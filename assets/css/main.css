@@ -135,6 +135,7 @@ p { margin: 0; }
 .section + .section { border-top: 1px solid var(--line); }
 .section-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 28px; flex-wrap: wrap; }
 .section-head h2 { font-size: 30px; }
+.section-head h1 { font-size: 30px; }
 .section-head .spacer { flex: 1; }
 .grid { display: grid; gap: 16px; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
