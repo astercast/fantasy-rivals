@@ -14,7 +14,7 @@
 }
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/inter-latin-normal-var.woff2") format("woff2");
+  src: url("/assets/fonts/inter-latin-normal-var.woff2") format("woff2-variations");
   font-weight: 100 900; font-style: normal; font-display: swap;
 }
 
@@ -50,7 +50,11 @@
 }
 
 * { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+/* iPhone Safari font hardening (aesthetics ROUND-001 section 5): never
+   synthesize weight. Anton ships one true weight (400); Inter variable
+   carries real weights 100 to 900. Synthesis is where iOS swaps in a
+   system face or a smeared weight. */
+html { -webkit-text-size-adjust: 100%; font-synthesis-weight: none; }
 body {
   margin: 0;
   background: var(--bg);
