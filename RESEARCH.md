@@ -64,3 +64,11 @@ Verified: Deadlock has **no official league and no Valve-run circuit** as of thi
 5. Stage 1 champions for Americas, Pacific and China (2026) are unverified; the indexed stories are 2025 material. China's Stage 2 playoff field could not be matched from published abbreviations to full team names in the sources read, and two Pacific playoff abbreviations are likewise unexpanded.
 6. The Stage 2 group stage's exact opening date is not pinned in the sources (late September); the seed carries the block's approximate start and says so in its source note. The playoffs (Oct 8 to 18) and everything after are dated precisely.
 7. Per-player season stats (averages, form) do not exist until results are imported; the players page does not pretend otherwise.
+
+## Wave 2 addendum (2026-10-14)
+
+Re-verification pass for the wave-2 landings, all read directly today:
+
+- **Headline facts unchanged.** Beebom's Stage 2 playoffs coverage (updated Oct 9, 2026) still gives the Oct 8 to 18 playoff window; DreamHack's own Stockholm page still gives the Ignite Grand Finals on Nov 23 to 29, 2026. No seed fact moved.
+- **Liquipedia's Ignite 2026 hub read in full today** (the direct-fetch 403 noted in section 4 did not apply to this route). Facts now carried on the season and teams surfaces: the League Points distribution by finish for Stage 1, the Mid-Season Finals and Stage 2; Grand Finals qualification (each region's Stage 2 playoff winners plus the top of the annual League Points table; the field splits Americas 4, EMEA 4, Pacific 2, China 2); and the Partner Teams Program (twelve organizations with guaranteed spots, revenue sharing and relegation protection). The twelve partners named in section 2 are flagged `partner` in the seed and badged on the teams page.
+- **Season state is now calendar-derived** (see ARCHITECTURE.md): the Oct 18 Stage 2 close and the Nov 23 Grand Finals start roll the public surface and the league picker forward on rebuild, with no hand edits. The Stage 2 stage line was reworded so it stays true in the past tense.

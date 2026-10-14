@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T04:46:25.676Z",
+  "generatedAt": "2026-10-14T04:55:20.542Z",
   "game": {
     "name": "Marvel Rivals",
     "slug": "marvel-rivals",
@@ -9,27 +9,32 @@
     {
       "name": "100 Thieves",
       "region": "Americas",
-      "short": "100T"
+      "short": "100T",
+      "partner": true
     },
     {
       "name": "Sentinels",
       "region": "Americas",
-      "short": "SEN"
+      "short": "SEN",
+      "partner": true
     },
     {
       "name": "FlyQuest",
       "region": "Americas",
-      "short": "FLY"
+      "short": "FLY",
+      "partner": true
     },
     {
       "name": "NRG Shock",
       "region": "Americas",
-      "short": "NRG"
+      "short": "NRG",
+      "partner": true
     },
     {
       "name": "Liquid Citadel",
       "region": "Americas",
-      "short": "LC"
+      "short": "LC",
+      "partner": true
     },
     {
       "name": "NTMR",
@@ -39,12 +44,14 @@
     {
       "name": "TSM",
       "region": "Americas",
-      "short": "TSM"
+      "short": "TSM",
+      "partner": true
     },
     {
       "name": "Spacestation Gaming",
       "region": "Americas",
-      "short": "SSG"
+      "short": "SSG",
+      "partner": true
     },
     {
       "name": "Swamp Gaming",
@@ -69,17 +76,20 @@
     {
       "name": "Natus Vincere",
       "region": "EMEA",
-      "short": "NAVI"
+      "short": "NAVI",
+      "partner": true
     },
     {
       "name": "Virtus.pro",
       "region": "EMEA",
-      "short": "VP"
+      "short": "VP",
+      "partner": true
     },
     {
       "name": "Team Heretics",
       "region": "EMEA",
-      "short": "TH"
+      "short": "TH",
+      "partner": true
     },
     {
       "name": "Team Peps",
@@ -134,12 +144,14 @@
     {
       "name": "REJECT",
       "region": "Pacific",
-      "short": "RJT"
+      "short": "RJT",
+      "partner": true
     },
     {
       "name": "Gen.G Esports",
       "region": "Pacific",
-      "short": "GEN"
+      "short": "GEN",
+      "partner": true
     },
     {
       "name": "The Burgers",

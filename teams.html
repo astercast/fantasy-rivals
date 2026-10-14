@@ -36,7 +36,7 @@
   import { renderChrome, fetchJson, esc, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("teams");
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`);
-  document.querySelector("[data-note]").textContent = `Rosters as published on Liquipedia. Teams marked “roster pending” are confirmed in the competition; their current lineups are being verified before they enter the draft pool.`;
+  document.querySelector("[data-note]").textContent = `Rosters as published for the 2026 season. Teams marked “roster pending” are confirmed in the competition; their current lineups are being verified before they enter the draft pool. Teams carrying a Partner tag are the circuit's twelve partner organizations, with guaranteed league spots for 2026.`;
   const byRegion = {};
   for (const t of data.teams) (byRegion[t.region || ""] ||= []).push(t);
   const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
@@ -47,7 +47,7 @@
         ${teams.map((t) => {
           const roster = data.players.filter((p) => p.team === t.short);
           return `<div class="card">
-            <h3>${esc(t.name)} <span class="mono fine">${esc(t.short)}</span></h3>
+            <h3>${esc(t.name)} <span class="mono fine">${esc(t.short)}</span>${t.partner ? ` <span class="role" style="background:#fdf3d7; color:#7a5b12">Partner</span>` : ""}</h3>
             ${roster.length ? `<div style="margin-top:10px">${roster.map((p) => `
               <div style="display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--line)">
                 <span style="font-weight:600">${esc(p.ign)}</span>

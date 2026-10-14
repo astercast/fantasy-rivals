@@ -34,6 +34,9 @@
         <option>Duelist</option>
         <option>Strategist</option>
       </select>
+      <select id="teamFilter" style="padding:9px 12px; border:1px solid var(--line-dark); border-radius:8px; font:inherit; font-size:14px; margin-left:8px">
+        <option value="">All teams</option>
+      </select>
     </div>
     <p class="muted small" style="margin-bottom:18px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool, a player enters the pool when their roster spot is confirmed by a published source.</p>
     <div class="card" style="padding:6px 12px">
@@ -51,21 +54,28 @@
   renderChrome("players");
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`);
   const teamName = Object.fromEntries(data.teams.map((t) => [t.short, t.name]));
+  const teamRegion = Object.fromEntries(data.teams.map((t) => [t.short, t.region]));
   const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
   const players = [...data.players].sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999));
-  function draw(filter) {
+  const poolTeams = [...new Set(players.map((p) => p.team))].sort((a, b) => (teamName[a] || a).localeCompare(teamName[b] || b));
+  const teamFilter = document.getElementById("teamFilter");
+  teamFilter.innerHTML = `<option value="">All teams</option>` + poolTeams.map((t) => `<option value="${esc(t)}">${esc(teamName[t] || t)}</option>`).join("");
+  function draw() {
+    const role = document.getElementById("roleFilter").value;
+    const team = teamFilter.value;
     document.querySelector("[data-pool]").innerHTML = players
-      .filter((p) => !filter || p.role === filter)
+      .filter((p) => (!role || p.role === role) && (!team || p.team === team))
       .map((p, i) => `<tr>
         <td class="n">${p.draftRank ?? "·"}</td>
         <td><strong>${esc(p.ign)}</strong>${p.realName ? ` <span class="fine">${esc(p.realName)}</span>` : ""}</td>
         <td><span class="role ${roleClass(p.role)}">${esc(p.role)}</span></td>
-        <td>${esc(teamName[p.team] || p.team || "")}</td>
+        <td>${esc(teamName[p.team] || p.team || "")}${teamRegion[p.team] ? ` <span class="fine">${esc(teamRegion[p.team])}</span>` : ""}</td>
         <td class="muted small">${(p.heroes || []).map(esc).join(" · ")}</td>
       </tr>`).join("");
   }
-  draw("");
-  document.getElementById("roleFilter").addEventListener("change", (e) => draw(e.target.value));
+  draw();
+  document.getElementById("roleFilter").addEventListener("change", draw);
+  teamFilter.addEventListener("change", draw);
 </script>
 </body>
 </html>
