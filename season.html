@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (Liquipedia series results, official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Player points rest on per-player box scores, and box scores are published as data nowhere: a player's line prints only when it has been extracted from the official broadcast record with its source (the VOD and timestamp) named. No box-score lines have landed yet, so no player averages or form lines are shown anywhere on this site. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
+    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (series results from MRVL (mrvl.net), named on every row; official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Player points rest on per-player box scores: a player's line prints only when it has been extracted from the official broadcast record with its source (the VOD and timestamp) named. No box-score lines have landed yet, so no player averages or form lines are shown anywhere on this site. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
   </div>
 </section>
 
@@ -203,7 +203,7 @@
           <tr><td>${esc(teamName[short] || short)}</td><td class="n">${r.w}</td><td class="n">${r.l}</td><td class="n">${r.f} to ${r.a}</td></tr>`).join("")}
         </tbody>
       </table>`).join("") + `
-      <p class="fine" style="margin-top:8px">Computed from the ${finals.length} imported final series above, as of ${fmtDate(sched.generatedAt)}. Partial: two further verified EMEA group series (Virtus.pro over Disband, Sep 26; CrownFall over Vengeful, Oct 4) are in the import payload but their teams are not yet in the directory, so they are reported in the import record, not folded in here. Inside a league, your table is live from the first scored week.</p>`;
+      <p class="fine" style="margin-top:8px">Computed from the ${finals.length} imported final series above, as of ${fmtDate(sched.generatedAt)}. Partial: the EMEA group stage ran more series than the imported record carries, and no Americas, Pacific or China finals are imported yet, so this table is the imported record so far, not the group table. The two series reported unresolved in rotation 24 (Virtus.pro over Disband, Sep 26; CrownFall over Vengeful, Oct 4) are folded in: both teams entered the directory in rotation 25 with sourced identities, named in the import record. Inside a league, your table is live from the first scored week.</p>`;
   }
 </script>
 </body>

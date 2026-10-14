@@ -62,6 +62,17 @@
   },
   {
    "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 0,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-26",
+   "status": "final",
+   "teamA": "VP",
+   "teamB": "Disband",
+   "week": 2
+  },
+  {
+   "roundLabel": "EMEA group stage",
    "scoreA": 0,
    "scoreB": 2,
    "source": "MRVL (mrvl.net), read Oct 14, 2026",
@@ -91,6 +102,17 @@
    "status": "final",
    "teamA": "VP",
    "teamB": "SHK",
+   "week": 3
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 0,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-04",
+   "status": "final",
+   "teamA": "CRWN",
+   "teamB": "VGF",
    "week": 3
   },
   {
@@ -163,6 +185,15 @@
    "status": "scheduled",
    "teamA": "CRWN",
    "teamB": "VP",
+   "week": 4
+  },
+  {
+   "roundLabel": "China playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-16",
+   "status": "scheduled",
+   "teamA": "Dynasty",
+   "teamB": "DMA",
    "week": 4
   }
  ],
@@ -1204,6 +1235,26 @@
    "name": "Hypertune",
    "region": "EMEA",
    "short": "HYT"
+  },
+  {
+   "name": "Disband",
+   "region": "EMEA",
+   "short": "Disband"
+  },
+  {
+   "name": "Vengeful",
+   "region": "EMEA",
+   "short": "VGF"
+  },
+  {
+   "name": "Dynasty",
+   "region": "China",
+   "short": "Dynasty"
+  },
+  {
+   "name": "Dawn Mercy Accord",
+   "region": "China",
+   "short": "DMA"
   }
  ]
 }

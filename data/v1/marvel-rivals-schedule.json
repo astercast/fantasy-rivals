@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T14:47:34.072Z",
+  "generatedAt": "2026-10-14T16:18:00.437Z",
   "game": {
     "name": "Marvel Rivals",
     "slug": "marvel-rivals",
@@ -63,6 +63,17 @@
     },
     {
       "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 0,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-26",
+      "status": "final",
+      "teamA": "VP",
+      "teamB": "Disband",
+      "week": 2
+    },
+    {
+      "roundLabel": "EMEA group stage",
       "scoreA": 0,
       "scoreB": 2,
       "source": "MRVL (mrvl.net), read Oct 14, 2026",
@@ -92,6 +103,17 @@
       "status": "final",
       "teamA": "VP",
       "teamB": "SHK",
+      "week": 3
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 0,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-04",
+      "status": "final",
+      "teamA": "CRWN",
+      "teamB": "VGF",
       "week": 3
     },
     {
@@ -164,6 +186,15 @@
       "status": "scheduled",
       "teamA": "CRWN",
       "teamB": "VP",
+      "week": 4
+    },
+    {
+      "roundLabel": "China playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-16",
+      "status": "scheduled",
+      "teamA": "Dynasty",
+      "teamB": "DMA",
       "week": 4
     }
   ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-14T14:47:34.072Z",
+  "generatedAt": "2026-10-14T16:18:00.437Z",
   "game": {
     "name": "Marvel Rivals",
     "slug": "marvel-rivals",
@@ -277,6 +277,26 @@
       "name": "Hypertune",
       "region": "EMEA",
       "short": "HYT"
+    },
+    {
+      "name": "Disband",
+      "region": "EMEA",
+      "short": "Disband"
+    },
+    {
+      "name": "Vengeful",
+      "region": "EMEA",
+      "short": "VGF"
+    },
+    {
+      "name": "Dynasty",
+      "region": "China",
+      "short": "Dynasty"
+    },
+    {
+      "name": "Dawn Mercy Accord",
+      "region": "China",
+      "short": "DMA"
     }
   ],
   "players": [
