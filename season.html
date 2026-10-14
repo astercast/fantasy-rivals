@@ -4,22 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Season · Rivals Fantasy</title>
-<meta name="theme-color" content="#0b0d1c">
+<meta name="theme-color" content="#0a1224">
 <meta property="og:title" content="Season · Rivals Fantasy">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
-<meta property="og:description" content="The Marvel Rivals pro calendar: what is live now, what is next, and what every competition means for your league.">
+<meta property="og:description" content="The Marvel Rivals pro calendar: what is live now, what is next, the schedule, and how scoring works.">
 <meta property="og:image" content="/assets/og-card.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Season · Rivals Fantasy">
-<meta name="twitter:description" content="The Marvel Rivals pro calendar: what is live now, what is next, and what every competition means for your league.">
+<meta name="twitter:description" content="The Marvel Rivals pro calendar: what is live now, what is next, the schedule, and how scoring works.">
 <meta name="twitter:image" content="/assets/og-card.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta name="description" content="The Marvel Rivals pro calendar: what is live now, what is next, and what every competition means for your league.">
-<link rel="preload" href="/assets/fonts/anton-latin-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="description" content="The Marvel Rivals pro calendar: what is live now, what is next, the schedule, and how scoring works.">
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
@@ -27,20 +27,37 @@
 
 <section class="plate" data-season-plate></section>
 
+<div class="art-band">
+  <img src="/assets/img/season-key-art.jpg" width="1438" height="810" alt="Marvel Rivals key art">
+</div>
+
 <section class="section">
   <div class="wrap">
-    <div class="section-head"><h1>The competition calendar</h1><span class="spacer"></span><span class="fine" data-asof></span></div>
-    <div data-competitions></div>
-    <p class="fine" style="margin-top:20px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one hasn't started, you can set up in advance, draft now, score when play begins.</p>
+    <div class="section-head"><h1>Season timeline</h1><span class="spacer"></span><span class="fine" data-asof></span></div>
+    <div data-timeline></div>
   </div>
 </section>
 
-<section class="section" style="padding-top:0">
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Schedule and results</h2></div>
+    <div data-fixtures></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Standings</h2></div>
+    <div data-standings></div>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap">
     <div class="section-head"><h2>How the Grand Finals field is set</h2></div>
     <p class="muted" style="max-width:64ch">Twelve teams reach the Grand Finals in Stockholm. Each region's Stage 2 playoff winner qualifies directly. The remaining places go to the top of the annual League Points table, which adds up points from Stage 1, the Mid-Season Finals and Stage 2, with Stage 2 weighted heaviest. The field splits four from the Americas, four from EMEA, two from the Pacific and two from China. That is why the Stage 2 playoffs matter here: they decide the direct qualifiers and most of the points table at the same time.</p>
-    <div class="card" style="margin-top:20px; max-width:640px">
-      <h3 style="margin-bottom:10px">League Points by finish</h3>
+    <div style="margin-top:24px; max-width:640px">
+      <h3 style="margin-bottom:8px">League Points by finish</h3>
       <table class="sheet">
         <thead><tr><th>Finish</th><th class="n">Stage 1</th><th class="n">Mid-Season Finals</th><th class="n">Stage 2</th></tr></thead>
         <tbody>
@@ -55,8 +72,55 @@
           <tr><td>9th to 16th, Pacific</td><td class="n">3</td><td class="n">·</td><td class="n">4</td></tr>
         </tbody>
       </table>
-      <p class="fine" style="margin-top:12px">Qualification and points: Liquipedia's Marvel Rivals Ignite 2026 hub, read Oct 14, 2026. The table awards points per regional finish; the annual table sums a team's three events.</p>
+      <p class="fine" style="margin-top:8px">Qualification and points: Liquipedia's Marvel Rivals Ignite 2026 hub, read Oct 14, 2026. The table awards points per regional finish; the annual table sums a team's three events.</p>
     </div>
+  </div>
+</section>
+
+<!-- Scoring is explained once, here, in plain words with one small
+     table. No other surface re-explains it. -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Scoring</h2></div>
+    <p class="muted" style="max-width:64ch">Your players score from their real match stats. Eliminations and assists are worth the most, deaths cost a little, and damage, blocking and healing add up per thousand. When a player's team wins the series, the player gets a win bonus, and a 25-elimination series earns a carry bonus. Your drafted Squad (one pro org) scores its own results: a point per map, two per series, two more for a clean sweep. Every league can tune its own table; this is the standard one, modelled on Fantasy LCS's published table.</p>
+    <div class="grid grid-2" style="margin-top:24px">
+      <div>
+        <h3 style="margin-bottom:8px">Players</h3>
+        <table class="sheet">
+          <tr><td>Elimination</td><td class="n">2.0</td></tr>
+          <tr><td>Assist</td><td class="n">1.5</td></tr>
+          <tr><td>Death</td><td class="n">−0.5</td></tr>
+          <tr><td>Final hit</td><td class="n">0.5</td></tr>
+          <tr><td>Damage dealt, per 1,000</td><td class="n">1.0</td></tr>
+          <tr><td>Damage blocked, per 2,000</td><td class="n">1.0</td></tr>
+          <tr><td>Healing, per 1,000</td><td class="n">1.0</td></tr>
+          <tr><td>Series win (player's team)</td><td class="n">2.0</td></tr>
+          <tr><td>25+ elimination series</td><td class="n">2.0</td></tr>
+        </table>
+      </div>
+      <div>
+        <h3 style="margin-bottom:8px">Squad slot</h3>
+        <table class="sheet">
+          <tr><td>Map win</td><td class="n">1.0</td></tr>
+          <tr><td>Series win</td><td class="n">2.0</td></tr>
+          <tr><td>Clean sweep (no maps dropped)</td><td class="n">2.0</td></tr>
+        </table>
+        <h3 style="margin:24px 0 8px">A big series, scored</h3>
+        <p class="muted small" style="margin-bottom:8px">A Duelist drops 24 eliminations in a series his team wins 3-1:</p>
+        <div class="worked">
+          <div class="w-row"><span>24 eliminations × 2.0</span><span>48.0</span></div>
+          <div class="w-row"><span>16 assists × 1.5</span><span>24.0</span></div>
+          <div class="w-row"><span>9 deaths × −0.5</span><span>−4.5</span></div>
+          <div class="w-row"><span>12 final hits × 0.5</span><span>6.0</span></div>
+          <div class="w-row"><span>18,400 damage dealt (per 1,000)</span><span>18.4</span></div>
+          <div class="w-row"><span>3,000 damage blocked (per 2,000)</span><span>1.5</span></div>
+          <div class="w-row"><span>900 healing (per 1,000)</span><span>0.9</span></div>
+          <div class="w-row"><span>Series win bonus</span><span>2.0</span></div>
+          <div class="w-row w-total"><span>Fantasy points for the week</span><span>96.3</span></div>
+        </div>
+      </div>
+    </div>
+    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (Liquipedia series results, official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
   </div>
 </section>
 
@@ -65,30 +129,59 @@
   import { renderChrome, renderSeasonPlate, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("season");
   renderSeasonPlate(document.querySelector("[data-season-plate]"));
+
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-season.json`);
   document.querySelector("[data-asof]").textContent = `State as of ${fmtDate(data.asOf)}`;
-  /* The calendar in wire form (study 2): one line per competition, name,
-     stage, state word, dates, and the sourcing note as the appended fact.
-     Date grouping by starting month is the only sectioning. */
-  const monthOf = (iso) => new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
-  const groups = {};
-  for (const s of [...data.seasons].sort((a, b) => (b.startsOn || "").localeCompare(a.startsOn || ""))) {
-    (groups[monthOf(s.startsOn)] ||= []).push(s);
-  }
+  /* The timeline: one line per event, live first, then upcoming, then
+     complete. Scope, event, dates, state word. */
+  const order = { live: 0, upcoming: 1, complete: 2 };
   const stateWord = (s) => s.state === "live" ? "Live now" : s.state === "upcoming" ? "Upcoming" : "Complete";
-  document.querySelector("[data-competitions]").innerHTML = Object.entries(groups).map(([month, ss]) => `
-    <div class="wire-group">
-      <p class="wire-date">${esc(month)}</p>
-      ${ss.map((s) => `
-        <div class="wire-line">
-          <span class="w-name">${esc(s.name)}</span>
-          <span class="w-stage">${esc(s.stage || "")}</span>
-          <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
-          <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
-          <span class="w-fact">${esc(s.sourceNote || "")}</span>
-          ${s.state !== "complete" ? `<span class="w-act"><a class="btn btn-small btn-accent" href="/create-league.html">Create a league for this</a></span>` : ""}
-        </div>`).join("")}
-    </div>`).join("");
+  const sorted = [...data.seasons].sort((a, b) =>
+    (order[a.state] - order[b.state]) || (a.startsOn || "").localeCompare(b.startsOn || ""));
+  document.querySelector("[data-timeline]").innerHTML = sorted.map((s) => `
+    <div class="wire-line">
+      <span class="w-name">${esc(s.name)}</span>
+      <span class="w-stage">${esc(s.stage || "")}</span>
+      <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
+      <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
+      ${s.state !== "complete" ? `<span class="w-act"><a class="btn btn-small" href="/start.html">Create a league for this</a></span>` : ""}
+    </div>`).join("") + `
+    <p class="fine" style="margin-top:16px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one has not started, you can set up in advance: draft now, score when play begins.</p>`;
+
+  /* Schedule and results: day-grouped one-line rows. Teams, record
+     inline on finals, state word, one appended fact. The same grammar
+     as the home wire and the league fixtures. */
+  const [sched, teamsData] = await Promise.all([
+    fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`),
+    fetchJson(`/data/v1/${GAME_SLUG}-teams.json`),
+  ]);
+  const teamName = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.name]));
+  const fx = document.querySelector("[data-fixtures]");
+  if (!sched.matches.length) {
+    fx.innerHTML = `<div class="wire-line"><span class="w-name">Fixtures publish with the competition</span><span class="w-fact">The live competition's series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</span></div>`;
+    document.querySelector("[data-standings]").innerHTML =
+      `<p class="muted" style="max-width:64ch">The standings table publishes here when the first fixtures are imported. Inside a league, your table is live from the first scored week.</p>`;
+  } else {
+    const dayOf = (iso) => new Date(iso).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
+    const byDay = {};
+    for (const m of [...sched.matches].sort((a, b) => String(a.startsAt).localeCompare(String(b.startsAt)))) {
+      (byDay[dayOf(m.startsAt)] ||= []).push(m);
+    }
+    fx.innerHTML = Object.entries(byDay).map(([day, ms]) => `
+      <div class="wire-group">
+        <p class="wire-date">${esc(day)}</p>
+        ${ms.map((m) => `
+          <div class="wire-line">
+            <span class="w-name">${esc(teamName[m.teamA] || m.teamA)} vs ${esc(teamName[m.teamB] || m.teamB)}</span>
+            <span class="w-stage">${esc(m.roundLabel || "")}</span>
+            <span class="w-state">${m.status === "final" ? "Final" : "Scheduled"}</span>
+            ${m.scoreA == null ? "" : `<span class="w-score">${m.scoreA} to ${m.scoreB}</span>`}
+            <span class="w-fact">Fantasy week ${esc(m.week)}</span>
+          </div>`).join("")}
+      </div>`).join("");
+    document.querySelector("[data-standings]").innerHTML =
+      `<p class="muted" style="max-width:64ch">Regional standings publish with the imported fixtures. Inside a league, your table is live from the first scored week.</p>`;
+  }
 </script>
 </body>
 </html>

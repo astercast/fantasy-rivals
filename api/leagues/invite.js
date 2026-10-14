@@ -3,7 +3,7 @@ import { currentUser } from "../../lib/session.js";
 import { getLeague, getMember, createInvite } from "../../lib/league.js";
 
 // POST /api/leagues/invite { leagueId } - mint a fresh invite code
-// (any member can invite; the link is /join.html?code=XXXX).
+// (any member can invite; the link is /start.html?mode=join&code=XXXX).
 export default handler(async (req, res) => {
   if (req.method !== "POST") return methodNotAllowed(res, ["POST"]);
   const user = await currentUser(req);
@@ -15,5 +15,5 @@ export default handler(async (req, res) => {
     return fail(res, 403, "not_member", "Only league members can invite.");
   }
   const code = await createInvite(league.id, user.id);
-  json(res, 200, { ok: true, code, path: `/join.html?code=${code}` });
+  json(res, 200, { ok: true, code, path: `/start.html?mode=join&code=${code}` });
 });

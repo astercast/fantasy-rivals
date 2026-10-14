@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rivals Fantasy · Fantasy Marvel Rivals on the real pro season</title>
-<meta name="theme-color" content="#0b0d1c">
+<meta name="theme-color" content="#0a1224">
 <meta property="og:title" content="Rivals Fantasy · Fantasy Marvel Rivals on the real pro season">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
@@ -19,39 +19,27 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
-<link rel="preload" href="/assets/fonts/anton-latin-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
 
-<!-- The splash is the broadcast open (FANTASY-STUDY 5.1): the trade-dress
-     band above, one beat of cover art at full strength, the season plate
-     docked at the splash's foot, then the wire running off the first
-     screen. No stat strip, no card grid, no second beat. -->
-<section class="cover">
-  <div class="wrap">
-    <div class="cover-grid">
-      <div>
-        <p class="kicker">Fantasy esports · Marvel Rivals</p>
-        <h1 style="margin-top:14px">The pro season, <em>drafted by you.</em></h1>
-        <p class="sub">Pick real pros by role (Vanguard, Duelist, Strategist), run a snake draft with your friends, and score every week from the actual match stats. No spreadsheets. No honor system.</p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="/create-league.html">Create a league</a>
-          <a class="btn btn-ghost" href="/season.html">See the season</a>
-        </div>
-      </div>
-      <div class="cover-panel">
-        <div class="hc-head">
-          <h3>Top of the draft board</h3>
-          <span class="spacer" style="flex:1"></span>
-          <span class="fine">Consensus rank</span>
-        </div>
-        <div data-board><p class="fine" style="padding:10px 0">Loading the pool…</p></div>
-        <p style="padding:12px 0 10px"><a href="/players.html" style="font-size:14px; font-weight:600">Full player pool →</a></p>
+<!-- The front door is a working door: full-bleed current-season key
+     art, the wordmark set over it, one line, one action. Season state,
+     the top of the board, and the wire follow in that order. -->
+<section class="hero">
+  <img class="hero-art" src="/assets/img/hero-key-art.jpg" width="1920" height="620" alt="Marvel Rivals key art" fetchpriority="high">
+  <div class="hero-shade" aria-hidden="true"></div>
+  <div class="hero-in">
+    <div class="wrap">
+      <h1 class="wordmark-big">Rivals<span class="dot">·</span>Fantasy</h1>
+      <p class="hero-line">The pro season, drafted by you. Fantasy on the real Ignite season.</p>
+      <div class="cta-row">
+        <a class="btn btn-primary" href="/start.html" data-hero-action>Create a league</a>
+        <a class="btn btn-ghost" href="/season.html">See the season</a>
       </div>
     </div>
-    <div class="cover-lines" data-cover-lines></div>
   </div>
 </section>
 
@@ -60,121 +48,78 @@
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h2>The season wire</h2>
+      <h2>Top of the draft board</h2>
       <span class="spacer"></span>
-      <a href="/season.html" style="font-weight:600">Season page →</a>
+      <a href="/players.html" style="font-weight:600">Full player pool</a>
     </div>
-    <div data-wire></div>
-    <p class="fine" style="margin-top:16px">You create a league <strong>for</strong> one named competition. If it is live, its remaining weeks are your fantasy season. If the next one has not started, you can set up in advance: draft now, score when play begins. Series lines join this wire as the live competition's fixtures are imported, each named with its source.</p>
-  </div>
-</section>
-
-<section class="section alt">
-  <div class="wrap">
-    <div class="section-head"><h2>How it plays</h2></div>
-    <div class="step-line">
-      <span class="step-num">01</span>
-      <div>
-        <h3>Snake draft, real pool</h3>
-        <p class="muted">Eight rounds, pick clock running, order reverses every round. It is the format fantasy players already know. A final ninth round claims your Squad: one pro org whose own results score for you all season.</p>
-      </div>
-    </div>
-    <div class="step-line">
-      <span class="step-num">02</span>
-      <div>
-        <h3>Five starters, three in reserve</h3>
-        <p class="muted">Start a Vanguard, a Duelist, a Strategist, and two Flex picks. Lineups lock when the week's first pro match starts, and carry forward until you change them.</p>
-      </div>
-    </div>
-    <div class="step-line">
-      <span class="step-num">03</span>
-      <div>
-        <h3>Real stats, head-to-head</h3>
-        <p class="muted">Eliminations, assists, damage and healing, scored from the imported real match results. Every week is a head-to-head matchup; wins and points decide the table. Top four make the playoffs, semifinal winners meet in the final.</p>
-      </div>
-    </div>
+    <div data-board><p class="fine" style="padding:8px 0">Loading the pool…</p></div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <h2>Scoring</h2>
+      <h2>The season wire</h2>
       <span class="spacer"></span>
-      <span class="fine">Modelled on Fantasy LCS's published table, translated to hero-shooter stat lines. Every league can tune its own.</span>
+      <a href="/season.html" style="font-weight:600">Season page</a>
     </div>
-    <div class="card">
-      <div class="grid grid-2">
-        <div>
-          <h3 style="margin-bottom:10px">Players</h3>
-          <table class="sheet">
-            <tr><td>Elimination</td><td class="n">2.0</td></tr>
-            <tr><td>Assist</td><td class="n">1.5</td></tr>
-            <tr><td>Death</td><td class="n">−0.5</td></tr>
-            <tr><td>Final hit</td><td class="n">0.5</td></tr>
-            <tr><td>Damage dealt · per 1,000</td><td class="n">1.0</td></tr>
-            <tr><td>Damage blocked · per 2,000</td><td class="n">1.0</td></tr>
-            <tr><td>Healing · per 1,000</td><td class="n">1.0</td></tr>
-            <tr><td>Series win (player's team)</td><td class="n">2.0</td></tr>
-            <tr><td>25+ elimination series</td><td class="n">2.0</td></tr>
-          </table>
-        </div>
-        <div>
-          <h3 style="margin-bottom:10px">Squad slot</h3>
-          <p class="muted small" style="margin-bottom:12px">Your drafted pro org scores its own series, the way the old Fantasy LCS "Team" item did.</p>
-          <table class="sheet">
-            <tr><td>Map win</td><td class="n">1.0</td></tr>
-            <tr><td>Series win</td><td class="n">2.0</td></tr>
-            <tr><td>Clean sweep (no maps dropped)</td><td class="n">2.0</td></tr>
-          </table>
-          <p class="fine" style="margin-top:14px">Results enter through one import pipeline from published sources (Liquipedia series results, official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup.</p>
-        </div>
+    <div data-wire></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="art-block">
+      <img src="/assets/img/still-playoffs.jpg" width="1440" height="810" alt="Thanos in Marvel Rivals" loading="lazy">
+      <div class="ab-head">
+        <h3>Stage 2 playoffs</h3>
+        <span class="tag-live">Live now</span>
       </div>
-      <h3 style="margin:22px 0 8px">A big series, scored</h3>
-      <p class="muted small" style="margin-bottom:10px">A worked example on the default table. A Duelist drops 24 eliminations in a series his team wins 3-1:</p>
-      <div class="worked">
-        <div class="w-row"><span>24 eliminations × 2.0</span><span>48.0</span></div>
-        <div class="w-row"><span>16 assists × 1.5</span><span>24.0</span></div>
-        <div class="w-row"><span>9 deaths × −0.5</span><span>−4.5</span></div>
-        <div class="w-row"><span>12 final hits × 0.5</span><span>6.0</span></div>
-        <div class="w-row"><span>18,400 damage dealt (per 1,000)</span><span>18.4</span></div>
-        <div class="w-row"><span>3,000 damage blocked (per 2,000)</span><span>1.5</span></div>
-        <div class="w-row"><span>900 healing (per 1,000)</span><span>0.9</span></div>
-        <div class="w-row"><span>Series win bonus</span><span>2.0</span></div>
-        <div class="w-row w-total"><span>Fantasy points for the week</span><span>96.3</span></div>
+      <p>Oct 8 to 18, 2026. Each region's playoff winner qualifies directly for the Grand Finals, and the same results settle most of the League Points table.</p>
+    </div>
+    <div class="art-block">
+      <img src="/assets/img/still-finals.jpg" width="1440" height="810" alt="K'un-Lun arena in Marvel Rivals" loading="lazy">
+      <div class="ab-head"><h3>Grand Finals, Stockholm</h3></div>
+      <p>Nov 23 to 29, 2026, at DreamHack Stockholm. Twelve teams reach the finals: four from the Americas, four from EMEA, two from the Pacific, two from China.</p>
+    </div>
+    <div class="art-block">
+      <img src="/assets/img/still-pool.jpg" width="1440" height="810" alt="Iron Man in Marvel Rivals gameplay" loading="lazy">
+      <div class="ab-head">
+        <h3>The player pool</h3>
+        <span class="spacer" style="flex:1"></span>
+        <a href="/players.html" style="font-weight:600">Browse the pool</a>
       </div>
+      <p>98 verified pros from 52 teams. Pick by role, run a snake draft with your friends, and score every week from the actual match stats. No spreadsheets. No honor system.</p>
     </div>
   </div>
 </section>
 
-<section class="section alt" id="games">
+<section class="section" id="games">
   <div class="wrap">
-    <div class="section-head"><h2>One site, every game</h2></div>
-    <p class="muted" style="max-width:56ch">Rivals Fantasy launches with Marvel Rivals. When a new game's pro scene exists, it arrives here as a new section of the same site: same account, same leagues page, same draft room. Your fantasy home does not move.</p>
-    <div style="margin-top:18px">
-      <div class="wire-line">
-        <span class="w-name">Marvel Rivals</span>
-        <span class="w-state live">Live now</span>
-        <span class="w-fact">Ignite 2026 is the circuit, and it closes with the Grand Finals in Stockholm this November. Full pool, leagues open.</span>
-      </div>
-      <div class="wire-line">
-        <span class="w-name">Deadlock</span>
-        <span class="w-state">Watching</span>
-        <span class="w-fact">Valve's shooter has community cups but no official pro league yet. The moment one exists, Deadlock opens here as a section of this site, not a new one.</span>
-      </div>
+    <div class="section-head"><h2>Games</h2></div>
+    <div class="wire-line">
+      <span class="w-name">Marvel Rivals</span>
+      <span class="w-state live">Live now</span>
+      <span class="w-fact">Ignite 2026 is the circuit, and it closes with the Grand Finals in Stockholm this November. Full pool, leagues open.</span>
     </div>
-    <div class="cta-row" style="margin-top:24px; display:flex; gap:12px">
-      <a class="btn btn-accent" href="/create-league.html">Start your league</a>
-      <a class="btn btn-ghost" href="/players.html">Browse the player pool</a>
+    <div class="wire-line">
+      <span class="w-name">Deadlock</span>
+      <span class="w-state">Watching</span>
+      <span class="w-fact">Valve's shooter has community cups but no official pro league yet. When one exists, Deadlock opens here as a section of this site, not a new one.</span>
     </div>
   </div>
 </section>
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, renderSeasonPlate, fetchJson, esc, fmtDate, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, renderSeasonPlate, fetchJson, esc, fmtDate, api, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("home");
-  renderSeasonPlate(document.querySelector("[data-season-plate]"), { settle: true });
+  renderSeasonPlate(document.querySelector("[data-season-plate]"));
+  api("/api/auth/me").then(({ user }) => {
+    if (!user) return;
+    const a = document.querySelector("[data-hero-action]");
+    if (a) { a.textContent = "Go to your league"; a.href = "/dashboard.html"; }
+  }).catch(() => {});
 
   const roleClass = { Vanguard: "van", Duelist: "due", Strategist: "str" };
   const teamsData = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`).catch(() => null);
@@ -188,19 +133,10 @@
         <span class="role ${roleClass[p.role] || ""}">${esc(p.role)}</span>
         <span class="tm">${esc(teamShort[p.team]?.name || p.team)}</span>
       </div>`).join("");
-    /* Cover lines (study 4, cover copy): the issue's selling lines, set
-       from the pool data itself, never a stat strip. */
-    const rostered = new Set(teamsData.players.map((p) => p.team)).size;
-    document.querySelector("[data-cover-lines]").innerHTML = `
-      <span class="cover-line"><span class="cl-n">${teamsData.players.length}</span> pros in the pool</span>
-      <span class="cover-line"><span class="cl-n">${teamsData.teams.length}</span> pro teams tracked</span>
-      <span class="cover-line"><span class="cl-n">${rostered}</span> full rosters verified</span>
-      <span class="cover-line"><span class="cl-n">9</span> draft rounds, squad round included</span>`;
   }
 
-  /* The wire (study 2): every competition as ONE line (name, stage,
-     state word, dates, one appended fact), grouped by starting month.
-     Date grouping is the only sectioning the wire needs. */
+  /* The wire: every competition as one line (name, stage, state word,
+     dates, one appended fact), grouped by starting month. */
   const season = await fetchJson(`/data/v1/${GAME_SLUG}-season.json`).catch(() => null);
   if (season) {
     const firstFact = (note) => (note || "").split(/(?<=\.)\s/)[0] || "";

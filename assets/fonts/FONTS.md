@@ -2,10 +2,15 @@
 
 All files in this directory are SIL Open Font License (OFL) webfonts from
 the Google Fonts latin subsets, served locally so the site makes zero
-remote font requests. The same files are self-hosted elsewhere in the
-fleet (the film guide's font set); provenance recorded there and here.
+remote font requests.
 
-| file | family | style | weight | role here |
+V3 ships ONE family: Archivo, a modern grotesk with a variable width
+axis. The condensed cut (font-stretch below 100%) sets headlines and the
+wordmark; the regular cut sets data and body. Mono is the system mono
+stack, reserved for scores, times, and the draft clock. Anton and Inter
+left the shipped set in v3 (rotation 23, R23-D).
+
+| file | family | style | axes | role here |
 |---|---|---|---|---|
-| anton-latin-normal-400.woff2 | Anton | normal | 400 (static) | display voice: headlines, the wordmark, big numbers, broadcast graphics |
-| inter-latin-normal-var.woff2 | Inter | normal | 100 to 900 variable | body and UI voice |
+| archivo-latin-normal-var.woff2 | Archivo | normal | wght 100 to 900, wdth 62% to 125% (latin subset) | the whole type system |
+| archivo-latin-ext-normal-var.woff2 | Archivo | normal | wght 100 to 900, wdth 62% to 125% (latin-ext subset) | names and words outside the latin subset |

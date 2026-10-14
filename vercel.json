@@ -1,1 +1,140 @@
-{"buildCommand":"node scripts/build-site.mjs","framework":null,"functions":{"api/admin/import-results.js":{"maxDuration":10},"api/auth/login.js":{"maxDuration":10},"api/auth/logout.js":{"maxDuration":10},"api/auth/me.js":{"maxDuration":10},"api/auth/oauth-callback.js":{"maxDuration":10},"api/auth/oauth-start.js":{"maxDuration":10},"api/auth/signup.js":{"maxDuration":10},"api/health.js":{"maxDuration":10},"api/leagues/draft.js":{"maxDuration":10},"api/leagues/get.js":{"maxDuration":10},"api/leagues/index.js":{"maxDuration":10},"api/leagues/invite.js":{"maxDuration":10},"api/leagues/join.js":{"maxDuration":10},"api/leagues/lineup.js":{"maxDuration":10},"api/leagues/meta.js":{"maxDuration":10},"api/leagues/score-week.js":{"maxDuration":10},"api/leagues/standings.js":{"maxDuration":10}},"headers":[{"headers":[{"key":"Cache-Control","value":"public, max-age=300, stale-while-revalidate=86400"}],"source":"/data/v1/(.*)"},{"headers":[{"key":"Cache-Control","value":"public, max-age=3600"}],"source":"/assets/(.*)"}],"outputDirectory":"."}
+{
+  "buildCommand": "node scripts/build-site.mjs",
+  "framework": null,
+  "functions": {
+    "api/admin/import-results.js": {
+      "maxDuration": 10
+    },
+    "api/auth/login.js": {
+      "maxDuration": 10
+    },
+    "api/auth/logout.js": {
+      "maxDuration": 10
+    },
+    "api/auth/me.js": {
+      "maxDuration": 10
+    },
+    "api/auth/oauth-callback.js": {
+      "maxDuration": 10
+    },
+    "api/auth/oauth-start.js": {
+      "maxDuration": 10
+    },
+    "api/auth/signup.js": {
+      "maxDuration": 10
+    },
+    "api/health.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/draft.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/get.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/index.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/invite.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/join.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/lineup.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/meta.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/score-week.js": {
+      "maxDuration": 10
+    },
+    "api/leagues/standings.js": {
+      "maxDuration": 10
+    }
+  },
+  "headers": [
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, stale-while-revalidate=86400"
+        }
+      ],
+      "source": "/data/v1/(.*)"
+    },
+    {
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600"
+        }
+      ],
+      "source": "/assets/(.*)"
+    }
+  ],
+  "outputDirectory": ".",
+  "redirects": [
+    {
+      "source": "/schedule.html",
+      "destination": "/season.html",
+      "permanent": true
+    },
+    {
+      "source": "/schedule",
+      "destination": "/season.html",
+      "permanent": true
+    },
+    {
+      "source": "/teams.html",
+      "destination": "/players.html",
+      "permanent": true
+    },
+    {
+      "source": "/teams",
+      "destination": "/players.html",
+      "permanent": true
+    },
+    {
+      "source": "/login.html",
+      "destination": "/auth.html",
+      "permanent": true
+    },
+    {
+      "source": "/login",
+      "destination": "/auth.html",
+      "permanent": true
+    },
+    {
+      "source": "/signup.html",
+      "destination": "/auth.html?mode=signup",
+      "permanent": true
+    },
+    {
+      "source": "/signup",
+      "destination": "/auth.html?mode=signup",
+      "permanent": true
+    },
+    {
+      "source": "/join.html",
+      "destination": "/start.html?mode=join",
+      "permanent": true
+    },
+    {
+      "source": "/join",
+      "destination": "/start.html?mode=join",
+      "permanent": true
+    },
+    {
+      "source": "/create-league.html",
+      "destination": "/start.html",
+      "permanent": true
+    },
+    {
+      "source": "/create-league",
+      "destination": "/start.html",
+      "permanent": true
+    }
+  ]
+}

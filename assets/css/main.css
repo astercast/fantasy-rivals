@@ -1,83 +1,53 @@
-/* Rivals Fantasy, design system.
-   Identity: "the comic cover x the broadcast graphic." A dark ink ground,
-   content composed in hard-bordered panels with offset shadows, Anton
-   condensed for the display voice (headlines, the wordmark, the numbers
-   that matter), Inter for the reading voice, mono for data. Two accents
-   only: Rivals red (hero) and signal teal (live state, links, focus).
-   Burst yellow exists for status bursts and nothing else. Halftone dots
-   live in the splash beat and in the season plate's state-change moment,
-   nowhere else (FANTASY-STUDY 5.1, 5.4). The floor plan is the study's:
-   a fixed trade dress on every page, the season plate run as a
-   scorebug, the season told as a one-line wire, and a draft room built
-   as a room (board, pool, queue rail). */
+/* Rivals Fantasy, v3 design system.
+   Identity: a broadcast product on the game's own night. Deep ink-navy
+   ground (a coloured dark), one modern grotesk (Archivo) with its
+   condensed cut for headlines and its regular cut for data and body,
+   mono only for scores, times, and the draft clock. Rivals red has one
+   job: LIVE state and the primary action. Shape is sharp corners and
+   hairline rules. Spacing runs on an 8px base: 8 / 16 / 24 / 48.
+   Still by default: state changes appear by cut; the only motion is
+   the countdown numerals, the one loud draft element, and a short fade
+   on the draft room's phone tabs. No halftone, no offset shadows, no
+   pill chips: role and state marks are rectangular data tags. */
 
 @font-face {
-  font-family: "Anton";
-  src: url("/assets/fonts/anton-latin-normal-400.woff2") format("woff2");
-  font-weight: 400; font-style: normal; font-display: swap;
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo-latin-normal-var.woff2") format("woff2-variations");
+  font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Inter";
-  src: url("/assets/fonts/inter-latin-normal-var.woff2") format("woff2-variations");
-  font-weight: 100 900; font-style: normal; font-display: swap;
+  font-family: "Archivo";
+  src: url("/assets/fonts/archivo-latin-ext-normal-var.woff2") format("woff2-variations");
+  font-weight: 100 900; font-stretch: 62% 125%; font-style: normal; font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
-
-/* Adjusted fallback faces (aesthetics ROUND-001 section 5, rule 5,
-   fallback-metric part). Each local fallback is metric-adjusted to the
-   webfont it stands in for, so the font-display: swap exchange and any
-   failed load keep the layout's line boxes and reading size instead of
-   shifting the page. Overrides measured from the shipped font files
-   (hhea and OS/2 tables) against Arial metrics: Anton adjusted on cap
-   height, Inter on x-height, both normalized by their size-adjust. */
+/* Metric-adjusted fallback so a swap or a failed load keeps line boxes. */
 @font-face {
-  font-family: "Anton Fallback";
-  src: local("Arial Narrow"), local("Arial");
-  ascent-override: 94.17%; descent-override: 26.35%;
-  line-gap-override: 0%; size-adjust: 124.91%;
-}
-@font-face {
-  font-family: "Inter Fallback";
+  font-family: "Archivo Fallback";
   src: local("Arial"), local("Helvetica");
-  ascent-override: 93.76%; descent-override: 23.34%;
-  line-gap-override: 0%; size-adjust: 103.33%;
+  ascent-override: 92%; descent-override: 24%;
+  line-gap-override: 0%; size-adjust: 101%;
 }
 
 :root {
-  --bg: #0b0d1c;
-  --bg-2: #0e1126;
-  --panel: #161a38;
-  --panel-2: #1e2350;
-  --edge: #04050c;
-  --line: #2b3066;
-  --line-dark: #49519b;
-  --ink: #f5f3ec;
-  --ink-2: #c9cce4;
-  --ink-3: #8f94bd;
-  --hero: #e8322b;
-  --hero-deep: #b31b14;
-  --signal: #16d3bf;
-  --signal-deep: #0b7a6c;
-  --burst: #ffc72c;
-  --gold: #ffc72c;
-  --accent: #2fe0cb;
-  --accent-bright: #3ee6d2;
-  --dark: #07081a;
-  --dark-2: #12142e;
-  --dark-line: #2b3066;
-  --on-dark: #f5f3ec;
-  --on-dark-2: #a7abd0;
-  --radius: 8px;
-  --font: "Inter", "Inter Fallback", "SF Pro Display", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --display: "Anton", "Anton Fallback", "Arial Narrow", "Inter", sans-serif;
+  --bg: #0a1224;
+  --bg-2: #0e1830;
+  --panel: #111d3a;
+  --line: #22304f;
+  --line-strong: #33477a;
+  --ink: #f2f5fa;
+  --ink-2: #b9c3d6;
+  --ink-3: #7e8cab;
+  --red: #e8322b;
+  --red-deep: #b31b14;
+  --red-dim: rgba(232, 50, 43, 0.16);
+  --good: #5da88a;
+  --font: "Archivo", "Archivo Fallback", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
-  --panel-shadow: 7px 7px 0 rgba(2, 3, 8, 0.55);
 }
 
 * { box-sizing: border-box; }
-/* iPhone Safari font hardening (aesthetics ROUND-001 section 5): never
-   synthesize weight. Anton ships one true weight (400); Inter variable
-   carries real weights 100 to 900. Synthesis is where iOS swaps in a
-   system face or a smeared weight. */
 html { -webkit-text-size-adjust: 100%; font-synthesis-weight: none; }
 body {
   margin: 0;
@@ -88,513 +58,473 @@ body {
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; }
-h1, h2, h3 { line-height: 1.08; letter-spacing: -0.01em; margin: 0; font-weight: 750; }
+a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
+a:hover { text-decoration-color: var(--ink); }
+h1, h2, h3 { line-height: 1.08; margin: 0; font-weight: 700; }
 p { margin: 0; }
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.num { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.display { font-family: var(--display); font-weight: 400; letter-spacing: 0.01em; }
+.num { font-variant-numeric: tabular-nums; }
+.cond { font-stretch: 74%; letter-spacing: 0.01em; }
 
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.kicker {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--signal);
-  font-weight: 600;
-}
 .muted { color: var(--ink-2); }
 .small { font-size: 13px; }
 .fine { font-size: 12px; color: var(--ink-3); }
+.hidden { display: none !important; }
+.stack > * + * { margin-top: 16px; }
 
-/* --- the band (trade dress, study 5.4): fixed on every page. Wordmark
-   left, competition switcher right, corner box at the band's right end.
-   One size, set in the display face, never redrawn per page. Flat: the
-   dress carries no blur, no glass, no texture. --- */
+/* --- chrome: a slim bar. Wordmark left, three words, account right.
+   No corner box, no switcher: season state lives in the plate. --- */
 .site-head {
   position: sticky; top: 0; z-index: 40;
   background: var(--bg);
-  border-bottom: 2px solid var(--edge);
+  border-bottom: 1px solid var(--line);
 }
-.site-head .band { display: flex; align-items: stretch; gap: 26px; min-height: 60px; flex-wrap: wrap; }
+.site-head .band { display: flex; align-items: center; gap: 24px; min-height: 56px; flex-wrap: wrap; }
 .wordmark {
-  font-family: var(--display); font-weight: 400; letter-spacing: 0.03em;
+  font-weight: 800; font-stretch: 74%; letter-spacing: 0.02em;
   font-size: 21px; color: var(--ink); text-transform: uppercase; white-space: nowrap;
-  align-self: center;
+  text-decoration: none;
 }
-.wordmark:hover { text-decoration: none; }
-.wordmark .dot { color: var(--hero); }
-.main-nav { display: flex; gap: 22px; margin-left: 8px; align-items: center; }
-.main-nav a { color: var(--ink-2); font-size: 14.5px; font-weight: 600; }
-.main-nav a:hover { color: var(--ink); text-decoration: none; }
-.main-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--hero); }
-.head-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
+.wordmark .dot { color: var(--red); }
+.main-nav { display: flex; gap: 24px; align-items: center; }
+.main-nav a { color: var(--ink-2); font-size: 15px; font-weight: 600; text-decoration: none; }
+.main-nav a:hover { color: var(--ink); }
+.main-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--red); }
+.head-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 .head-user { font-size: 14px; color: var(--ink-2); }
-.switcher { display: flex; align-items: stretch; }
-.sw {
-  font-family: var(--display); font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
-  font-size: 13px; color: var(--ink-3); display: flex; align-items: center; gap: 7px;
-  padding: 0 12px; border-left: 1px solid var(--line); white-space: nowrap;
-}
-.sw i { font: 600 9.5px var(--mono); font-style: normal; letter-spacing: 0.1em; color: var(--ink-3); }
-.sw.on { color: var(--ink); }
-.sw.on i { color: var(--signal); }
-a.sw:hover { color: var(--ink); text-decoration: none; }
-/* The corner box (study 4, the cover system; study 5.4): a fixed-size box
-   at the band's right end carrying season state in dual-number form, the
-   current run's number over the season's whole. It never moves and never
-   resizes; only its two lines of type change. */
-.corner-box {
-  flex: none; width: 148px; min-height: 60px; align-self: stretch;
-  border-left: 2px solid var(--edge); border-right: 2px solid var(--edge);
-  background: var(--panel); display: flex; flex-direction: column;
-  align-items: center; justify-content: center; gap: 2px; padding: 6px 8px;
-  text-align: center;
-}
-.corner-box .cb-top {
-  font-family: var(--display); font-weight: 400; font-size: 16px; letter-spacing: 0.05em;
-  text-transform: uppercase; color: var(--ink); line-height: 1.05; white-space: nowrap;
-}
-.corner-box .cb-bottom {
-  font: 600 9.5px var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
-  color: var(--ink-3); white-space: nowrap;
+@media (max-width: 640px) {
+  /* Phone chrome: the bar stops sticking (the draft clock strip owns
+     the pinned slot), the nav takes its own row, and the account row
+     keeps only the action. */
+  .site-head { position: static; }
+  .site-head .band { row-gap: 0; padding-top: 8px; padding-bottom: 8px; }
+  .main-nav { order: 3; width: 100%; gap: 16px; margin-left: 0; margin-top: 8px; }
+  .main-nav a { font-size: 14px; }
+  .head-right { order: 2; }
+  .head-right .head-user, .head-right a.small { display: none; }
 }
 
-/* --- buttons --- */
+/* --- buttons: rectangular, at least 44px tall. Red is the primary
+   action and nothing else. --- */
 .btn {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-  font: 600 14.5px var(--font);
-  padding: 10px 18px; border-radius: 6px; border: 2px solid var(--edge);
-  cursor: pointer; transition: transform 0.1s, box-shadow 0.1s, background 0.15s;
-  white-space: nowrap; box-shadow: 4px 4px 0 rgba(2, 3, 8, 0.55);
+  font: 600 15px var(--font);
+  min-height: 44px; padding: 8px 16px; border-radius: 0; border: 1px solid var(--line-strong);
+  background: transparent; color: var(--ink); cursor: pointer; white-space: nowrap;
+  text-decoration: none;
 }
-.btn:hover { text-decoration: none; transform: translate(-1px, -1px); box-shadow: 5px 5px 0 rgba(2, 3, 8, 0.55); }
-.btn:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 rgba(2, 3, 8, 0.55); }
-.btn-primary { background: var(--hero); color: #fff; }
-.btn-primary:hover { background: #f0443a; }
-.btn-accent { background: var(--signal); color: #03211c; }
-.btn-accent:hover { background: #3ee6d2; }
-.btn-ghost { background: var(--panel); color: var(--ink); border-color: var(--line-dark); box-shadow: none; }
-.btn-ghost:hover { border-color: var(--ink-3); box-shadow: none; transform: none; }
-.btn-small { padding: 7px 12px; font-size: 13.5px; }
+.btn:hover { border-color: var(--ink-3); text-decoration: none; }
+.btn-primary { background: var(--red); border-color: var(--red); color: #fff; }
+.btn-primary:hover { background: #f0443a; border-color: #f0443a; }
+.btn-accent { background: var(--red); border-color: var(--red); color: #fff; }
+.btn-accent:hover { background: #f0443a; border-color: #f0443a; }
+.btn-ghost { background: transparent; color: var(--ink); }
+.btn-small { min-height: 44px; padding: 8px 12px; font-size: 14px; }
 .btn[disabled] { opacity: 0.45; cursor: not-allowed; }
 .btn-provider {
-  width: 100%; background: var(--panel-2); border-color: var(--line-dark); color: var(--ink);
-  font-weight: 600; padding: 12px 18px; box-shadow: none;
+  width: 100%; background: var(--panel); border-color: var(--line-strong); color: var(--ink); font-weight: 600;
 }
-.btn-provider:hover { border-color: var(--ink-3); transform: none; box-shadow: none; }
 .btn-provider .glyph { font-weight: 800; width: 18px; text-align: center; }
 
-/* --- the splash beat (study 5.1): one beat of cover-art treatment, the
-   only place halftone and panel geometry run at full strength. The cover
-   lines sit at the panel edges the way cover copy sits on an issue: short,
-   loud, and part of the art, not a stat strip. --- */
-.cover {
-  background:
-    radial-gradient(rgba(232, 50, 43, 0.16) 1.6px, transparent 1.7px) 0 0 / 22px 22px,
-    radial-gradient(rgba(22, 211, 191, 0.10) 1.6px, transparent 1.7px) 11px 11px / 22px 22px,
-    linear-gradient(155deg, #151838 0%, var(--bg) 62%);
-  color: var(--on-dark);
-  border-bottom: 3px solid var(--hero);
+/* --- hero: full-bleed key art, type set over the art. One line, one
+   action, a legibility gradient at the foot of the art and nothing
+   else over it. --- */
+.hero { position: relative; background: var(--bg-2); overflow: hidden; }
+.hero img.hero-art {
+  display: block; width: 100%; height: min(76vh, 620px); min-height: 420px;
+  object-fit: cover; object-position: center 30%;
 }
-.cover .wrap { padding: 64px 24px 56px; }
-.cover h1 {
-  font-family: var(--display); font-weight: 400; text-transform: uppercase;
-  font-size: clamp(52px, 7vw, 88px); line-height: 0.98; letter-spacing: 0.005em; max-width: 12ch;
-  text-shadow: 5px 5px 0 rgba(2, 3, 8, 0.6);
+.hero-shade {
+  position: absolute; inset: auto 0 0 0; height: 62%;
+  background: linear-gradient(to top, rgba(10, 18, 36, 0.94) 0%, rgba(10, 18, 36, 0.55) 46%, rgba(10, 18, 36, 0) 100%);
 }
-.cover h1 em { font-style: normal; color: var(--hero); }
-.cover .sub { margin-top: 20px; font-size: 19px; color: var(--on-dark-2); max-width: 52ch; }
-.cover .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-.cover .btn-ghost { color: var(--on-dark); border-color: var(--dark-line); background: transparent; }
-.cover .btn-ghost:hover { border-color: var(--on-dark-2); }
-.cover-lines { display: flex; gap: 10px 26px; flex-wrap: wrap; margin-top: 40px; border-top: 1px solid var(--dark-line); padding-top: 18px; }
-/* At bar-test width the beat compacts so the plate docked at the
-   splash's foot stays close under it: same order, same hierarchy,
-   tighter air. */
+.hero-in {
+  position: absolute; inset: auto 0 0 0; padding-bottom: 48px;
+}
+.hero .wordmark-big {
+  font-weight: 800; font-stretch: 72%; text-transform: uppercase;
+  font-size: clamp(44px, 7.2vw, 92px); line-height: 0.98; letter-spacing: 0.005em; max-width: 12ch;
+}
+.hero .wordmark-big .dot { color: var(--red); }
+.hero-line { margin-top: 16px; font-size: 19px; color: var(--ink); max-width: 52ch; }
+.hero .cta-row { margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
+.hero .btn-ghost { border-color: rgba(242, 245, 250, 0.55); color: #fff; }
 @media (max-width: 640px) {
-  .cover .wrap { padding: 38px 24px 40px; }
-  .cover h1 { font-size: clamp(42px, 13.5vw, 88px); }
-  .cover .sub { font-size: 17px; margin-top: 14px; }
-  .cover .cta-row { margin-top: 22px; }
-  .cover-lines { margin-top: 26px; }
+  .hero img.hero-art { height: 68vh; min-height: 480px; }
+  .hero-in { padding-bottom: 24px; }
+  .hero-line { font-size: 17px; margin-top: 8px; }
+  .hero .cta-row { margin-top: 16px; }
 }
-.cover-line {
-  font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em;
-  font-size: 15px; color: var(--on-dark); display: inline-flex; gap: 9px; align-items: baseline;
-}
-.cover-line b { color: var(--hero); font-weight: 400; }
-.cover-line .cl-n { font-family: var(--display); color: var(--signal); font-size: 19px; }
 
-/* --- competition state pills (league picker furniture) --- */
-.status-pill {
-  display: inline-flex; align-items: center; gap: 8px;
-  font: 700 12px var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
-  padding: 7px 13px; border-radius: 4px; border: 2px solid var(--edge);
-  background: var(--panel-2); color: var(--ink);
-  transform: skewX(-8deg);
-}
-.status-pill > * { transform: skewX(8deg); }
-.status-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); }
-.status-pill.next .dot { background: var(--gold); }
+/* --- art blocks: the image is the content, the heading labels it. --- */
+.art-block { margin-top: 48px; }
+.art-block:first-child { margin-top: 0; }
+.art-block img { display: block; width: 100%; height: auto; }
+.art-block .ab-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+.art-block h3 { font-stretch: 76%; text-transform: uppercase; font-size: 26px; font-weight: 800; }
+.art-block p { color: var(--ink-2); max-width: 62ch; margin-top: 8px; }
+.art-band img { display: block; width: 100%; height: 240px; object-fit: cover; object-position: center 35%; }
+@media (max-width: 640px) { .art-band img { height: 160px; } }
 
-/* --- the season plate (study 5.2): the site's scorebug. Fixed geometry
-   on hub, season, and league surfaces alike. Core zone left, protected:
-   wordmark line, stage name, state word, dates, in that order, never
-   reordered, never resized. Assist zone right, one tenant: the tally.
-   Flat every day; halftone appears only in the state-change moment,
-   when the state word also takes corner-box red. --- */
-.plate {
-  background: var(--dark);
-  border-bottom: 2px solid var(--edge);
-  color: var(--on-dark);
-  position: relative;
-}
-.plate.loud {
-  background:
-    radial-gradient(rgba(232, 50, 43, 0.13) 1.4px, transparent 1.5px) 0 0 / 20px 20px,
-    var(--dark);
-}
-.plate-in { padding: 22px 24px; display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 36px; align-items: center; }
+/* --- the season plate: a flat block, fixed two-zone geometry. Core
+   left in one order (competition, stage, state word, dates), tally
+   right. The core never moves when the tally changes. --- */
+.plate { background: var(--bg-2); border-bottom: 1px solid var(--line); color: var(--ink); }
+.plate-in { padding: 24px; display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 48px; align-items: center; }
 .plate-core { min-width: 0; }
-.plate-comp {
-  font: 600 11px var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--signal);
-}
+.plate-comp { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
 .plate-stage {
-  font-family: var(--display); font-weight: 400; text-transform: uppercase;
-  font-size: 32px; letter-spacing: 0.015em; line-height: 1.05; margin-top: 3px;
+  font-weight: 800; font-stretch: 76%; text-transform: uppercase;
+  font-size: 34px; letter-spacing: 0.01em; line-height: 1.05; margin-top: 8px;
 }
-.plate-state {
-  font: 700 13px var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--ink); margin-top: 7px;
-}
-.plate-state.loud { color: var(--hero); }
-.plate-dates { color: var(--on-dark-2); font-size: 14px; margin-top: 3px; }
-.plate-assist {
-  border-left: 1px solid var(--dark-line); padding-left: 20px;
-  min-width: 0;
-}
-.plate-tally { display: flex; flex-direction: column; gap: 3px; }
-.plate-tally .t-fig { font-size: 13px; color: var(--on-dark-2); letter-spacing: 0.02em; }
+.plate-state { font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-top: 8px; }
+.plate-state.loud { color: var(--red); }
+.plate-dates { color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+.plate-assist { border-left: 1px solid var(--line); padding-left: 24px; min-width: 0; }
+.plate-tally { display: flex; flex-direction: column; gap: 8px; }
+.plate-tally .t-fig { font-size: 13px; color: var(--ink-2); }
 .plate-tally .t-fig b {
-  font-family: var(--display); font-weight: 400; font-size: 21px; color: var(--ink);
-  display: inline-block; width: 52px; min-width: 52px;
+  font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; font-size: 21px; color: var(--ink);
+  display: inline-block; width: 56px; min-width: 56px;
 }
 @media (max-width: 640px) {
-  .plate-in { grid-template-columns: 1fr; align-items: stretch; gap: 16px; }
-  .plate-assist { border-left: none; border-top: 1px solid var(--dark-line); padding: 14px 0 0; }
-  .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 6px 22px; }
+  .plate-in { grid-template-columns: 1fr; align-items: stretch; gap: 16px; padding: 24px; }
+  .plate-assist { border-left: none; border-top: 1px solid var(--line); padding: 16px 0 0; }
+  .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 8px 24px; }
 }
 
-/* --- the wire (study 2, the Sleeper scores wire): date-grouped one-line
-   results. Every fixture, result, and competition prints as ONE line:
-   names, standing carried inline, the state word, one appended fact.
-   Never a fixture card. --- */
-.wire-group { margin-top: 26px; }
+/* --- the wire: day or month grouped one-line rows. Names, record or
+   stage inline, the state word, one appended fact. Never a card. --- */
+.wire-group { margin-top: 24px; }
 .wire-group:first-child { margin-top: 0; }
-.wire-date {
-  font: 600 11px var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
-  color: var(--signal); margin: 0 0 4px;
-}
+.wire-date { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
 .wire-line {
-  display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap;
-  padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: 15px;
+  display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap;
+  padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; min-height: 48px; align-content: center;
 }
 .wire-line:last-child { border-bottom: none; }
 .wire-line .w-name { font-weight: 700; }
 .wire-line .w-stage { color: var(--ink-2); }
-.wire-line .w-state {
-  font: 700 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2);
-}
-.wire-line .w-state.live { color: var(--signal); }
-.wire-line .w-state.loud { color: var(--hero); }
-.wire-line .w-dates { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
-.wire-line .w-fact { color: var(--ink-3); font-size: 13.5px; }
+.wire-line .w-state { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+.wire-line .w-state.live { color: var(--red); }
+.wire-line .w-score { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.wire-line .w-dates { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+.wire-line .w-fact { color: var(--ink-3); font-size: 14px; }
 .wire-line .w-act { margin-left: auto; }
 
-/* --- sections & panels --- */
-.section { padding: 64px 0; }
+/* --- sections and flat panels --- */
+.section { padding: 48px 0; }
 .section + .section { border-top: 1px solid var(--line); }
-.section-head { display: flex; align-items: baseline; gap: 18px; margin-bottom: 28px; flex-wrap: wrap; }
-.section-head h2 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; letter-spacing: 0.015em; }
-.section-head h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; letter-spacing: 0.015em; }
+.section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
+.section-head h2, .section-head h1 {
+  font-weight: 800; font-stretch: 76%; text-transform: uppercase; font-size: 32px; letter-spacing: 0.01em;
+}
 .section-head .spacer { flex: 1; }
-.grid { display: grid; gap: 18px; }
+.grid { display: grid; gap: 24px; }
 .grid-2 { grid-template-columns: repeat(2, 1fr); }
-.grid-3 { grid-template-columns: repeat(3, 1fr); }
-.grid-4 { grid-template-columns: repeat(4, 1fr); }
-@media (max-width: 900px) { .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; } .main-nav { display: none; } }
-.card {
-  background: var(--panel); border: 2px solid var(--edge); border-radius: var(--radius);
-  padding: 20px; box-shadow: var(--panel-shadow);
-}
-.card h3 { font-size: 17px; margin-bottom: 6px; }
-.card.flat { background: transparent; border-color: transparent; box-shadow: none; }
+@media (max-width: 900px) { .grid-2 { grid-template-columns: 1fr; } }
+.card { background: var(--panel); border: 1px solid var(--line); padding: 24px; }
+.card h3 { font-size: 17px; margin-bottom: 8px; }
+.card.flat { background: transparent; border-color: transparent; }
 
-/* --- tables (broadcast graphic tables) --- */
-table.sheet { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+/* --- tables --- */
+table.sheet { width: 100%; border-collapse: collapse; font-size: 15px; }
 table.sheet th {
-  text-align: left; font: 600 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
-  color: var(--signal); background: var(--panel-2);
-  padding: 10px 12px; border-bottom: 2px solid var(--edge);
+  text-align: left; font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3); padding: 8px; border-bottom: 1px solid var(--line-strong);
 }
-table.sheet td { padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+table.sheet td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; min-height: 48px; }
 table.sheet tr:last-child td { border-bottom: none; }
-table.sheet td.n, table.sheet th.n { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
-table.sheet tr.me td { background: rgba(22, 211, 191, 0.13); font-weight: 600; }
-table.sheet tr.me td:first-child { box-shadow: inset 3px 0 0 var(--signal); }
+table.sheet td.n, table.sheet th.n { text-align: right; font-variant-numeric: tabular-nums; }
+table.sheet td.score, table.sheet th.score { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
+table.sheet tr.me td { background: rgba(93, 168, 138, 0.10); font-weight: 600; }
+table.sheet tr.me td:first-child { box-shadow: inset 3px 0 0 var(--good); }
+
+/* Rectangular data tags. Role colours survive only here, one
+   desaturated family, inside data. */
 .role {
-  font: 600 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 3px 8px; border-radius: 4px; background: var(--panel-2); color: var(--ink-2);
-  white-space: nowrap;
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 8px; background: var(--bg-2); color: var(--ink-2); white-space: nowrap;
 }
-.role.van { background: #11382a; color: #63e6a4; }
-.role.due { background: #401a12; color: #ffa08c; }
-.role.str { background: #1d2c57; color: #9db9ff; }
-.role.partner { background: #453304; color: var(--burst); }
+.role.van { background: #24473a; color: #9ccbb2; }
+.role.due { background: #4d322b; color: #d8a794; }
+.role.str { background: #2c3d63; color: #a3b6dd; }
+.role.partner { background: #24473a; color: #9ccbb2; }
+.tag-live {
+  display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 8px; background: var(--red); color: #fff; white-space: nowrap;
+}
 
 /* --- forms --- */
 .form-card { max-width: 440px; margin: 0 auto; }
 .field { margin-bottom: 16px; }
-.field label { display: block; font-size: 13.5px; font-weight: 600; margin-bottom: 6px; }
+.field label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; }
 .field input, .field select {
-  width: 100%; padding: 11px 13px; font: 400 15px var(--font);
-  border: 1px solid var(--line-dark); border-radius: 6px; background: var(--bg-2); color: var(--ink);
+  width: 100%; min-height: 48px; padding: 8px; font: 400 16px var(--font);
+  border: 1px solid var(--line-strong); border-radius: 0; background: var(--bg-2); color: var(--ink);
 }
-.field input:focus, .field select:focus { outline: 2px solid var(--signal); outline-offset: 0; border-color: transparent; }
+.field input:focus, .field select:focus { outline: 2px solid var(--red); outline-offset: 0; border-color: transparent; }
 .field select option { background: var(--panel); color: var(--ink); }
-select { background: var(--panel); color: var(--ink); border-color: var(--line-dark); }
+select { background: var(--panel); color: var(--ink); border-color: var(--line-strong); }
 select option { background: var(--panel); color: var(--ink); }
-.divider { display: flex; align-items: center; gap: 14px; margin: 22px 0; color: var(--ink-3); font-size: 12.5px; }
+.divider { display: flex; align-items: center; gap: 16px; margin: 24px 0; color: var(--ink-3); font-size: 13px; }
 .divider::before, .divider::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
-.alert { border-radius: 6px; padding: 12px 14px; font-size: 14px; margin-bottom: 16px; display: none; border: 2px solid var(--edge); }
+.alert { padding: 16px; font-size: 14px; margin-bottom: 16px; display: none; border: 1px solid var(--line-strong); }
 .alert.show { display: block; }
-.alert.error { background: #3d130f; color: #ffb3a7; }
-.alert.info { background: #0d2f2a; color: #9df0e2; }
+.alert.error { background: #3d130f; color: #ffb3a7; border-color: #6e231c; }
+.alert.info { background: #14332a; color: #a9dcc4; border-color: #245c48; }
 
-/* --- picker (league creation step 1) --- */
+/* --- competition picker (start flow) --- */
 .comp-option {
   display: flex; gap: 16px; align-items: flex-start; text-align: left; width: 100%;
-  background: var(--panel); border: 2px solid var(--line-dark); border-radius: var(--radius);
-  padding: 18px; cursor: pointer; font: inherit; margin-bottom: 12px; color: var(--ink);
+  background: var(--panel); border: 1px solid var(--line-strong); border-radius: 0;
+  padding: 16px; cursor: pointer; font: inherit; margin-bottom: 16px; color: var(--ink); min-height: 56px;
 }
 .comp-option:hover { border-color: var(--ink-3); }
-.comp-option.selected { border-color: var(--signal); box-shadow: 0 0 0 1px var(--signal), var(--panel-shadow); }
+.comp-option.selected { border-color: var(--red); box-shadow: inset 3px 0 0 var(--red); }
 .comp-option .c-name { font-weight: 700; font-size: 17px; }
 .comp-option .c-meta { color: var(--ink-2); font-size: 14px; }
+.status-tag {
+  flex: none; font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 4px 8px; background: var(--bg-2); color: var(--ink-2); white-space: nowrap;
+}
+.status-tag.live { background: var(--red); color: #fff; }
 
 /* --- tabs --- */
-.tabs { display: flex; gap: 4px; border-bottom: 2px solid var(--line); margin-bottom: 24px; flex-wrap: wrap; }
+.tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 24px; flex-wrap: wrap; }
 .tabs button {
-  font: 600 14.5px var(--font); padding: 10px 14px; background: none; border: none;
+  font: 600 15px var(--font); min-height: 44px; padding: 8px; background: none; border: none;
   border-bottom: 3px solid transparent; cursor: pointer; color: var(--ink-2);
 }
-.tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
+.tabs button.active { color: var(--ink); border-bottom-color: var(--red); }
 
-/* --- pick rows (rail history, roster, members, week detail) --- */
-.pick-row { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+/* --- pick rows, feed --- */
+.pick-row { display: flex; gap: 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; min-height: 48px; }
 .pick-row .spacer { flex: 1; }
+.feed-item { padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
+.feed-item .when { color: var(--ink-3); font-size: 13px; font-family: var(--mono); }
 
-/* --- versus matchup cards --- */
+/* --- versus rows: flat, hairline separated, no card. The winning
+   score takes the data green; the divider is a plain word. --- */
 .versus {
-  display: grid; grid-template-columns: 1fr auto 1fr; align-items: stretch;
-  background: var(--panel); border: 2px solid var(--edge); border-radius: var(--radius);
-  box-shadow: 5px 5px 0 rgba(2, 3, 8, 0.55); margin: 10px 0; overflow: hidden;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+  border-bottom: 1px solid var(--line); padding: 16px 0; gap: 16px;
 }
-.versus .side { padding: 12px 16px; display: flex; flex-direction: column; gap: 2px; justify-content: center; }
+.versus .side { display: flex; flex-direction: column; gap: 8px; }
 .versus .side.right { text-align: right; align-items: flex-end; }
-.versus .side .t-name { font-weight: 700; font-size: 15.5px; }
-.versus .side .t-score { font-family: var(--display); font-size: 27px; line-height: 1; color: var(--ink-2); }
-.versus .side.win .t-score { color: var(--signal); }
-.versus .side.win { background: linear-gradient(90deg, rgba(22, 211, 191, 0.10), transparent 70%); }
-.versus .side.right.win { background: linear-gradient(270deg, rgba(22, 211, 191, 0.10), transparent 70%); }
-.versus .vs-mid {
-  display: flex; align-items: center; justify-content: center; padding: 0 6px;
-  background: var(--edge);
-}
-.versus .vs-badge {
-  font-family: var(--display); font-size: 15px; color: #fff; background: var(--hero);
-  border-radius: 50%; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
-  transform: rotate(-6deg);
-}
-.versus .vs-note { font-size: 12px; color: var(--ink-3); font-family: var(--mono); text-align: center; }
+.versus .side .t-name { font-weight: 700; font-size: 16px; }
+.versus .side .t-score { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 24px; line-height: 1; color: var(--ink-3); }
+.versus .side.win .t-score { color: var(--good); }
+.versus .vs-mid { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); text-align: center; }
 
-/* --- feed --- */
-.feed-item { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-.feed-item .when { color: var(--ink-3); font-size: 12.5px; font-family: var(--mono); }
-
-/* --- footer (trade dress, study 5.4): reduced to one small-print line,
-   data provenance and the update time, the smallest type on the page in
-   an unvarying place. --- */
-.site-foot { border-top: 2px solid var(--edge); margin-top: 0; background: var(--dark); }
-.site-foot .wrap { padding: 18px 24px 22px; }
+/* --- footer: one line. Data sources, update time, art credit. --- */
+.site-foot { border-top: 1px solid var(--line); background: var(--bg-2); }
+.site-foot .wrap { padding: 24px; }
 .foot-line { font-size: 12px; color: var(--ink-3); max-width: 92ch; }
 
-.badge-live { color: var(--signal); font-weight: 700; }
-.hidden { display: none !important; }
-.stack > * + * { margin-top: 14px; }
+.badge-live { color: var(--red); font-weight: 700; }
 
-/* --- cover panel: the draft board as the issue's cover art --- */
-.cover-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: start; }
-@media (max-width: 900px) { .cover-grid { grid-template-columns: 1fr; } }
-.cover-panel {
-  background: var(--panel); border: 2px solid var(--edge); border-radius: var(--radius);
-  padding: 20px 20px 8px; box-shadow: var(--panel-shadow);
-}
-.cover-panel .hc-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
-.cover-panel .hc-head h3 { color: var(--on-dark); font-size: 16px; }
-.cover-panel .hc-head .fine { color: var(--on-dark-2); }
+/* --- board preview rows (home) --- */
 .lb-row {
-  display: flex; align-items: center; gap: 12px; padding: 9px 0;
-  border-bottom: 1px solid var(--line); font-size: 14.5px; color: var(--on-dark);
+  display: flex; align-items: center; gap: 16px; padding: 8px 0; min-height: 48px;
+  border-bottom: 1px solid var(--line); font-size: 15px;
 }
 .lb-row:last-child { border-bottom: none; }
-.lb-row .rk { font-family: var(--display); color: var(--hero); width: 26px; font-size: 17px; }
+.lb-row .rk { font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; color: var(--red); width: 32px; font-size: 17px; }
 .lb-row .who { font-weight: 650; }
-.lb-row .tm { margin-left: auto; font-family: var(--mono); font-size: 12.5px; color: var(--on-dark-2); letter-spacing: 0.06em; }
+.lb-row .tm { margin-left: auto; font-size: 13px; color: var(--ink-3); }
 
-.section.alt { background: var(--bg-2); }
-.step-num { font-family: var(--display); font-size: 36px; font-weight: 400; color: var(--hero); }
-.step-line { display: flex; gap: 20px; align-items: baseline; padding: 16px 2px; border-bottom: 1px solid var(--line); }
-.step-line:last-child { border-bottom: none; }
-.step-line h3 { font-size: 16.5px; margin-bottom: 3px; }
-.worked { font-family: var(--mono); font-size: 13.5px; }
-.worked .w-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px solid var(--line); }
-.worked .w-row:last-child { border-bottom: none; }
-.worked .w-total { font-weight: 700; font-size: 15px; color: var(--ink); }
-.region-tag { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
+/* --- hero portrait strip (players): official hero portraits, heroes
+   only, never presented as pro players. Whole portrait on the flat
+   ground, name under the art. --- */
+.hero-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
+.hero-group h3 { font-stretch: 76%; text-transform: uppercase; font-size: 20px; font-weight: 800; }
+.hero-group .role-line { color: var(--ink-2); font-size: 14px; margin-top: 8px; max-width: 34ch; }
+.hero-portraits { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.hero-portraits figure { margin: 0; width: 88px; }
+.hero-portraits img { display: block; width: 88px; height: 144px; object-fit: contain; object-position: center bottom; }
+.hero-portraits figcaption { font-size: 11px; color: var(--ink-3); margin-top: 8px; line-height: 1.3; }
+@media (max-width: 900px) { .hero-strip { grid-template-columns: 1fr; } }
 
-/* --- teams page: ruled team blocks, roster as lines --- */
-.team-block { padding: 14px 2px 4px; border-bottom: 1px solid var(--line); }
-.team-block .tb-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+/* --- team blocks (players team view) --- */
+.team-block { padding: 16px 0 8px; border-bottom: 1px solid var(--line); }
+.team-block .tb-head { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; }
 .team-block .tb-head h3 { font-size: 18px; }
-.roster-line { display: flex; gap: 10px; align-items: center; padding: 5px 0 5px 14px; font-size: 14.5px; }
+.roster-line { display: flex; gap: 16px; align-items: center; padding: 8px 0 8px 16px; font-size: 15px; min-height: 48px; }
 .roster-line .spacer { flex: 1; }
+.region-tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
 
-/* --- pool filters (study 1.3, public form): word tabs carrying counts,
-   plain-word toggles, one search box, and a printed filter-state line.
-   Nothing filters silently. --- */
-.filter-tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 2px solid var(--line); }
+/* --- pool filters: word tabs carrying counts, one search box, and a
+   printed filter-state line. Nothing filters silently. --- */
+.filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; border-bottom: 1px solid var(--line); }
 .filter-tabs button {
-  font: 600 13px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  font: 600 13px var(--font); letter-spacing: 0.06em; text-transform: uppercase;
   background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer;
-  color: var(--ink-2); padding: 9px 12px 7px; text-align: center;
+  color: var(--ink-2); padding: 8px; min-height: 44px; text-align: center;
 }
-.filter-tabs button .frac { display: block; font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.06em; margin-top: 1px; }
-.filter-tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
-.filter-tabs button.active .frac { color: var(--signal); }
-.filter-line { font: 600 11.5px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding: 9px 2px 2px; }
+.filter-tabs button .frac { display: block; font-size: 11px; font-weight: 500; color: var(--ink-3); letter-spacing: 0.04em; margin-top: 2px; text-transform: none; }
+.filter-tabs button.active { color: var(--ink); border-bottom-color: var(--red); }
+.filter-line { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding: 8px 0 0; }
 .word-toggle {
-  font: 600 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
-  background: none; border: none; cursor: pointer; color: var(--ink-3); padding: 9px 4px;
+  font: 600 13px var(--font); letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 1px solid var(--line-strong); cursor: pointer; color: var(--ink-2); padding: 8px; min-height: 44px;
 }
-.word-toggle[aria-pressed="true"] { color: var(--signal); }
+.word-toggle[aria-pressed="true"] { color: var(--ink); border-color: var(--red); }
 .search-box {
-  padding: 9px 12px; font: 400 14px var(--font); border: 1px solid var(--line-dark);
-  border-radius: 6px; background: var(--bg-2); color: var(--ink); min-width: 180px;
+  padding: 8px; font: 400 15px var(--font); border: 1px solid var(--line-strong);
+  border-radius: 0; background: var(--bg-2); color: var(--ink); min-width: 200px; min-height: 44px;
 }
-.search-box:focus { outline: 2px solid var(--signal); outline-offset: 0; border-color: transparent; }
+.search-box:focus { outline: 2px solid var(--red); outline-offset: 0; border-color: transparent; }
 
-/* --- the draft room (study 5.3, replacing the rail wholesale): a room,
-   not a page. Board above, pool bottom left, rail right with the queue
-   as its default face. Drama is carried by state changes inside fixed
-   furniture; on the clock, exactly one cell in the room is loud. --- */
-.room { display: grid; grid-template-columns: minmax(0, 1fr) 330px; grid-template-areas: "board board" "pool rail"; gap: 18px; align-items: start; }
+/* Pool rows: permanent rank, name, role tag, pro team, key numbers at
+   the right. The rank never renumbers under a filter. */
+.pool2-row { display: flex; gap: 16px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; min-height: 56px; }
+.pool2-row .rk { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--ink-3); width: 32px; flex: none; }
+.pool2-row .who { font-weight: 650; }
+.pool2-row .marg { margin-left: auto; font-size: 12px; color: var(--ink-3); text-align: right; }
+.pool2-row.drafted { opacity: 0.45; }
+
+/* --- the draft room: a room, not a page. Three fixed zones on
+   desktop (board, pool, queue rail with the queue as its default
+   face), reskinned flat: hairlines and space, no panel shadows.
+   On the clock, exactly one element is loud: the current pick cell,
+   red at low strength with a solid red edge, countdown inside it. --- */
+.room { display: grid; grid-template-columns: minmax(0, 1fr) 336px; grid-template-areas: "board board" "pool rail"; gap: 24px; align-items: start; }
 .room-board { grid-area: board; }
 .room-pool { grid-area: pool; }
 .room-rail { grid-area: rail; }
-@media (max-width: 900px) { .room { grid-template-columns: 1fr; grid-template-areas: "board" "pool" "rail"; } }
+.clock-strip { display: none; }
+.phone-tabs { display: none; }
 .board-scroll { overflow-x: auto; }
 table.board { border-collapse: collapse; width: 100%; font-size: 13px; }
 table.board th, table.board td {
-  border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top;
-  min-width: 104px;
+  border: 1px solid var(--line); padding: 8px; text-align: left; vertical-align: top; min-width: 104px;
 }
-table.board th { font: 600 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); background: var(--panel-2); }
-table.board th.rd { min-width: 44px; width: 44px; text-align: center; color: var(--signal); }
-table.board td.rd { font-family: var(--display); font-size: 15px; color: var(--ink-3); text-align: center; }
+table.board th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); background: var(--bg-2); }
+table.board th.rd { min-width: 48px; width: 48px; text-align: center; color: var(--ink-3); }
+table.board td.rd { font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; font-size: 15px; color: var(--ink-3); text-align: center; }
 table.board td .b-ign { font-weight: 650; display: block; }
-table.board td .b-meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.04em; }
+table.board td .b-meta { font-size: 11px; color: var(--ink-3); letter-spacing: 0.04em; }
 table.board td.empty { color: var(--ink-3); }
-table.board td.mine { box-shadow: inset 3px 0 0 var(--signal); }
-/* The room's one loud element: the on-the-clock cell, corner-box red,
-   carrying the countdown inside the cell it governs. Nothing else in
-   the room flashes, pulses, or resizes. */
-table.board td.on-clock { background: var(--hero); color: #fff; }
-table.board td.on-clock .b-meta { color: rgba(255, 255, 255, 0.85); }
-table.board td.on-clock .b-clock { font-family: var(--display); font-size: 21px; line-height: 1.1; display: block; }
-table.board td.on-clock .b-auto { font: 700 9.5px var(--mono); letter-spacing: 0.12em; background: #fff; color: var(--hero); padding: 1px 5px; border-radius: 3px; }
+table.board td.mine { box-shadow: inset 3px 0 0 var(--good); }
+table.board td.on-clock { background: var(--red-dim); box-shadow: inset 0 0 0 2px var(--red); color: var(--ink); }
+table.board td.on-clock .b-meta { color: var(--ink-2); }
+table.board td.on-clock .b-clock { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 22px; line-height: 1.1; display: block; }
+table.board td.on-clock .b-auto { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; background: var(--red); color: #fff; padding: 2px 8px; }
 
-/* Pool rows in study 1.2 order: pick control at the left edge, permanent
-   rank, name, role, pro team, pool marginalia in mono at the right edge,
-   state control at the right edge whose fill tells the truth. */
-.pool2-row { display: flex; gap: 11px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
-.pool2-row .rk { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); width: 30px; flex: none; }
-.pool2-row .who { font-weight: 650; }
-.pool2-row .marg { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.03em; text-align: right; }
-.pool2-row.drafted { opacity: 0.45; }
+/* The pick control sits at the pool row's left edge. Armed only on
+   your clock, where it takes the red. */
 .pick-ctl {
-  flex: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
-  border: 2px solid var(--line-dark); background: transparent; color: var(--ink-3);
-  font: 700 15px var(--font); line-height: 1; display: inline-flex; align-items: center; justify-content: center;
+  flex: none; width: 44px; height: 44px; border-radius: 0; cursor: pointer;
+  border: 1px solid var(--line-strong); background: transparent; color: var(--ink-3);
+  font: 700 18px var(--font); line-height: 1; display: inline-flex; align-items: center; justify-content: center;
 }
-.pick-ctl.live { border-color: var(--signal); color: var(--signal); }
-.pick-ctl.live:hover { background: var(--signal); color: #03211c; }
+.pick-ctl.live { border-color: var(--red); color: var(--red); }
+.pick-ctl.live:hover { background: var(--red); color: #fff; }
 .pick-ctl[disabled] { cursor: default; opacity: 0.55; }
+span.pick-ctl { cursor: default; }
 .queue-ctl {
-  flex: none; font: 600 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
-  background: none; border: 1px solid var(--line-dark); border-radius: 4px; color: var(--ink-3);
-  padding: 5px 8px; cursor: pointer; white-space: nowrap;
+  flex: none; font: 600 12px var(--font); letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 1px solid var(--line-strong); border-radius: 0; color: var(--ink-2);
+  padding: 8px; cursor: pointer; white-space: nowrap; min-height: 44px;
 }
-.queue-ctl.queued { background: var(--signal); border-color: var(--signal); color: #03211c; }
+.queue-ctl.queued { background: var(--panel); border-color: var(--ink-3); color: var(--ink); }
 
 /* The rail: QUEUE / ROSTER / PICKS faces, queue the default. The queue
    is insertion-ordered and never sorts itself. Its top row wears the
-   room's ONLY dashed border and the words NEXT PICK. */
-.rail-tabs { display: flex; gap: 2px; border-bottom: 2px solid var(--line); margin-bottom: 6px; }
+   room's ONLY dashed frame and the words NEXT PICK. */
+.rail-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
 .rail-tabs button {
-  font: 600 12.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  font: 600 13px var(--font); letter-spacing: 0.06em; text-transform: uppercase;
   background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer;
-  color: var(--ink-2); padding: 8px 10px 6px;
+  color: var(--ink-2); padding: 8px; min-height: 44px;
 }
-.rail-tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
-.queue-row { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; padding: 8px 6px; border-bottom: 1px solid var(--line); font-size: 14px; }
-.queue-row .drag { color: var(--ink-3); cursor: grab; font-family: var(--mono); flex: none; }
+.rail-tabs button.active { color: var(--ink); border-bottom-color: var(--red); }
+.queue-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; padding: 8px; border-bottom: 1px solid var(--line); font-size: 14px; min-height: 56px; }
+.queue-row .drag { color: var(--ink-3); cursor: grab; flex: none; }
 .queue-row .q-name { font-weight: 650; }
-.queue-row .q-marg { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-3); white-space: nowrap; }
-.queue-row .q-remove {
-  font: 600 10.5px var(--mono); letter-spacing: 0.08em; background: none; border: none;
-  color: var(--ink-3); cursor: pointer; padding: 4px 2px; white-space: nowrap;
+.queue-row .q-marg { margin-left: auto; font-size: 11px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.queue-row .q-remove, .queue-row .q-move {
+  font: 600 11px var(--font); letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 1px solid var(--line-strong); color: var(--ink-2);
+  cursor: pointer; padding: 8px; white-space: nowrap; min-height: 44px; min-width: 44px;
 }
-.queue-row .q-remove:hover { color: var(--hero); }
-.queue-row.next-pick { border: 2px dashed var(--signal); border-radius: 6px; padding: 8px; margin: 8px 0; }
-.next-pick-tag { font: 700 10px var(--mono); letter-spacing: 0.14em; color: var(--signal); display: block; margin-bottom: 2px; }
-.auto-row { display: flex; align-items: center; gap: 10px; padding: 4px 0 10px; }
+.queue-row .q-remove:hover { color: var(--red); border-color: var(--red); }
+.queue-row.next-pick { border: 2px dashed var(--ink-3); padding: 8px; margin: 8px 0; }
+.next-pick-tag { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 8px; }
+.auto-row { display: flex; align-items: center; gap: 16px; padding: 8px 0 16px; }
 .auto-row .fine { flex: 1; }
+.queue-more { width: 100%; margin-top: 8px; }
 
-/* --- motion (study 5.2 + 6.7): temporary hierarchy only. Two beats in
-   the whole estate: the plate's lower-third settle on the splash, and
-   the tally swap when the tally changes. Each fires once and returns
-   to base state. Nothing loops; nothing decorative moves. The figures
-   themselves are never faded or counted: they are present, and the
-   emphasis passes over the furniture around them. --- */
-@keyframes plate-settle {
-  from { transform: translateY(10px); }
-  to { transform: translateY(0); }
+/* --- the draft room on a phone: a live pick, one handed, at 320px.
+   Sticky clock strip first, queue top three with NEXT PICK first,
+   pool as the main scroll with sticky role filters, and board / pool /
+   roster as phone-only tabs that never leave the room. --- */
+@media (max-width: 900px) {
+  .room { grid-template-columns: minmax(0, 1fr); grid-template-areas: "rail" "pool" "board"; gap: 24px; }
+  .room-board, .room-pool, .room-rail { min-width: 0; }
+  .pool2-row > * { min-width: 0; }
+  .clock-strip {
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 57px; z-index: 30;
+    background: var(--bg-2); border-bottom: 1px solid var(--line-strong);
+    padding: 8px 0; margin-bottom: 16px; min-height: 56px;
+  }
+  .clock-strip.on-clock { background: var(--red-dim); box-shadow: inset 0 0 0 2px var(--red); padding-left: 8px; padding-right: 8px; }
+  .clock-strip .cs-who { font-weight: 700; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .clock-strip .cs-clock { font-family: var(--mono); font-variant-numeric: tabular-nums; font-size: 22px; margin-left: auto; }
+  .clock-strip .cs-next { font-size: 12px; color: var(--ink-3); white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .phone-tabs { display: flex; gap: 8px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+  .phone-tabs button {
+    font: 600 14px var(--font); min-height: 44px; padding: 8px; flex: 1;
+    background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; color: var(--ink-2);
+  }
+  .phone-tabs button.active { color: var(--ink); border-bottom-color: var(--red); }
+  .room[data-view="pool"] .room-board { display: none; }
+  .room[data-view="board"] .room-pool, .room[data-view="board"] .room-rail { display: none; }
+  .room[data-view="roster"] .room-board, .room[data-view="roster"] .room-pool { display: none; }
+  .room-pool .filter-tabs { position: sticky; top: 130px; z-index: 20; background: var(--bg); }
+  .auto-row { flex-direction: column; align-items: stretch; }
+  .auto-row .word-toggle { width: 100%; }
+  .pool2-row { min-height: 56px; }
+  .pool2-row .who { font-size: 15px; }
+  .queue-collapsed .queue-row:nth-of-type(n+4) { display: none; }
 }
-@keyframes tally-swap {
-  0% { transform: scale(1); }
-  35% { transform: scale(1.06); }
-  100% { transform: scale(1); }
+@media (max-width: 400px) {
+  .pool2-row .marg { display: none; }
+  .clock-strip .cs-next { display: none; }
 }
+@media (max-width: 640px) {
+  /* With the header static, the strip pins to the very top and the
+     pool filters pin directly under it (strip height 73px). */
+  .clock-strip { top: 0; }
+  .room-pool .filter-tabs { top: 73px; }
+}
+
+/* --- league rows (dashboard): one league per row, full width. --- */
+.league-row {
+  display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
+  padding: 16px 0; border-bottom: 1px solid var(--line); min-height: 56px; color: inherit; text-decoration: none;
+}
+.league-row:hover { text-decoration: none; }
+.league-row .l-name { font-weight: 700; font-size: 18px; }
+.league-row .l-meta { color: var(--ink-2); font-size: 14px; }
+.league-row .l-act { margin-left: auto; }
+
+/* --- scoring worked example --- */
+.worked { font-family: var(--mono); font-size: 13px; }
+.worked .w-row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
+.worked .w-row:last-child { border-bottom: none; }
+.worked .w-total { font-weight: 700; font-size: 15px; color: var(--ink); }
+
+/* --- motion: still by default. State changes appear by cut. The
+   countdown numerals tick (content, not animation), the phone tab
+   swap fades once, and under reduced motion even that holds still. --- */
 @media (prefers-reduced-motion: no-preference) {
-  .plate.settle .plate-in { animation: plate-settle 0.28s ease-out 1 both; }
-  .plate-tally.swap { animation: tally-swap 0.22s ease-out 1 both; transform-origin: left center; }
+  .room[data-view] .room-board, .room[data-view] .room-pool, .room[data-view] .room-rail { animation: tab-fade 0.15s ease-out 1; }
+  @keyframes tab-fade { from { opacity: 0.35; } to { opacity: 1; } }
 }
 @media (prefers-reduced-motion: reduce) {
-  .plate.settle .plate-in, .plate-tally.swap { animation: none; }
-  .btn, .btn:hover, .btn:active { transition: none; }
+  * { animation: none !important; transition: none !important; }
 }

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Players · Rivals Fantasy</title>
-<meta name="theme-color" content="#0b0d1c">
+<meta name="theme-color" content="#0a1224">
 <meta property="og:title" content="Players · Rivals Fantasy">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
@@ -19,7 +19,7 @@
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="description" content="The draft pool: every verified pro in the current Marvel Rivals competition, by role and team.">
-<link rel="preload" href="/assets/fonts/anton-latin-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
@@ -27,17 +27,54 @@
 
 <section class="section">
   <div class="wrap">
-    <div class="section-head">
-      <h1>Player pool</h1><span class="spacer"></span>
+    <div class="section-head"><h1>Player pool</h1></div>
+
+    <!-- The heroes of the game, by role. These portraits are heroes,
+         never pro players: they show the jobs the pool is drafted by. -->
+    <div class="hero-strip">
+      <div class="hero-group">
+        <h3>Vanguard</h3>
+        <p class="role-line">Vanguards hold the front line and take the space fights start from.</p>
+        <div class="hero-portraits">
+          <figure><img src="/assets/img/heroes/hero-portrait-doctor-strange.png" width="154" height="280" alt="Doctor Strange" loading="lazy"><figcaption>Doctor Strange</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-magneto.png" width="154" height="279" alt="Magneto" loading="lazy"><figcaption>Magneto</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-hulk.png" width="154" height="281" alt="Hulk" loading="lazy"><figcaption>Hulk</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-captain-america.png" width="154" height="281" alt="Captain America" loading="lazy"><figcaption>Captain America</figcaption></figure>
+        </div>
+      </div>
+      <div class="hero-group">
+        <h3>Duelist</h3>
+        <p class="role-line">Duelists deal the damage and finish the fights.</p>
+        <div class="hero-portraits">
+          <figure><img src="/assets/img/heroes/hero-portrait-iron-man.png" width="154" height="280" alt="Iron Man" loading="lazy"><figcaption>Iron Man</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-spider-man.png" width="154" height="280" alt="Spider-Man" loading="lazy"><figcaption>Spider-Man</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-magik.png" width="155" height="279" alt="Magik" loading="lazy"><figcaption>Magik</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-hela.png" width="155" height="280" alt="Hela" loading="lazy"><figcaption>Hela</figcaption></figure>
+        </div>
+      </div>
+      <div class="hero-group">
+        <h3>Strategist</h3>
+        <p class="role-line">Strategists heal and set up the team to win the fight.</p>
+        <div class="hero-portraits">
+          <figure><img src="/assets/img/heroes/hero-portrait-luna-snow.png" width="155" height="281" alt="Luna Snow" loading="lazy"><figcaption>Luna Snow</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-rocket-raccoon.png" width="154" height="279" alt="Rocket Raccoon" loading="lazy"><figcaption>Rocket Raccoon</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-adam-warlock.png" width="154" height="280" alt="Adam Warlock" loading="lazy"><figcaption>Adam Warlock</figcaption></figure>
+          <figure><img src="/assets/img/heroes/hero-portrait-jeff-the-land-shark.png" width="154" height="281" alt="Jeff the Land Shark" loading="lazy"><figcaption>Jeff the Land Shark</figcaption></figure>
+        </div>
+      </div>
+    </div>
+
+    <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
       <input class="search-box" id="poolSearch" type="search" placeholder="Search the pool" aria-label="Search the pool">
-      <select id="teamFilter" style="padding:9px 12px; border:1px solid var(--line-dark); border-radius:8px; font:inherit; font-size:14px; margin-left:8px">
+      <select id="teamFilter" aria-label="Filter by team" style="padding:8px; border:1px solid var(--line-strong); font:inherit; font-size:15px; min-height:44px">
         <option value="">All teams</option>
       </select>
     </div>
-    <p class="muted small" style="margin-bottom:18px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool, a player enters the pool when their roster spot is confirmed by a published source. A player's rank is their identity in the pool: it never renumbers when the list is filtered.</p>
     <div class="filter-tabs" data-role-tabs role="group" aria-label="Filter by role"></div>
     <p class="filter-line" data-filter-line></p>
+    <div data-team-view></div>
     <div data-pool></div>
+    <p class="fine" style="margin-top:16px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool: a player enters when their roster spot is confirmed by a published source. A player's rank is their identity in the pool: it never renumbers when the list is filtered. Rosters as published for the 2026 season; teams marked roster pending are confirmed in the competition and enter the pool when their lineups are verified.</p>
   </div>
 </section>
 
@@ -46,6 +83,7 @@
   import { renderChrome, fetchJson, esc, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("players");
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`);
+  const teamByShort = Object.fromEntries(data.teams.map((t) => [t.short, t]));
   const teamName = Object.fromEntries(data.teams.map((t) => [t.short, t.name]));
   const teamRegion = Object.fromEntries(data.teams.map((t) => [t.short, t.region]));
   const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
@@ -53,10 +91,6 @@
   const poolTeams = [...new Set(players.map((p) => p.team))].sort((a, b) => (teamName[a] || a).localeCompare(teamName[b] || b));
   const teamFilter = document.getElementById("teamFilter");
   teamFilter.innerHTML = `<option value="">All teams</option>` + poolTeams.map((t) => `<option value="${esc(t)}">${esc(teamName[t] || t)}</option>`).join("");
-  /* Word tabs carrying the pool count under each label (study 1.3: the
-     tab row doubles as an instrument), one search box, and a printed
-     filter-state line. Nothing filters silently, and the rank printed
-     is the player's permanent draft rank under every filter. */
   const roles = ["", "Vanguard", "Duelist", "Strategist"];
   let activeRole = "";
   const tabsEl = document.querySelector("[data-role-tabs]");
@@ -80,6 +114,24 @@
     if (team) parts.push(`team: ${teamName[team] || team}`);
     if (q) parts.push(`search: "${q}"`);
     document.querySelector("[data-filter-line]").textContent = parts.join(" · ");
+    /* Team view: picking a team turns the pool into that team's page,
+       roster and record of the filter, inside this surface. */
+    const tv = document.querySelector("[data-team-view]");
+    if (team) {
+      const t = teamByShort[team] || {};
+      const roster = players.filter((p) => p.team === team);
+      tv.innerHTML = `
+        <div class="team-block">
+          <div class="tb-head">
+            <h3>${esc(t.name || team)}</h3>
+            <span class="region-tag">${esc(t.region || "")}</span>
+            ${t.partner ? `<span class="role partner">Partner</span>` : ""}
+            <span class="fine">${roster.length} in the pool</span>
+          </div>
+        </div>`;
+    } else {
+      tv.innerHTML = "";
+    }
     document.querySelector("[data-pool]").innerHTML = shown.length ? shown.map((p) => `
       <div class="pool2-row">
         <span class="rk">${p.draftRank ?? "·"}</span>
@@ -88,7 +140,7 @@
         <span class="muted small">${esc(teamName[p.team] || p.team || "")}${teamRegion[p.team] ? ` · ${esc(teamRegion[p.team])}` : ""}</span>
         <span class="marg">${(p.heroes || []).map(esc).join(" · ")}</span>
       </div>`).join("")
-      : `<p class="muted small" style="padding:12px 2px">No players match that filter line. Clear a filter above to see the whole pool.</p>`;
+      : `<p class="muted small" style="padding:16px 0">No players match that filter line. Clear a filter above to see the whole pool.</p>`;
   }
   draw();
   teamFilter.addEventListener("change", draw);

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Start a league · Rivals Fantasy</title>
+<meta name="theme-color" content="#0a1224">
+<meta name="description" content="Create a private Rivals Fantasy league for a live or upcoming Marvel Rivals competition, or join one with an invite code.">
+<meta property="og:title" content="Start a league · Rivals Fantasy">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rivals Fantasy">
+<meta property="og:description" content="Create a private Rivals Fantasy league for a live or upcoming Marvel Rivals competition, or join one with an invite code.">
+<meta property="og:image" content="/assets/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Start a league · Rivals Fantasy">
+<meta name="twitter:description" content="Create a private Rivals Fantasy league for a live or upcoming Marvel Rivals competition, or join one with an invite code.">
+<meta name="twitter:image" content="/assets/og-card.png">
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<!-- One flow, two modes: create a league (pick a competition, name it)
+     or join with an invite code. Both end inside the league page. -->
+<section class="section">
+  <div class="wrap" style="max-width:760px">
+    <div class="tabs" role="group" aria-label="Create or join">
+      <button data-mode-tab="create" class="active">Create a league</button>
+      <button data-mode-tab="join">Join with a code</button>
+    </div>
+    <div class="alert error" data-alert></div>
+
+    <div data-mode="create">
+      <h1 style="font-size:30px; margin-bottom:8px">Pick the competition</h1>
+      <p class="muted" style="margin-bottom:24px">A league is played for one real pro competition. Its matches are what your players score from.</p>
+      <div data-competitions></div>
+      <div data-step2 class="hidden" style="margin-top:48px">
+        <h2 style="font-size:24px; margin-bottom:24px">Name your league</h2>
+        <form data-create-form>
+          <div class="field"><label for="lname">League name</label><input id="lname" required placeholder="e.g. The Sunday Dive League"></div>
+          <div class="field"><label for="tname">Your team name</label><input id="tname" required placeholder="e.g. Dive Comp Enjoyers"></div>
+          <div class="field"><label for="size">League size (teams)</label>
+            <select id="size"><option>4</option><option selected>6</option><option>8</option><option>10</option><option>12</option></select>
+          </div>
+          <div class="field"><label for="weeks">Regular-season weeks</label>
+            <select id="weeks"><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option></select>
+            <p class="fine" style="margin-top:8px">Fantasy weeks map to the competition's match weeks. Scoring uses the standard table (tunable later in league settings).</p>
+          </div>
+          <button class="btn btn-primary" type="submit">Create league</button>
+        </form>
+      </div>
+    </div>
+
+    <div data-mode="join" class="hidden">
+      <h1 style="font-size:30px; margin-bottom:8px">Join a league</h1>
+      <p class="muted" style="margin-bottom:24px">Enter the invite code from your commissioner and name your team.</p>
+      <div class="alert info" data-need-auth>
+        You need an account first: <a href="/auth.html?mode=signup">create one</a> or <a href="/auth.html">sign in</a>, then come back to this page.
+      </div>
+      <form data-join-form style="max-width:440px">
+        <div class="field"><label for="code">Invite code</label><input id="code" required style="text-transform:uppercase" autocomplete="off"></div>
+        <div class="field"><label for="team">Your team name</label><input id="team" required placeholder="e.g. Dive Comp Enjoyers"></div>
+        <button class="btn btn-primary" style="width:100%" type="submit">Join league</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, api, esc, fmtDate } from "/assets/js/site.js";
+  renderChrome("");
+  const alertBox = document.querySelector("[data-alert]");
+  const showError = (m) => { alertBox.textContent = m; alertBox.classList.add("show"); };
+
+  function setMode(mode) {
+    document.querySelectorAll("[data-mode-tab]").forEach((b) =>
+      b.classList.toggle("active", b.dataset.modeTab === mode));
+    document.querySelector('[data-mode="create"]').classList.toggle("hidden", mode !== "create");
+    document.querySelector('[data-mode="join"]').classList.toggle("hidden", mode !== "join");
+    document.title = mode === "join" ? "Join a league · Rivals Fantasy" : "Start a league · Rivals Fantasy";
+  }
+  document.querySelectorAll("[data-mode-tab]").forEach((b) =>
+    b.addEventListener("click", () => {
+      history.replaceState(null, "", b.dataset.modeTab === "join" ? "/start.html?mode=join" : "/start.html");
+      setMode(b.dataset.modeTab);
+    }));
+  const params = new URLSearchParams(location.search);
+  if (params.get("mode") === "join" || params.get("code")) setMode("join");
+
+  const { user } = await api("/api/auth/me").catch(() => ({ user: null }));
+
+  /* --- create --- */
+  if (!user) {
+    document.querySelector('[data-mode="create"]').insertAdjacentHTML("afterbegin",
+      `<div class="alert info show" style="margin-bottom:24px">You need an account first: <a href="/auth.html?mode=signup">create one</a> or <a href="/auth.html">sign in</a>.</div>`);
+  }
+  let picked = null;
+  const meta = await api("/api/leagues/meta").catch(() => null);
+  const box = document.querySelector("[data-competitions]");
+  if (meta) {
+    const tag = (c) =>
+      c.state === "live" ? `<span class="status-tag live">Live now</span>`
+      : c.state === "upcoming" ? `<span class="status-tag">Next up</span>`
+      : `<span class="status-tag">Complete</span>`;
+    box.innerHTML = meta.competitions.map((c) => `
+      <button type="button" class="comp-option" data-comp="${c.id}" ${c.leagueCreationOpen ? "" : "disabled style='opacity:.55'"}>
+        <span style="flex:1">
+          <span class="c-name">${esc(c.name)}</span>
+          <span class="c-meta" style="display:block">${esc(c.stage || "")} · ${fmtDate(c.startsOn)} to ${fmtDate(c.endsOn)}</span>
+          <span class="fine" style="display:block; margin-top:8px">${c.state === "live" ? "In progress, your league scores its remaining weeks." : c.state === "upcoming" ? "Hasn't started, set up now, draft any time, scoring begins at the first series." : "Finished, leagues can no longer be created for it."}</span>
+        </span>
+        ${tag(c)}
+      </button>`).join("");
+    box.addEventListener("click", (e) => {
+      const btn = e.target.closest("[data-comp]");
+      if (!btn || btn.disabled) return;
+      document.querySelectorAll(".comp-option").forEach((b) => b.classList.remove("selected"));
+      btn.classList.add("selected");
+      picked = btn.dataset.comp;
+      document.querySelector("[data-step2]").classList.remove("hidden");
+      document.querySelector("[data-step2]").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  }
+  document.querySelector("[data-create-form]").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!user) return showError("Sign in first, then create.");
+    if (!picked) return showError("Pick a competition first.");
+    try {
+      const { league, inviteCode } = await api("/api/leagues", {
+        method: "POST",
+        body: JSON.stringify({
+          name: document.getElementById("lname").value,
+          teamName: document.getElementById("tname").value,
+          seasonId: picked,
+          size: Number(document.getElementById("size").value),
+          settings: { regularWeeks: Number(document.getElementById("weeks").value) },
+        }),
+      });
+      location.href = `/league.html?id=${league.id}&invite=${inviteCode}`;
+    } catch (err) { showError(err.message); }
+  });
+
+  /* --- join --- */
+  const codeInput = document.getElementById("code");
+  if (params.get("code")) codeInput.value = params.get("code").toUpperCase();
+  if (user) document.querySelector("[data-need-auth]").classList.remove("show");
+  else document.querySelector("[data-need-auth]").classList.add("show");
+  document.querySelector("[data-join-form]").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!user) return showError("Sign in first, then join.");
+    try {
+      const { league } = await api("/api/leagues/join", {
+        method: "POST",
+        body: JSON.stringify({ code: codeInput.value.trim(), teamName: document.getElementById("team").value }),
+      });
+      location.href = `/league.html?id=${league.id}`;
+    } catch (err) { showError(err.message); }
+  });
+</script>
+</body>
+</html>

@@ -87,6 +87,21 @@ const server = createServer(async (rawReq, rawRes) => {
       await mod.default(req, res);
       return;
     }
+    // Merged-surface redirects (mirror of vercel.json "redirects"):
+    // the v3 build folded six standalone pages into merged surfaces.
+    const REDIRECTS = {
+      "/schedule.html": "/season.html", "/schedule": "/season.html",
+      "/teams.html": "/players.html", "/teams": "/players.html",
+      "/login.html": "/auth.html", "/login": "/auth.html",
+      "/signup.html": "/auth.html?mode=signup", "/signup": "/auth.html?mode=signup",
+      "/join.html": "/start.html?mode=join", "/join": "/start.html?mode=join",
+      "/create-league.html": "/start.html", "/create-league": "/start.html",
+    };
+    if (REDIRECTS[path]) {
+      const dest = REDIRECTS[path] + (path.endsWith("join") || path.endsWith("join.html") ? (url.searchParams.get("code") ? `&code=${encodeURIComponent(url.searchParams.get("code"))}` : "") : "");
+      rawRes.writeHead(301, { Location: dest });
+      return rawRes.end();
+    }
     // Static
     let rel = path === "/" ? "index.html" : path.replace(/^\//, "");
     if (!extname(rel) && !rel.endsWith("/")) rel += ".html";

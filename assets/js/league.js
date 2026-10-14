@@ -81,7 +81,7 @@ function describeEvent(e) {
 function setInvite(code) {
   document.querySelector("[data-invite-code]").textContent = code;
   document.querySelector("[data-copy-link]").dataset.link =
-    `${location.origin}/join.html?code=${code}`;
+    `${location.origin}/start.html?mode=join&code=${code}`;
 }
 document.querySelector("[data-new-invite]").addEventListener("click", async () => {
   const { code } = await api("/api/leagues/invite", { method: "POST", body: JSON.stringify({ leagueId }) });
@@ -117,6 +117,7 @@ let poolQuery = "";
 let showDrafted = false;
 let autoPick = false;
 let autoFiredFor = -1;
+let queueExpanded = false;
 let queue = loadQueue();
 
 const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
@@ -142,15 +143,51 @@ async function loadDraft() {
 }
 
 /* The countdown lives in the on-the-clock cell and ticks every second
-   against the server deadline; the 4s poll only re-reads the room. */
+   against the server deadline; the 4s poll only re-reads the room. The
+   phone clock strip mirrors the same deadline and whose turn it is. */
 setInterval(() => {
   const el = document.querySelector("[data-cell-clock]");
   if (el && lastState?.draft?.pickDeadline) el.textContent = countdown(lastState.draft.pickDeadline);
+  const cs = document.querySelector("[data-cs-clock]");
+  if (cs && lastState?.draft?.pickDeadline && lastState.draft.status === "live") {
+    cs.textContent = countdown(lastState.draft.pickDeadline);
+  }
 }, 1000);
+
+function renderClockStrip(state) {
+  const strip = document.querySelector("[data-clock-strip]");
+  if (!strip) return;
+  const { draft, myMemberId } = state;
+  const who = strip.querySelector("[data-cs-who]");
+  const next = strip.querySelector("[data-cs-next]");
+  const clock = strip.querySelector("[data-cs-clock]");
+  if (!draft || draft.status !== "live") {
+    who.textContent = draft?.status === "complete" ? "Draft complete" : "Draft room";
+    next.textContent = "";
+    clock.textContent = "";
+    strip.classList.remove("on-clock");
+    return;
+  }
+  const mine = draft.onClock?.memberId === myMemberId;
+  who.textContent = mine ? "Your pick" : `${memberName(draft.onClock?.memberId)} is on the clock`;
+  const order = draft.order || [];
+  let nextText = "";
+  if (!mine && order.length) {
+    for (let pickNo = draft.currentPick + 1; pickNo < draft.totalPicks; pickNo++) {
+      const round = Math.floor(pickNo / order.length);
+      const pos = round % 2 === 0 ? pickNo % order.length : order.length - 1 - (pickNo % order.length);
+      if (order[pos] === myMemberId) { nextText = `Your next pick: ${pickNo + 1}`; break; }
+    }
+  }
+  next.textContent = nextText;
+  clock.textContent = draft.pickDeadline ? countdown(draft.pickDeadline) : "";
+  strip.classList.toggle("on-clock", mine);
+}
 
 function renderDraft(state) {
   const { draft, picks, pool, myMemberId } = state;
   poolCache = pool || [];
+  renderClockStrip(state);
   const title = document.querySelector("[data-draft-title]");
   const status = document.querySelector("[data-draft-status]");
   const actions = document.querySelector("[data-draft-actions]");
@@ -169,7 +206,7 @@ function renderDraft(state) {
       ? "The draft hasn't started. Once every team is in, the commissioner starts it here, order is drawn at random, snake format."
       : "No draft for this league.";
     actions.innerHTML = L.isCommissioner && L.league.status === "forming"
-      ? `<button class="btn btn-accent" data-start-draft>Start the draft</button>` : "";
+      ? `<button class="btn btn-primary" data-start-draft>Start the draft</button>` : "";
     document.querySelector("[data-board]").innerHTML = "";
     document.querySelector("[data-pool]").innerHTML = "";
     document.querySelector("[data-pool-tabs]").innerHTML = "";
@@ -345,12 +382,15 @@ function renderQueue(state) {
   if (pruned.length !== queue.length) { queue = pruned; saveQueue(); }
   if (!queue.length) {
     el.innerHTML = `<p class="muted small" style="padding:8px 2px">Your queue is empty. Add players from the pool; the order you build here is the order the room respects, it never sorts itself.</p>`;
+    document.querySelector("[data-queue-expand]")?.classList.add("hidden");
     return;
   }
   const mine = draft?.status === "live" && draft.onClock?.memberId === myMemberId && draft.onClockPickKind !== "squad";
-  const controls = (p) => `
+  const controls = (p, i) => `
     <span class="q-marg">RK ${p.draft_rank} · ${esc(p.role)}</span>
-    ${mine ? `<button class="btn btn-small btn-accent" data-queue-draft="${p.id}">Draft</button>` : ""}
+    ${mine ? `<button class="btn btn-small btn-primary" data-queue-draft="${p.id}">Draft</button>` : ""}
+    <button class="q-move" data-queue-up="${p.id}" ${i === 0 ? "disabled" : ""} aria-label="Move ${esc(p.ign)} up in the queue">Up</button>
+    <button class="q-move" data-queue-down="${p.id}" ${i === queue.length - 1 ? "disabled" : ""} aria-label="Move ${esc(p.ign)} down in the queue">Down</button>
     <button class="q-remove" data-queue-remove="${p.id}">Remove</button>`;
   el.innerHTML = queue.map((id, i) => {
     const p = byId[id];
@@ -358,10 +398,10 @@ function renderQueue(state) {
       return `<div class="queue-row next-pick" draggable="true" data-queue-row="0">
         <div style="flex:1; min-width:0">
           <span class="next-pick-tag">Next pick</span>
-          <div style="display:flex; gap:9px; align-items:center; flex-wrap:wrap">
+          <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
             <span class="drag" aria-hidden="true">⠿</span>
             <span class="q-name">${esc(p.ign)}</span>
-            ${controls(p)}
+            ${controls(p, i)}
           </div>
         </div>
       </div>`;
@@ -369,9 +409,19 @@ function renderQueue(state) {
     return `<div class="queue-row" draggable="true" data-queue-row="${i}">
       <span class="drag" aria-hidden="true">⠿</span>
       <span class="q-name">${esc(p.ign)}</span>
-      ${controls(p)}
+      ${controls(p, i)}
     </div>`;
   }).join("");
+  /* Phone collapse: the queue shows its top three until expanded. The
+     class and the expand control are phone-only furniture; on desktop
+     the CSS never collapses and the button stays hidden. */
+  const expandBtn = document.querySelector("[data-queue-expand]");
+  if (expandBtn) {
+    const collapsible = queue.length > 3;
+    el.classList.toggle("queue-collapsed", collapsible && !queueExpanded);
+    expandBtn.classList.toggle("hidden", !collapsible);
+    expandBtn.textContent = queueExpanded ? "Show top three" : `Show full queue (${queue.length})`;
+  }
   el.querySelectorAll("[data-queue-remove]").forEach((b) =>
     b.addEventListener("click", () => {
       queue = queue.filter((x) => x !== b.dataset.queueRemove);
@@ -379,6 +429,18 @@ function renderQueue(state) {
       renderQueue(state);
       if (lastState) renderPool(lastState);
     }));
+  const moveInQueue = (id, dir) => {
+    const i = queue.indexOf(id);
+    const j = i + dir;
+    if (i < 0 || j < 0 || j >= queue.length) return;
+    [queue[i], queue[j]] = [queue[j], queue[i]];
+    saveQueue();
+    renderQueue(state);
+  };
+  el.querySelectorAll("[data-queue-up]").forEach((b) =>
+    b.addEventListener("click", () => moveInQueue(b.dataset.queueUp, -1)));
+  el.querySelectorAll("[data-queue-down]").forEach((b) =>
+    b.addEventListener("click", () => moveInQueue(b.dataset.queueDown, 1)));
   el.querySelectorAll("[data-queue-draft]").forEach((b) =>
     b.addEventListener("click", () => doPick({ playerId: b.dataset.queueDraft })));
   let dragIdx = null;
@@ -428,6 +490,24 @@ document.querySelector("[data-show-drafted]")?.addEventListener("click", (e) => 
   e.target.setAttribute("aria-pressed", String(showDrafted));
   e.target.textContent = showDrafted ? "Show drafted: on" : "Show drafted";
   if (lastState) renderPool(lastState);
+});
+document.querySelector("[data-queue-expand]")?.addEventListener("click", () => {
+  queueExpanded = !queueExpanded;
+  if (lastState) renderQueue(lastState);
+});
+/* Phone-only room views: Board / Pool / Roster swap what the phone
+   shows without leaving the room, so queue and clock state survive the
+   swap untouched. The Roster view drives the rail to its roster face. */
+document.querySelector("[data-phone-tabs]")?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-view]");
+  if (!btn) return;
+  document.querySelectorAll("[data-phone-tabs] [data-view]").forEach((b) =>
+    b.classList.toggle("active", b === btn));
+  const room = document.querySelector("[data-room]");
+  if (room) room.dataset.view = btn.dataset.view;
+  if (btn.dataset.view === "roster") {
+    document.querySelector('[data-rail="roster"]')?.click();
+  }
 });
 document.querySelector("[data-auto-pick]")?.addEventListener("click", (e) => {
   autoPick = !autoPick;
@@ -488,7 +568,7 @@ async function loadLineup() {
       <tr><td><strong>${esc(r.ign)}</strong></td>
         <td><span class="role ${r.role === "Vanguard" ? "van" : r.role === "Duelist" ? "due" : "str"}">${esc(r.role)}</span></td>
         <td class="muted">${esc(r.pro_team_name || "")}</td>
-        <td><select data-slot-for="${r.player_id}" ${data.locked ? "disabled" : ""} style="padding:7px 10px; border:1px solid var(--line-dark); border-radius:8px; font:inherit; width:100%">
+        <td><select data-slot-for="${r.player_id}" ${data.locked ? "disabled" : ""} style="padding:8px; border:1px solid var(--line-strong); border-radius:0; font:inherit; width:100%; min-height:44px">
           ${["VAN", "DUE", "STR", "FLEX", "BENCH"].map((s) => `<option value="${s}" ${saved[r.player_id] === s ? "selected" : ""}>${s === "BENCH" ? "Bench" : s}</option>`).join("")}
         </select></td></tr>`).join("") +
       (squad ? `<tr><td><strong>${esc(squad.squad_name)}</strong></td><td><span class="role">Squad</span></td><td class="muted">scores its own series</td><td class="muted small">Always on</td></tr>` : "");
@@ -529,10 +609,11 @@ async function loadStandings() {
     }
     const data = await api(`/api/leagues/standings?leagueId=${leagueId}&week=${detailSel.value || 1}`);
     document.querySelector("[data-standings-rows]").innerHTML = data.standings.length
-      ? data.standings.map((s) => `
-        <tr class="${s.member_id === L.me.id ? "me" : ""}"><td>${esc(s.team_name)}</td>
-          <td class="n">${s.wins}</td><td class="n">${s.losses}</td>
-          <td class="n">${Number(s.points_for).toFixed(1)}</td><td class="n">${Number(s.points_against).toFixed(1)}</td></tr>`).join("")
+      ? data.standings.map((s, i) => `
+        <tr class="${s.member_id === L.me.id ? "me" : ""}"><td class="n">${i + 1}</td><td>${esc(s.team_name)}</td>
+          <td class="score">${Number(s.points_for).toFixed(1)}</td>
+          <td class="n">${s.wins}-${s.losses}</td>
+          <td class="score">${Number(s.points_against).toFixed(1)}</td></tr>`).join("")
       : `<tr><td colspan="5" class="muted">No table yet, the draft comes first.</td></tr>`;
     const byWeek = {};
     for (const m of data.matchups) (byWeek[m.week] ||= []).push(m);
@@ -590,6 +671,6 @@ try {
   // If the draft is already live, land the user near it.
   if (L.league.status === "drafting") loadDraft();
 } catch (err) {
-  if (err.status === 401) location.href = "/login.html";
+  if (err.status === 401) location.href = "/auth.html";
   else showError(err.message);
 }

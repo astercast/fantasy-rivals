@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>League · Rivals Fantasy</title>
-<meta name="theme-color" content="#0b0d1c">
+<meta name="theme-color" content="#0a1224">
 <meta name="description" content="The league room: draft board, lineups, weekly matchups, standings and the activity feed.">
 <meta property="og:title" content="League · Rivals Fantasy">
 <meta property="og:type" content="website">
@@ -19,23 +19,26 @@
 <meta name="twitter:image" content="/assets/og-card.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/anton-latin-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
 <section class="plate" data-season-plate></section>
+<div class="art-band">
+  <img src="/assets/img/league-art.jpg" width="1440" height="810" alt="Jeff the Land Shark in Marvel Rivals">
+</div>
 
-<section class="section" style="padding-top:40px">
+<section class="section" style="padding-top:24px">
   <div class="wrap">
     <div class="alert error" data-alert></div>
     <div data-league-head>
-      <p class="kicker" data-season-line>Loading…</p>
-      <h1 style="font-size:34px; margin:8px 0 6px" data-league-name></h1>
+      <p class="fine" data-season-line>Loading…</p>
+      <h1 style="font-size:34px; margin:8px 0 8px" data-league-name></h1>
       <p class="muted" data-league-sub></p>
     </div>
 
-    <div class="tabs" style="margin-top:28px" data-tabs>
+    <div class="tabs" style="margin-top:24px" data-tabs>
       <button data-tab="overview" class="active">Overview</button>
       <button data-tab="draft">Draft</button>
       <button data-tab="team">My Team</button>
@@ -49,44 +52,53 @@
         <div class="card">
           <h3>Teams</h3>
           <div data-members></div>
-          <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:14px">
+          <div style="margin-top:16px; border-top:1px solid var(--line); padding-top:16px">
             <p class="small muted" style="margin-bottom:8px">Invite your league, share this code or link:</p>
-            <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+            <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap">
               <span class="mono" style="font-size:18px; font-weight:700" data-invite-code>····</span>
-              <button class="btn btn-ghost btn-small" data-new-invite>New invite code</button>
-              <button class="btn btn-ghost btn-small" data-copy-link>Copy invite link</button>
+              <button class="btn btn-small" data-new-invite>New invite code</button>
+              <button class="btn btn-small" data-copy-link>Copy invite link</button>
             </div>
           </div>
         </div>
         <div class="card">
           <h3>What's next</h3>
-          <p class="muted" data-next-step style="margin-bottom:14px"></p>
-          <h3 style="margin-top:20px">Activity</h3>
+          <p class="muted" data-next-step style="margin-bottom:16px"></p>
+          <h3 style="margin-top:24px">Activity</h3>
           <div data-feed></div>
         </div>
       </div>
     </div>
 
-    <!-- DRAFT: the room (FANTASY-STUDY 5.3). Board above, pool bottom
-         left, rail right with the queue as its default face. The three
-         zones never move during the draft; drama is state changes
-         inside fixed furniture. The clock lives inside the board cell
-         it governs, never in a banner. -->
+    <!-- DRAFT: the room. Board, pool, and queue rail in fixed zones on
+         desktop. On a phone: a sticky clock strip, the queue collapsed
+         to its top three, the pool as the main scroll, and Board / Pool /
+         Roster tabs that swap the view without leaving the room. -->
     <div data-pane="draft" class="hidden">
-      <div class="room">
+      <div class="clock-strip" data-clock-strip>
+        <span class="cs-who" data-cs-who>Draft room</span>
+        <span class="cs-next" data-cs-next></span>
+        <span class="cs-clock" data-cs-clock></span>
+      </div>
+      <div style="display:flex; gap:16px; align-items:baseline; flex-wrap:wrap">
+        <h3 data-draft-title style="font-size:20px">Draft room</h3>
+      </div>
+      <p class="muted small" data-draft-status style="margin:8px 0 16px"></p>
+      <div data-draft-actions style="margin-bottom:16px"></div>
+      <div class="phone-tabs" data-phone-tabs role="group" aria-label="Draft room views">
+        <button data-view="pool" class="active">Pool</button>
+        <button data-view="board">Board</button>
+        <button data-view="roster">Roster</button>
+      </div>
+      <div class="room" data-room data-view="pool">
         <div class="card room-board">
-          <div style="display:flex; gap:16px; align-items:baseline; flex-wrap:wrap">
-            <h3 data-draft-title>Draft room</h3>
-          </div>
-          <p class="muted small" data-draft-status style="margin:6px 0 14px"></p>
-          <div data-draft-actions style="margin-bottom:14px"></div>
+          <h3 style="margin-bottom:16px">Draft board</h3>
           <div class="board-scroll"><div data-board></div></div>
         </div>
         <div class="card room-pool">
-          <h3 style="margin-bottom:4px">Player pool</h3>
-          <p class="fine" style="margin-bottom:6px">The round control drafts a player when you are on the clock. Queue holds your order in the rail. A rank is a player's identity here: it never renumbers under filters.</p>
+          <h3 style="margin-bottom:8px">Player pool</h3>
           <div class="filter-tabs" data-pool-tabs role="group" aria-label="Filter the pool by role"></div>
-          <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:6px">
+          <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-top:8px">
             <input class="search-box" data-pool-search type="search" placeholder="Search the pool" aria-label="Search the pool">
             <button class="word-toggle" data-show-drafted aria-pressed="false">Show drafted</button>
           </div>
@@ -105,6 +117,7 @@
               <button class="word-toggle" data-auto-pick aria-pressed="false">Auto-pick: off</button>
             </div>
             <div data-queue></div>
+            <button class="btn btn-small queue-more hidden" data-queue-expand>Show full queue</button>
           </div>
           <div data-rail-roster class="hidden"></div>
           <div data-rail-picks class="hidden"><div data-picks></div></div>
@@ -115,32 +128,32 @@
     <!-- MY TEAM -->
     <div data-pane="team" class="hidden">
       <div class="card">
-        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-bottom:8px">
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap; margin-bottom:8px">
           <h3>Lineup</h3>
           <span style="flex:1"></span>
           <label class="small muted">Week
-            <select data-week-select style="padding:7px 10px; border:1px solid var(--line-dark); border-radius:8px; font:inherit"></select>
+            <select data-week-select style="padding:8px; border:1px solid var(--line-strong); font:inherit; min-height:44px"></select>
           </label>
         </div>
-        <p class="small muted" data-lock-note style="margin-bottom:12px"></p>
+        <p class="small muted" data-lock-note style="margin-bottom:16px"></p>
         <div class="alert error" data-team-alert></div>
         <div class="alert info" data-team-info></div>
         <table class="sheet">
           <thead><tr><th>Player</th><th>Role</th><th>Pro team</th><th style="width:170px">Slot</th></tr></thead>
           <tbody data-lineup-rows></tbody>
         </table>
-        <p class="small muted" style="margin-top:12px">Starters: one Vanguard, one Duelist, one Strategist, two Flex. Everyone else is bench. Your drafted Squad scores on its own, no slot to set. Lineups carry forward week to week until you change them.</p>
-        <button class="btn btn-accent" data-save-lineup style="margin-top:14px">Save lineup</button>
+        <p class="small muted" style="margin-top:16px">Starters: one Vanguard, one Duelist, one Strategist, two Flex. Everyone else is bench. Your drafted Squad scores on its own, no slot to set. Lineups carry forward week to week until you change them.</p>
+        <button class="btn btn-primary" data-save-lineup style="margin-top:16px">Save lineup</button>
       </div>
     </div>
 
     <!-- STANDINGS -->
     <div data-pane="standings" class="hidden">
-      <div class="grid" style="grid-template-columns: 1fr 1fr; gap:20px" data-standings-grid>
+      <div class="grid grid-2">
         <div class="card">
           <h3>Table</h3>
           <table class="sheet">
-            <thead><tr><th>Team</th><th class="n">W</th><th class="n">L</th><th class="n">PF</th><th class="n">PA</th></tr></thead>
+            <thead><tr><th>#</th><th>Team</th><th class="score">Pts</th><th>Record</th><th class="score">Against</th></tr></thead>
             <tbody data-standings-rows></tbody>
           </table>
         </div>
@@ -149,10 +162,10 @@
           <div data-matchups></div>
         </div>
       </div>
-      <div class="card" style="margin-top:20px">
-        <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap">
+      <div class="card" style="margin-top:24px">
+        <div style="display:flex; gap:16px; align-items:center; flex-wrap:wrap">
           <h3>Week detail</h3><span style="flex:1"></span>
-          <label class="small muted">Week <select data-detail-week style="padding:7px 10px; border:1px solid var(--line-dark); border-radius:8px; font:inherit"></select></label>
+          <label class="small muted">Week <select data-detail-week style="padding:8px; border:1px solid var(--line-strong); font:inherit; min-height:44px"></select></label>
         </div>
         <div data-week-detail></div>
       </div>
@@ -163,23 +176,23 @@
       <div class="grid grid-2">
         <div class="card">
           <h3>Score a week</h3>
-          <p class="muted small" style="margin-bottom:12px">Scores every matchup for the week from the imported real results, then refreshes the table. Safe to re-run, scoring replaces the week's numbers.</p>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center">
-            <label class="small">Week <input type="number" min="1" value="1" data-score-week-input style="width:70px; padding:8px; border:1px solid var(--line-dark); border-radius:8px; font:inherit"></label>
-            <button class="btn btn-accent btn-small" data-score-week>Score week</button>
+          <p class="muted small" style="margin-bottom:16px">Scores every matchup for the week from the imported real results, then refreshes the table. Safe to re-run, scoring replaces the week's numbers.</p>
+          <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center">
+            <label class="small">Week <input type="number" min="1" value="1" data-score-week-input style="width:70px; padding:8px; border:1px solid var(--line-strong); font:inherit; min-height:44px"></label>
+            <button class="btn btn-primary btn-small" data-score-week>Score week</button>
             <label class="small muted"><input type="checkbox" data-gen-playoffs> Seed playoffs after final regular week</label>
           </div>
-          <div class="alert info" data-comm-info style="margin-top:14px"></div>
+          <div class="alert info" data-comm-info style="margin-top:16px"></div>
         </div>
         <div class="card">
           <h3>Importing results</h3>
           <p class="muted small">Results enter through the import API with a named source, never typed into the standings by hand. Payload per series: week, both teams, map score, and each player's line (eliminations / deaths / assists / final hits / damage / blocked / healing).</p>
-          <pre class="mono" style="font-size:11.5px; background:var(--paper-2); padding:12px; border-radius:8px; overflow:auto; margin-top:12px">POST /api/admin/import-results
+          <pre class="mono" style="font-size:12px; background:var(--bg-2); padding:16px; overflow:auto; margin-top:16px">POST /api/admin/import-results
 { "seasonId": "…", "source": "Liquipedia series result; player lines from the official broadcast VOD scoreboard",
   "matches": [{ "week": 1, "teamA": "SEN",
     "teamB": "100T", "scoreA": 3, "scoreB": 1,
     "status": "final", "stats": [ … ] }] }</pre>
-          <p class="fine" style="margin-top:10px">Admins and the pipeline key can import. Unresolved teams/players are reported back, never guessed.</p>
+          <p class="fine" style="margin-top:8px">Admins and the pipeline key can import. Unresolved teams/players are reported back, never guessed.</p>
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ export default handler(async (req, res) => {
   const { provider, code, state, error } = query(req);
   const back = (msg) => {
     res.statusCode = 302;
-    res.setHeader("Location", `/login.html?oauth_error=${encodeURIComponent(msg)}`);
+    res.setHeader("Location", `/auth.html?oauth_error=${encodeURIComponent(msg)}`);
     res.end();
   };
   if (provider !== "dev" && !PROVIDERS[provider]) return back("Unknown provider.");

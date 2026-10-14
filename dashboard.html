@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>My leagues · Rivals Fantasy</title>
-<meta name="theme-color" content="#0b0d1c">
+<meta name="theme-color" content="#0a1224">
 <meta name="description" content="Your Rivals Fantasy leagues in one place: drafts, lineups, weekly matchups, standings and scores.">
 <meta property="og:title" content="My leagues · Rivals Fantasy">
 <meta property="og:type" content="website">
@@ -19,7 +19,7 @@
 <meta name="twitter:image" content="/assets/og-card.png">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<link rel="preload" href="/assets/fonts/anton-latin-normal-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 </head>
 <body>
@@ -28,17 +28,17 @@
 <section class="section">
   <div class="wrap">
     <div class="section-head">
-      <div><p class="kicker">Your fantasy home</p><h1 style="margin-top:8px; font-size:30px">My leagues</h1></div>
+      <h1>My leagues</h1>
       <span class="spacer"></span>
-      <a class="btn btn-ghost" href="/join.html">Join with a code</a>
-      <a class="btn btn-primary" href="/create-league.html">Create a league</a>
+      <a class="btn" href="/start.html?mode=join">Join with a code</a>
+      <a class="btn btn-primary" href="/start.html">Create a league</a>
     </div>
     <div class="alert error" data-alert></div>
-    <div class="grid grid-2" data-leagues></div>
-    <div data-empty class="card hidden" style="text-align:center; padding:44px 20px">
-      <h3>No leagues yet</h3>
-      <p class="muted" style="margin:8px 0 18px">Create one for the live competition, or join a friend's with their invite code.</p>
-      <a class="btn btn-accent" href="/create-league.html">Create your first league</a>
+    <div data-leagues></div>
+    <div data-empty class="hidden" style="padding:48px 0">
+      <h3 style="font-size:20px">No leagues yet</h3>
+      <p class="muted" style="margin:8px 0 24px">Create one for the live competition, or join a friend's with their invite code.</p>
+      <a class="btn btn-primary" href="/start.html">Create your first league</a>
     </div>
   </div>
 </section>
@@ -46,22 +46,24 @@
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
   import { renderChrome, api, esc } from "/assets/js/site.js";
-  renderChrome("");
+  renderChrome("dashboard");
   const statusLabel = { forming: "Forming, invites open", drafting: "Draft is live", active: "Season running", playoffs: "Playoffs", complete: "Complete" };
+  const nextAction = { forming: "Open league", drafting: "Go to the draft", active: "Set your lineup", playoffs: "See the bracket", complete: "Final table" };
   try {
     const { leagues } = await api("/api/leagues");
     const box = document.querySelector("[data-leagues]");
     if (!leagues.length) document.querySelector("[data-empty]").classList.remove("hidden");
     box.innerHTML = leagues.map((l) => `
-      <a class="card" href="/league.html?id=${l.id}" style="color:inherit; display:block">
-        <div style="display:flex; gap:12px; align-items:baseline">
-          <h3 style="flex:1">${esc(l.name)}</h3>
-          <span class="mono fine">${l.member_count}/${l.size} teams</span>
-        </div>
-        <p class="muted small">${esc(statusLabel[l.status] || l.status)} · your team: <strong>${esc(l.team_name)}</strong></p>
+      <a class="league-row" href="/league.html?id=${l.id}">
+        <span>
+          <span class="l-name">${esc(l.name)}</span>
+          <span class="l-meta" style="display:block">${esc(statusLabel[l.status] || l.status)} · your team: <strong>${esc(l.team_name)}</strong> · ${l.member_count}/${l.size} teams</span>
+        </span>
+        ${l.status === "drafting" ? `<span class="tag-live">Draft live</span>` : ""}
+        <span class="l-act btn btn-small">${esc(nextAction[l.status] || "Open league")}</span>
       </a>`).join("");
   } catch (err) {
-    if (err.status === 401) location.href = "/login.html";
+    if (err.status === 401) location.href = "/auth.html";
     const a = document.querySelector("[data-alert]");
     a.textContent = err.message; a.classList.add("show");
   }

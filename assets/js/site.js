@@ -1,13 +1,10 @@
-/* site.js, shared chrome (the trade dress), the season plate, and small
-   public-data helpers. Loaded on every page.
+/* site.js, shared chrome, the season plate, and small public-data
+   helpers. Loaded on every page.
 
-   Trade dress (FANTASY-STUDY section 5.4, from the Marvel Comics cover
-   system teardown, study section 4): a fixed band on every page (wordmark
-   left, competition switcher right, display face, one size), a corner box
-   at the band's right end carrying season state in dual-number form, and
-   a foot reduced to one small-print line (provenance + update time). The
-   dress itself is flat; halftone lives only in the splash beat and in the
-   plate's state-change moment. */
+   V3 chrome: a slim bar (wordmark left, Season / Players / My Leagues,
+   account right) and a one-line foot (data sources, update time, art
+   credit). Season state lives in the plate on the page, never in the
+   header. */
 
 export const GAME_SLUG = "marvel-rivals";
 
@@ -44,10 +41,9 @@ export function esc(s) {
 }
 
 /* The public season file is fetched once per page and shared by the
-   corner box, the plate, and the foot line, so the dress can never
-   disagree with itself. State inside it is calendar-derived at build
-   time in scripts/build-site.mjs; the league picker derives the same
-   state at request time in api/leagues/meta.js. Same rule, both sites. */
+   plate and the foot line. State inside it is calendar-derived at
+   build time in scripts/build-site.mjs; the league picker derives the
+   same state at request time in api/leagues/meta.js. */
 let seasonPromise = null;
 export function seasonData() {
   if (!seasonPromise) {
@@ -56,37 +52,9 @@ export function seasonData() {
   return seasonPromise;
 }
 
-/* Dual-number season state for the corner box (study 5.4): the current
-   run's number over the season's whole. Today that reads as the stage
-   word (PLAYOFFS) over the live competition's position in the season
-   (3 OF 4). Derived from the season file only; nothing is authored here. */
-export function cornerBoxState(data) {
-  if (!data) return { top: "SEASON", bottom: "STATE UNAVAILABLE" };
-  const seasons = [...(data.seasons || [])].sort((a, b) =>
-    (a.startsOn || "").localeCompare(b.startsOn || ""));
-  const total = seasons.length;
-  const live = data.liveNow?.[0];
-  if (live) {
-    const pos = seasons.findIndex((s) => s.name === live.name) + 1;
-    const stageWord = (live.stage || "").trim().split(/\s+/)[0] || "LIVE";
-    const shortName = (live.name.split(":").pop() || "").trim().toUpperCase();
-    return {
-      top: shortName || "LIVE NOW",
-      bottom: `${stageWord.toUpperCase()} · ${pos} OF ${total}`,
-    };
-  }
-  const next = data.nextUp;
-  if (next) {
-    const pos = seasons.findIndex((s) => s.name === next.name) + 1;
-    const shortName = (next.name.split(":").pop() || "").trim().toUpperCase();
-    return { top: shortName || "NEXT UP", bottom: `NEXT · ${pos} OF ${total}` };
-  }
-  return { top: "OFF SEASON", bottom: `${total} EVENTS FILED`, loud: false };
-}
-
-/* The plate's one loud state (study 5.2): the state word takes corner-box
-   red only when the season state changes class, the playoffs of the live
-   competition or the Grand Finals window. Every other day it sits in ink. */
+/* The plate's one loud state: the state word takes the red only when
+   the season state changes class, the playoffs of the live competition
+   or the Grand Finals window. Every other day it sits in ink. */
 export function isLoudState(live) {
   if (!live) return false;
   return /playoff/i.test(live.stage || "") || /grand finals/i.test(live.name || "");
@@ -100,36 +68,20 @@ export function renderChrome(active) {
         <a class="wordmark" href="/">Rivals<span class="dot">·</span>Fantasy</a>
         <nav class="main-nav">
           <a href="/season.html" ${active === "season" ? 'aria-current="page"' : ""}>Season</a>
-          <a href="/teams.html" ${active === "teams" ? 'aria-current="page"' : ""}>Teams</a>
           <a href="/players.html" ${active === "players" ? 'aria-current="page"' : ""}>Players</a>
-          <a href="/schedule.html" ${active === "schedule" ? 'aria-current="page"' : ""}>Schedule</a>
+          <a href="/dashboard.html" ${active === "dashboard" ? 'aria-current="page"' : ""}>My Leagues</a>
         </nav>
         <div class="head-right" data-head-right>
-          <a class="small muted" href="/login.html">Sign in</a>
-          <a class="btn btn-primary btn-small" href="/create-league.html">Create a league</a>
-        </div>
-        <div class="switcher" role="group" aria-label="Competition">
-          <span class="sw on" aria-current="true">Marvel Rivals <i>Live</i></span>
-          <a class="sw" href="/#games">Deadlock <i>Watching</i></a>
-        </div>
-        <div class="corner-box" data-corner-box title="Season state">
-          <div class="cb-top" data-cb-top>Season</div>
-          <div class="cb-bottom" data-cb-bottom>Loading state</div>
+          <a class="small muted" href="/auth.html" style="text-decoration:none">Sign in</a>
+          <a class="btn btn-primary btn-small" href="/start.html">Create a league</a>
         </div>
       </div>`;
-    seasonData().then((data) => {
-      const box = document.querySelector("[data-corner-box]");
-      if (!box || !data) return;
-      const s = cornerBoxState(data);
-      box.querySelector("[data-cb-top]").textContent = s.top;
-      box.querySelector("[data-cb-bottom]").textContent = s.bottom;
-    });
   }
   const foot = document.querySelector("[data-chrome-foot]");
   if (foot) {
     foot.innerHTML = `
       <div class="wrap">
-        <p class="foot-line" data-foot-line>Pro data is compiled from public sources (Liquipedia, Esports Insider, Dot Esports, official broadcasts) and labelled with its source and date wherever it appears. Not affiliated with NetEase, Marvel, or Riot Games.</p>
+        <p class="foot-line" data-foot-line>Pro data is compiled from public sources (Liquipedia, Esports Insider, Dot Esports, official broadcasts) and labelled with its source and date wherever it appears. Marvel Rivals art by Marvel and NetEase. Not affiliated with NetEase, Marvel, or Riot Games.</p>
       </div>`;
     seasonData().then((data) => {
       const line = document.querySelector("[data-foot-line]");
@@ -144,26 +96,24 @@ export function renderChrome(active) {
       if (user) {
         right.innerHTML = `
           <span class="head-user">${esc(user.displayName)}</span>
-          <a class="small muted" href="/dashboard.html">My leagues</a>
-          <a class="btn btn-primary btn-small" href="/create-league.html">Create a league</a>`;
+          <a class="small muted" href="/dashboard.html" style="text-decoration:none">My leagues</a>
+          <a class="btn btn-primary btn-small" href="/start.html">Create a league</a>`;
       }
     })
     .catch(() => {});
 }
 
-/* The season plate: the site's scorebug (study 5.2, from the broadcast
-   scorebug teardown, study section 3). Fixed geometry on every surface
-   that carries it. Left zone is the protected core, in this order and no
-   other: competition wordmark line, stage name, state word, dates. The
-   core never moves or resizes. Right zone is the assist area, and its
-   only tenant is the running tally. When the tally lands, the tally
-   element alone re-ranks for a beat and settles (temporary hierarchy);
-   the plate's outer geometry does not change by a pixel. */
-export async function renderSeasonPlate(el, { settle = false } = {}) {
+/* The season plate: fixed two-zone geometry on home, season, and
+   league alike. Left zone is the protected core, in this order and no
+   other: competition, stage, state word, dates. The core never moves
+   or resizes. Right zone holds only the tally, whose figures sit in
+   fixed-width slots so a tally change shifts nothing. Flat block: no
+   border kit, no texture, state changes by cut. */
+export async function renderSeasonPlate(el) {
   if (!el) return;
   const data = await seasonData();
   if (!data) {
-    el.innerHTML = `<div class="wrap"><p class="muted small">Season status is temporarily unavailable.</p></div>`;
+    el.innerHTML = `<div class="wrap"><p class="muted small" style="padding:24px 0">Season status is temporarily unavailable.</p></div>`;
     return;
   }
   const live = data.liveNow?.[0];
@@ -187,8 +137,6 @@ export async function renderSeasonPlate(el, { settle = false } = {}) {
     ? focus.name.split(":").map((s) => s.trim())
     : [focus.name, focus.stage || ""];
   const loud = live ? isLoudState(live) : false;
-  el.classList.toggle("loud", loud);
-  if (settle) el.classList.add("settle");
   el.innerHTML = `
     <div class="wrap plate-in">
       <div class="plate-core">
@@ -206,11 +154,6 @@ export async function renderSeasonPlate(el, { settle = false } = {}) {
   fillTally(el);
 }
 
-/* The tally is the assist zone's only tenant, ever (study 3: no sponsor
-   or promo inventory takes the assist area). Figures come from the
-   public data files: teams in the circuit, players rostered, fixtures
-   played. When the figures land, the tally re-ranks for one beat and
-   settles back to base state. */
 async function fillTally(plateEl) {
   const tallyEl = plateEl.querySelector("[data-tally]");
   if (!tallyEl) return;
@@ -224,7 +167,6 @@ async function fillTally(plateEl) {
       <span class="t-fig"><b>${teamsData.teams.length}</b> teams in</span>
       <span class="t-fig"><b>${teamsData.players.length}</b> players rostered</span>
       <span class="t-fig"><b>${played}</b> fixtures played</span>`;
-    tallyEl.classList.add("swap");
   } catch {
     tallyEl.textContent = "";
   }
