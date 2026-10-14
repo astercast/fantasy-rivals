@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rivals Fantasy · Fantasy Marvel Rivals on the real pro season</title>
+<meta name="description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <p class="kicker" style="color:var(--accent-bright)">Fantasy esports · Marvel Rivals</p>
+        <h1 style="margin-top:14px">The pro season, <em>drafted by you.</em></h1>
+        <p class="sub">Pick real pros by role (Vanguard, Duelist, Strategist), run a snake draft with your friends, and score every week from the actual match stats. No spreadsheets. No honor system.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" href="/create-league.html">Create a league</a>
+          <a class="btn btn-ghost" href="/season.html">See the season</a>
+        </div>
+        <div class="hero-stats">
+          <div class="hs"><div class="n">104</div><div class="l">Pros in the pool</div></div>
+          <div class="hs"><div class="n">51</div><div class="l">Pro teams tracked</div></div>
+          <div class="hs"><div class="n">17</div><div class="l">Full rosters verified</div></div>
+          <div class="hs"><div class="n">9</div><div class="l">Draft rounds</div></div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="hc-head">
+          <h3>Top of the draft board</h3>
+          <span class="spacer" style="flex:1"></span>
+          <span class="fine">Consensus rank</span>
+        </div>
+        <div data-board><p class="fine" style="padding:10px 0">Loading the pool…</p></div>
+        <p style="padding:12px 0 10px"><a href="/players.html" style="color:var(--accent-bright); font-size:14px; font-weight:600">Full player pool →</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="ticker"><div class="wrap" data-ticker></div></div>
+
+<section class="status-band" data-season-status></section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>The calendar</h2>
+      <span class="spacer"></span>
+      <a href="/season.html" style="font-weight:600">Season page →</a>
+    </div>
+    <div class="grid grid-2" data-calendar></div>
+    <p class="fine" style="margin-top:16px">You create a league <strong>for</strong> one named competition. If it is live, its remaining weeks are your fantasy season. If the next one has not started, you can set up in advance: draft now, score when play begins.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>How it plays</h2></div>
+    <div class="grid grid-3">
+      <div class="card flat">
+        <div class="step-num">01</div>
+        <h3 style="margin-top:10px">Snake draft, real pool</h3>
+        <p class="muted">Eight rounds, pick clock running, order reverses every round. It is the format fantasy players already know. A final ninth round claims your Squad: one pro org whose own results score for you all season.</p>
+      </div>
+      <div class="card flat">
+        <div class="step-num">02</div>
+        <h3 style="margin-top:10px">Five starters, three in reserve</h3>
+        <p class="muted">Start a Vanguard, a Duelist, a Strategist, and two Flex picks. Lineups lock when the week's first pro match starts, and carry forward until you change them.</p>
+      </div>
+      <div class="card flat">
+        <div class="step-num">03</div>
+        <h3 style="margin-top:10px">Real stats, head-to-head</h3>
+        <p class="muted">Eliminations, assists, damage and healing, scored from the published match lines. Every week is a head-to-head matchup; wins and points decide the table. Top four make the playoffs, semifinal winners meet in the final.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Scoring</h2>
+      <span class="spacer"></span>
+      <span class="fine">Modelled on Fantasy LCS's published table, translated to hero-shooter stat lines. Every league can tune its own.</span>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Players</h3>
+        <table class="sheet">
+          <tr><td>Elimination</td><td class="n">2.0</td></tr>
+          <tr><td>Assist</td><td class="n">1.5</td></tr>
+          <tr><td>Death</td><td class="n">−0.5</td></tr>
+          <tr><td>Final hit</td><td class="n">0.5</td></tr>
+          <tr><td>Damage dealt · per 1,000</td><td class="n">1.0</td></tr>
+          <tr><td>Damage blocked · per 2,000</td><td class="n">1.0</td></tr>
+          <tr><td>Healing · per 1,000</td><td class="n">1.0</td></tr>
+          <tr><td>Series win (player's team)</td><td class="n">2.0</td></tr>
+          <tr><td>25+ elimination series</td><td class="n">2.0</td></tr>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Squad slot</h3>
+        <p class="muted small" style="margin-bottom:12px">Your drafted pro org scores its own series, the way the old Fantasy LCS "Team" item did.</p>
+        <table class="sheet">
+          <tr><td>Map win</td><td class="n">1.0</td></tr>
+          <tr><td>Series win</td><td class="n">2.0</td></tr>
+          <tr><td>Clean sweep (no maps dropped)</td><td class="n">2.0</td></tr>
+        </table>
+        <p class="fine" style="margin-top:14px">Stats come from publicly published match lines (Liquipedia). Every imported result names its source, and every week's breakdown is visible on the matchup.</p>
+      </div>
+    </div>
+    <div class="card" style="margin-top:16px">
+      <h3>A big series, scored</h3>
+      <p class="muted small" style="margin-bottom:10px">A worked example on the default table. A Duelist drops 24 eliminations in a series his team wins 3-1:</p>
+      <div class="worked">
+        <div class="w-row"><span>24 eliminations × 2.0</span><span>48.0</span></div>
+        <div class="w-row"><span>16 assists × 1.5</span><span>24.0</span></div>
+        <div class="w-row"><span>9 deaths × −0.5</span><span>−4.5</span></div>
+        <div class="w-row"><span>12 final hits × 0.5</span><span>6.0</span></div>
+        <div class="w-row"><span>18,400 damage dealt (per 1,000)</span><span>18.4</span></div>
+        <div class="w-row"><span>3,000 damage blocked (per 2,000)</span><span>1.5</span></div>
+        <div class="w-row"><span>900 healing (per 1,000)</span><span>0.9</span></div>
+        <div class="w-row"><span>Series win bonus</span><span>2.0</span></div>
+        <div class="w-row w-total"><span>Fantasy points for the week</span><span>96.3</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>One site, every game</h2></div>
+    <p class="muted" style="max-width:56ch">Rivals Fantasy launches with Marvel Rivals. When a new game's pro scene exists, it arrives here as a new section of the same site: same account, same leagues page, same draft room. Your fantasy home does not move.</p>
+    <div class="grid grid-2" style="margin-top:24px">
+      <div class="card game-tile">
+        <span class="g-dot" style="background:var(--accent-bright)"></span>
+        <div>
+          <h3>Marvel Rivals</h3>
+          <p class="muted small">Live now. Ignite 2026 is the circuit: Stage 2 is in progress, the Grand Finals close the season in Atlanta. Full pool, leagues open.</p>
+        </div>
+      </div>
+      <div class="card game-tile">
+        <span class="g-dot" style="background:var(--gold)"></span>
+        <div>
+          <h3>Deadlock</h3>
+          <p class="muted small">Watching. Valve's shooter has community cups but no official pro league yet. The moment one exists, Deadlock opens here as a section of this site, not a new one.</p>
+        </div>
+      </div>
+    </div>
+    <div class="cta-row" style="margin-top:24px; display:flex; gap:12px">
+      <a class="btn btn-accent" href="/create-league.html">Start your league</a>
+      <a class="btn btn-ghost" href="/players.html">Browse the player pool</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, renderSeasonStatus, fetchJson, esc, fmtDate } from "/assets/js/site.js";
+  renderChrome("home");
+  renderSeasonStatus(document.querySelector("[data-season-status]"));
+
+  const roleClass = { Vanguard: "van", Duelist: "due", Strategist: "str" };
+  fetchJson("/data/v1/marvel-rivals-teams.json").then((data) => {
+    const top = [...data.players].sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999)).slice(0, 8);
+    const teamShort = Object.fromEntries(data.teams.map((t) => [t.short, t]));
+    document.querySelector("[data-board]").innerHTML = top.map((p) => `
+      <div class="lb-row">
+        <span class="rk">${p.draftRank}</span>
+        <span class="who">${esc(p.ign)}</span>
+        <span class="role ${roleClass[p.role] || ""}">${esc(p.role)}</span>
+        <span class="tm">${esc(teamShort[p.team]?.name || p.team)}</span>
+      </div>`).join("");
+  }).catch(() => {});
+
+  fetchJson("/data/v1/marvel-rivals-season.json").then((data) => {
+    const dot = (s) => s.state === "live" ? "" : s.state === "upcoming" ? "gold" : "grey";
+    document.querySelector("[data-ticker]").innerHTML = data.seasons.map((s) => `
+      <span class="t-item"><span class="t-dot ${dot(s)}"></span>${esc(s.name)} · ${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>`).join("");
+    const pill = (s) => s.state === "live"
+      ? '<span class="state-pill live">Live now</span>'
+      : s.state === "upcoming" ? '<span class="state-pill next">Next up</span>' : '<span class="state-pill">Complete</span>';
+    document.querySelector("[data-calendar]").innerHTML = data.seasons.map((s) => `
+      <div class="card cal-card">
+        <div class="cc-top">${pill(s)}<span class="spacer" style="flex:1"></span><span class="cc-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span></div>
+        <h3>${esc(s.name)}</h3>
+        <p class="cc-stage">${esc(s.stage)}</p>
+      </div>`).join("");
+  }).catch(() => {});
+</script>
+</body>
+</html>

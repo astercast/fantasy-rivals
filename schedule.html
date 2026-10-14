@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Schedule &amp; results · Rivals Fantasy</title>
+<meta name="description" content="Fixtures and results for the live Marvel Rivals competition, the matches your fantasy weeks are scored from.">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<section class="status-band" data-season-status></section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>Schedule &amp; results</h2><span class="spacer"></span><span class="fine" data-note></span></div>
+    <div data-fixtures class="stack"></div>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, renderSeasonStatus, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
+  renderChrome("schedule");
+  renderSeasonStatus(document.querySelector("[data-season-status]"));
+  const [sched, teamsData] = await Promise.all([
+    fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`),
+    fetchJson(`/data/v1/${GAME_SLUG}-teams.json`),
+  ]);
+  const teamName = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.name]));
+  const el = document.querySelector("[data-fixtures]");
+  document.querySelector("[data-note]").textContent = sched.matches.length
+    ? `Results are imported from published match lines and named with their source.`
+    : "";
+  if (!sched.matches.length) {
+    el.innerHTML = `<div class="card"><h3>Fixtures publish with the competition</h3><p class="muted">The current competition's series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</p></div>`;
+  } else {
+    const byWeek = {};
+    for (const m of sched.matches) (byWeek[m.week] ||= []).push(m);
+    el.innerHTML = Object.entries(byWeek).map(([week, ms]) => `
+      <div>
+        <p class="kicker" style="margin:16px 0 10px">Fantasy week ${esc(week)}</p>
+        <div class="card" style="padding:6px 12px">
+          <table class="sheet">
+            <thead><tr><th>Series</th><th>Round</th><th>Date</th><th class="n">Score</th><th>Status</th></tr></thead>
+            <tbody>${ms.map((m) => `<tr>
+              <td><strong>${esc(teamName[m.teamA] || m.teamA)}</strong> vs <strong>${esc(teamName[m.teamB] || m.teamB)}</strong></td>
+              <td class="muted">${esc(m.roundLabel || "")}</td>
+              <td class="mono small">${fmtDate(m.startsAt)}</td>
+              <td class="n">${m.scoreA == null ? "·" : `${m.scoreA}-${m.scoreB}`}</td>
+              <td>${m.status === "final" ? "Final" : "Scheduled"}</td>
+            </tr>`).join("")}</tbody>
+          </table>
+        </div>
+      </div>`).join("");
+  }
+</script>
+</body>
+</html>

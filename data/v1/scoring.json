@@ -1,0 +1,45 @@
+{
+  "generatedAt": "2026-10-14T03:37:50.664Z",
+  "scoring": {
+    "eliminations": 2,
+    "assists": 1.5,
+    "deaths": -0.5,
+    "finalHits": 0.5,
+    "damageDealtPer1000": 1,
+    "damageBlockedPer2000": 1,
+    "healingPer1000": 1,
+    "matchWin": 2,
+    "carryGame": 2,
+    "carryGameThreshold": 25
+  },
+  "squadScoring": {
+    "mapWin": 1,
+    "seriesWin": 2,
+    "sweepBonus": 2
+  },
+  "roster": {
+    "slots": [
+      {
+        "slot": "VAN",
+        "role": "Vanguard",
+        "count": 1
+      },
+      {
+        "slot": "DUE",
+        "role": "Duelist",
+        "count": 1
+      },
+      {
+        "slot": "STR",
+        "role": "Strategist",
+        "count": 1
+      },
+      {
+        "slot": "FLEX",
+        "role": null,
+        "count": 2
+      }
+    ],
+    "bench": 3
+  }
+}

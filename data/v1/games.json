@@ -1,0 +1,15 @@
+{
+  "generatedAt": "2026-10-14T03:37:50.664Z",
+  "games": [
+    {
+      "name": "Deadlock",
+      "slug": "deadlock",
+      "status": "watching"
+    },
+    {
+      "name": "Marvel Rivals",
+      "slug": "marvel-rivals",
+      "status": "active"
+    }
+  ]
+}

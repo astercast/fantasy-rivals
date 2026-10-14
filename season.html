@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Season · Rivals Fantasy</title>
+<meta name="description" content="The Marvel Rivals pro calendar: what is live now, what is next, and what every competition means for your league.">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<section class="status-band" data-season-status style="margin-top:0"></section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head"><h2>The competition calendar</h2><span class="spacer"></span><span class="fine" data-asof></span></div>
+    <div class="stack" data-competitions></div>
+    <p class="fine" style="margin-top:20px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one hasn't started, you can set up in advance, draft now, score when play begins.</p>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, renderSeasonStatus, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
+  renderChrome("season");
+  renderSeasonStatus(document.querySelector("[data-season-status]"));
+  const data = await fetchJson(`/data/v1/${GAME_SLUG}-season.json`);
+  document.querySelector("[data-asof]").textContent = `State as of ${fmtDate(data.asOf)}`;
+  const pill = (s) =>
+    s.state === "live" ? `<span class="status-pill"><span class="pulse"></span>Live now</span>`
+    : s.state === "upcoming" ? `<span class="status-pill next"><span class="pulse"></span>Upcoming</span>`
+    : `<span class="status-pill"><span class="pulse" style="background:var(--ink-3)"></span>Complete</span>`;
+  document.querySelector("[data-competitions]").innerHTML = data.seasons.map((s) => `
+    <div class="card" style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap">
+      <div style="flex:1; min-width:260px">
+        <h3>${esc(s.name)}</h3>
+        <p class="muted">${esc(s.stage || "")}</p>
+        <p class="fine" style="margin-top:8px">${esc(s.sourceNote || "")}</p>
+      </div>
+      <div style="text-align:right">
+        ${pill(s)}
+        <div class="mono small" style="margin-top:10px">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</div>
+        ${s.state !== "complete" ? `<div style="margin-top:10px"><a class="btn btn-small btn-accent" href="/create-league.html">Create a league for this</a></div>` : ""}
+      </div>
+    </div>`).join("");
+</script>
+</body>
+</html>

@@ -1,0 +1,1039 @@
+{
+  "generatedAt": "2026-10-14T03:37:50.664Z",
+  "game": {
+    "name": "Marvel Rivals",
+    "slug": "marvel-rivals",
+    "status": "active"
+  },
+  "teams": [
+    {
+      "name": "100 Thieves",
+      "region": "Americas",
+      "short": "100T"
+    },
+    {
+      "name": "Sentinels",
+      "region": "Americas",
+      "short": "SEN"
+    },
+    {
+      "name": "FlyQuest",
+      "region": "Americas",
+      "short": "FLY"
+    },
+    {
+      "name": "NRG Shock",
+      "region": "Americas",
+      "short": "NRG"
+    },
+    {
+      "name": "Liquid Citadel",
+      "region": "Americas",
+      "short": "LC"
+    },
+    {
+      "name": "NTMR",
+      "region": "Americas",
+      "short": "NTMR"
+    },
+    {
+      "name": "FURIA",
+      "region": "Americas",
+      "short": "FUR"
+    },
+    {
+      "name": "TSM",
+      "region": "Americas",
+      "short": "TSM"
+    },
+    {
+      "name": "Spacestation Gaming",
+      "region": "Americas",
+      "short": "SSG"
+    },
+    {
+      "name": "Swamp Gaming",
+      "region": "Americas",
+      "short": "SWMP"
+    },
+    {
+      "name": "Equinox Gaming",
+      "region": "Americas",
+      "short": "EQX"
+    },
+    {
+      "name": "Yeah We Lost",
+      "region": "Americas",
+      "short": "YWL"
+    },
+    {
+      "name": "Stickdrift",
+      "region": "Americas",
+      "short": "STK"
+    },
+    {
+      "name": "Natus Vincere",
+      "region": "EMEA",
+      "short": "NAVI"
+    },
+    {
+      "name": "Virtus.pro",
+      "region": "EMEA",
+      "short": "VP"
+    },
+    {
+      "name": "Team Heretics",
+      "region": "EMEA",
+      "short": "TH"
+    },
+    {
+      "name": "Team Peps",
+      "region": "EMEA",
+      "short": "PEPS"
+    },
+    {
+      "name": "FYR Strays",
+      "region": "EMEA",
+      "short": "FYR"
+    },
+    {
+      "name": "Pulsar Esports",
+      "region": "EMEA",
+      "short": "PLS"
+    },
+    {
+      "name": "Reason Gaming",
+      "region": "EMEA",
+      "short": "RSN"
+    },
+    {
+      "name": "Shikigami",
+      "region": "EMEA",
+      "short": "SHK"
+    },
+    {
+      "name": "The Chosen Ones",
+      "region": "EMEA",
+      "short": "TCO"
+    },
+    {
+      "name": "The Lions",
+      "region": "EMEA",
+      "short": "LIO"
+    },
+    {
+      "name": "Alter Esports",
+      "region": "EMEA",
+      "short": "ALT"
+    },
+    {
+      "name": "Crownfall",
+      "region": "EMEA",
+      "short": "CRWN"
+    },
+    {
+      "name": "RAD Esports",
+      "region": "EMEA",
+      "short": "RAD"
+    },
+    {
+      "name": "REJECT",
+      "region": "Pacific",
+      "short": "RJT"
+    },
+    {
+      "name": "Gen.G Esports",
+      "region": "Pacific",
+      "short": "GEN"
+    },
+    {
+      "name": "The Burgers",
+      "region": "Pacific",
+      "short": "BURG"
+    },
+    {
+      "name": "RVL Esports",
+      "region": "Pacific",
+      "short": "RVL"
+    },
+    {
+      "name": "X0X001",
+      "region": "Pacific",
+      "short": "X0X"
+    },
+    {
+      "name": "Zero Tenacity",
+      "region": "Pacific",
+      "short": "Z10"
+    },
+    {
+      "name": "N1HEX",
+      "region": "Pacific",
+      "short": "N1H"
+    },
+    {
+      "name": "AAAD",
+      "region": "Pacific",
+      "short": "AAAD"
+    },
+    {
+      "name": "Loyalty",
+      "region": "Pacific",
+      "short": "LOY"
+    },
+    {
+      "name": "Fury",
+      "region": "Pacific",
+      "short": "FURY"
+    },
+    {
+      "name": "Kanga Esports",
+      "region": "Pacific",
+      "short": "KANGA"
+    },
+    {
+      "name": "RE_VOLT",
+      "region": "Pacific",
+      "short": "RVT"
+    },
+    {
+      "name": "Vulcan Red",
+      "region": "Pacific",
+      "short": "VR"
+    },
+    {
+      "name": "The Chiefs",
+      "region": "Pacific",
+      "short": "CHF"
+    },
+    {
+      "name": "JFT Esports",
+      "region": "Pacific",
+      "short": "JFT"
+    },
+    {
+      "name": "DXA Esports",
+      "region": "Pacific",
+      "short": "DXA"
+    },
+    {
+      "name": "Over Ultra Gaming",
+      "region": "China",
+      "short": "OUG"
+    },
+    {
+      "name": "Aconyx Esports",
+      "region": "China",
+      "short": "ACX"
+    },
+    {
+      "name": "FL eSports Club",
+      "region": "China",
+      "short": "FL"
+    },
+    {
+      "name": "Fiat Lux Esports",
+      "region": "China",
+      "short": "FLX"
+    },
+    {
+      "name": "Sylvan Legion Zeal Zenith",
+      "region": "China",
+      "short": "SLZZ"
+    },
+    {
+      "name": "Aimmiracle.x",
+      "region": "China",
+      "short": "AIM"
+    },
+    {
+      "name": "Not Bad",
+      "region": "China",
+      "short": "NB"
+    },
+    {
+      "name": "Black Cat",
+      "region": "China",
+      "short": "BCAT"
+    },
+    {
+      "name": "Team Rise",
+      "region": "China",
+      "short": "RISE"
+    }
+  ],
+  "players": [
+    {
+      "draftRank": 1,
+      "heroes": [
+        "Doctor Strange",
+        "Magneto"
+      ],
+      "ign": "Finnsi",
+      "realName": "Finnbjörn Jónasson",
+      "role": "Vanguard",
+      "team": "VP"
+    },
+    {
+      "draftRank": 2,
+      "heroes": [
+        "Venom",
+        "Emma Frost"
+      ],
+      "ign": "Nevix",
+      "realName": "Andreas Karlsson",
+      "role": "Vanguard",
+      "team": "VP"
+    },
+    {
+      "draftRank": 3,
+      "heroes": [
+        "Hela",
+        "Star-Lord"
+      ],
+      "ign": "phi",
+      "realName": "Philip Handke",
+      "role": "Duelist",
+      "team": "VP"
+    },
+    {
+      "draftRank": 4,
+      "heroes": [
+        "Magik"
+      ],
+      "ign": "SparkR",
+      "realName": "William Andersson",
+      "role": "Duelist",
+      "team": "VP"
+    },
+    {
+      "draftRank": 5,
+      "heroes": [
+        "Luna Snow"
+      ],
+      "ign": "dridro",
+      "realName": "Arthur Szanto",
+      "role": "Strategist",
+      "team": "VP"
+    },
+    {
+      "draftRank": 6,
+      "heroes": [
+        "Mantis",
+        "Luna Snow"
+      ],
+      "ign": "Sypeh",
+      "realName": "Mikkel Klein",
+      "role": "Strategist",
+      "team": "VP"
+    },
+    {
+      "draftRank": 7,
+      "heroes": [
+        "Star-Lord",
+        "Hela",
+        "Phoenix"
+      ],
+      "ign": "delenaa",
+      "realName": "Anthony De La Rosa",
+      "role": "Duelist",
+      "team": "100T"
+    },
+    {
+      "draftRank": 8,
+      "ign": "Self",
+      "realName": "Bryce Pettit",
+      "role": "Duelist",
+      "team": "100T"
+    },
+    {
+      "draftRank": 9,
+      "heroes": [
+        "Magneto",
+        "Emma Frost",
+        "Doctor Strange"
+      ],
+      "ign": "Vinnie",
+      "realName": "Vincent Scarantine",
+      "role": "Vanguard",
+      "team": "100T"
+    },
+    {
+      "draftRank": 10,
+      "heroes": [
+        "Venom",
+        "Angela"
+      ],
+      "ign": "TTK",
+      "realName": "Eric Arraiga",
+      "role": "Vanguard",
+      "team": "100T"
+    },
+    {
+      "draftRank": 11,
+      "heroes": [
+        "Luna Snow",
+        "Mantis"
+      ],
+      "ign": "Malenia",
+      "realName": "Kamryn Mistry",
+      "role": "Strategist",
+      "team": "100T"
+    },
+    {
+      "draftRank": 12,
+      "heroes": [
+        "Invisible Woman",
+        "Rocket Raccoon"
+      ],
+      "ign": "Wyni",
+      "realName": "Pol Wyneken Carracedo",
+      "role": "Strategist",
+      "team": "100T"
+    },
+    {
+      "draftRank": 13,
+      "ign": "Rymazing",
+      "realName": "Ryan Bishop",
+      "role": "Duelist",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 14,
+      "ign": "eusher",
+      "realName": "Joshua Batson",
+      "role": "Duelist",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 15,
+      "ign": "Crimzo",
+      "realName": "William Hernandez",
+      "role": "Vanguard",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 16,
+      "ign": "Dongmin",
+      "realName": "Vincent Kim",
+      "role": "Vanguard",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 17,
+      "ign": "Karova",
+      "realName": "Mark Kvashin",
+      "role": "Strategist",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 18,
+      "ign": "Flamay",
+      "realName": "Daniel Garcia",
+      "role": "Strategist",
+      "team": "SEN"
+    },
+    {
+      "draftRank": 19,
+      "ign": "Terra",
+      "realName": "",
+      "role": "Duelist",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 20,
+      "ign": "Jur3ky",
+      "realName": "Jurica Risek",
+      "role": "Duelist",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 21,
+      "ign": "Raajaro",
+      "realName": "Rasmus Rosvall",
+      "role": "Vanguard",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 22,
+      "ign": "TrqstMe",
+      "realName": "Oliver Rüdiger Pöhler",
+      "role": "Vanguard",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 23,
+      "ign": "fate",
+      "realName": "Max Currie",
+      "role": "Strategist",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 24,
+      "ign": "Lv1Crook",
+      "realName": "Márk Leveleki",
+      "role": "Strategist",
+      "team": "NAVI"
+    },
+    {
+      "draftRank": 25,
+      "ign": "Brownie",
+      "realName": "Choi Min-gi",
+      "role": "Duelist",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 26,
+      "ign": "Yaki",
+      "realName": "Kim Jun-ki",
+      "role": "Duelist",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 27,
+      "ign": "GARGOYLE",
+      "realName": "Lee Beom-jun",
+      "role": "Vanguard",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 28,
+      "ign": "piggy",
+      "realName": "Shin Min-jun",
+      "role": "Vanguard",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 29,
+      "ign": "Blastro",
+      "realName": "Mun Jung-won",
+      "role": "Strategist",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 30,
+      "ign": "SeungHoon",
+      "realName": "",
+      "role": "Strategist",
+      "team": "RJT"
+    },
+    {
+      "draftRank": 31,
+      "ign": "energy",
+      "realName": "Jovan",
+      "role": "Duelist",
+      "team": "LC"
+    },
+    {
+      "draftRank": 32,
+      "ign": "Shpeediry",
+      "realName": "Nicholas Zou",
+      "role": "Duelist",
+      "team": "LC"
+    },
+    {
+      "draftRank": 33,
+      "ign": "Polly",
+      "realName": "Paal Arve Guno Eskildsen",
+      "role": "Vanguard",
+      "team": "LC"
+    },
+    {
+      "draftRank": 34,
+      "ign": "SparkChief",
+      "realName": "Ian Rivera Cruz",
+      "role": "Vanguard",
+      "team": "LC"
+    },
+    {
+      "draftRank": 35,
+      "ign": "coopertastic",
+      "realName": "Cooper",
+      "role": "Strategist",
+      "team": "LC"
+    },
+    {
+      "draftRank": 36,
+      "ign": "nero",
+      "realName": "Charlie Zwarg",
+      "role": "Strategist",
+      "team": "LC"
+    },
+    {
+      "draftRank": 37,
+      "ign": "Chime",
+      "realName": "Julian Alexander Flores",
+      "role": "Duelist",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 38,
+      "ign": "stinkrs",
+      "realName": "Evan McClure",
+      "role": "Duelist",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 39,
+      "ign": "Chuckles",
+      "realName": "Charles Plimier",
+      "role": "Vanguard",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 40,
+      "ign": "Madara",
+      "realName": "Andrew Dixon",
+      "role": "Vanguard",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 41,
+      "ign": "renko",
+      "realName": "Steven Saucedo",
+      "role": "Strategist",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 42,
+      "ign": "Velocity",
+      "realName": "Kyle Cordy",
+      "role": "Strategist",
+      "team": "NRG"
+    },
+    {
+      "draftRank": 43,
+      "ign": "Naga",
+      "realName": "Nikolai Dereli",
+      "role": "Duelist",
+      "team": "TH"
+    },
+    {
+      "draftRank": 44,
+      "ign": "Tanuki",
+      "realName": "Roald Matthijs Rademarkers",
+      "role": "Duelist",
+      "team": "TH"
+    },
+    {
+      "draftRank": 45,
+      "ign": "Beetle",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "TH"
+    },
+    {
+      "draftRank": 46,
+      "ign": "Nzo",
+      "realName": "Enzo Keippe",
+      "role": "Vanguard",
+      "team": "TH"
+    },
+    {
+      "draftRank": 47,
+      "ign": "Alx",
+      "realName": "Aleks Suchev",
+      "role": "Strategist",
+      "team": "TH"
+    },
+    {
+      "draftRank": 48,
+      "ign": "Oasis",
+      "realName": "",
+      "role": "Strategist",
+      "team": "TH"
+    },
+    {
+      "draftRank": 49,
+      "ign": "Bobo",
+      "realName": "Lin Zehao",
+      "role": "Duelist",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 50,
+      "ign": "FMCL",
+      "realName": "",
+      "role": "Duelist",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 51,
+      "ign": "duep",
+      "realName": "Kyre Harris",
+      "role": "Vanguard",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 52,
+      "ign": "Zenstarry",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 53,
+      "ign": "Skittles",
+      "realName": "Blake Woods",
+      "role": "Strategist",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 54,
+      "ign": "Salvation",
+      "realName": "Zhu Xiaoyu",
+      "role": "Strategist",
+      "team": "GEN"
+    },
+    {
+      "draftRank": 55,
+      "ign": "MoLanran",
+      "realName": "Liao Yang",
+      "role": "Duelist",
+      "team": "OUG"
+    },
+    {
+      "draftRank": 56,
+      "ign": "TAROCOOK1E",
+      "realName": "Zhong Yunlong",
+      "role": "Duelist",
+      "team": "OUG"
+    },
+    {
+      "draftRank": 57,
+      "ign": "Wenxuyan",
+      "realName": "Zhu ShiHan",
+      "role": "Vanguard",
+      "team": "OUG"
+    },
+    {
+      "draftRank": 58,
+      "ign": "Yexin",
+      "realName": "Luo Wenjie",
+      "role": "Vanguard",
+      "team": "OUG"
+    },
+    {
+      "draftRank": 59,
+      "ign": "SVALD",
+      "realName": "Zhao Tangyang",
+      "role": "Strategist",
+      "team": "OUG"
+    },
+    {
+      "draftRank": 60,
+      "ign": "XiaoZhuang",
+      "realName": "Zhan Xiaozhuang",
+      "role": "Strategist",
+      "team": "OUG"
+    },
+    {
+      "ign": "lyte",
+      "realName": "Parker Lewis",
+      "role": "Duelist",
+      "team": "NTMR",
+      "draftRank": 61
+    },
+    {
+      "ign": "smash",
+      "realName": "Alexander Basurco",
+      "role": "Duelist",
+      "team": "NTMR",
+      "draftRank": 62
+    },
+    {
+      "ign": "Vision",
+      "realName": "Austin Wallace",
+      "role": "Duelist",
+      "team": "NTMR",
+      "draftRank": 63
+    },
+    {
+      "ign": "MACE",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "NTMR",
+      "draftRank": 64
+    },
+    {
+      "ign": "Monzter",
+      "realName": "Salvatore Donato",
+      "role": "Vanguard",
+      "team": "NTMR",
+      "draftRank": 65
+    },
+    {
+      "ign": "Dinks",
+      "realName": "Kevin Hernandez",
+      "role": "Strategist",
+      "team": "NTMR",
+      "draftRank": 66
+    },
+    {
+      "ign": "skier",
+      "realName": "Griffin Gould",
+      "role": "Strategist",
+      "team": "NTMR",
+      "draftRank": 67
+    },
+    {
+      "ign": "Kibblez",
+      "realName": "",
+      "role": "Duelist",
+      "team": "FUR",
+      "draftRank": 68
+    },
+    {
+      "ign": "YoYo",
+      "realName": "",
+      "role": "Duelist",
+      "team": "FUR",
+      "draftRank": 69
+    },
+    {
+      "ign": "HoneyB",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "FUR",
+      "draftRank": 70
+    },
+    {
+      "ign": "Axis",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "FUR",
+      "draftRank": 71
+    },
+    {
+      "ign": "DonMolly",
+      "realName": "",
+      "role": "Strategist",
+      "team": "FUR",
+      "draftRank": 72
+    },
+    {
+      "ign": "NovaJax",
+      "realName": "",
+      "role": "Strategist",
+      "team": "FUR",
+      "draftRank": 73
+    },
+    {
+      "ign": "DEAMONN",
+      "realName": "Eamonn Paul Hawkins",
+      "role": "Duelist",
+      "team": "FYR",
+      "draftRank": 74
+    },
+    {
+      "ign": "Sestroyed",
+      "realName": "Kevin Gauronskas",
+      "role": "Duelist",
+      "team": "FYR",
+      "draftRank": 75
+    },
+    {
+      "ign": "Slopo",
+      "realName": "Archie Hallet",
+      "role": "Duelist",
+      "team": "FYR",
+      "draftRank": 76
+    },
+    {
+      "ign": "Binary",
+      "realName": "Johannes Hartl",
+      "role": "Vanguard",
+      "team": "FYR",
+      "draftRank": 77
+    },
+    {
+      "ign": "Blax",
+      "realName": "Maxime Thomas",
+      "role": "Vanguard",
+      "team": "FYR",
+      "draftRank": 78
+    },
+    {
+      "ign": "kl0sar",
+      "realName": "Pavle Raičević",
+      "role": "Strategist",
+      "team": "FYR",
+      "draftRank": 79
+    },
+    {
+      "ign": "Znost",
+      "realName": "Matti Phillip Mueller",
+      "role": "Strategist",
+      "team": "FYR",
+      "draftRank": 80
+    },
+    {
+      "ign": "Hqrdest",
+      "realName": "Jeremy Danton",
+      "role": "Duelist",
+      "team": "PEPS",
+      "draftRank": 81
+    },
+    {
+      "ign": "Kqz",
+      "realName": "",
+      "role": "Duelist",
+      "team": "PEPS",
+      "draftRank": 82
+    },
+    {
+      "ign": "W3LSHMANIA",
+      "realName": "Rhys Ellesmere",
+      "role": "Vanguard",
+      "team": "PEPS",
+      "draftRank": 83
+    },
+    {
+      "ign": "iMonkey",
+      "realName": "",
+      "role": "Vanguard",
+      "team": "PEPS",
+      "draftRank": 84
+    },
+    {
+      "ign": "EgZo",
+      "realName": "Alessandro Succu",
+      "role": "Strategist",
+      "team": "PEPS",
+      "draftRank": 85
+    },
+    {
+      "ign": "Smafer",
+      "realName": "",
+      "role": "Strategist",
+      "team": "PEPS",
+      "draftRank": 86
+    },
+    {
+      "ign": "adios",
+      "realName": "Black Chaplin",
+      "role": "Duelist",
+      "team": "FLY",
+      "draftRank": 87
+    },
+    {
+      "ign": "Veswa",
+      "realName": "Aiden",
+      "role": "Vanguard",
+      "team": "FLY",
+      "draftRank": 88
+    },
+    {
+      "ign": "Zelos",
+      "realName": "Harrison Potter",
+      "role": "Strategist",
+      "team": "FLY",
+      "draftRank": 89
+    },
+    {
+      "ign": "Disaster",
+      "realName": "Huang Xiaochuan",
+      "role": "Duelist",
+      "team": "ACX",
+      "draftRank": 90
+    },
+    {
+      "ign": "KovAAK",
+      "realName": "Zhang Yige",
+      "role": "Duelist",
+      "team": "ACX",
+      "draftRank": 91
+    },
+    {
+      "ign": "Kami",
+      "realName": "Tang Yitao",
+      "role": "Vanguard",
+      "team": "ACX",
+      "draftRank": 92
+    },
+    {
+      "ign": "Kuma",
+      "realName": "Chu Jingyuan",
+      "role": "Vanguard",
+      "team": "ACX",
+      "draftRank": 93
+    },
+    {
+      "ign": "HetLot",
+      "realName": "Zhang Xuan",
+      "role": "Vanguard",
+      "team": "ACX",
+      "draftRank": 94
+    },
+    {
+      "ign": "Egg tart",
+      "realName": "Jianxi Sun",
+      "role": "Strategist",
+      "team": "ACX",
+      "draftRank": 95
+    },
+    {
+      "ign": "Ghost",
+      "realName": "Tan Li",
+      "role": "Strategist",
+      "team": "ACX",
+      "draftRank": 96
+    },
+    {
+      "ign": "Mercury",
+      "realName": "Chen Guanru",
+      "role": "Strategist",
+      "team": "ACX",
+      "draftRank": 97
+    },
+    {
+      "ign": "AV7",
+      "realName": "",
+      "role": "Duelist",
+      "team": "FL",
+      "draftRank": 98
+    },
+    {
+      "ign": "Ray",
+      "realName": "Huang Chunshuang",
+      "role": "Duelist",
+      "team": "FL",
+      "draftRank": 99
+    },
+    {
+      "ign": "RAYMOMO",
+      "realName": "YYu Yu-jui",
+      "role": "Vanguard",
+      "team": "FL",
+      "draftRank": 100
+    },
+    {
+      "ign": "Youma",
+      "realName": "Feng He",
+      "role": "Vanguard",
+      "team": "FL",
+      "draftRank": 101
+    },
+    {
+      "ign": "Shyva",
+      "realName": "Lu Xuxin",
+      "role": "Strategist",
+      "team": "FL",
+      "draftRank": 102
+    },
+    {
+      "ign": "TuZ1",
+      "realName": "Wu DaLe",
+      "role": "Strategist",
+      "team": "FL",
+      "draftRank": 103
+    },
+    {
+      "ign": "Papercut",
+      "realName": "",
+      "role": "Strategist",
+      "team": "FL",
+      "draftRank": 104
+    }
+  ]
+}

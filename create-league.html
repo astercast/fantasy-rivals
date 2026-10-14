@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create a league · Rivals Fantasy</title>
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<section class="section">
+  <div class="wrap" style="max-width:760px">
+    <p class="kicker">Step 1 of 2 · Pick the competition</p>
+    <h1 style="font-size:32px; margin:10px 0 8px">A league is played <span style="color:var(--accent)">for</span> a competition</h1>
+    <p class="muted" style="margin-bottom:26px">Your league's season is a real pro competition, its matches are what your players score from. Here's exactly what's on, straight from the calendar:</p>
+    <div class="alert error" data-alert></div>
+    <div data-competitions></div>
+
+    <div data-step2 class="hidden" style="margin-top:36px">
+      <p class="kicker">Step 2 of 2 · Your league</p>
+      <h2 style="font-size:24px; margin:10px 0 18px">Name it, and you're the commissioner</h2>
+      <form data-create-form>
+        <div class="field"><label for="lname">League name</label><input id="lname" required placeholder="e.g. The Sunday Dive League"></div>
+        <div class="field"><label for="tname">Your team name</label><input id="tname" required placeholder="e.g. Dive Comp Enjoyers"></div>
+        <div class="field"><label for="size">League size (teams)</label>
+          <select id="size"><option>4</option><option selected>6</option><option>8</option><option>10</option><option>12</option></select>
+        </div>
+        <div class="field"><label for="weeks">Regular-season weeks</label>
+          <select id="weeks"><option>3</option><option>4</option><option selected>5</option><option>6</option><option>7</option></select>
+          <p class="fine" style="margin-top:6px">Fantasy weeks map to the competition's match weeks. Scoring uses the standard table (tunable later in league settings).</p>
+        </div>
+        <button class="btn btn-accent" type="submit">Create league</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, api, esc, fmtDate } from "/assets/js/site.js";
+  renderChrome("");
+  const alertBox = document.querySelector("[data-alert]");
+  const showError = (m) => { alertBox.textContent = m; alertBox.classList.add("show"); };
+  const { user } = await api("/api/auth/me").catch(() => ({ user: null }));
+  if (!user) { location.href = "/login.html"; }
+
+  let picked = null;
+  const meta = await api("/api/leagues/meta");
+  const box = document.querySelector("[data-competitions]");
+  const pill = (c) =>
+    c.state === "live" ? `<span class="status-pill"><span class="pulse"></span>Live now</span>`
+    : c.state === "upcoming" ? `<span class="status-pill next"><span class="pulse"></span>Next up</span>`
+    : `<span class="status-pill"><span class="pulse" style="background:var(--ink-3)"></span>Complete</span>`;
+  box.innerHTML = meta.competitions.map((c) => `
+    <button type="button" class="comp-option" data-comp="${c.id}" ${c.leagueCreationOpen ? "" : "disabled style='opacity:.55'"}>
+      <span style="flex:1">
+        <span class="c-name">${esc(c.name)}</span>
+        <span class="c-meta" style="display:block">${esc(c.stage || "")} · ${fmtDate(c.startsOn)} to ${fmtDate(c.endsOn)}</span>
+        <span class="fine" style="display:block; margin-top:6px">${c.state === "live" ? "In progress, your league scores its remaining weeks." : c.state === "upcoming" ? "Hasn't started, set up now, draft any time, scoring begins at the first series." : "Finished, leagues can no longer be created for it."}</span>
+      </span>
+      ${pill(c)}
+    </button>`).join("");
+  box.addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-comp]");
+    if (!btn || btn.disabled) return;
+    document.querySelectorAll(".comp-option").forEach((b) => b.classList.remove("selected"));
+    btn.classList.add("selected");
+    picked = btn.dataset.comp;
+    document.querySelector("[data-step2]").classList.remove("hidden");
+    document.querySelector("[data-step2]").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  document.querySelector("[data-create-form]").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    if (!picked) return showError("Pick a competition first, it's step 1.");
+    try {
+      const { league, inviteCode } = await api("/api/leagues", {
+        method: "POST",
+        body: JSON.stringify({
+          name: document.getElementById("lname").value,
+          teamName: document.getElementById("tname").value,
+          seasonId: picked,
+          size: Number(document.getElementById("size").value),
+          settings: { regularWeeks: Number(document.getElementById("weeks").value) },
+        }),
+      });
+      location.href = `/league.html?id=${league.id}&invite=${inviteCode}`;
+    } catch (err) { showError(err.message); }
+  });
+</script>
+</body>
+</html>

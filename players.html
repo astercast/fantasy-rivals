@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Players · Rivals Fantasy</title>
+<meta name="description" content="The draft pool: every verified pro in the current Marvel Rivals competition, by role and team.">
+<link rel="stylesheet" href="/assets/css/main.css">
+</head>
+<body>
+<header class="site-head" data-chrome-head></header>
+
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Player pool</h2><span class="spacer"></span>
+      <select id="roleFilter" style="padding:9px 12px; border:1px solid var(--line-dark); border-radius:8px; font:inherit; font-size:14px">
+        <option value="">All roles</option>
+        <option>Vanguard</option>
+        <option>Duelist</option>
+        <option>Strategist</option>
+      </select>
+    </div>
+    <p class="muted small" style="margin-bottom:18px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool, a player enters the pool when their roster spot is confirmed by a published source.</p>
+    <div class="card" style="padding:6px 12px">
+      <table class="sheet">
+        <thead><tr><th style="width:56px">Rank</th><th>Player</th><th>Role</th><th>Team</th><th>Heroes</th></tr></thead>
+        <tbody data-pool></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot" data-chrome-foot></footer>
+<script type="module">
+  import { renderChrome, fetchJson, esc, GAME_SLUG } from "/assets/js/site.js";
+  renderChrome("players");
+  const data = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`);
+  const teamName = Object.fromEntries(data.teams.map((t) => [t.short, t.name]));
+  const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
+  const players = [...data.players].sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999));
+  function draw(filter) {
+    document.querySelector("[data-pool]").innerHTML = players
+      .filter((p) => !filter || p.role === filter)
+      .map((p, i) => `<tr>
+        <td class="n">${p.draftRank ?? "·"}</td>
+        <td><strong>${esc(p.ign)}</strong>${p.realName ? ` <span class="fine">${esc(p.realName)}</span>` : ""}</td>
+        <td><span class="role ${roleClass(p.role)}">${esc(p.role)}</span></td>
+        <td>${esc(teamName[p.team] || p.team || "")}</td>
+        <td class="muted small">${(p.heroes || []).map(esc).join(" · ")}</td>
+      </tr>`).join("");
+  }
+  draw("");
+  document.getElementById("roleFilter").addEventListener("change", (e) => draw(e.target.value));
+</script>
+</body>
+</html>

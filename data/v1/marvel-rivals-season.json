@@ -1,0 +1,77 @@
+{
+  "game": {
+    "name": "Marvel Rivals",
+    "slug": "marvel-rivals",
+    "status": "active"
+  },
+  "generatedAt": "2026-10-14T03:37:50.664Z",
+  "asOf": "2026-10-14",
+  "liveNow": [
+    {
+      "endsOn": "2026-11-01",
+      "name": "Marvel Rivals Ignite 2026: Stage 2",
+      "sourceNote": "Dates and format per Liquipedia's Ignite 2026 Stage 2 coverage and Dot Esports' Stage 2 reporting (Oct 2026). Series are best-of-5 (first to 3 map wins); regional grand finals best-of-7.",
+      "stage": "Group stage live; knockouts from Oct 24; grand finals Nov 1",
+      "startsOn": "2026-10-10",
+      "status": "current",
+      "state": "live"
+    },
+    {
+      "endsOn": "2026-11-15",
+      "name": "Marvel Rivals Pacific Invitational 2026",
+      "sourceNote": "Per Liquipedia's Pacific Invitational 2026 page (Oct 8 to Nov 15). A separate, lower tier than Ignite, listed for completeness; Ignite is the fantasy competition at launch.",
+      "stage": "Pacific region's second-tier circuit (below Ignite)",
+      "startsOn": "2026-10-08",
+      "status": "current",
+      "state": "live"
+    }
+  ],
+  "nextUp": {
+    "endsOn": "2026-12-06",
+    "name": "Marvel Rivals Ignite 2026: Grand Finals",
+    "sourceNote": "Per Liquipedia's Ignite 2026 Grand Finals page: Nov 27 to Dec 6, 2026, Atlanta. The top teams from every region close the season here.",
+    "stage": "Season championship, Atlanta (DreamHack)",
+    "startsOn": "2026-11-27",
+    "status": "upcoming",
+    "state": "upcoming"
+  },
+  "headline": "Marvel Rivals Ignite 2026: Stage 2 is live now - league creation is open.",
+  "seasons": [
+    {
+      "endsOn": "2026-11-01",
+      "name": "Marvel Rivals Ignite 2026: Stage 2",
+      "sourceNote": "Dates and format per Liquipedia's Ignite 2026 Stage 2 coverage and Dot Esports' Stage 2 reporting (Oct 2026). Series are best-of-5 (first to 3 map wins); regional grand finals best-of-7.",
+      "stage": "Group stage live; knockouts from Oct 24; grand finals Nov 1",
+      "startsOn": "2026-10-10",
+      "status": "current",
+      "state": "live"
+    },
+    {
+      "endsOn": "2026-12-06",
+      "name": "Marvel Rivals Ignite 2026: Grand Finals",
+      "sourceNote": "Per Liquipedia's Ignite 2026 Grand Finals page: Nov 27 to Dec 6, 2026, Atlanta. The top teams from every region close the season here.",
+      "stage": "Season championship, Atlanta (DreamHack)",
+      "startsOn": "2026-11-27",
+      "status": "upcoming",
+      "state": "upcoming"
+    },
+    {
+      "endsOn": "2026-11-15",
+      "name": "Marvel Rivals Pacific Invitational 2026",
+      "sourceNote": "Per Liquipedia's Pacific Invitational 2026 page (Oct 8 to Nov 15). A separate, lower tier than Ignite, listed for completeness; Ignite is the fantasy competition at launch.",
+      "stage": "Pacific region's second-tier circuit (below Ignite)",
+      "startsOn": "2026-10-08",
+      "status": "current",
+      "state": "live"
+    },
+    {
+      "endsOn": "2026-08-16",
+      "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
+      "sourceNote": "Per Liquipedia and Esports Insider: Aug 11 to 16, 2026, Guangzhou. 100 Thieves beat Natus Vincere 4-1 in the final.",
+      "stage": "International LAN, Guangzhou, complete (100 Thieves champions)",
+      "startsOn": "2026-08-11",
+      "status": "complete",
+      "state": "complete"
+    }
+  ]
+}
