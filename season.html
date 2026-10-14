@@ -120,7 +120,7 @@
         </div>
       </div>
     </div>
-    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (Liquipedia series results, official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
+    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (Liquipedia series results, official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Player points rest on per-player box scores, and box scores are published as data nowhere: a player's line prints only when it has been extracted from the official broadcast record with its source (the VOD and timestamp) named. No box-score lines have landed yet, so no player averages or form lines are shown anywhere on this site. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
   </div>
 </section>
 
@@ -158,7 +158,7 @@
   const teamName = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.name]));
   const fx = document.querySelector("[data-fixtures]");
   if (!sched.matches.length) {
-    fx.innerHTML = `<div class="wire-line"><span class="w-name">Fixtures publish with the competition</span><span class="w-fact">The live competition's series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</span></div>`;
+    fx.innerHTML = `<div class="wire-line"><span class="w-name">No series imported yet</span><span class="w-fact">Series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</span></div>`;
     document.querySelector("[data-standings]").innerHTML =
       `<p class="muted" style="max-width:64ch">The standings table publishes here when the first fixtures are imported. Inside a league, your table is live from the first scored week.</p>`;
   } else {
@@ -176,11 +176,34 @@
             <span class="w-stage">${esc(m.roundLabel || "")}</span>
             <span class="w-state">${m.status === "final" ? "Final" : "Scheduled"}</span>
             ${m.scoreA == null ? "" : `<span class="w-score">${m.scoreA} to ${m.scoreB}</span>`}
-            <span class="w-fact">Fantasy week ${esc(m.week)}</span>
+            <span class="w-fact">Fantasy week ${esc(m.week)} · ${esc(m.source || "")}</span>
           </div>`).join("")}
-      </div>`).join("");
-    document.querySelector("[data-standings]").innerHTML =
-      `<p class="muted" style="max-width:64ch">Regional standings publish with the imported fixtures. Inside a league, your table is live from the first scored week.</p>`;
+      </div>`).join("") + `
+      <p class="fine" style="margin-top:16px">Series are imported through the results pipeline (payloads in db/imports), each with its source named above. Unplayed series list as fixtures and never count as played. Per-map lines are not published by the sources read, so series carry series scores only.</p>`;
+    /* Standings derive from the imported finals, grouped by region.
+       The table is the imported record so far, and says so: it is
+       partial until every played series is imported. */
+    const finals = sched.matches.filter((m) => m.status === "final");
+    const regionOf = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.region]));
+    const byRegion = {};
+    for (const m of finals) {
+      const region = regionOf[m.teamA] || "";
+      const table = (byRegion[region] ||= {});
+      for (const [short, f, a] of [[m.teamA, m.scoreA, m.scoreB], [m.teamB, m.scoreB, m.scoreA]]) {
+        const row = (table[short] ||= { w: 0, l: 0, f: 0, a: 0 });
+        if (f > a) row.w++; else row.l++;
+        row.f += f; row.a += a;
+      }
+    }
+    document.querySelector("[data-standings]").innerHTML = Object.entries(byRegion).map(([region, table]) => `
+      <h3 style="margin:16px 0 8px">${esc(region)}: imported results table</h3>
+      <table class="sheet" style="max-width:640px">
+        <thead><tr><th>Team</th><th class="n">W</th><th class="n">L</th><th class="n">Maps</th></tr></thead>
+        <tbody>${Object.entries(table).sort((x, y) => (y[1].w - x[1].w) || ((y[1].f - y[1].a) - (x[1].f - x[1].a))).map(([short, r]) => `
+          <tr><td>${esc(teamName[short] || short)}</td><td class="n">${r.w}</td><td class="n">${r.l}</td><td class="n">${r.f} to ${r.a}</td></tr>`).join("")}
+        </tbody>
+      </table>`).join("") + `
+      <p class="fine" style="margin-top:8px">Computed from the ${finals.length} imported final series above, as of ${fmtDate(sched.generatedAt)}. Partial: two further verified EMEA group series (Virtus.pro over Disband, Sep 26; CrownFall over Vengeful, Oct 4) are in the import payload but their teams are not yet in the directory, so they are reported in the import record, not folded in here. Inside a league, your table is live from the first scored week.</p>`;
   }
 </script>
 </body>

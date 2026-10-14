@@ -4,7 +4,168 @@
   "slug": "marvel-rivals",
   "status": "active"
  },
- "matches": [],
+ "matches": [
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 1,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-18",
+   "status": "final",
+   "teamA": "CRWN",
+   "teamB": "FYR",
+   "week": 1
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 0,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-18",
+   "status": "final",
+   "teamA": "VP",
+   "teamB": "RAD",
+   "week": 1
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 1,
+   "scoreB": 2,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-19",
+   "status": "final",
+   "teamA": "CRWN",
+   "teamB": "TH",
+   "week": 1
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 1,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-25",
+   "status": "final",
+   "teamA": "VP",
+   "teamB": "HYT",
+   "week": 2
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 1,
+   "scoreB": 2,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-26",
+   "status": "final",
+   "teamA": "CRWN",
+   "teamB": "NAVI",
+   "week": 2
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 0,
+   "scoreB": 2,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-09-27",
+   "status": "final",
+   "teamA": "CRWN",
+   "teamB": "PLS",
+   "week": 2
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 0,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-02",
+   "status": "final",
+   "teamA": "VP",
+   "teamB": "TCO",
+   "week": 3
+  },
+  {
+   "roundLabel": "EMEA group stage",
+   "scoreA": 2,
+   "scoreB": 0,
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-03",
+   "status": "final",
+   "teamA": "VP",
+   "teamB": "SHK",
+   "week": 3
+  },
+  {
+   "roundLabel": "Americas playoffs, upper bracket quarterfinal",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "100T",
+   "teamB": "NRG",
+   "week": 4
+  },
+  {
+   "roundLabel": "Americas playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "FLY",
+   "teamB": "DML",
+   "week": 4
+  },
+  {
+   "roundLabel": "Americas playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "LC",
+   "teamB": "YWL",
+   "week": 4
+  },
+  {
+   "roundLabel": "EMEA playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "NAVI",
+   "teamB": "HYT",
+   "week": 4
+  },
+  {
+   "roundLabel": "EMEA playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "PLS",
+   "teamB": "SHK",
+   "week": 4
+  },
+  {
+   "roundLabel": "Americas playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "SSG",
+   "teamB": "SWMP",
+   "week": 4
+  },
+  {
+   "roundLabel": "EMEA playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15",
+   "status": "scheduled",
+   "teamA": "TH",
+   "teamB": "RAD",
+   "week": 4
+  },
+  {
+   "roundLabel": "EMEA playoffs",
+   "source": "MRVL (mrvl.net), read Oct 14, 2026",
+   "startsAt": "2026-10-15T17:00:00Z",
+   "status": "scheduled",
+   "teamA": "CRWN",
+   "teamB": "VP",
+   "week": 4
+  }
+ ],
  "players": [
   {
    "draftRank": 1,
@@ -471,336 +632,336 @@
    "team": "OUG"
   },
   {
+   "draftRank": 61,
    "ign": "lyte",
    "realName": "Parker Lewis",
    "role": "Duelist",
-   "team": "NTMR",
-   "draftRank": 61
+   "team": "NTMR"
   },
   {
+   "draftRank": 62,
    "ign": "smash",
    "realName": "Alexander Basurco",
    "role": "Duelist",
-   "team": "NTMR",
-   "draftRank": 62
+   "team": "NTMR"
   },
   {
+   "draftRank": 63,
    "ign": "Vision",
    "realName": "Austin Wallace",
    "role": "Duelist",
-   "team": "NTMR",
-   "draftRank": 63
+   "team": "NTMR"
   },
   {
+   "draftRank": 64,
    "ign": "MACE",
    "realName": "",
    "role": "Vanguard",
-   "team": "NTMR",
-   "draftRank": 64
+   "team": "NTMR"
   },
   {
+   "draftRank": 65,
    "ign": "Monzter",
    "realName": "Salvatore Donato",
    "role": "Vanguard",
-   "team": "NTMR",
-   "draftRank": 65
+   "team": "NTMR"
   },
   {
+   "draftRank": 66,
    "ign": "Dinks",
    "realName": "Kevin Hernandez",
    "role": "Strategist",
-   "team": "NTMR",
-   "draftRank": 66
+   "team": "NTMR"
   },
   {
+   "draftRank": 67,
    "ign": "skier",
    "realName": "Griffin Gould",
    "role": "Strategist",
-   "team": "NTMR",
-   "draftRank": 67
+   "team": "NTMR"
   },
   {
+   "draftRank": 68,
    "ign": "DEAMONN",
    "realName": "Eamonn Paul Hawkins",
    "role": "Duelist",
-   "team": "FYR",
-   "draftRank": 68
+   "team": "FYR"
   },
   {
+   "draftRank": 69,
    "ign": "Sestroyed",
    "realName": "Kevin Gauronskas",
    "role": "Duelist",
-   "team": "FYR",
-   "draftRank": 69
+   "team": "FYR"
   },
   {
+   "draftRank": 70,
    "ign": "Slopo",
    "realName": "Archie Hallet",
    "role": "Duelist",
-   "team": "FYR",
-   "draftRank": 70
+   "team": "FYR"
   },
   {
+   "draftRank": 71,
    "ign": "Binary",
    "realName": "Johannes Hartl",
    "role": "Vanguard",
-   "team": "FYR",
-   "draftRank": 71
+   "team": "FYR"
   },
   {
+   "draftRank": 72,
    "ign": "Blax",
    "realName": "Maxime Thomas",
    "role": "Vanguard",
-   "team": "FYR",
-   "draftRank": 72
+   "team": "FYR"
   },
   {
+   "draftRank": 73,
    "ign": "kl0sar",
    "realName": "Pavle Raičević",
    "role": "Strategist",
-   "team": "FYR",
-   "draftRank": 73
+   "team": "FYR"
   },
   {
+   "draftRank": 74,
    "ign": "Znost",
    "realName": "Matti Phillip Mueller",
    "role": "Strategist",
-   "team": "FYR",
-   "draftRank": 74
+   "team": "FYR"
   },
   {
+   "draftRank": 75,
    "ign": "Hqrdest",
    "realName": "Jeremy Danton",
    "role": "Duelist",
-   "team": "PEPS",
-   "draftRank": 75
+   "team": "PEPS"
   },
   {
+   "draftRank": 76,
    "ign": "Kqz",
    "realName": "",
    "role": "Duelist",
-   "team": "PEPS",
-   "draftRank": 76
+   "team": "PEPS"
   },
   {
+   "draftRank": 77,
    "ign": "W3LSHMANIA",
    "realName": "Rhys Ellesmere",
    "role": "Vanguard",
-   "team": "PEPS",
-   "draftRank": 77
+   "team": "PEPS"
   },
   {
+   "draftRank": 78,
    "ign": "iMonkey",
    "realName": "",
    "role": "Vanguard",
-   "team": "PEPS",
-   "draftRank": 78
+   "team": "PEPS"
   },
   {
+   "draftRank": 79,
    "ign": "EgZo",
    "realName": "Alessandro Succu",
    "role": "Strategist",
-   "team": "PEPS",
-   "draftRank": 79
+   "team": "PEPS"
   },
   {
+   "draftRank": 80,
    "ign": "Smafer",
    "realName": "",
    "role": "Strategist",
-   "team": "PEPS",
-   "draftRank": 80
+   "team": "PEPS"
   },
   {
+   "draftRank": 81,
    "ign": "adios",
    "realName": "Black Chaplin",
    "role": "Duelist",
-   "team": "FLY",
-   "draftRank": 81
+   "team": "FLY"
   },
   {
+   "draftRank": 82,
    "ign": "Veswa",
    "realName": "Aiden",
    "role": "Vanguard",
-   "team": "FLY",
-   "draftRank": 82
+   "team": "FLY"
   },
   {
+   "draftRank": 83,
    "ign": "Zelos",
    "realName": "Harrison Potter",
    "role": "Strategist",
-   "team": "FLY",
-   "draftRank": 83
+   "team": "FLY"
   },
   {
+   "draftRank": 84,
    "ign": "Disaster",
    "realName": "Huang Xiaochuan",
    "role": "Duelist",
-   "team": "ACX",
-   "draftRank": 84
+   "team": "ACX"
   },
   {
+   "draftRank": 85,
    "ign": "KovAAK",
    "realName": "Zhang Yige",
    "role": "Duelist",
-   "team": "ACX",
-   "draftRank": 85
+   "team": "ACX"
   },
   {
+   "draftRank": 86,
    "ign": "Kami",
    "realName": "Tang Yitao",
    "role": "Vanguard",
-   "team": "ACX",
-   "draftRank": 86
+   "team": "ACX"
   },
   {
+   "draftRank": 87,
    "ign": "Kuma",
    "realName": "Chu Jingyuan",
    "role": "Vanguard",
-   "team": "ACX",
-   "draftRank": 87
+   "team": "ACX"
   },
   {
+   "draftRank": 88,
    "ign": "HetLot",
    "realName": "Zhang Xuan",
    "role": "Vanguard",
-   "team": "ACX",
-   "draftRank": 88
+   "team": "ACX"
   },
   {
+   "draftRank": 89,
    "ign": "Egg tart",
    "realName": "Jianxi Sun",
    "role": "Strategist",
-   "team": "ACX",
-   "draftRank": 89
+   "team": "ACX"
   },
   {
+   "draftRank": 90,
    "ign": "Ghost",
    "realName": "Tan Li",
    "role": "Strategist",
-   "team": "ACX",
-   "draftRank": 90
+   "team": "ACX"
   },
   {
+   "draftRank": 91,
    "ign": "Mercury",
    "realName": "Chen Guanru",
    "role": "Strategist",
-   "team": "ACX",
-   "draftRank": 91
+   "team": "ACX"
   },
   {
+   "draftRank": 92,
    "ign": "AV7",
    "realName": "",
    "role": "Duelist",
-   "team": "FL",
-   "draftRank": 92
+   "team": "FL"
   },
   {
+   "draftRank": 93,
    "ign": "Ray",
    "realName": "Huang Chunshuang",
    "role": "Duelist",
-   "team": "FL",
-   "draftRank": 93
+   "team": "FL"
   },
   {
+   "draftRank": 94,
    "ign": "RAYMOMO",
    "realName": "YYu Yu-jui",
    "role": "Vanguard",
-   "team": "FL",
-   "draftRank": 94
+   "team": "FL"
   },
   {
+   "draftRank": 95,
    "ign": "Youma",
    "realName": "Feng He",
    "role": "Vanguard",
-   "team": "FL",
-   "draftRank": 95
+   "team": "FL"
   },
   {
+   "draftRank": 96,
    "ign": "Shyva",
    "realName": "Lu Xuxin",
    "role": "Strategist",
-   "team": "FL",
-   "draftRank": 96
+   "team": "FL"
   },
   {
+   "draftRank": 97,
    "ign": "TuZ1",
    "realName": "Wu DaLe",
    "role": "Strategist",
-   "team": "FL",
-   "draftRank": 97
+   "team": "FL"
   },
   {
+   "draftRank": 98,
    "ign": "Papercut",
    "realName": "",
    "role": "Strategist",
-   "team": "FL",
-   "draftRank": 98
+   "team": "FL"
   }
  ],
  "seasons": [
   {
-   "name": "Marvel Rivals Ignite 2026: Stage 2",
-   "stage": "Playoffs Oct 8 to 18, 2026; group stage complete",
-   "startsOn": "2026-09-28",
    "endsOn": "2026-10-18",
-   "status": "current",
-   "sourceNote": "Playoffs run Oct 8 to 18, 2026, per the official Pick'Ems brackets reported by Beebom (Oct 9, 2026) and team match listings (NAVI lists a Stage 2 playoff match on Oct 15). Group play ran late September into early October; the September start date here is the block's approximate open. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7."
+   "name": "Marvel Rivals Ignite 2026: Stage 2",
+   "sourceNote": "Playoffs run Oct 8 to 18, 2026, per the official Pick'Ems brackets reported by Beebom (Oct 9, 2026) and team match listings (NAVI lists a Stage 2 playoff match on Oct 15). The regional events run Sep 18 to Oct 18, 2026 (China from Sep 17), per MRVL's event listings and NAVI's tournament page, both read Oct 14, 2026; the earlier September 28 start carried here was the block's approximate open and is corrected. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7. Series results and playoff fixtures are imported in db/imports (MRVL, read Oct 14, 2026); the hub tally and schedule derive from that record.",
+   "stage": "Playoffs Oct 8 to 18, 2026; group stage complete",
+   "startsOn": "2026-09-18",
+   "status": "current"
   },
   {
+   "endsOn": "2026-11-29",
    "name": "Marvel Rivals Ignite 2026: Grand Finals",
+   "sourceNote": "Nov 23 to 29, 2026, at DreamHack Stockholm (Stockholmsmassan), per DreamHack's own site. Twelve teams qualify: the Stage 2 playoff winners and the top of the annual League Points table (Americas 4, EMEA 4, Pacific 2, China 2). Liquipedia's summary table shows a conflicting placeholder date; DreamHack is authoritative for its own event.",
    "stage": "Season championship, DreamHack Stockholm",
    "startsOn": "2026-11-23",
-   "endsOn": "2026-11-29",
-   "status": "upcoming",
-   "sourceNote": "Nov 23 to 29, 2026, at DreamHack Stockholm (Stockholmsmassan), per DreamHack's own site. Twelve teams qualify: the Stage 2 playoff winners and the top of the annual League Points table (Americas 4, EMEA 4, Pacific 2, China 2). Liquipedia's summary table shows a conflicting placeholder date; DreamHack is authoritative for its own event."
+   "status": "upcoming"
   },
   {
+   "endsOn": "2026-08-01",
    "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
+   "sourceNote": "Jul 29 to Aug 1, 2026, $500,000 prize pool. NAVI won, defeating Liquid Citadel in the grand final (NAVI's own report, Aug 2, 2026; Esports.gg's Mid-Season Finals guide). An earlier listing placed this event in Guangzhou with a different winner; that was 2025-season material and has been corrected.",
    "stage": "International LAN, complete. NAVI champions, over Liquid Citadel in the final",
    "startsOn": "2026-07-29",
-   "endsOn": "2026-08-01",
-   "status": "complete",
-   "sourceNote": "Jul 29 to Aug 1, 2026, $500,000 prize pool. NAVI won, defeating Liquid Citadel in the grand final (NAVI's own report, Aug 2, 2026; Esports.gg's Mid-Season Finals guide). An earlier listing placed this event in Guangzhou with a different winner; that was 2025-season material and has been corrected."
+   "status": "complete"
   },
   {
+   "endsOn": "2026-06-07",
    "name": "Marvel Rivals Ignite 2026: Stage 1",
+   "sourceNote": "Ran May into early June 2026 (block dates approximate). NAVI's Stage 1 EMEA title is verified from NAVI's own report: a 5-0 group, three 3-0 playoff series, and a 4-0 grand final over Virtus.pro. The 2026 Stage 1 champions for Americas, Pacific and China are not verified in the sources read; widely indexed stories naming other winners are from the 2025 season.",
    "stage": "Complete. EMEA champions NAVI (4-0 over Virtus.pro in the final)",
    "startsOn": "2026-05-01",
-   "endsOn": "2026-06-07",
-   "status": "complete",
-   "sourceNote": "Ran May into early June 2026 (block dates approximate). NAVI's Stage 1 EMEA title is verified from NAVI's own report: a 5-0 group, three 3-0 playoff series, and a 4-0 grand final over Virtus.pro. The 2026 Stage 1 champions for Americas, Pacific and China are not verified in the sources read; widely indexed stories naming other winners are from the 2025 season."
+   "status": "complete"
   }
  ],
  "teams": [
   {
    "name": "100 Thieves",
+   "partner": true,
    "region": "Americas",
-   "short": "100T",
-   "partner": true
+   "short": "100T"
   },
   {
    "name": "Sentinels",
+   "partner": true,
    "region": "Americas",
-   "short": "SEN",
-   "partner": true
+   "short": "SEN"
   },
   {
    "name": "FlyQuest",
+   "partner": true,
    "region": "Americas",
-   "short": "FLY",
-   "partner": true
+   "short": "FLY"
   },
   {
    "name": "NRG Shock",
+   "partner": true,
    "region": "Americas",
-   "short": "NRG",
-   "partner": true
+   "short": "NRG"
   },
   {
    "name": "Liquid Citadel",
+   "partner": true,
    "region": "Americas",
-   "short": "LC",
-   "partner": true
+   "short": "LC"
   },
   {
    "name": "NTMR",
@@ -809,15 +970,15 @@
   },
   {
    "name": "TSM",
+   "partner": true,
    "region": "Americas",
-   "short": "TSM",
-   "partner": true
+   "short": "TSM"
   },
   {
    "name": "Spacestation Gaming",
+   "partner": true,
    "region": "Americas",
-   "short": "SSG",
-   "partner": true
+   "short": "SSG"
   },
   {
    "name": "Swamp Gaming",
@@ -841,21 +1002,21 @@
   },
   {
    "name": "Natus Vincere",
+   "partner": true,
    "region": "EMEA",
-   "short": "NAVI",
-   "partner": true
+   "short": "NAVI"
   },
   {
    "name": "Virtus.pro",
+   "partner": true,
    "region": "EMEA",
-   "short": "VP",
-   "partner": true
+   "short": "VP"
   },
   {
    "name": "Team Heretics",
+   "partner": true,
    "region": "EMEA",
-   "short": "TH",
-   "partner": true
+   "short": "TH"
   },
   {
    "name": "Team Peps",
@@ -909,15 +1070,15 @@
   },
   {
    "name": "REJECT",
+   "partner": true,
    "region": "Pacific",
-   "short": "RJT",
-   "partner": true
+   "short": "RJT"
   },
   {
    "name": "Gen.G Esports",
+   "partner": true,
    "region": "Pacific",
-   "short": "GEN",
-   "partner": true
+   "short": "GEN"
   },
   {
    "name": "The Burgers",
@@ -1036,13 +1197,13 @@
   },
   {
    "name": "Dreamland",
-   "short": "DML",
-   "region": "Americas"
+   "region": "Americas",
+   "short": "DML"
   },
   {
    "name": "Hypertune",
-   "short": "HYT",
-   "region": "EMEA"
+   "region": "EMEA",
+   "short": "HYT"
   }
  ]
 }

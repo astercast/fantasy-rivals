@@ -1,9 +1,170 @@
 {
-  "generatedAt": "2026-10-14T11:31:07.008Z",
+  "generatedAt": "2026-10-14T14:47:34.072Z",
   "game": {
     "name": "Marvel Rivals",
     "slug": "marvel-rivals",
     "status": "active"
   },
-  "matches": []
+  "matches": [
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 1,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-18",
+      "status": "final",
+      "teamA": "CRWN",
+      "teamB": "FYR",
+      "week": 1
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 0,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-18",
+      "status": "final",
+      "teamA": "VP",
+      "teamB": "RAD",
+      "week": 1
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 1,
+      "scoreB": 2,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-19",
+      "status": "final",
+      "teamA": "CRWN",
+      "teamB": "TH",
+      "week": 1
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 1,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-25",
+      "status": "final",
+      "teamA": "VP",
+      "teamB": "HYT",
+      "week": 2
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 1,
+      "scoreB": 2,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-26",
+      "status": "final",
+      "teamA": "CRWN",
+      "teamB": "NAVI",
+      "week": 2
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 0,
+      "scoreB": 2,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-09-27",
+      "status": "final",
+      "teamA": "CRWN",
+      "teamB": "PLS",
+      "week": 2
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 0,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-02",
+      "status": "final",
+      "teamA": "VP",
+      "teamB": "TCO",
+      "week": 3
+    },
+    {
+      "roundLabel": "EMEA group stage",
+      "scoreA": 2,
+      "scoreB": 0,
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-03",
+      "status": "final",
+      "teamA": "VP",
+      "teamB": "SHK",
+      "week": 3
+    },
+    {
+      "roundLabel": "Americas playoffs, upper bracket quarterfinal",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "100T",
+      "teamB": "NRG",
+      "week": 4
+    },
+    {
+      "roundLabel": "Americas playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "FLY",
+      "teamB": "DML",
+      "week": 4
+    },
+    {
+      "roundLabel": "Americas playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "LC",
+      "teamB": "YWL",
+      "week": 4
+    },
+    {
+      "roundLabel": "EMEA playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "NAVI",
+      "teamB": "HYT",
+      "week": 4
+    },
+    {
+      "roundLabel": "EMEA playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "PLS",
+      "teamB": "SHK",
+      "week": 4
+    },
+    {
+      "roundLabel": "Americas playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "SSG",
+      "teamB": "SWMP",
+      "week": 4
+    },
+    {
+      "roundLabel": "EMEA playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15",
+      "status": "scheduled",
+      "teamA": "TH",
+      "teamB": "RAD",
+      "week": 4
+    },
+    {
+      "roundLabel": "EMEA playoffs",
+      "source": "MRVL (mrvl.net), read Oct 14, 2026",
+      "startsAt": "2026-10-15T17:00:00Z",
+      "status": "scheduled",
+      "teamA": "CRWN",
+      "teamB": "VP",
+      "week": 4
+    }
+  ]
 }
