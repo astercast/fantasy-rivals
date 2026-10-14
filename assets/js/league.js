@@ -7,7 +7,19 @@ const params = new URLSearchParams(location.search);
 const leagueId = params.get("id");
 const alertBox = document.querySelector("[data-alert]");
 const showError = (m) => { alertBox.textContent = m; alertBox.classList.add("show"); };
-if (!leagueId) { showError("No league specified."); throw new Error("no league"); }
+/* Bare visit (no league id): a first-time visitor who lands here
+   directly has no league room to open. Show the honest no-league
+   state in league.html and stop there, with no uncaught error and
+   no league calls. The season plate above still renders as usual;
+   nothing here gates the season content elsewhere. */
+const hasLeague = Boolean(leagueId);
+if (!hasLeague) {
+  document.title = "No league yet · Rivals Fantasy";
+  document.querySelector("[data-league-head]")?.classList.add("hidden");
+  document.querySelector("[data-tabs]")?.classList.add("hidden");
+  document.querySelectorAll("[data-pane]").forEach((p) => p.classList.add("hidden"));
+  document.querySelector("[data-no-league]")?.classList.remove("hidden");
+}
 
 let L = null; // league/get payload
 let draftTimer = null;
@@ -666,11 +678,13 @@ document.querySelector("[data-score-week]")?.addEventListener("click", async () 
   }
 });
 
-try {
-  await loadLeague();
-  // If the draft is already live, land the user near it.
-  if (L.league.status === "drafting") loadDraft();
-} catch (err) {
-  if (err.status === 401) location.href = "/auth.html";
-  else showError(err.message);
+if (hasLeague) {
+  try {
+    await loadLeague();
+    // If the draft is already live, land the user near it.
+    if (L.league.status === "drafting") loadDraft();
+  } catch (err) {
+    if (err.status === 401) location.href = "/auth.html";
+    else showError(err.message);
+  }
 }
