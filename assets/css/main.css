@@ -492,8 +492,44 @@ span.pick-ctl { cursor: default; }
   .queue-collapsed .queue-row:nth-of-type(n+4) { display: none; }
 }
 @media (max-width: 400px) {
-  .pool2-row .marg { display: none; }
   .clock-strip .cs-next { display: none; }
+}
+
+/* --- phone rows and sheets: at phone widths a pool row stops being a
+   squeezed desktop line (its flex items shrank below their text and
+   the text painted over the next column). It becomes a stack on a
+   grid: rank (or the pick control) down the left, gamertag and role
+   tag on the first line, real name and team on the second, heroes on
+   their own line where they wrap instead of clipping - the heroes
+   line is no longer hidden at small widths. Sheets tighten padding
+   and header tracking, and cards give up 8px of padding, so a
+   five-column standings table fits its card instead of pushing past
+   the screen edge. Desktop geometry is untouched. --- */
+@media (max-width: 640px) {
+  .card { padding: 16px; }
+  table.sheet { font-size: 14px; }
+  table.sheet th, table.sheet td { padding: 8px 4px; }
+  table.sheet th { letter-spacing: 0.04em; }
+  /* Pressure valve: a word too long for its column (a team name like
+     Commissioner's) wraps mid-word rather than forcing the whole
+     table past the screen edge. Only bites when nothing else fits. */
+  table.sheet td { overflow-wrap: anywhere; }
+  .pool2-row {
+    display: grid;
+    grid-template-columns: auto auto minmax(0, 1fr) auto;
+    column-gap: 12px; row-gap: 2px;
+    align-items: center;
+  }
+  .pool2-row > * { min-width: auto; }
+  .pool2-row .pick-ctl { grid-column: 1; grid-row: 1 / span 3; align-self: center; }
+  .pool2-row .rk { grid-column: 2; grid-row: 1 / span 3; align-self: start; padding-top: 2px; }
+  .pool2-row .who { grid-column: 3; grid-row: 1; overflow-wrap: anywhere; }
+  .pool2-row .role { grid-column: 4; grid-row: 1; justify-self: end; }
+  .pool2-row .fine { grid-column: 3; grid-row: 2; overflow-wrap: anywhere; }
+  .pool2-row .muted { grid-column: 4; grid-row: 2; justify-self: end; text-align: right; }
+  .room .pool2-row .muted { grid-column: 3; grid-row: 2; justify-self: start; text-align: left; }
+  .pool2-row .queue-ctl { grid-column: 4; grid-row: 2; justify-self: end; }
+  .pool2-row .marg { display: block; grid-column: 3 / -1; grid-row: 3; margin-left: 0; text-align: left; }
 }
 @media (max-width: 640px) {
   /* With the header static, the strip pins to the very top and the
