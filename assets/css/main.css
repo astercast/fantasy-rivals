@@ -257,8 +257,8 @@ a.sw:hover { color: var(--ink); text-decoration: none; }
     radial-gradient(rgba(232, 50, 43, 0.13) 1.4px, transparent 1.5px) 0 0 / 20px 20px,
     var(--dark);
 }
-.plate-in { padding: 22px 24px; display: flex; gap: 36px; align-items: center; }
-.plate-core { flex: 1; min-width: 250px; }
+.plate-in { padding: 22px 24px; display: grid; grid-template-columns: minmax(0, 1fr) 190px; gap: 36px; align-items: center; }
+.plate-core { min-width: 0; }
 .plate-comp {
   font: 600 11px var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--signal);
 }
@@ -273,17 +273,17 @@ a.sw:hover { color: var(--ink); text-decoration: none; }
 .plate-state.loud { color: var(--hero); }
 .plate-dates { color: var(--on-dark-2); font-size: 14px; margin-top: 3px; }
 .plate-assist {
-  flex: none; border-left: 1px solid var(--dark-line); padding-left: 28px;
-  min-width: 190px;
+  border-left: 1px solid var(--dark-line); padding-left: 20px;
+  min-width: 0;
 }
 .plate-tally { display: flex; flex-direction: column; gap: 3px; }
 .plate-tally .t-fig { font-size: 13px; color: var(--on-dark-2); letter-spacing: 0.02em; }
 .plate-tally .t-fig b {
   font-family: var(--display); font-weight: 400; font-size: 21px; color: var(--ink);
-  display: inline-block; min-width: 44px;
+  display: inline-block; width: 52px; min-width: 52px;
 }
 @media (max-width: 640px) {
-  .plate-in { flex-direction: column; align-items: stretch; gap: 16px; }
+  .plate-in { grid-template-columns: 1fr; align-items: stretch; gap: 16px; }
   .plate-assist { border-left: none; border-top: 1px solid var(--dark-line); padding: 14px 0 0; }
   .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 6px 22px; }
 }

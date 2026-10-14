@@ -1,7 +1,8 @@
 /* league.js, the league room: overview, draft, lineup, standings, commish. */
-import { renderChrome, api, esc, fmtDate } from "/assets/js/site.js";
+import { renderChrome, renderSeasonPlate, api, esc, fmtDate } from "/assets/js/site.js";
 
 renderChrome("");
+renderSeasonPlate(document.querySelector("[data-season-plate]"));
 const params = new URLSearchParams(location.search);
 const leagueId = params.get("id");
 const alertBox = document.querySelector("[data-alert]");
