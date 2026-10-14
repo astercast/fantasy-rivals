@@ -29,7 +29,7 @@ Fleet rules honored: static data lives in `data/v1/`, never under `api/`; no `.j
 ## Free-tier ceilings
 
 - **Vercel Hobby:** 100 GB bandwidth, function execution capped at 10s (all functions here are far under in practice), 100 GB-hours. The public layer is static files plus precomputed JSON, so nearly all read traffic never touches a function.
-- **Neon free tier:** 0.5 GB storage, autoscaling compute with idle suspend, 100 CU-hours class limits. The dataset is tiny (about 104 players, low thousands of stat rows per season). A season of a few hundred leagues is well inside this.
+- **Neon free tier:** 0.5 GB storage, autoscaling compute with idle suspend, 100 CU-hours class limits. The dataset is tiny (about 98 players, low thousands of stat rows per season). A season of a few hundred leagues is well inside this.
 - **Locally:** no tiers at all. Embedded SQLite; the only dependency is optional.
 
 ## Honest estimates (friends-scale launch)

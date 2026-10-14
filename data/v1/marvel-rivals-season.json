@@ -4,73 +4,64 @@
     "slug": "marvel-rivals",
     "status": "active"
   },
-  "generatedAt": "2026-10-14T03:37:50.664Z",
+  "generatedAt": "2026-10-14T04:04:16.721Z",
   "asOf": "2026-10-14",
   "liveNow": [
     {
-      "endsOn": "2026-11-01",
       "name": "Marvel Rivals Ignite 2026: Stage 2",
-      "sourceNote": "Dates and format per Liquipedia's Ignite 2026 Stage 2 coverage and Dot Esports' Stage 2 reporting (Oct 2026). Series are best-of-5 (first to 3 map wins); regional grand finals best-of-7.",
-      "stage": "Group stage live; knockouts from Oct 24; grand finals Nov 1",
-      "startsOn": "2026-10-10",
+      "stage": "Playoffs live now (Oct 8 to 18); group stage complete",
+      "startsOn": "2026-09-28",
+      "endsOn": "2026-10-18",
       "status": "current",
-      "state": "live"
-    },
-    {
-      "endsOn": "2026-11-15",
-      "name": "Marvel Rivals Pacific Invitational 2026",
-      "sourceNote": "Per Liquipedia's Pacific Invitational 2026 page (Oct 8 to Nov 15). A separate, lower tier than Ignite, listed for completeness; Ignite is the fantasy competition at launch.",
-      "stage": "Pacific region's second-tier circuit (below Ignite)",
-      "startsOn": "2026-10-08",
-      "status": "current",
+      "sourceNote": "Playoffs run Oct 8 to 18, 2026, per the official Pick'Ems brackets reported by Beebom (Oct 9, 2026) and team match listings (NAVI lists a Stage 2 playoff match on Oct 15). Group play ran late September into early October; the September start date here is the block's approximate open. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7.",
       "state": "live"
     }
   ],
   "nextUp": {
-    "endsOn": "2026-12-06",
     "name": "Marvel Rivals Ignite 2026: Grand Finals",
-    "sourceNote": "Per Liquipedia's Ignite 2026 Grand Finals page: Nov 27 to Dec 6, 2026, Atlanta. The top teams from every region close the season here.",
-    "stage": "Season championship, Atlanta (DreamHack)",
-    "startsOn": "2026-11-27",
+    "stage": "Season championship, DreamHack Stockholm",
+    "startsOn": "2026-11-23",
+    "endsOn": "2026-11-29",
     "status": "upcoming",
+    "sourceNote": "Nov 23 to 29, 2026, at DreamHack Stockholm (Stockholmsmassan), per DreamHack's own site. Twelve teams qualify: the Stage 2 playoff winners and the top of the annual League Points table (Americas 4, EMEA 4, Pacific 2, China 2). Liquipedia's summary table shows a conflicting placeholder date; DreamHack is authoritative for its own event.",
     "state": "upcoming"
   },
   "headline": "Marvel Rivals Ignite 2026: Stage 2 is live now - league creation is open.",
   "seasons": [
     {
-      "endsOn": "2026-11-01",
       "name": "Marvel Rivals Ignite 2026: Stage 2",
-      "sourceNote": "Dates and format per Liquipedia's Ignite 2026 Stage 2 coverage and Dot Esports' Stage 2 reporting (Oct 2026). Series are best-of-5 (first to 3 map wins); regional grand finals best-of-7.",
-      "stage": "Group stage live; knockouts from Oct 24; grand finals Nov 1",
-      "startsOn": "2026-10-10",
+      "stage": "Playoffs live now (Oct 8 to 18); group stage complete",
+      "startsOn": "2026-09-28",
+      "endsOn": "2026-10-18",
       "status": "current",
+      "sourceNote": "Playoffs run Oct 8 to 18, 2026, per the official Pick'Ems brackets reported by Beebom (Oct 9, 2026) and team match listings (NAVI lists a Stage 2 playoff match on Oct 15). Group play ran late September into early October; the September start date here is the block's approximate open. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7.",
       "state": "live"
     },
     {
-      "endsOn": "2026-12-06",
       "name": "Marvel Rivals Ignite 2026: Grand Finals",
-      "sourceNote": "Per Liquipedia's Ignite 2026 Grand Finals page: Nov 27 to Dec 6, 2026, Atlanta. The top teams from every region close the season here.",
-      "stage": "Season championship, Atlanta (DreamHack)",
-      "startsOn": "2026-11-27",
+      "stage": "Season championship, DreamHack Stockholm",
+      "startsOn": "2026-11-23",
+      "endsOn": "2026-11-29",
       "status": "upcoming",
+      "sourceNote": "Nov 23 to 29, 2026, at DreamHack Stockholm (Stockholmsmassan), per DreamHack's own site. Twelve teams qualify: the Stage 2 playoff winners and the top of the annual League Points table (Americas 4, EMEA 4, Pacific 2, China 2). Liquipedia's summary table shows a conflicting placeholder date; DreamHack is authoritative for its own event.",
       "state": "upcoming"
     },
     {
-      "endsOn": "2026-11-15",
-      "name": "Marvel Rivals Pacific Invitational 2026",
-      "sourceNote": "Per Liquipedia's Pacific Invitational 2026 page (Oct 8 to Nov 15). A separate, lower tier than Ignite, listed for completeness; Ignite is the fantasy competition at launch.",
-      "stage": "Pacific region's second-tier circuit (below Ignite)",
-      "startsOn": "2026-10-08",
-      "status": "current",
-      "state": "live"
+      "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
+      "stage": "International LAN, complete. NAVI champions, over Liquid Citadel in the final",
+      "startsOn": "2026-07-29",
+      "endsOn": "2026-08-01",
+      "status": "complete",
+      "sourceNote": "Jul 29 to Aug 1, 2026, $500,000 prize pool. NAVI won, defeating Liquid Citadel in the grand final (NAVI's own report, Aug 2, 2026; Esports.gg's Mid-Season Finals guide). An earlier listing placed this event in Guangzhou with a different winner; that was 2025-season material and has been corrected.",
+      "state": "complete"
     },
     {
-      "endsOn": "2026-08-16",
-      "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
-      "sourceNote": "Per Liquipedia and Esports Insider: Aug 11 to 16, 2026, Guangzhou. 100 Thieves beat Natus Vincere 4-1 in the final.",
-      "stage": "International LAN, Guangzhou, complete (100 Thieves champions)",
-      "startsOn": "2026-08-11",
+      "name": "Marvel Rivals Ignite 2026: Stage 1",
+      "stage": "Complete. EMEA champions NAVI (4-0 over Virtus.pro in the final)",
+      "startsOn": "2026-05-01",
+      "endsOn": "2026-06-07",
       "status": "complete",
+      "sourceNote": "Ran May into early June 2026 (block dates approximate). NAVI's Stage 1 EMEA title is verified from NAVI's own report: a 5-0 group, three 3-0 playoff series, and a 4-0 grand final over Virtus.pro. The 2026 Stage 1 champions for Americas, Pacific and China are not verified in the sources read; widely indexed stories naming other winners are from the 2025 season.",
       "state": "complete"
     }
   ]

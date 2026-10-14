@@ -135,9 +135,9 @@
           <h3>Importing results</h3>
           <p class="muted small">Results enter through the import API with a named source, never typed into the standings by hand. Payload per series: week, both teams, map score, and each player's line (eliminations / deaths / assists / final hits / damage / blocked / healing).</p>
           <pre class="mono" style="font-size:11.5px; background:var(--paper-2); padding:12px; border-radius:8px; overflow:auto; margin-top:12px">POST /api/admin/import-results
-{ "seasonId": "…", "source": "Liquipedia LPDB",
+{ "seasonId": "…", "source": "Liquipedia series result; player lines from the official broadcast VOD scoreboard",
   "matches": [{ "week": 1, "teamA": "SEN",
-    "teamB": "SR", "scoreA": 3, "scoreB": 1,
+    "teamB": "100T", "scoreA": 3, "scoreB": 1,
     "status": "final", "stats": [ … ] }] }</pre>
           <p class="fine" style="margin-top:10px">Admins and the pipeline key can import. Unresolved teams/players are reported back, never guessed.</p>
         </div>
