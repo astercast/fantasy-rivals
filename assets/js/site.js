@@ -169,11 +169,33 @@ async function fillTally(plateEl) {
       fetchJson(`/data/v1/${GAME_SLUG}-teams.json`),
       fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`),
     ]);
-    const played = (sched.matches || []).filter((m) => m.status === "final").length;
+    const finals = (sched.matches || []).filter((m) => m.status === "final");
+    const played = finals.length;
+    /* The tally's honest edge: the played record does not yet cover
+       every region in the directory. Derived from the same two files
+       as the figures, so the line can never outlive the data: when a
+       region's first final is imported it drops off the line, and
+       when no region is missing the line is not printed at all. The
+       wording follows the season page's own disclosure. */
+    const regionOf = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.region]));
+    const inData = [...new Set(teamsData.teams.map((t) => t.region).filter(Boolean))];
+    const allRegions = ["Americas", "EMEA", "Pacific", "China"].filter((r) => inData.includes(r))
+      .concat(inData.filter((r) => !["Americas", "EMEA", "Pacific", "China"].includes(r)));
+    const playedRegions = [...new Set(finals.map((m) => regionOf[m.teamA]).filter(Boolean))];
+    const missing = allRegions.filter((r) => !playedRegions.includes(r));
+    let note = "";
+    if (missing.length) {
+      const list = missing.length > 1
+        ? missing.slice(0, -1).join(", ") + " and " + missing[missing.length - 1]
+        : missing[0];
+      note = `<span class="t-note">${playedRegions.length === 1
+        ? `Played so far: ${esc(playedRegions[0])} only. `
+        : ""}${esc(list)} finals are not imported yet.</span>`;
+    }
     tallyEl.innerHTML = `
       <span class="t-fig"><b>${teamsData.teams.length}</b> teams in</span>
       <span class="t-fig"><b>${teamsData.players.length}</b> players rostered</span>
-      <span class="t-fig"><b>${played}</b> fixtures played</span>`;
+      <span class="t-fig"><b>${played}</b> fixtures played</span>${note}`;
   } catch {
     tallyEl.textContent = "";
   }

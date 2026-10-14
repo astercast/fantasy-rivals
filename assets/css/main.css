@@ -191,10 +191,12 @@ p { margin: 0; }
   font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; font-size: 21px; color: var(--ink);
   display: inline-block; width: 56px; min-width: 56px;
 }
+.plate-tally .t-note { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
 @media (max-width: 640px) {
   .plate-in { grid-template-columns: 1fr; align-items: stretch; gap: 16px; padding: 24px; }
   .plate-assist { border-left: none; border-top: 1px solid var(--line); padding: 16px 0 0; }
   .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 8px 24px; }
+  .plate-tally .t-note { flex-basis: 100%; }
 }
 
 /* --- the wire: day or month grouped one-line rows. Names, record or
