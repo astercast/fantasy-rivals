@@ -65,9 +65,9 @@
   const meta = await api("/api/leagues/meta");
   const box = document.querySelector("[data-competitions]");
   const pill = (c) =>
-    c.state === "live" ? `<span class="status-pill"><span class="pulse"></span>Live now</span>`
-    : c.state === "upcoming" ? `<span class="status-pill next"><span class="pulse"></span>Next up</span>`
-    : `<span class="status-pill"><span class="pulse" style="background:var(--ink-3)"></span>Complete</span>`;
+    c.state === "live" ? `<span class="status-pill"><span class="dot"></span>Live now</span>`
+    : c.state === "upcoming" ? `<span class="status-pill next"><span class="dot"></span>Next up</span>`
+    : `<span class="status-pill"><span class="dot" style="background:var(--ink-3)"></span>Complete</span>`;
   box.innerHTML = meta.competitions.map((c) => `
     <button type="button" class="comp-option" data-comp="${c.id}" ${c.leagueCreationOpen ? "" : "disabled style='opacity:.55'"}>
       <span style="flex:1">

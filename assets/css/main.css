@@ -5,7 +5,11 @@
    that matter), Inter for the reading voice, mono for data. Two accents
    only: Rivals red (hero) and signal teal (live state, links, focus).
    Burst yellow exists for status bursts and nothing else. Halftone dots
-   live in the hero and the broadcast band, nowhere else. */
+   live in the splash beat and in the season plate's state-change moment,
+   nowhere else (FANTASY-STUDY 5.1, 5.4). The floor plan is the study's:
+   a fixed trade dress on every page, the season plate run as a
+   scorebug, the season told as a one-line wire, and a draft room built
+   as a room (board, pool, queue rail). */
 
 @font-face {
   font-family: "Anton";
@@ -105,26 +109,58 @@ p { margin: 0; }
 .small { font-size: 13px; }
 .fine { font-size: 12px; color: var(--ink-3); }
 
-/* --- header --- */
+/* --- the band (trade dress, study 5.4): fixed on every page. Wordmark
+   left, competition switcher right, corner box at the band's right end.
+   One size, set in the display face, never redrawn per page. Flat: the
+   dress carries no blur, no glass, no texture. --- */
 .site-head {
   position: sticky; top: 0; z-index: 40;
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
-  backdrop-filter: blur(10px);
+  background: var(--bg);
   border-bottom: 2px solid var(--edge);
 }
-.site-head .wrap { display: flex; align-items: center; gap: 28px; height: 60px; }
+.site-head .band { display: flex; align-items: stretch; gap: 26px; min-height: 60px; flex-wrap: wrap; }
 .wordmark {
   font-family: var(--display); font-weight: 400; letter-spacing: 0.03em;
   font-size: 21px; color: var(--ink); text-transform: uppercase; white-space: nowrap;
+  align-self: center;
 }
 .wordmark:hover { text-decoration: none; }
 .wordmark .dot { color: var(--hero); }
-.main-nav { display: flex; gap: 22px; margin-left: 8px; }
+.main-nav { display: flex; gap: 22px; margin-left: 8px; align-items: center; }
 .main-nav a { color: var(--ink-2); font-size: 14.5px; font-weight: 600; }
 .main-nav a:hover { color: var(--ink); text-decoration: none; }
 .main-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--hero); }
 .head-right { margin-left: auto; display: flex; align-items: center; gap: 14px; }
 .head-user { font-size: 14px; color: var(--ink-2); }
+.switcher { display: flex; align-items: stretch; }
+.sw {
+  font-family: var(--display); font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase;
+  font-size: 13px; color: var(--ink-3); display: flex; align-items: center; gap: 7px;
+  padding: 0 12px; border-left: 1px solid var(--line); white-space: nowrap;
+}
+.sw i { font: 600 9.5px var(--mono); font-style: normal; letter-spacing: 0.1em; color: var(--ink-3); }
+.sw.on { color: var(--ink); }
+.sw.on i { color: var(--signal); }
+a.sw:hover { color: var(--ink); text-decoration: none; }
+/* The corner box (study 4, the cover system; study 5.4): a fixed-size box
+   at the band's right end carrying season state in dual-number form, the
+   current run's number over the season's whole. It never moves and never
+   resizes; only its two lines of type change. */
+.corner-box {
+  flex: none; width: 148px; min-height: 60px; align-self: stretch;
+  border-left: 2px solid var(--edge); border-right: 2px solid var(--edge);
+  background: var(--panel); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 2px; padding: 6px 8px;
+  text-align: center;
+}
+.corner-box .cb-top {
+  font-family: var(--display); font-weight: 400; font-size: 16px; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--ink); line-height: 1.05; white-space: nowrap;
+}
+.corner-box .cb-bottom {
+  font: 600 9.5px var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--ink-3); white-space: nowrap;
+}
 
 /* --- buttons --- */
 .btn {
@@ -151,8 +187,11 @@ p { margin: 0; }
 .btn-provider:hover { border-color: var(--ink-3); transform: none; box-shadow: none; }
 .btn-provider .glyph { font-weight: 800; width: 18px; text-align: center; }
 
-/* --- hero (the cover) --- */
-.hero {
+/* --- the splash beat (study 5.1): one beat of cover-art treatment, the
+   only place halftone and panel geometry run at full strength. The cover
+   lines sit at the panel edges the way cover copy sits on an issue: short,
+   loud, and part of the art, not a stat strip. --- */
+.cover {
   background:
     radial-gradient(rgba(232, 50, 43, 0.16) 1.6px, transparent 1.7px) 0 0 / 22px 22px,
     radial-gradient(rgba(22, 211, 191, 0.10) 1.6px, transparent 1.7px) 11px 11px / 22px 22px,
@@ -160,29 +199,36 @@ p { margin: 0; }
   color: var(--on-dark);
   border-bottom: 3px solid var(--hero);
 }
-.hero .wrap { padding: 84px 24px 72px; }
-.hero h1 {
+.cover .wrap { padding: 64px 24px 56px; }
+.cover h1 {
   font-family: var(--display); font-weight: 400; text-transform: uppercase;
   font-size: clamp(52px, 7vw, 88px); line-height: 0.98; letter-spacing: 0.005em; max-width: 12ch;
   text-shadow: 5px 5px 0 rgba(2, 3, 8, 0.6);
 }
-.hero h1 em { font-style: normal; color: var(--hero); }
-.hero .sub { margin-top: 20px; font-size: 19px; color: var(--on-dark-2); max-width: 52ch; }
-.hero .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
-.hero .btn-primary { background: var(--hero); color: #fff; }
-.hero .btn-primary:hover { background: #f0443a; }
-.hero .btn-ghost { color: var(--on-dark); border-color: var(--dark-line); background: transparent; }
-.hero .btn-ghost:hover { border-color: var(--on-dark-2); }
-
-/* --- season status (the broadcast lower third) --- */
-.status-band {
-  background:
-    radial-gradient(rgba(22, 211, 191, 0.07) 1.4px, transparent 1.5px) 0 0 / 20px 20px,
-    var(--dark);
-  border-bottom: 2px solid var(--edge);
-  color: var(--on-dark);
+.cover h1 em { font-style: normal; color: var(--hero); }
+.cover .sub { margin-top: 20px; font-size: 19px; color: var(--on-dark-2); max-width: 52ch; }
+.cover .cta-row { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+.cover .btn-ghost { color: var(--on-dark); border-color: var(--dark-line); background: transparent; }
+.cover .btn-ghost:hover { border-color: var(--on-dark-2); }
+.cover-lines { display: flex; gap: 10px 26px; flex-wrap: wrap; margin-top: 40px; border-top: 1px solid var(--dark-line); padding-top: 18px; }
+/* At bar-test width the beat compacts so the plate docked at the
+   splash's foot stays close under it: same order, same hierarchy,
+   tighter air. */
+@media (max-width: 640px) {
+  .cover .wrap { padding: 38px 24px 40px; }
+  .cover h1 { font-size: clamp(42px, 13.5vw, 88px); }
+  .cover .sub { font-size: 17px; margin-top: 14px; }
+  .cover .cta-row { margin-top: 22px; }
+  .cover-lines { margin-top: 26px; }
 }
-.status-band .wrap { padding: 26px 24px; display: flex; gap: 28px; align-items: center; flex-wrap: wrap; }
+.cover-line {
+  font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: 0.03em;
+  font-size: 15px; color: var(--on-dark); display: inline-flex; gap: 9px; align-items: baseline;
+}
+.cover-line b { color: var(--hero); font-weight: 400; }
+.cover-line .cl-n { font-family: var(--display); color: var(--signal); font-size: 19px; }
+
+/* --- competition state pills (league picker furniture) --- */
 .status-pill {
   display: inline-flex; align-items: center; gap: 8px;
   font: 700 12px var(--mono); letter-spacing: 0.12em; text-transform: uppercase;
@@ -191,27 +237,82 @@ p { margin: 0; }
   transform: skewX(-8deg);
 }
 .status-pill > * { transform: skewX(8deg); }
-.status-pill .pulse { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); }
-.status-pill.next .pulse { background: var(--gold); }
-/* the burst: status only, never decoration */
-.status-pill.burst-live {
-  background: var(--burst); color: #191203; transform: rotate(-3deg);
-  clip-path: polygon(100% 50%, 92.5% 61.8%, 98.5% 73.2%, 88.2% 78.5%, 90.5% 91.2%, 79.1% 90.5%, 76.2% 100%, 65.6% 93.9%, 57.4% 100%, 50% 91%, 41.3% 99.1%, 34.4% 92.6%, 24.5% 97.6%, 21.8% 87.3%, 10.9% 87.8%, 12.7% 76.5%, 2.4% 71.4%, 8.2% 61.2%, 0% 50%, 7.5% 38.2%, 1.5% 26.8%, 11.8% 21.5%, 9.5% 8.8%, 20.9% 9.5%, 23.8% 0%, 34.4% 6.1%, 42.6% 0%, 50% 9%, 58.7% 0.9%, 65.6% 7.4%, 75.5% 2.4%, 78.2% 12.7%, 89.1% 12.2%, 87.3% 23.5%, 97.6% 28.6%, 91.8% 38.8%);
-  border: none; padding: 13px 20px;
+.status-pill .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--signal); }
+.status-pill.next .dot { background: var(--gold); }
+
+/* --- the season plate (study 5.2): the site's scorebug. Fixed geometry
+   on hub, season, and league surfaces alike. Core zone left, protected:
+   wordmark line, stage name, state word, dates, in that order, never
+   reordered, never resized. Assist zone right, one tenant: the tally.
+   Flat every day; halftone appears only in the state-change moment,
+   when the state word also takes corner-box red. --- */
+.plate {
+  background: var(--dark);
+  border-bottom: 2px solid var(--edge);
+  color: var(--on-dark);
+  position: relative;
 }
-.status-main { flex: 1; min-width: 260px; }
-.status-main .comp-name {
+.plate.loud {
+  background:
+    radial-gradient(rgba(232, 50, 43, 0.13) 1.4px, transparent 1.5px) 0 0 / 20px 20px,
+    var(--dark);
+}
+.plate-in { padding: 22px 24px; display: flex; gap: 36px; align-items: center; }
+.plate-core { flex: 1; min-width: 250px; }
+.plate-comp {
+  font: 600 11px var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--signal);
+}
+.plate-stage {
   font-family: var(--display); font-weight: 400; text-transform: uppercase;
-  font-size: 30px; letter-spacing: 0.015em; line-height: 1.05;
+  font-size: 32px; letter-spacing: 0.015em; line-height: 1.05; margin-top: 3px;
 }
-.status-main .comp-meta { color: var(--on-dark-2); font-size: 14.5px; margin-top: 4px; }
-.status-next {
-  text-align: left; border: 2px solid var(--line); background: var(--panel);
-  padding: 10px 14px; box-shadow: 5px 5px 0 rgba(2, 3, 8, 0.55);
+.plate-state {
+  font: 700 13px var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink); margin-top: 7px;
 }
-.status-next .n-name { font-weight: 700; }
-.status-band.on-dark { background: var(--dark-2); border-color: var(--dark-line); color: var(--on-dark); }
-.status-band.on-dark .comp-meta { color: var(--on-dark-2); }
+.plate-state.loud { color: var(--hero); }
+.plate-dates { color: var(--on-dark-2); font-size: 14px; margin-top: 3px; }
+.plate-assist {
+  flex: none; border-left: 1px solid var(--dark-line); padding-left: 28px;
+  min-width: 190px;
+}
+.plate-tally { display: flex; flex-direction: column; gap: 3px; }
+.plate-tally .t-fig { font-size: 13px; color: var(--on-dark-2); letter-spacing: 0.02em; }
+.plate-tally .t-fig b {
+  font-family: var(--display); font-weight: 400; font-size: 21px; color: var(--ink);
+  display: inline-block; min-width: 44px;
+}
+@media (max-width: 640px) {
+  .plate-in { flex-direction: column; align-items: stretch; gap: 16px; }
+  .plate-assist { border-left: none; border-top: 1px solid var(--dark-line); padding: 14px 0 0; }
+  .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 6px 22px; }
+}
+
+/* --- the wire (study 2, the Sleeper scores wire): date-grouped one-line
+   results. Every fixture, result, and competition prints as ONE line:
+   names, standing carried inline, the state word, one appended fact.
+   Never a fixture card. --- */
+.wire-group { margin-top: 26px; }
+.wire-group:first-child { margin-top: 0; }
+.wire-date {
+  font: 600 11px var(--mono); letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--signal); margin: 0 0 4px;
+}
+.wire-line {
+  display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap;
+  padding: 10px 2px; border-bottom: 1px solid var(--line); font-size: 15px;
+}
+.wire-line:last-child { border-bottom: none; }
+.wire-line .w-name { font-weight: 700; }
+.wire-line .w-stage { color: var(--ink-2); }
+.wire-line .w-state {
+  font: 700 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2);
+}
+.wire-line .w-state.live { color: var(--signal); }
+.wire-line .w-state.loud { color: var(--hero); }
+.wire-line .w-dates { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); }
+.wire-line .w-fact { color: var(--ink-3); font-size: 13.5px; }
+.wire-line .w-act { margin-left: auto; }
 
 /* --- sections & panels --- */
 .section { padding: 64px 0; }
@@ -293,18 +394,9 @@ select option { background: var(--panel); color: var(--ink); }
 }
 .tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
 
-/* --- draft (the broadcast draft graphic) --- */
-.draft-clock {
-  font-family: var(--display); font-size: 38px; font-weight: 400; color: var(--signal);
-  letter-spacing: 0.02em;
-}
-.onclock {
-  background: var(--panel-2); border: 2px solid var(--edge); border-left: 6px solid var(--signal);
-  padding: 12px 14px; box-shadow: 5px 5px 0 rgba(2, 3, 8, 0.55);
-}
+/* --- pick rows (rail history, roster, members, week detail) --- */
 .pick-row { display: flex; gap: 12px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
-.pool-row { display: flex; gap: 12px; align-items: center; padding: 9px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
-.pool-row .spacer, .pick-row .spacer { flex: 1; }
+.pick-row .spacer { flex: 1; }
 
 /* --- versus matchup cards --- */
 .versus {
@@ -334,25 +426,27 @@ select option { background: var(--panel); color: var(--ink); }
 .feed-item { padding: 10px 0; border-bottom: 1px solid var(--line); font-size: 14px; }
 .feed-item .when { color: var(--ink-3); font-size: 12.5px; font-family: var(--mono); }
 
-/* --- footer --- */
+/* --- footer (trade dress, study 5.4): reduced to one small-print line,
+   data provenance and the update time, the smallest type on the page in
+   an unvarying place. --- */
 .site-foot { border-top: 2px solid var(--edge); margin-top: 0; background: var(--dark); }
-.site-foot .wrap { padding: 36px 24px 44px; display: flex; gap: 24px; flex-wrap: wrap; }
-.site-foot .fine { max-width: 62ch; }
+.site-foot .wrap { padding: 18px 24px 22px; }
+.foot-line { font-size: 12px; color: var(--ink-3); max-width: 92ch; }
 
 .badge-live { color: var(--signal); font-weight: 700; }
 .hidden { display: none !important; }
 .stack > * + * { margin-top: 14px; }
 
-/* --- broadcast layer: hero board, ticker, calendar, worked example --- */
-.hero-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: start; }
-@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; } }
-.hero-card {
+/* --- cover panel: the draft board as the issue's cover art --- */
+.cover-grid { display: grid; grid-template-columns: 1.12fr 0.88fr; gap: 48px; align-items: start; }
+@media (max-width: 900px) { .cover-grid { grid-template-columns: 1fr; } }
+.cover-panel {
   background: var(--panel); border: 2px solid var(--edge); border-radius: var(--radius);
   padding: 20px 20px 8px; box-shadow: var(--panel-shadow);
 }
-.hero-card .hc-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
-.hero-card .hc-head h3 { color: var(--on-dark); font-size: 16px; }
-.hero-card .hc-head .fine { color: var(--on-dark-2); }
+.cover-panel .hc-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 8px; }
+.cover-panel .hc-head h3 { color: var(--on-dark); font-size: 16px; }
+.cover-panel .hc-head .fine { color: var(--on-dark-2); }
 .lb-row {
   display: flex; align-items: center; gap: 12px; padding: 9px 0;
   border-bottom: 1px solid var(--line); font-size: 14.5px; color: var(--on-dark);
@@ -361,47 +455,146 @@ select option { background: var(--panel); color: var(--ink); }
 .lb-row .rk { font-family: var(--display); color: var(--hero); width: 26px; font-size: 17px; }
 .lb-row .who { font-weight: 650; }
 .lb-row .tm { margin-left: auto; font-family: var(--mono); font-size: 12.5px; color: var(--on-dark-2); letter-spacing: 0.06em; }
-.hero-stats {
-  display: flex; gap: 36px; flex-wrap: wrap; margin-top: 44px;
-  border-top: 1px solid var(--dark-line); padding-top: 22px;
-}
-.hero-stats .hs .n { font-family: var(--display); font-size: 34px; font-weight: 400; color: #fff; line-height: 1; }
-.hero-stats .hs .l { font-size: 12.5px; color: var(--on-dark-2); letter-spacing: 0.04em; text-transform: uppercase; margin-top: 5px; }
-
-.ticker {
-  background: var(--hero); color: #fff;
-  font-family: var(--mono); font-size: 12.5px; letter-spacing: 0.05em; font-weight: 600;
-  overflow: hidden; white-space: nowrap; border-bottom: 2px solid var(--edge);
-}
-.ticker .wrap { display: flex; gap: 44px; padding-top: 10px; padding-bottom: 10px; overflow-x: auto; scrollbar-width: none; }
-.ticker .wrap::-webkit-scrollbar { display: none; }
-.ticker .t-item { display: inline-flex; gap: 10px; align-items: center; }
-.ticker .t-dot { width: 7px; height: 7px; border-radius: 50%; background: #fff; flex: none; }
-.ticker .t-dot.gold { background: var(--gold); }
-.ticker .t-dot.grey { background: rgba(255, 255, 255, 0.45); }
 
 .section.alt { background: var(--bg-2); }
-.cal-card { display: flex; flex-direction: column; gap: 8px; }
-.cal-card .cc-top { display: flex; align-items: center; gap: 10px; }
-.cal-card h3 { font-size: 18px; }
-.cal-card .cc-dates { font-family: var(--mono); font-size: 13.5px; color: var(--ink-2); }
-.cal-card .cc-stage { color: var(--ink-2); font-size: 14px; }
-.state-pill {
-  font: 700 11px var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
-  padding: 5px 10px; border-radius: 4px; border: 2px solid var(--edge); color: var(--ink-2);
-  background: var(--panel-2);
-}
-.state-pill.live { background: var(--hero); border-color: var(--edge); color: #fff; }
-.state-pill.next { border-color: var(--gold); color: var(--gold); background: transparent; }
 .step-num { font-family: var(--display); font-size: 36px; font-weight: 400; color: var(--hero); }
-.game-tile { display: flex; gap: 16px; align-items: flex-start; }
-.game-tile .g-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 7px; flex: none; }
+.step-line { display: flex; gap: 20px; align-items: baseline; padding: 16px 2px; border-bottom: 1px solid var(--line); }
+.step-line:last-child { border-bottom: none; }
+.step-line h3 { font-size: 16.5px; margin-bottom: 3px; }
 .worked { font-family: var(--mono); font-size: 13.5px; }
 .worked .w-row { display: flex; justify-content: space-between; gap: 16px; padding: 6px 0; border-bottom: 1px solid var(--line); }
 .worked .w-row:last-child { border-bottom: none; }
 .worked .w-total { font-weight: 700; font-size: 15px; color: var(--ink); }
 .region-tag { font-family: var(--mono); font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); }
-.foot-cols { display: grid; grid-template-columns: 1.4fr 1fr 1.4fr; gap: 32px; width: 100%; }
-@media (max-width: 700px) { .foot-cols { grid-template-columns: 1fr; } }
-.foot-cols h4 { font: 600 11px var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--signal); margin: 0 0 10px; }
-.foot-cols a { display: block; color: var(--ink-2); font-size: 14px; padding: 3px 0; }
+
+/* --- teams page: ruled team blocks, roster as lines --- */
+.team-block { padding: 14px 2px 4px; border-bottom: 1px solid var(--line); }
+.team-block .tb-head { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.team-block .tb-head h3 { font-size: 18px; }
+.roster-line { display: flex; gap: 10px; align-items: center; padding: 5px 0 5px 14px; font-size: 14.5px; }
+.roster-line .spacer { flex: 1; }
+
+/* --- pool filters (study 1.3, public form): word tabs carrying counts,
+   plain-word toggles, one search box, and a printed filter-state line.
+   Nothing filters silently. --- */
+.filter-tabs { display: flex; gap: 4px; flex-wrap: wrap; border-bottom: 2px solid var(--line); }
+.filter-tabs button {
+  font: 600 13px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer;
+  color: var(--ink-2); padding: 9px 12px 7px; text-align: center;
+}
+.filter-tabs button .frac { display: block; font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.06em; margin-top: 1px; }
+.filter-tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
+.filter-tabs button.active .frac { color: var(--signal); }
+.filter-line { font: 600 11.5px var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-3); padding: 9px 2px 2px; }
+.word-toggle {
+  font: 600 12px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  background: none; border: none; cursor: pointer; color: var(--ink-3); padding: 9px 4px;
+}
+.word-toggle[aria-pressed="true"] { color: var(--signal); }
+.search-box {
+  padding: 9px 12px; font: 400 14px var(--font); border: 1px solid var(--line-dark);
+  border-radius: 6px; background: var(--bg-2); color: var(--ink); min-width: 180px;
+}
+.search-box:focus { outline: 2px solid var(--signal); outline-offset: 0; border-color: transparent; }
+
+/* --- the draft room (study 5.3, replacing the rail wholesale): a room,
+   not a page. Board above, pool bottom left, rail right with the queue
+   as its default face. Drama is carried by state changes inside fixed
+   furniture; on the clock, exactly one cell in the room is loud. --- */
+.room { display: grid; grid-template-columns: minmax(0, 1fr) 330px; grid-template-areas: "board board" "pool rail"; gap: 18px; align-items: start; }
+.room-board { grid-area: board; }
+.room-pool { grid-area: pool; }
+.room-rail { grid-area: rail; }
+@media (max-width: 900px) { .room { grid-template-columns: 1fr; grid-template-areas: "board" "pool" "rail"; } }
+.board-scroll { overflow-x: auto; }
+table.board { border-collapse: collapse; width: 100%; font-size: 13px; }
+table.board th, table.board td {
+  border: 1px solid var(--line); padding: 7px 9px; text-align: left; vertical-align: top;
+  min-width: 104px;
+}
+table.board th { font: 600 11px var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); background: var(--panel-2); }
+table.board th.rd { min-width: 44px; width: 44px; text-align: center; color: var(--signal); }
+table.board td.rd { font-family: var(--display); font-size: 15px; color: var(--ink-3); text-align: center; }
+table.board td .b-ign { font-weight: 650; display: block; }
+table.board td .b-meta { font-family: var(--mono); font-size: 10.5px; color: var(--ink-3); letter-spacing: 0.04em; }
+table.board td.empty { color: var(--ink-3); }
+table.board td.mine { box-shadow: inset 3px 0 0 var(--signal); }
+/* The room's one loud element: the on-the-clock cell, corner-box red,
+   carrying the countdown inside the cell it governs. Nothing else in
+   the room flashes, pulses, or resizes. */
+table.board td.on-clock { background: var(--hero); color: #fff; }
+table.board td.on-clock .b-meta { color: rgba(255, 255, 255, 0.85); }
+table.board td.on-clock .b-clock { font-family: var(--display); font-size: 21px; line-height: 1.1; display: block; }
+table.board td.on-clock .b-auto { font: 700 9.5px var(--mono); letter-spacing: 0.12em; background: #fff; color: var(--hero); padding: 1px 5px; border-radius: 3px; }
+
+/* Pool rows in study 1.2 order: pick control at the left edge, permanent
+   rank, name, role, pro team, pool marginalia in mono at the right edge,
+   state control at the right edge whose fill tells the truth. */
+.pool2-row { display: flex; gap: 11px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.pool2-row .rk { font-family: var(--mono); font-size: 12.5px; color: var(--ink-3); width: 30px; flex: none; }
+.pool2-row .who { font-weight: 650; }
+.pool2-row .marg { margin-left: auto; font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.03em; text-align: right; }
+.pool2-row.drafted { opacity: 0.45; }
+.pick-ctl {
+  flex: none; width: 30px; height: 30px; border-radius: 50%; cursor: pointer;
+  border: 2px solid var(--line-dark); background: transparent; color: var(--ink-3);
+  font: 700 15px var(--font); line-height: 1; display: inline-flex; align-items: center; justify-content: center;
+}
+.pick-ctl.live { border-color: var(--signal); color: var(--signal); }
+.pick-ctl.live:hover { background: var(--signal); color: #03211c; }
+.pick-ctl[disabled] { cursor: default; opacity: 0.55; }
+.queue-ctl {
+  flex: none; font: 600 11px var(--mono); letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 1px solid var(--line-dark); border-radius: 4px; color: var(--ink-3);
+  padding: 5px 8px; cursor: pointer; white-space: nowrap;
+}
+.queue-ctl.queued { background: var(--signal); border-color: var(--signal); color: #03211c; }
+
+/* The rail: QUEUE / ROSTER / PICKS faces, queue the default. The queue
+   is insertion-ordered and never sorts itself. Its top row wears the
+   room's ONLY dashed border and the words NEXT PICK. */
+.rail-tabs { display: flex; gap: 2px; border-bottom: 2px solid var(--line); margin-bottom: 6px; }
+.rail-tabs button {
+  font: 600 12.5px var(--mono); letter-spacing: 0.08em; text-transform: uppercase;
+  background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer;
+  color: var(--ink-2); padding: 8px 10px 6px;
+}
+.rail-tabs button.active { color: var(--ink); border-bottom-color: var(--hero); }
+.queue-row { display: flex; gap: 9px; align-items: center; flex-wrap: wrap; padding: 8px 6px; border-bottom: 1px solid var(--line); font-size: 14px; }
+.queue-row .drag { color: var(--ink-3); cursor: grab; font-family: var(--mono); flex: none; }
+.queue-row .q-name { font-weight: 650; }
+.queue-row .q-marg { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-3); white-space: nowrap; }
+.queue-row .q-remove {
+  font: 600 10.5px var(--mono); letter-spacing: 0.08em; background: none; border: none;
+  color: var(--ink-3); cursor: pointer; padding: 4px 2px; white-space: nowrap;
+}
+.queue-row .q-remove:hover { color: var(--hero); }
+.queue-row.next-pick { border: 2px dashed var(--signal); border-radius: 6px; padding: 8px; margin: 8px 0; }
+.next-pick-tag { font: 700 10px var(--mono); letter-spacing: 0.14em; color: var(--signal); display: block; margin-bottom: 2px; }
+.auto-row { display: flex; align-items: center; gap: 10px; padding: 4px 0 10px; }
+.auto-row .fine { flex: 1; }
+
+/* --- motion (study 5.2 + 6.7): temporary hierarchy only. Two beats in
+   the whole estate: the plate's lower-third settle on the splash, and
+   the tally swap when the tally changes. Each fires once and returns
+   to base state. Nothing loops; nothing decorative moves. The figures
+   themselves are never faded or counted: they are present, and the
+   emphasis passes over the furniture around them. --- */
+@keyframes plate-settle {
+  from { transform: translateY(10px); }
+  to { transform: translateY(0); }
+}
+@keyframes tally-swap {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.06); }
+  100% { transform: scale(1); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .plate.settle .plate-in { animation: plate-settle 0.28s ease-out 1 both; }
+  .plate-tally.swap { animation: tally-swap 0.22s ease-out 1 both; transform-origin: left center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .plate.settle .plate-in, .plate-tally.swap { animation: none; }
+  .btn, .btn:hover, .btn:active { transition: none; }
+}

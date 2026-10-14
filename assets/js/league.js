@@ -105,11 +105,33 @@ document.querySelector("[data-tabs]").addEventListener("click", (e) => {
   if (btn.dataset.tab === "team") loadLineup();
 });
 
-/* --- draft --- */
+/* --- draft: the room (FANTASY-STUDY 5.3, from the Sleeper draft-room
+   teardown, study section 1). Board above, pool bottom left, rail right
+   with the queue as its default face. On the clock, exactly one board
+   cell is loud and it carries the countdown inside itself. --- */
 let poolCache = [];
+let lastState = null;
+let poolRole = "";
+let poolQuery = "";
+let showDrafted = false;
+let autoPick = false;
+let autoFiredFor = -1;
+let queue = loadQueue();
+
+const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
+const memberName = (id) => (L?.members.find((m) => m.id === id)?.team_name) || "·";
+
+function loadQueue() {
+  try { return JSON.parse(localStorage.getItem(`rf-queue-${leagueId}`) || "[]"); } catch { return []; }
+}
+function saveQueue() {
+  try { localStorage.setItem(`rf-queue-${leagueId}`, JSON.stringify(queue)); } catch {}
+}
+
 async function loadDraft() {
   try {
     const state = await api(`/api/leagues/draft?leagueId=${leagueId}`);
+    lastState = state;
     renderDraft(state);
     clearInterval(draftTimer);
     if (state.draft?.status === "live") {
@@ -118,15 +140,19 @@ async function loadDraft() {
   } catch (err) { showError(err.message); }
 }
 
+/* The countdown lives in the on-the-clock cell and ticks every second
+   against the server deadline; the 4s poll only re-reads the room. */
+setInterval(() => {
+  const el = document.querySelector("[data-cell-clock]");
+  if (el && lastState?.draft?.pickDeadline) el.textContent = countdown(lastState.draft.pickDeadline);
+}, 1000);
+
 function renderDraft(state) {
-  const { draft, picks, pool, squads, myMemberId } = state;
+  const { draft, picks, pool, myMemberId } = state;
   poolCache = pool || [];
   const title = document.querySelector("[data-draft-title]");
   const status = document.querySelector("[data-draft-status]");
   const actions = document.querySelector("[data-draft-actions]");
-  const poolEl = document.querySelector("[data-pool]");
-  const clockEl = document.querySelector("[data-draft-clock]");
-  const memberName = (id) => (L.members.find((m) => m.id === id)?.team_name) || "·";
 
   document.querySelector("[data-picks]").innerHTML = picks?.length
     ? [...picks].reverse().map((p) => `
@@ -138,65 +164,282 @@ function renderDraft(state) {
 
   if (!draft) {
     title.textContent = "Draft room";
-    status.classList.remove("onclock");
     status.textContent = L.league.status === "forming"
       ? "The draft hasn't started. Once every team is in, the commissioner starts it here, order is drawn at random, snake format."
       : "No draft for this league.";
     actions.innerHTML = L.isCommissioner && L.league.status === "forming"
       ? `<button class="btn btn-accent" data-start-draft>Start the draft</button>` : "";
-    poolEl.innerHTML = "";
-    clockEl.textContent = "";
+    document.querySelector("[data-board]").innerHTML = "";
+    document.querySelector("[data-pool]").innerHTML = "";
+    document.querySelector("[data-pool-tabs]").innerHTML = "";
+    document.querySelector("[data-pool-filter-line]").textContent = "";
     bindStart();
+    renderQueue(state);
+    renderRoster(state);
     return;
   }
   if (draft.status === "complete") {
     title.textContent = "Draft complete";
-    status.classList.remove("onclock");
     status.textContent = `${draft.totalPicks} picks made. Rosters are set, the schedule is in Standings & Matchups.`;
     actions.innerHTML = "";
-    poolEl.innerHTML = "";
-    clockEl.textContent = "";
+    renderBoard(state);
+    document.querySelector("[data-pool]").innerHTML = "";
+    document.querySelector("[data-pool-tabs]").innerHTML = "";
+    document.querySelector("[data-pool-filter-line]").textContent = "";
+    renderQueue(state);
+    renderRoster(state);
     return;
   }
   const mine = draft.onClock?.memberId === myMemberId;
   title.textContent = draft.onClockPickKind === "squad" ? "Squad round" : `Round ${Math.floor(draft.currentPick / draft.order.length) + 1}`;
-  status.classList.add("onclock");
   status.innerHTML = mine
     ? `<strong>You're on the clock.</strong> Pick ${draft.currentPick + 1} of ${draft.totalPicks}${draft.onClockPickKind === "squad" ? ", claim your pro org." : ""}`
     : `Pick ${draft.currentPick + 1} of ${draft.totalPicks}, ${esc(memberName(draft.onClock?.memberId))} is on the clock.`;
   actions.innerHTML = L.isCommissioner
     ? `<span class="fine">As commissioner you can also let the clock run, expired picks auto-pick the best available.</span>` : "";
-  clockEl.textContent = draft.pickDeadline ? countdown(draft.pickDeadline) : "";
+  renderBoard(state);
+  renderPool(state);
+  renderQueue(state);
+  renderRoster(state);
+
+  /* Auto-pick, armed by hand in the rail: when your turn arrives, the
+     top of your queue is drafted through the same pick call a tap
+     makes. Announced in exactly two places, both furniture: the rail
+     toggle's own word, and the AUTO tag on your board cell. */
+  if (mine && autoPick && draft.onClockPickKind !== "squad" && autoFiredFor !== draft.currentPick) {
+    const available = new Set(poolCache.map((p) => p.id));
+    const top = queue.find((id) => available.has(id));
+    if (top) {
+      autoFiredFor = draft.currentPick;
+      doPick({ playerId: top });
+    }
+  }
+}
+
+function renderBoard(state) {
+  const { draft, picks, myMemberId } = state;
+  const el = document.querySelector("[data-board]");
+  if (!draft?.order?.length) { el.innerHTML = ""; return; }
+  const n = draft.order.length;
+  const byPick = Object.fromEntries((picks || []).map((p) => [p.pick_no, p]));
+  const head = draft.order.map((mid) =>
+    `<th>${esc(memberName(mid))}${mid === myMemberId ? ' <span class="b-meta">you</span>' : ""}</th>`).join("");
+  let rows = "";
+  for (let r = 1; r <= draft.rounds; r++) {
+    let cells = "";
+    for (let c = 0; c < n; c++) {
+      const pickNo = (r - 1) * n + (r % 2 === 1 ? c : n - 1 - c);
+      const p = byPick[pickNo];
+      const isClock = draft.status === "live" && pickNo === draft.currentPick;
+      const memberId = draft.order[c];
+      if (isClock) {
+        cells += `<td class="on-clock"><span class="b-ign">${esc(memberName(memberId))}</span>` +
+          `<span class="b-clock" data-cell-clock>${draft.pickDeadline ? countdown(draft.pickDeadline) : ""}</span>` +
+          `<span class="b-meta">Pick ${pickNo + 1} of ${draft.totalPicks} · on the clock</span>` +
+          `${memberId === myMemberId && autoPick ? ' <span class="b-auto">AUTO</span>' : ""}</td>`;
+      } else if (p) {
+        cells += `<td class="${p.member_id === myMemberId ? "mine" : ""}"><span class="b-ign">${esc(p.ign || p.squad_name || "")}</span>` +
+          `<span class="b-meta">${esc(p.role || (p.squad_name ? "Squad" : ""))}${p.auto ? " · auto" : ""}</span></td>`;
+      } else {
+        cells += `<td class="empty">Pick ${pickNo + 1}</td>`;
+      }
+    }
+    rows += `<tr><td class="rd">${r}</td>${cells}</tr>`;
+  }
+  el.innerHTML = `<table class="board"><thead><tr><th class="rd">Rd</th>${head}</tr></thead><tbody>${rows}</tbody></table>`;
+}
+
+function renderPool(state) {
+  const { draft, picks, squads, myMemberId } = state;
+  const poolEl = document.querySelector("[data-pool]");
+  const tabsEl = document.querySelector("[data-pool-tabs]");
+  const lineEl = document.querySelector("[data-pool-filter-line]");
+  const mine = draft.onClock?.memberId === myMemberId;
 
   if (draft.onClockPickKind === "squad") {
+    tabsEl.innerHTML = "";
+    lineEl.textContent = `Squad round: ${squads?.length || 0} pro orgs unclaimed. Claim yours, it scores its own series all season.`;
     poolEl.innerHTML = (squads || []).map((s) => `
-      <div class="pool-row"><strong>${esc(s.name)}</strong><span class="role">${esc(s.region || "")}</span>
-      <span class="spacer"></span>
-      ${mine ? `<button class="btn btn-small btn-accent" data-pick-squad="${s.id}">Claim squad</button>` : ""}</div>`).join("");
-  } else {
-    poolEl.innerHTML = poolCache.map((p) => `
-      <div class="pool-row"><span class="mono fine" style="width:30px">${p.draft_rank}</span>
-      <strong>${esc(p.ign)}</strong>
-      <span class="role ${p.role === "Vanguard" ? "van" : p.role === "Duelist" ? "due" : "str"}">${esc(p.role)}</span>
-      <span class="muted small">${esc(p.pro_team_name || "")}</span>
-      <span class="spacer"></span>
-      ${mine ? `<button class="btn btn-small btn-accent" data-pick-player="${p.id}">Draft</button>` : ""}</div>`).join("");
+      <div class="pool2-row">
+        ${mine ? `<button class="pick-ctl live" data-pick-squad="${s.id}" title="Claim ${esc(s.name)}" aria-label="Claim ${esc(s.name)}">+</button>` : `<span class="pick-ctl" aria-hidden="true">+</span>`}
+        <span class="who">${esc(s.name)}</span>
+        <span class="role">${esc(s.region || "")}</span>
+        <span class="marg">${esc(s.short || "")}</span>
+      </div>`).join("");
+    poolEl.querySelectorAll("[data-pick-squad]").forEach((b) =>
+      b.addEventListener("click", () => doPick({ proTeamId: b.dataset.pickSquad })));
+    return;
   }
+
+  /* Filter tabs carry the roster-fill fraction under each label (study
+     1.3): how many of that role your roster already holds, of the one
+     starter the lineup needs. */
+  const myPicks = (picks || []).filter((p) => p.member_id === myMemberId && p.player_id);
+  const fill = (role) => myPicks.filter((p) => p.role === role).length;
+  const tabDefs = [
+    { role: "", label: "All", frac: `${poolCache.length} available` },
+    { role: "Vanguard", label: "Vanguard", frac: `${fill("Vanguard")}/1 drafted` },
+    { role: "Duelist", label: "Duelist", frac: `${fill("Duelist")}/1 drafted` },
+    { role: "Strategist", label: "Strategist", frac: `${fill("Strategist")}/1 drafted` },
+  ];
+  tabsEl.innerHTML = tabDefs.map((t) =>
+    `<button data-pool-role="${esc(t.role)}" class="${t.role === poolRole ? "active" : ""}" aria-pressed="${t.role === poolRole}">${t.label}<span class="frac">${t.frac}</span></button>`).join("");
+  tabsEl.querySelectorAll("[data-pool-role]").forEach((b) =>
+    b.addEventListener("click", () => { poolRole = b.dataset.poolRole; renderPool(state); }));
+
+  const draftedById = Object.fromEntries((picks || []).filter((p) => p.player_id).map((p) => [p.player_id, p]));
+  const q = poolQuery.trim().toLowerCase();
+  const available = poolCache.filter((p) =>
+    (!poolRole || p.role === poolRole) && (!q || p.ign.toLowerCase().includes(q)));
+  const draftedShown = showDrafted
+    ? Object.values(draftedById)
+        .filter((p) => (!poolRole || p.role === poolRole) && (!q || (p.ign || "").toLowerCase().includes(q)))
+        .sort((a, b) => a.pick_no - b.pick_no)
+    : [];
+  const parts = [`Showing ${available.length + draftedShown.length} of ${poolCache.length + Object.keys(draftedById).length}`];
+  if (poolRole) parts.push(`role: ${poolRole}`);
+  if (q) parts.push(`search: "${poolQuery.trim()}"`);
+  if (showDrafted) parts.push("drafted shown");
+  lineEl.textContent = parts.join(" · ");
+
+  const queued = new Set(queue);
+  const rowsHtml = available.map((p) => `
+    <div class="pool2-row">
+      ${mine ? `<button class="pick-ctl live" data-pick-player="${p.id}" title="Draft ${esc(p.ign)}" aria-label="Draft ${esc(p.ign)}">+</button>` : `<span class="pick-ctl" aria-hidden="true">+</span>`}
+      <span class="rk">${p.draft_rank}</span>
+      <span class="who">${esc(p.ign)}</span>
+      <span class="role ${roleClass(p.role)}">${esc(p.role)}</span>
+      <span class="muted small">${esc(p.pro_team_name || "")}</span>
+      <span class="marg">${(p.heroes || []).map(esc).join(" · ")}</span>
+      <button class="queue-ctl${queued.has(p.id) ? " queued" : ""}" data-queue-toggle="${p.id}" aria-pressed="${queued.has(p.id)}">${queued.has(p.id) ? "Queued" : "Queue"}</button>
+    </div>`).join("") + draftedShown.map((p) => `
+    <div class="pool2-row drafted">
+      <span class="rk">·</span>
+      <span class="who">${esc(p.ign || "")}</span>
+      <span class="role ${roleClass(p.role)}">${esc(p.role || "")}</span>
+      <span class="marg">Drafted · pick ${p.pick_no + 1} · ${esc(p.team_name)}</span>
+    </div>`).join("");
+  poolEl.innerHTML = rowsHtml || `<p class="muted small" style="padding:10px 2px">No players match that filter line.</p>`;
   poolEl.querySelectorAll("[data-pick-player]").forEach((b) =>
     b.addEventListener("click", () => doPick({ playerId: b.dataset.pickPlayer })));
-  poolEl.querySelectorAll("[data-pick-squad]").forEach((b) =>
-    b.addEventListener("click", () => doPick({ proTeamId: b.dataset.pickSquad })));
+  poolEl.querySelectorAll("[data-queue-toggle]").forEach((b) =>
+    b.addEventListener("click", () => {
+      const id = b.dataset.queueToggle;
+      queue = queue.includes(id) ? queue.filter((x) => x !== id) : [...queue, id];
+      saveQueue();
+      renderPool(state);
+      renderQueue(state);
+    }));
 }
+
+/* The queue: insertion-ordered, never sorted by the room. The top row
+   wears the surface's only dashed border and the words NEXT PICK.
+   Drafted players leave the queue on their own. */
+function renderQueue(state) {
+  const el = document.querySelector("[data-queue]");
+  if (!el) return;
+  const { draft, myMemberId } = state;
+  const byId = Object.fromEntries(poolCache.map((p) => [p.id, p]));
+  const pruned = queue.filter((id) => byId[id]);
+  if (pruned.length !== queue.length) { queue = pruned; saveQueue(); }
+  if (!queue.length) {
+    el.innerHTML = `<p class="muted small" style="padding:8px 2px">Your queue is empty. Add players from the pool; the order you build here is the order the room respects, it never sorts itself.</p>`;
+    return;
+  }
+  const mine = draft?.status === "live" && draft.onClock?.memberId === myMemberId && draft.onClockPickKind !== "squad";
+  const controls = (p) => `
+    <span class="q-marg">RK ${p.draft_rank} · ${esc(p.role)}</span>
+    ${mine ? `<button class="btn btn-small btn-accent" data-queue-draft="${p.id}">Draft</button>` : ""}
+    <button class="q-remove" data-queue-remove="${p.id}">Remove</button>`;
+  el.innerHTML = queue.map((id, i) => {
+    const p = byId[id];
+    if (i === 0) {
+      return `<div class="queue-row next-pick" draggable="true" data-queue-row="0">
+        <div style="flex:1; min-width:0">
+          <span class="next-pick-tag">Next pick</span>
+          <div style="display:flex; gap:9px; align-items:center; flex-wrap:wrap">
+            <span class="drag" aria-hidden="true">⠿</span>
+            <span class="q-name">${esc(p.ign)}</span>
+            ${controls(p)}
+          </div>
+        </div>
+      </div>`;
+    }
+    return `<div class="queue-row" draggable="true" data-queue-row="${i}">
+      <span class="drag" aria-hidden="true">⠿</span>
+      <span class="q-name">${esc(p.ign)}</span>
+      ${controls(p)}
+    </div>`;
+  }).join("");
+  el.querySelectorAll("[data-queue-remove]").forEach((b) =>
+    b.addEventListener("click", () => {
+      queue = queue.filter((x) => x !== b.dataset.queueRemove);
+      saveQueue();
+      renderQueue(state);
+      if (lastState) renderPool(lastState);
+    }));
+  el.querySelectorAll("[data-queue-draft]").forEach((b) =>
+    b.addEventListener("click", () => doPick({ playerId: b.dataset.queueDraft })));
+  let dragIdx = null;
+  el.querySelectorAll("[data-queue-row]").forEach((rowEl) => {
+    rowEl.addEventListener("dragstart", () => { dragIdx = Number(rowEl.dataset.queueRow); });
+    rowEl.addEventListener("dragover", (e) => e.preventDefault());
+    rowEl.addEventListener("drop", (e) => {
+      e.preventDefault();
+      const target = Number(rowEl.dataset.queueRow);
+      if (dragIdx == null || dragIdx === target) return;
+      const [moved] = queue.splice(dragIdx, 1);
+      queue.splice(target, 0, moved);
+      dragIdx = null;
+      saveQueue();
+      renderQueue(state);
+    });
+  });
+}
+
+function renderRoster(state) {
+  const el = document.querySelector("[data-rail-roster]");
+  if (!el) return;
+  const mine = (state.picks || []).filter((p) => p.member_id === state.myMemberId);
+  el.innerHTML = mine.length
+    ? mine.map((p) => `
+      <div class="pick-row"><strong>${esc(p.ign || p.squad_name || "")}</strong>
+        <span class="muted small">${esc(p.role || (p.squad_name ? "Squad" : ""))}</span>
+        <span class="spacer"></span><span class="mono fine">Pick ${p.pick_no + 1}</span></div>`).join("")
+    : `<p class="muted small" style="padding:8px 2px">Nothing drafted yet. Your roster fills in here as your picks land.</p>`;
+}
+
+/* Rail faces and pool furniture, bound once. */
+document.querySelector("[data-rail-tabs]")?.addEventListener("click", (e) => {
+  const btn = e.target.closest("[data-rail]");
+  if (!btn) return;
+  document.querySelectorAll("[data-rail]").forEach((b) => b.classList.toggle("active", b === btn));
+  document.querySelector("[data-rail-queue]").classList.toggle("hidden", btn.dataset.rail !== "queue");
+  document.querySelector("[data-rail-roster]").classList.toggle("hidden", btn.dataset.rail !== "roster");
+  document.querySelector("[data-rail-picks]").classList.toggle("hidden", btn.dataset.rail !== "picks");
+});
+document.querySelector("[data-pool-search]")?.addEventListener("input", (e) => {
+  poolQuery = e.target.value;
+  if (lastState) renderPool(lastState);
+});
+document.querySelector("[data-show-drafted]")?.addEventListener("click", (e) => {
+  showDrafted = !showDrafted;
+  e.target.setAttribute("aria-pressed", String(showDrafted));
+  e.target.textContent = showDrafted ? "Show drafted: on" : "Show drafted";
+  if (lastState) renderPool(lastState);
+});
+document.querySelector("[data-auto-pick]")?.addEventListener("click", (e) => {
+  autoPick = !autoPick;
+  autoFiredFor = -1;
+  e.target.setAttribute("aria-pressed", String(autoPick));
+  e.target.textContent = autoPick ? "Auto-pick: armed" : "Auto-pick: off";
+  if (lastState) renderDraft(lastState);
+});
 
 function countdown(deadline) {
   const left = Math.max(0, Math.round((Date.parse(deadline) - Date.now()) / 1000));
   return `${Math.floor(left / 60)}:${String(left % 60).padStart(2, "0")}`;
 }
-setInterval(() => {
-  const el = document.querySelector("[data-draft-clock]");
-  // Clock text refreshes on the 4s draft poll; this keeps the display honest between polls.
-  if (el && el.textContent && !el.textContent.includes(":")) el.textContent = "";
-}, 1000);
 
 function bindStart() {
   document.querySelector("[data-start-draft]")?.addEventListener("click", async () => {

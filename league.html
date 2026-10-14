@@ -66,22 +66,47 @@
       </div>
     </div>
 
-    <!-- DRAFT -->
+    <!-- DRAFT: the room (FANTASY-STUDY 5.3). Board above, pool bottom
+         left, rail right with the queue as its default face. The three
+         zones never move during the draft; drama is state changes
+         inside fixed furniture. The clock lives inside the board cell
+         it governs, never in a banner. -->
     <div data-pane="draft" class="hidden">
-      <div class="grid" style="grid-template-columns: 2fr 1fr; gap:20px" data-draft-grid>
-        <div class="card">
+      <div class="room">
+        <div class="card room-board">
           <div style="display:flex; gap:16px; align-items:baseline; flex-wrap:wrap">
             <h3 data-draft-title>Draft room</h3>
-            <span class="spacer" style="flex:1"></span>
-            <span class="draft-clock" data-draft-clock></span>
           </div>
           <p class="muted small" data-draft-status style="margin:6px 0 14px"></p>
           <div data-draft-actions style="margin-bottom:14px"></div>
+          <div class="board-scroll"><div data-board></div></div>
+        </div>
+        <div class="card room-pool">
+          <h3 style="margin-bottom:4px">Player pool</h3>
+          <p class="fine" style="margin-bottom:6px">The round control drafts a player when you are on the clock. Queue holds your order in the rail. A rank is a player's identity here: it never renumbers under filters.</p>
+          <div class="filter-tabs" data-pool-tabs role="group" aria-label="Filter the pool by role"></div>
+          <div style="display:flex; gap:14px; align-items:center; flex-wrap:wrap; margin-top:6px">
+            <input class="search-box" data-pool-search type="search" placeholder="Search the pool" aria-label="Search the pool">
+            <button class="word-toggle" data-show-drafted aria-pressed="false">Show drafted</button>
+          </div>
+          <p class="filter-line" data-pool-filter-line></p>
           <div data-pool></div>
         </div>
-        <div class="card">
-          <h3>Pick history</h3>
-          <div data-picks></div>
+        <div class="card room-rail">
+          <div class="rail-tabs" data-rail-tabs role="group" aria-label="Draft rail">
+            <button data-rail="queue" class="active">Queue</button>
+            <button data-rail="roster">Roster</button>
+            <button data-rail="picks">Picks</button>
+          </div>
+          <div data-rail-queue>
+            <div class="auto-row">
+              <span class="fine">When armed, your turn drafts the top of your queue on its own. The room says so here and on your board cell, nowhere else.</span>
+              <button class="word-toggle" data-auto-pick aria-pressed="false">Auto-pick: off</button>
+            </div>
+            <div data-queue></div>
+          </div>
+          <div data-rail-roster class="hidden"></div>
+          <div data-rail-picks class="hidden"><div data-picks></div></div>
         </div>
       </div>
     </div>

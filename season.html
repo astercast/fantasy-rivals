@@ -25,12 +25,12 @@
 <body>
 <header class="site-head" data-chrome-head></header>
 
-<section class="status-band" data-season-status style="margin-top:0"></section>
+<section class="plate" data-season-plate></section>
 
 <section class="section">
   <div class="wrap">
     <div class="section-head"><h1>The competition calendar</h1><span class="spacer"></span><span class="fine" data-asof></span></div>
-    <div class="stack" data-competitions></div>
+    <div data-competitions></div>
     <p class="fine" style="margin-top:20px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one hasn't started, you can set up in advance, draft now, score when play begins.</p>
   </div>
 </section>
@@ -62,27 +62,32 @@
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, renderSeasonStatus, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, renderSeasonPlate, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("season");
-  renderSeasonStatus(document.querySelector("[data-season-status]"));
+  renderSeasonPlate(document.querySelector("[data-season-plate]"));
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-season.json`);
   document.querySelector("[data-asof]").textContent = `State as of ${fmtDate(data.asOf)}`;
-  const pill = (s) =>
-    s.state === "live" ? `<span class="status-pill"><span class="pulse"></span>Live now</span>`
-    : s.state === "upcoming" ? `<span class="status-pill next"><span class="pulse"></span>Upcoming</span>`
-    : `<span class="status-pill"><span class="pulse" style="background:var(--ink-3)"></span>Complete</span>`;
-  document.querySelector("[data-competitions]").innerHTML = data.seasons.map((s) => `
-    <div class="card" style="display:flex; gap:20px; align-items:flex-start; flex-wrap:wrap">
-      <div style="flex:1; min-width:260px">
-        <h3>${esc(s.name)}</h3>
-        <p class="muted">${esc(s.stage || "")}</p>
-        <p class="fine" style="margin-top:8px">${esc(s.sourceNote || "")}</p>
-      </div>
-      <div style="text-align:right">
-        ${pill(s)}
-        <div class="mono small" style="margin-top:10px">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</div>
-        ${s.state !== "complete" ? `<div style="margin-top:10px"><a class="btn btn-small btn-accent" href="/create-league.html">Create a league for this</a></div>` : ""}
-      </div>
+  /* The calendar in wire form (study 2): one line per competition, name,
+     stage, state word, dates, and the sourcing note as the appended fact.
+     Date grouping by starting month is the only sectioning. */
+  const monthOf = (iso) => new Date(iso + "T12:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric", timeZone: "UTC" });
+  const groups = {};
+  for (const s of [...data.seasons].sort((a, b) => (b.startsOn || "").localeCompare(a.startsOn || ""))) {
+    (groups[monthOf(s.startsOn)] ||= []).push(s);
+  }
+  const stateWord = (s) => s.state === "live" ? "Live now" : s.state === "upcoming" ? "Upcoming" : "Complete";
+  document.querySelector("[data-competitions]").innerHTML = Object.entries(groups).map(([month, ss]) => `
+    <div class="wire-group">
+      <p class="wire-date">${esc(month)}</p>
+      ${ss.map((s) => `
+        <div class="wire-line">
+          <span class="w-name">${esc(s.name)}</span>
+          <span class="w-stage">${esc(s.stage || "")}</span>
+          <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
+          <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
+          <span class="w-fact">${esc(s.sourceNote || "")}</span>
+          ${s.state !== "complete" ? `<span class="w-act"><a class="btn btn-small btn-accent" href="/create-league.html">Create a league for this</a></span>` : ""}
+        </div>`).join("")}
     </div>`).join("");
 </script>
 </body>

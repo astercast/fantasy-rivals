@@ -43,22 +43,25 @@
   const roleClass = (r) => r === "Vanguard" ? "van" : r === "Duelist" ? "due" : "str";
   document.querySelector("[data-regions]").innerHTML = Object.entries(byRegion).map(([region, teams]) => `
     <div>
-      <p class="kicker" style="margin:18px 0 12px">${esc(region)}</p>
-      <div class="grid grid-3">
-        ${teams.map((t) => {
-          const roster = data.players.filter((p) => p.team === t.short);
-          return `<div class="card">
-            <h3>${esc(t.name)} <span class="mono fine">${esc(t.short)}</span>${t.partner ? ` <span class="role partner">Partner</span>` : ""}</h3>
-            ${roster.length ? `<div style="margin-top:10px">${roster.map((p) => `
-              <div style="display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--line)">
-                <span style="font-weight:600">${esc(p.ign)}</span>
-                <span class="spacer" style="flex:1"></span>
-                <span class="role ${roleClass(p.role)}">${esc(p.role)}</span>
-              </div>`).join("")}</div>`
-            : `<p class="fine" style="margin-top:8px">Roster pending verification</p>`}
-          </div>`;
-        }).join("")}
-      </div>
+      <p class="kicker" style="margin:18px 0 4px">${esc(region)}</p>
+      ${teams.map((t) => {
+        const roster = data.players.filter((p) => p.team === t.short);
+        return `<div class="team-block">
+          <div class="tb-head">
+            <h3>${esc(t.name)}</h3>
+            <span class="mono fine">${esc(t.short)}</span>
+            ${t.partner ? `<span class="role partner">Partner</span>` : ""}
+            <span class="fine">${roster.length ? `${roster.length} in the pool` : ""}</span>
+          </div>
+          ${roster.length ? roster.map((p) => `
+            <div class="roster-line">
+              <span style="font-weight:600">${esc(p.ign)}</span>
+              <span class="spacer"></span>
+              <span class="role ${roleClass(p.role)}">${esc(p.role)}</span>
+            </div>`).join("")
+          : `<p class="fine" style="margin-top:6px">Roster pending verification</p>`}
+        </div>`;
+      }).join("")}
     </div>`).join("");
 </script>
 </body>

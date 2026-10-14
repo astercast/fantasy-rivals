@@ -25,20 +25,20 @@
 <body>
 <header class="site-head" data-chrome-head></header>
 
-<section class="status-band" data-season-status></section>
+<section class="plate" data-season-plate></section>
 
 <section class="section">
   <div class="wrap">
     <div class="section-head"><h1>Schedule &amp; results</h1><span class="spacer"></span><span class="fine" data-note></span></div>
-    <div data-fixtures class="stack"></div>
+    <div data-fixtures></div>
   </div>
 </section>
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, renderSeasonStatus, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, renderSeasonPlate, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("schedule");
-  renderSeasonStatus(document.querySelector("[data-season-status]"));
+  renderSeasonPlate(document.querySelector("[data-season-plate]"));
   const [sched, teamsData] = await Promise.all([
     fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`),
     fetchJson(`/data/v1/${GAME_SLUG}-teams.json`),
@@ -49,25 +49,24 @@
     ? `Results are imported from published match lines and named with their source.`
     : "";
   if (!sched.matches.length) {
-    el.innerHTML = `<div class="card"><h3>Fixtures publish with the competition</h3><p class="muted">The current competition's series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</p></div>`;
+    el.innerHTML = `<div class="wire-line"><span class="w-name">Fixtures publish with the competition</span><span class="w-fact">The current competition's series are imported here as they are scheduled and played, each with its source. Fantasy weeks map to these series.</span></div>`;
   } else {
+    /* Fixtures in wire form (study 2): one line per series, teams, round,
+       state word, date, and the score as the appended fact on finals.
+       Grouped by fantasy week, the wire's date grouping. */
     const byWeek = {};
     for (const m of sched.matches) (byWeek[m.week] ||= []).push(m);
     el.innerHTML = Object.entries(byWeek).map(([week, ms]) => `
-      <div>
-        <p class="kicker" style="margin:16px 0 10px">Fantasy week ${esc(week)}</p>
-        <div class="card" style="padding:6px 12px">
-          <table class="sheet">
-            <thead><tr><th>Series</th><th>Round</th><th>Date</th><th class="n">Score</th><th>Status</th></tr></thead>
-            <tbody>${ms.map((m) => `<tr>
-              <td><strong>${esc(teamName[m.teamA] || m.teamA)}</strong> vs <strong>${esc(teamName[m.teamB] || m.teamB)}</strong></td>
-              <td class="muted">${esc(m.roundLabel || "")}</td>
-              <td class="mono small">${fmtDate(m.startsAt)}</td>
-              <td class="n">${m.scoreA == null ? "·" : `${m.scoreA}-${m.scoreB}`}</td>
-              <td>${m.status === "final" ? "Final" : "Scheduled"}</td>
-            </tr>`).join("")}</tbody>
-          </table>
-        </div>
+      <div class="wire-group">
+        <p class="wire-date">Fantasy week ${esc(week)}</p>
+        ${ms.map((m) => `
+          <div class="wire-line">
+            <span class="w-name">${esc(teamName[m.teamA] || m.teamA)} vs ${esc(teamName[m.teamB] || m.teamB)}</span>
+            <span class="w-stage">${esc(m.roundLabel || "")}</span>
+            <span class="w-state">${m.status === "final" ? "Final" : "Scheduled"}</span>
+            <span class="w-dates">${fmtDate(m.startsAt)}</span>
+            ${m.scoreA == null ? "" : `<span class="w-fact">${m.scoreA} to ${m.scoreB}</span>`}
+          </div>`).join("")}
       </div>`).join("");
   }
 </script>
