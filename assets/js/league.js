@@ -138,6 +138,7 @@ function renderDraft(state) {
 
   if (!draft) {
     title.textContent = "Draft room";
+    status.classList.remove("onclock");
     status.textContent = L.league.status === "forming"
       ? "The draft hasn't started. Once every team is in, the commissioner starts it here, order is drawn at random, snake format."
       : "No draft for this league.";
@@ -150,6 +151,7 @@ function renderDraft(state) {
   }
   if (draft.status === "complete") {
     title.textContent = "Draft complete";
+    status.classList.remove("onclock");
     status.textContent = `${draft.totalPicks} picks made. Rosters are set, the schedule is in Standings & Matchups.`;
     actions.innerHTML = "";
     poolEl.innerHTML = "";
@@ -158,6 +160,7 @@ function renderDraft(state) {
   }
   const mine = draft.onClock?.memberId === myMemberId;
   title.textContent = draft.onClockPickKind === "squad" ? "Squad round" : `Round ${Math.floor(draft.currentPick / draft.order.length) + 1}`;
+  status.classList.add("onclock");
   status.innerHTML = mine
     ? `<strong>You're on the clock.</strong> Pick ${draft.currentPick + 1} of ${draft.totalPicks}${draft.onClockPickKind === "squad" ? ", claim your pro org." : ""}`
     : `Pick ${draft.currentPick + 1} of ${draft.totalPicks}, ${esc(memberName(draft.onClock?.memberId))} is on the clock.`;
@@ -291,9 +294,17 @@ async function loadStandings() {
     for (const m of data.matchups) (byWeek[m.week] ||= []).push(m);
     document.querySelector("[data-matchups]").innerHTML = Object.keys(byWeek).length
       ? Object.entries(byWeek).map(([w, ms]) => `
-        <p class="kicker" style="margin:12px 0 6px">${ms[0].is_playoff ? "Playoff · " : ""}Week ${w}</p>
-        ${ms.map((m) => `<div class="pick-row"><span>${esc(m.team_a)}${m.team_b ? " vs " + esc(m.team_b) : " · bye"}</span><span class="spacer"></span>
-          <span class="mono">${m.score_a == null ? "·" : `${Number(m.score_a).toFixed(1)} : ${m.score_b == null ? "·" : Number(m.score_b).toFixed(1)}`}</span></div>`).join("")}`).join("")
+        <p class="kicker" style="margin:14px 0 6px">${ms[0].is_playoff ? "Playoff · " : ""}Week ${w}</p>
+        ${ms.map((m) => {
+          const played = m.score_a != null && m.score_b != null;
+          const aWin = played && Number(m.score_a) > Number(m.score_b);
+          const bWin = played && Number(m.score_b) > Number(m.score_a);
+          return `<div class="versus">
+            <div class="side ${aWin ? "win" : ""}"><span class="t-name">${esc(m.team_a)}</span><span class="t-score">${m.score_a == null ? "·" : Number(m.score_a).toFixed(1)}</span></div>
+            <div class="vs-mid"><span class="vs-badge">${m.team_b ? "VS" : "BYE"}</span></div>
+            <div class="side right ${bWin ? "win" : ""}"><span class="t-name">${m.team_b ? esc(m.team_b) : "Bye week"}</span><span class="t-score">${m.score_b == null ? "·" : Number(m.score_b).toFixed(1)}</span></div>
+          </div>`;
+        }).join("")}`).join("")
       : `<p class="muted small">Matchups generate when the draft completes.</p>`;
     const detail = document.querySelector("[data-week-detail]");
     const rows = data.playerScores.map((s) => `

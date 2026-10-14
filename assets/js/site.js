@@ -102,7 +102,7 @@ export async function renderSeasonStatus(el, { dark = false } = {}) {
     if (live) {
       el.innerHTML = `
         <div class="wrap">
-          <span class="status-pill"><span class="pulse"></span>Live now</span>
+          <span class="status-pill burst-live"><span class="pulse"></span>Live now</span>
           <div class="status-main">
             <div class="comp-name">${esc(live.name)}</div>
             <div class="comp-meta">${esc(live.stage)} · ${fmtDate(live.startsOn)} to ${fmtDate(live.endsOn)} · League creation is open for this competition.</div>

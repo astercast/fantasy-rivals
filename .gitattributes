@@ -1,0 +1,8 @@
+# Image assets are binary, pinned against text normalization fleet-wide:
+# the placed card and icon blobs must survive every clone byte for byte.
+*.png binary -text
+*.jpg binary -text
+*.jpeg binary -text
+*.webp binary -text
+*.ico binary -text
+*.woff2 binary -text

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Teams · Rivals Fantasy</title>
-<meta name="theme-color" content="#fafaf7">
+<meta name="theme-color" content="#0b0d1c">
 <meta property="og:title" content="Teams · Rivals Fantasy">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
@@ -47,7 +47,7 @@
         ${teams.map((t) => {
           const roster = data.players.filter((p) => p.team === t.short);
           return `<div class="card">
-            <h3>${esc(t.name)} <span class="mono fine">${esc(t.short)}</span>${t.partner ? ` <span class="role" style="background:#fdf3d7; color:#7a5b12">Partner</span>` : ""}</h3>
+            <h3>${esc(t.name)} <span class="mono fine">${esc(t.short)}</span>${t.partner ? ` <span class="role partner">Partner</span>` : ""}</h3>
             ${roster.length ? `<div style="margin-top:10px">${roster.map((p) => `
               <div style="display:flex; gap:10px; align-items:center; padding:5px 0; border-bottom:1px solid var(--line)">
                 <span style="font-weight:600">${esc(p.ign)}</span>
