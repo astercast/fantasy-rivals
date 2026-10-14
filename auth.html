@@ -59,7 +59,7 @@
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
   import { renderChrome, api } from "/assets/js/site.js";
-  renderChrome("");
+  renderChrome("auth");
   const alertBox = document.querySelector("[data-alert]");
   const showError = (msg) => { alertBox.textContent = msg; alertBox.classList.add("show"); };
   const oauthError = new URLSearchParams(location.search).get("oauth_error");

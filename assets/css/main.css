@@ -91,18 +91,21 @@ p { margin: 0; }
 .main-nav a { color: var(--ink-2); font-size: 15px; font-weight: 600; text-decoration: none; }
 .main-nav a:hover { color: var(--ink); }
 .main-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--red); }
+.head-right a.small[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -3px 0 var(--red); }
+.head-right .btn[aria-current="page"] { box-shadow: inset 0 -3px 0 rgba(255,255,255,.85); }
 .head-right { margin-left: auto; display: flex; align-items: center; gap: 16px; }
 .head-user { font-size: 14px; color: var(--ink-2); }
 @media (max-width: 640px) {
   /* Phone chrome: the bar stops sticking (the draft clock strip owns
      the pinned slot), the nav takes its own row, and the account row
-     keeps only the action. */
+     keeps Sign in and the action; only the signed-in name and the
+     duplicate My leagues link fold away. */
   .site-head { position: static; }
   .site-head .band { row-gap: 0; padding-top: 8px; padding-bottom: 8px; }
   .main-nav { order: 3; width: 100%; gap: 16px; margin-left: 0; margin-top: 8px; }
   .main-nav a { font-size: 14px; }
   .head-right { order: 2; }
-  .head-right .head-user, .head-right a.small { display: none; }
+  .head-right .head-user, .head-right .head-dupe { display: none; }
 }
 
 /* --- buttons: rectangular, at least 44px tall. Red is the primary
@@ -318,9 +321,13 @@ select option { background: var(--panel); color: var(--ink); }
 .versus .side.win .t-score { color: var(--good); }
 .versus .vs-mid { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-3); text-align: center; }
 
-/* --- footer: one line. Data sources, update time, art credit. --- */
+/* --- footer: the site map over one line. Data sources, update
+   time, art credit. --- */
 .site-foot { border-top: 1px solid var(--line); background: var(--bg-2); }
 .site-foot .wrap { padding: 24px; }
+.foot-nav { display: flex; flex-wrap: wrap; gap: 4px 24px; margin-bottom: 12px; }
+.foot-nav a { display: inline-flex; align-items: center; min-height: 44px; color: var(--ink-2); font-size: 14px; font-weight: 600; text-decoration: none; }
+.foot-nav a:hover { color: var(--ink); }
 .foot-line { font-size: 12px; color: var(--ink-3); max-width: 92ch; }
 
 .badge-live { color: var(--red); font-weight: 700; }

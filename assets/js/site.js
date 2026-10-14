@@ -2,9 +2,9 @@
    helpers. Loaded on every page.
 
    V3 chrome: a slim bar (wordmark left, Season / Players / My Leagues,
-   account right) and a one-line foot (data sources, update time, art
-   credit). Season state lives in the plate on the page, never in the
-   header. */
+   account right) and a foot that carries the full site map over one
+   line of data sources, update time, art credit. Season state lives
+   in the plate on the page, never in the header. */
 
 export const GAME_SLUG = "marvel-rivals";
 
@@ -72,8 +72,8 @@ export function renderChrome(active) {
           <a href="/dashboard.html" ${active === "dashboard" ? 'aria-current="page"' : ""}>My Leagues</a>
         </nav>
         <div class="head-right" data-head-right>
-          <a class="small muted" href="/auth.html" style="text-decoration:none">Sign in</a>
-          <a class="btn btn-primary btn-small" href="/start.html">Create a league</a>
+          <a class="small muted" href="/auth.html" ${active === "auth" ? 'aria-current="page"' : ""} style="text-decoration:none">Sign in</a>
+          <a class="btn btn-primary btn-small" href="/start.html" ${active === "start" ? 'aria-current="page"' : ""}>Create a league</a>
         </div>
       </div>`;
   }
@@ -81,6 +81,13 @@ export function renderChrome(active) {
   if (foot) {
     foot.innerHTML = `
       <div class="wrap">
+        <nav class="foot-nav" aria-label="Site map">
+          <a href="/">Home</a>
+          <a href="/season.html">Season</a>
+          <a href="/players.html">Players</a>
+          <a href="/dashboard.html">My Leagues</a>
+          <a href="/auth.html">Sign in</a>
+        </nav>
         <p class="foot-line" data-foot-line>Pro data is compiled from public sources (Liquipedia, Esports Insider, Dot Esports, official broadcasts) and labelled with its source and date wherever it appears. Marvel Rivals art by Marvel and NetEase. Not affiliated with NetEase, Marvel, or Riot Games.</p>
       </div>`;
     seasonData().then((data) => {
@@ -96,7 +103,7 @@ export function renderChrome(active) {
       if (user) {
         right.innerHTML = `
           <span class="head-user">${esc(user.displayName)}</span>
-          <a class="small muted" href="/dashboard.html" style="text-decoration:none">My leagues</a>
+          <a class="small muted head-dupe" href="/dashboard.html" style="text-decoration:none">My leagues</a>
           <a class="btn btn-primary btn-small" href="/start.html">Create a league</a>`;
       }
     })

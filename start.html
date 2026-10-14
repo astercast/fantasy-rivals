@@ -30,7 +30,7 @@
 <section class="section">
   <div class="wrap" style="max-width:760px">
     <div class="tabs" role="group" aria-label="Create or join">
-      <button data-mode-tab="create" class="active">Create a league</button>
+      <button data-mode-tab="create" class="active">New league</button>
       <button data-mode-tab="join">Join with a code</button>
     </div>
     <div class="alert error" data-alert></div>
@@ -38,7 +38,7 @@
     <div data-mode="create">
       <h1 style="font-size:30px; margin-bottom:8px">Pick the competition</h1>
       <p class="muted" style="margin-bottom:24px">A league is played for one real pro competition. Its matches are what your players score from.</p>
-      <div data-competitions></div>
+      <div data-competitions><p class="muted">The competitions you can create a league for appear here after you sign in.</p></div>
       <div data-step2 class="hidden" style="margin-top:48px">
         <h2 style="font-size:24px; margin-bottom:24px">Name your league</h2>
         <form data-create-form>
@@ -74,7 +74,7 @@
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
   import { renderChrome, api, esc, fmtDate } from "/assets/js/site.js";
-  renderChrome("");
+  renderChrome("start");
   const alertBox = document.querySelector("[data-alert]");
   const showError = (m) => { alertBox.textContent = m; alertBox.classList.add("show"); };
 
@@ -126,6 +126,8 @@
       document.querySelector("[data-step2]").classList.remove("hidden");
       document.querySelector("[data-step2]").scrollIntoView({ behavior: "smooth", block: "start" });
     });
+  } else if (user) {
+    box.innerHTML = `<p class="muted">The competition list did not load. Reload the page to try again.</p>`;
   }
   document.querySelector("[data-create-form]").addEventListener("submit", async (e) => {
     e.preventDefault();
