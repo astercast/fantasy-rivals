@@ -6,7 +6,7 @@ Wave 1, October 2026. Working repo only. Nothing here is deployed; see the two-t
 
 Static-first public layer, live database only for user and league state.
 
-- Public content (season hub, teams, players, schedule, scoring tables) is compiled at build time from the curated dataset in `db/seed-data/*.json` into `data/v1/*.json` by `scripts/build-site.mjs`. Competition state (live, next, complete) is computed from dates at build time and stamped with `generatedAt` and `asOf`, so staleness is visible on the surface instead of hidden.
+- Public content (season hub, teams, players, schedule, scoring tables) is compiled at build time from the curated dataset in `db/seed-data/*.json` into `data/v1/*.json` by `scripts/build-site.mjs`. Competition state is derived from the calendar at build time (upcoming before a competition's window, live inside it, complete after it ends; the seed's stored status is only a fallback for undated records) and stamped with `generatedAt` and `asOf`, so staleness is visible on the surface instead of hidden. The league-picker API (`api/leagues/meta.js`) runs the identical derivation, so the two season-clarity surfaces can never disagree. A rebuild after a window closes rolls the surface forward with no copy edits: Stage 2 completes on Oct 19, 2026 and the Grand Finals go live on Nov 23.
 - Everything multi-user (accounts, leagues, drafts, lineups, scoring, standings) is server state in one database behind 17 Vercel-style functions in `api/`. The same functions run locally under `scripts/dev-server.mjs` unchanged.
 
 ## Data layer
@@ -51,6 +51,8 @@ The refresh lane this implies: a dated dataset refresh updates `db/seed-data` an
 ## Design identity
 
 Named: **the stat sheet, broadcast desk.** Paper surfaces and ink text for the public layer, a dark ink band for the hero and draft board, tabular mono for every number, hairline rules instead of boxes-on-boxes, one accent (signal teal) plus small role tints (Vanguard green, Duelist red, Strategist blue). Type voice is a grotesk for words and mono for data; the rhythm is ruled tables and calendar strips, like a broadcast desk's stat pack. It shares the fleet's discipline (clear hierarchy, professional finish) and no other site's look.
+
+The identity kit (wave 2) is generated from the same tokens: `scripts/build-og-assets.py` renders `assets/og-card.png` (the social card, set as a stat sheet with the pool's real counts and a dark broadcast band; its copy describes the product, never a dated state, so it cannot expire) and `assets/apple-touch-icon.png`; `assets/favicon.svg` is the ledger-row mark. Every page carries the full meta set (description, Open Graph, Twitter card) pointing at the card.
 
 Copy rule, enforced at wave 1 and checked before every wave report: no em dashes or en dashes anywhere in the tree (grep-verified), no filler phrasing, no machine tells. Numbers in copy are the real counts from the dataset.
 

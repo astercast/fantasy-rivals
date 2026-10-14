@@ -12,9 +12,15 @@ export default handler(async (req, res) => {
   const seasons = await all("SELECT * FROM seasons ORDER BY starts_on ASC");
   const today = new Date().toISOString().slice(0, 10);
   const competitions = seasons.map((s) => {
-    let state = s.status;
-    if (state === "current") {
-      state = s.ends_on && s.ends_on < today ? "complete" : "live";
+    // Same calendar derivation as scripts/build-site.mjs, so the picker and
+    // the public season hub can never disagree: a dated competition is
+    // upcoming before its window, live inside it, complete after it ends.
+    // The stored status is only a fallback for undated records.
+    let state;
+    if (s.starts_on && s.ends_on) {
+      state = today < s.starts_on ? "upcoming" : today > s.ends_on ? "complete" : "live";
+    } else {
+      state = s.status === "current" ? "live" : s.status;
     }
     return {
       id: s.id,

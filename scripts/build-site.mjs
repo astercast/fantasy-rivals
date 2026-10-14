@@ -25,8 +25,18 @@ const generatedAt = new Date().toISOString();
 for (const data of datasets) {
   const slug = data.game.slug;
   const seasons = (data.seasons || []).map((s) => {
-    let state = s.status === "current" ? "live" : s.status;
-    if (state === "live" && s.endsOn && s.endsOn < today) state = "complete";
+    // State is derived from the calendar, never hand-set: a dated
+    // competition is upcoming before its window, live inside it, and
+    // complete after it ends. The stored status is only a fallback for
+    // undated records. Rebuilding after a window closes rolls the public
+    // surface forward on its own (Stage 2 completes on Oct 19, the Grand
+    // Finals go live on Nov 23) with no copy edit required.
+    let state;
+    if (s.startsOn && s.endsOn) {
+      state = today < s.startsOn ? "upcoming" : today > s.endsOn ? "complete" : "live";
+    } else {
+      state = s.status === "current" ? "live" : s.status || "upcoming";
+    }
     return { ...s, state };
   });
   const live = seasons.filter((s) => s.state === "live");
