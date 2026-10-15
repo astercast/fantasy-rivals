@@ -160,6 +160,21 @@ try {
   const inviteCode = created.json.inviteCode;
   ok(!!inviteCode, "league issues an invite code");
 
+  // - regression: the Draft tab of a FORMING league (no draft row yet).
+  //    A first-time commissioner opens it before anyone joins or starts
+  //    anything. It must answer 200 with the honest not-started state
+  //    (draft null, empty picks, the full pool), never a 500 - the
+  //    draftState no-draft shape once omitted `picks` and the GET
+  //    handler's state.picks.map threw (fixed 2026-10-15). -
+  const formingDraft = await A.get(`/api/leagues/draft?leagueId=${leagueId}`);
+  ok(formingDraft.status === 200 && formingDraft.json.draft === null &&
+     Array.isArray(formingDraft.json.picks) && formingDraft.json.picks.length === 0,
+    "forming league's Draft tab answers 200 with draft null and zero picks",
+    `status=${formingDraft.status} body=${formingDraft.text.slice(0, 200)}`);
+  ok(Array.isArray(formingDraft.json.pool) && formingDraft.json.pool.length > 0 &&
+     Array.isArray(formingDraft.json.squads) && formingDraft.json.squads.length > 0,
+    "forming league's draft read carries the full pool and squads");
+
   // - join ×3 -
   for (const [i, c] of [B, C, D].entries()) {
     const r = await c.post("/api/leagues/join", { code: inviteCode, teamName: names[i + 1] });
