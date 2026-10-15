@@ -19,7 +19,7 @@ Demo accounts from `npm run seed`: `commish@demo.rivals.gg` / `demo-password-1` 
 
 ## The loop test
 
-`npm run test:loop` boots the dev server on a throwaway database and proves the whole product over real HTTP: dev OAuth sign-in, four email sign-ups, a league created for the live competition, three invite joins, a full 36-pick snake draft (32 players plus the Squad round), week-1 lineups, a labelled demo results import through the real import API, three scored weeks with moving standings, seeded playoffs, a final, and a completed league with a champion. 40 checks.
+`npm run test:loop` boots the dev server on a throwaway database and proves the whole product over real HTTP: dev OAuth sign-in, four email sign-ups, a league created for the live competition, three invite joins, a full 36-pick snake draft (32 players plus the Squad round), week-1 lineups, a labelled demo results import through the real import API, three scored weeks with moving standings, seeded playoffs, a final, a completed league with a champion, and a per-map import proving map lines aggregate into one series line before scoring. 46 checks.
 
 ## Layout
 

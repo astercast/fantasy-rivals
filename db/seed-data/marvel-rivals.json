@@ -933,9 +933,9 @@
   {
    "endsOn": "2026-10-18",
    "name": "Marvel Rivals Ignite 2026: Stage 2",
-   "sourceNote": "Playoffs run Oct 8 to 18, 2026, per the official Pick'Ems brackets reported by Beebom (Oct 9, 2026) and team match listings (NAVI lists a Stage 2 playoff match on Oct 15). The regional events run Sep 18 to Oct 18, 2026 (China from Sep 17), per MRVL's event listings and NAVI's tournament page, both read Oct 14, 2026; the earlier September 28 start carried here was the block's approximate open and is corrected. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7. Series results and playoff fixtures are imported in db/imports (MRVL, read Oct 14, 2026); the hub tally and schedule derive from that record.",
-   "stage": "Playoffs Oct 8 to 18, 2026; group stage complete",
-   "startsOn": "2026-09-18",
+   "sourceNote": "Playoffs run Oct 8 to 18, 2026, staggered by region (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16), per the official Version 20260911 patch notes (marvelrivals.com, read Oct 15, 2026); Beebom's Pick'Ems coverage (Oct 9, 2026) gives the same Oct 8 to 18 envelope. The regional events run Sep 17 to Oct 18, 2026: the regular season opened Sep 17 with the Oceania and China series, the Americas and EMEA series began Sep 18, and the Asia series joined Sep 25 (official patch notes, as above; MRVL's event listings, read Oct 14, 2026, agree). The September 28 approximate start carried here first, and the September 18 opening date carried after it, are both corrected: competition began Sep 17. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7. Series results and playoff fixtures are imported in db/imports (MRVL, read Oct 14, 2026); the hub tally and schedule derive from that record.",
+   "stage": "Playoffs Oct 8 to 18, 2026 (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16); group stage complete",
+   "startsOn": "2026-09-17",
    "status": "current"
   },
   {
@@ -949,17 +949,25 @@
   {
    "endsOn": "2026-08-01",
    "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
-   "sourceNote": "Jul 29 to Aug 1, 2026, $500,000 prize pool. NAVI won, defeating Liquid Citadel in the grand final (NAVI's own report, Aug 2, 2026; Esports.gg's Mid-Season Finals guide). An earlier listing placed this event in Guangzhou with a different winner; that was 2025-season material and has been corrected.",
-   "stage": "International LAN, complete. NAVI champions, over Liquid Citadel in the final",
+   "sourceNote": "Jul 29 to Aug 1, 2026, at WePlay Studios, Los Angeles, $500,000 prize pool. Play-In on Jul 29: 100 Thieves, RAD, REJECT and Aconyx played a double-elimination bracket for the last two Main Stage spots, joining the six pre-qualified teams (Liquid Citadel, Swamp Gaming, NAVI, Virtus.pro, Gen.G Esports, OUG); the Main Stage ran Jul 30 to 31 and the grand final was best-of-7 on Aug 1 (Esports.gg's Mid-Season Finals guide, Jul 28, 2026; venue per the official tickets page on marvelrivalsesports.com). NAVI won, defeating Liquid Citadel in the grand final (NAVI's own report, Aug 2, 2026). An earlier listing placed this event in Guangzhou with a different winner; that was 2025-season material and has been corrected.",
+   "stage": "International LAN in Los Angeles, complete. Play-In Jul 29, Main Stage Jul 30 to Aug 1. NAVI champions, over Liquid Citadel in the final",
    "startsOn": "2026-07-29",
    "status": "complete"
   },
   {
-   "endsOn": "2026-06-07",
+   "endsOn": "2026-07-05",
    "name": "Marvel Rivals Ignite 2026: Stage 1",
-   "sourceNote": "Ran May into early June 2026 (block dates approximate). NAVI's Stage 1 EMEA title is verified from NAVI's own report: a 5-0 group, three 3-0 playoff series, and a 4-0 grand final over Virtus.pro. The 2026 Stage 1 champions for Americas, Pacific and China are not verified in the sources read; widely indexed stories naming other winners are from the 2025 season.",
-   "stage": "Complete. EMEA champions NAVI (4-0 over Virtus.pro in the final)",
-   "startsOn": "2026-05-01",
+   "sourceNote": "Group stage May 21 to Jun 7, 2026; playoffs Jun 25 to Jul 5, 2026 (Pacific Jun 25 to 28, China Jun 26 to 28, Americas and EMEA Jul 2 to 5), per the official Stage 1 guide and Stage 1 Playoffs Viewer Guide on marvelrivalsesports.com, read Oct 15, 2026. An earlier record here carried May 1 to Jun 7, the group stage's span only; the official dates correct both ends. NAVI's Stage 1 EMEA title is verified from NAVI's own report (Jul 5, 2026): a 5-0 group, three 3-0 playoff series, and a 4-0 grand final over Virtus.pro. The 2026 Stage 1 champions for Americas, Pacific and China are not verified in the sources read; widely indexed stories naming other winners are from the 2025 season. Stage 1 seeding was set by the Preseason. The Mid-Season Qualifiers (the promotion and relegation tournament that set the Stage 2 field) ran after these playoffs; no source read publishes their exact dates, so they carry no dated record here.",
+   "stage": "Complete. Group stage May 21 to Jun 7, playoffs Jun 25 to Jul 5. EMEA champions NAVI (4-0 over Virtus.pro in the final)",
+   "startsOn": "2026-05-21",
+   "status": "complete"
+  },
+  {
+   "endsOn": "2026-05-03",
+   "name": "Marvel Rivals Ignite 2026: Preseason",
+   "sourceNote": "The season's opening phase, played region by region: Americas and EMEA Mar 27 to Apr 19, 2026, Pacific Asia Apr 3 to 26, Pacific Oceania Apr 24 to May 3 (group stage, main stage, finals in each region), per NetEase's revealed schedule reported by Esports Insider (Feb 26, 2026) and the official 2026 roadmap. Group series were best-of-3, main stage series best-of-5, grand finals best-of-7. The Preseason set the seeding for Stage 1 (official Stage 1 guide, marvelrivalsesports.com). China's Preseason schedule was not detailed in the roadmap reporting read, so no China dates are stated for this phase. The Preseason awards no League Points toward the Grand Finals.",
+   "stage": "Complete. Opening phase, Mar 27 to May 3, 2026; set the seeding for Stage 1",
+   "startsOn": "2026-03-27",
    "status": "complete"
   }
  ],

@@ -8,8 +8,14 @@ import { newId, q, one, all } from "../../lib/db.js";
 // Body: {
 //   seasonId, source, sourceUrl,
 //   matches: [{ week, roundLabel, teamA, teamB, startsAt, scoreA, scoreB,
-//               status, stats: [{ playerIgn, eliminations, deaths, assists,
-//               finalHits, damageDealt, damageBlocked, healing, heroes }] }]
+//               status, stats: [{ playerIgn, mapLabel, eliminations, deaths,
+//               assists, finalHits, damageDealt, damageBlocked, healing,
+//               heroes }] }]
+// A stat line is one player's line on one map: the game produces its
+// lines per map, so mapLabel names the map the line came from (the map
+// name, or "Map 1" and so on). Lines without a mapLabel are series
+// aggregates and share the empty label. Scoring aggregates a player's
+// map lines into one series line before applying the scoring table.
 // }
 // Team/player references resolve by short code, team name, or player IGN
 // within the competition's game. Anything unresolved is reported back in
@@ -77,15 +83,15 @@ export default handler(async (req, res) => {
         continue;
       }
       await q(
-        `INSERT INTO player_match_stats (id, match_id, player_id, heroes, eliminations, deaths, assists, final_hits, damage_dealt, damage_blocked, healing, source)
-         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-         ON CONFLICT(match_id, player_id) DO UPDATE SET
+        `INSERT INTO player_match_stats (id, match_id, player_id, map_label, heroes, eliminations, deaths, assists, final_hits, damage_dealt, damage_blocked, healing, source)
+         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+         ON CONFLICT(match_id, player_id, map_label) DO UPDATE SET
            heroes = excluded.heroes, eliminations = excluded.eliminations,
            deaths = excluded.deaths, assists = excluded.assists,
            final_hits = excluded.final_hits, damage_dealt = excluded.damage_dealt,
            damage_blocked = excluded.damage_blocked, healing = excluded.healing,
            source = excluded.source`,
-        [newId(), match.id, player.id, JSON.stringify(s.heroes || []),
+        [newId(), match.id, player.id, String(s.mapLabel || ""), JSON.stringify(s.heroes || []),
          s.eliminations || 0, s.deaths || 0, s.assists || 0, s.finalHits || 0,
          s.damageDealt || 0, s.damageBlocked || 0, s.healing || 0, source]
       );

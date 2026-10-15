@@ -44,7 +44,7 @@ Per the user's order, sign-in is one click first:
 1. Every payload must name a `source` (and may add `sourceUrl`). Unattributed stats are rejected.
 2. Authorized by a site admin session or the `ADMIN_IMPORT_KEY` header.
 3. Team and player references resolve by short code, name or IGN inside the competition's game. Anything unresolved is reported in the response. It is never dropped silently and never guessed.
-4. Imports upsert by (season, week, teams) and (match, player), so a corrected box score can be re-imported safely.
+4. Imports upsert by (season, week, teams) and (match, player, map), so a corrected box score can be re-imported safely. Stat lines are per map, because that is the line the game produces on the broadcast scoreboard; scoring aggregates a player's map lines into one series line before the table is applied, so the win and carry bonuses fire once per series.
 
 The refresh lane this implies: a dated dataset refresh updates `db/seed-data` and rebuilds `data/v1` (rosters, calendar), while results flow through the import API. Both paths carry their sources.
 
