@@ -27,6 +27,7 @@
 
 <section class="section">
   <div class="wrap">
+    <p class="kicker">The pool</p>
     <div class="section-head"><h1>Player pool</h1></div>
 
     <!-- The heroes of the game, by role: the full 54-hero roster as
@@ -109,14 +110,16 @@
       </div>
     </div>
 
-    <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
-      <input class="search-box" id="poolSearch" type="search" placeholder="Search the pool" aria-label="Search the pool">
-      <select id="teamFilter" aria-label="Filter by team" style="padding:8px; border:1px solid var(--line-strong); font:inherit; font-size:15px; min-height:44px">
-        <option value="">All teams</option>
-      </select>
+    <div class="pool-tools">
+      <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
+        <input class="search-box" id="poolSearch" type="search" placeholder="Search the pool" aria-label="Search the pool">
+        <select id="teamFilter" aria-label="Filter by team" style="padding:8px; border:1px solid var(--line-strong); font:inherit; font-size:15px; min-height:44px">
+          <option value="">All teams</option>
+        </select>
+      </div>
+      <div class="filter-tabs" data-role-tabs role="group" aria-label="Filter by role"></div>
+      <p class="filter-line" data-filter-line></p>
     </div>
-    <div class="filter-tabs" data-role-tabs role="group" aria-label="Filter by role"></div>
-    <p class="filter-line" data-filter-line></p>
     <div data-team-view></div>
     <div data-pool></div>
     <p class="fine" style="margin-top:16px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool: a player enters when their roster spot is confirmed by a published source. A player's rank is their identity in the pool: it never renumbers when the list is filtered. Rosters as published for the 2026 season; teams marked roster pending are confirmed in the competition and enter the pool when their lineups are verified.</p>

@@ -86,3 +86,10 @@ tag covers all three roles; his portrait stands once, with the
 Duelists, and his file carries the small name and role plate the game
 itself distributes in the lower area, exactly as staged. The 12
 portraits shipped in rotation 23 are unchanged.
+
+Presentation rework note (2026-10-15): hero-key-art.jpg and
+season-key-art.jpg were recompressed for their slots in the v4
+presentation pass (same images, same dimensions, same crops;
+JPEG quality 82 / 78). 318,827 B to 203,890 B and 765,510 B to
+132,940 B. Provenance rows above are unchanged; the 54 hero
+portraits are byte-untouched.

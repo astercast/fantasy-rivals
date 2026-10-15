@@ -110,14 +110,20 @@ export function renderChrome(active) {
     .catch(() => {});
 }
 
-/* The season plate: fixed two-zone geometry on home, season, and
-   league alike. Left zone is the protected core, in this order and no
-   other: competition, stage, state word, dates. The core never moves
+/* The season plate: fixed two-zone geometry on home and season.
+   Left zone is the protected core, in this order and no other:
+   competition, stage, state word, dates. The core never moves
    or resizes. Right zone holds only the tally, whose figures sit in
    fixed-width slots so a tally change shifts nothing. Flat block: no
-   border kit, no texture, state changes by cut. */
+   border kit, no texture, state changes by cut. The league room opts
+   into the compact variant (data-plate-compact): the same core on
+   one line, no tally. */
 export async function renderSeasonPlate(el) {
   if (!el) return;
+  /* The compact variant (the league room opts in with
+     data-plate-compact): the same core on one line, no tally, so the
+     page's own subject leads. Same data, same component. */
+  const compact = el.hasAttribute("data-plate-compact");
   const data = await seasonData();
   if (!data) {
     el.innerHTML = `<div class="wrap"><p class="muted small" style="padding:24px 0">Season status is temporarily unavailable.</p></div>`;
@@ -127,6 +133,15 @@ export async function renderSeasonPlate(el) {
   const next = data.nextUp;
   const focus = live || next;
   if (!focus) {
+    if (compact) {
+      el.innerHTML = `
+      <div class="wrap plate-in compact">
+        <span class="plate-comp">Marvel Rivals</span>
+        <span class="plate-state">Off season</span>
+        <span class="plate-dates">The next event posts here with its dates.</span>
+      </div>`;
+      return;
+    }
     el.innerHTML = `
       <div class="wrap plate-in">
         <div class="plate-core">
@@ -144,6 +159,18 @@ export async function renderSeasonPlate(el) {
     ? focus.name.split(":").map((s) => s.trim())
     : [focus.name, focus.stage || ""];
   const loud = live ? isLoudState(live) : false;
+  if (compact) {
+    el.innerHTML = `
+    <div class="wrap plate-in compact">
+      <span class="plate-comp">${esc(compLine)}</span>
+      <span class="plate-stage-s">${esc(stageName || focus.name)}</span>
+      <span class="plate-state${loud ? " loud" : ""}">${live ? "Live now" : "Next up"}</span>
+      <span class="plate-dates">${live
+        ? `${fmtDate(focus.startsOn)} to ${fmtDate(focus.endsOn)}`
+        : `Starts ${fmtDate(focus.startsOn)}`} · ${esc(focus.stage || "")}</span>
+    </div>`;
+    return;
+  }
   el.innerHTML = `
     <div class="wrap plate-in">
       <div class="plate-core">
@@ -193,9 +220,9 @@ async function fillTally(plateEl) {
         : ""}${esc(list)} finals are not imported yet.</span>`;
     }
     tallyEl.innerHTML = `
-      <span class="t-fig"><b>${teamsData.teams.length}</b> teams in</span>
-      <span class="t-fig"><b>${teamsData.players.length}</b> players rostered</span>
-      <span class="t-fig"><b>${played}</b> fixtures played</span>${note}`;
+      <div class="t-cell"><span class="t-num">${teamsData.teams.length}</span><span class="t-label">Teams in</span></div>
+      <div class="t-cell"><span class="t-num">${teamsData.players.length}</span><span class="t-label">Players rostered</span></div>
+      <div class="t-cell"><span class="t-num">${played}</span><span class="t-label">Fixtures played</span></div>${note}`;
   } catch {
     tallyEl.textContent = "";
   }

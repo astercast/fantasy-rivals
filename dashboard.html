@@ -54,7 +54,7 @@
     const box = document.querySelector("[data-leagues]");
     if (!leagues.length) document.querySelector("[data-empty]").classList.remove("hidden");
     box.innerHTML = leagues.map((l) => `
-      <a class="league-row" href="/league.html?id=${l.id}">
+      <a class="league-row ${esc(l.status)}" href="/league.html?id=${l.id}">
         <span>
           <span class="l-name">${esc(l.name)}</span>
           <span class="l-meta" style="display:block">${esc(statusLabel[l.status] || l.status)} · your team: <strong>${esc(l.team_name)}</strong> · ${l.member_count}/${l.size} teams</span>

@@ -33,13 +33,15 @@
 
 <section class="section">
   <div class="wrap">
+    <p class="kicker">The calendar</p>
     <div class="section-head"><h1>Season timeline</h1><span class="spacer"></span><span class="fine" data-asof></span></div>
     <div data-timeline></div>
   </div>
 </section>
 
-<section class="section">
+<section class="section alt">
   <div class="wrap">
+    <p class="kicker">Results</p>
     <div class="section-head"><h2>Schedule and results</h2></div>
     <div data-fixtures></div>
   </div>
@@ -47,6 +49,7 @@
 
 <section class="section">
   <div class="wrap">
+    <p class="kicker">The table</p>
     <div class="section-head"><h2>Standings</h2></div>
     <div data-standings></div>
   </div>
@@ -54,6 +57,7 @@
 
 <section class="section">
   <div class="wrap">
+    <p class="kicker">Qualification</p>
     <div class="section-head"><h2>How the Grand Finals field is set</h2></div>
     <p class="muted" style="max-width:64ch">Twelve teams reach the Grand Finals in Stockholm. Each region's Stage 2 playoff winner qualifies directly. The remaining places go to the top of the annual League Points table, which adds up points from Stage 1, the Mid-Season Finals and Stage 2, with Stage 2 weighted heaviest. The field splits four from the Americas, four from EMEA, two from the Pacific and two from China. That is why the Stage 2 playoffs matter here: they decide the direct qualifiers and most of the points table at the same time.</p>
     <div style="margin-top:24px; max-width:640px">
@@ -79,8 +83,9 @@
 
 <!-- Scoring is explained once, here, in plain words with one small
      table. No other surface re-explains it. -->
-<section class="section">
+<section class="section alt">
   <div class="wrap">
+    <p class="kicker">Scoring</p>
     <div class="section-head"><h2>Scoring</h2></div>
     <p class="muted" style="max-width:64ch">Your players score from their real match stats. Eliminations and assists are worth the most, deaths cost a little, and damage, blocking and healing add up per thousand. When a player's team wins the series, the player gets a win bonus, and a 25-elimination series earns a carry bonus. Your drafted Squad (one pro org) scores its own results: a point per map, two per series, two more for a clean sweep. Every league can tune its own table; this is the standard one, modelled on Fantasy LCS's published table.</p>
     <div class="grid grid-2" style="margin-top:24px">
@@ -139,11 +144,13 @@
   const sorted = [...data.seasons].sort((a, b) =>
     (order[a.state] - order[b.state]) || (a.startsOn || "").localeCompare(b.startsOn || ""));
   document.querySelector("[data-timeline]").innerHTML = sorted.map((s) => `
-    <div class="wire-line">
-      <span class="w-name">${esc(s.name)}</span>
-      <span class="w-stage">${esc(s.stage || "")}</span>
-      <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
-      <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
+    <div class="wire-line${s.state !== "complete" ? " has-act" : ""}">
+      <span class="w-main">
+        <span class="w-name">${esc(s.name)}</span>
+        <span class="w-stage">${esc(s.stage || "")}</span>
+        <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
+        <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
+      </span>
       ${s.state !== "complete" ? `<span class="w-act"><a class="btn btn-small" href="/start.html">Create a league for this</a></span>` : ""}
     </div>`).join("") + `
     <p class="fine" style="margin-top:16px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one has not started, you can set up in advance: draft now, score when play begins.</p>`;
@@ -196,7 +203,7 @@
       }
     }
     document.querySelector("[data-standings]").innerHTML = Object.entries(byRegion).map(([region, table]) => `
-      <h3 style="margin:16px 0 8px">${esc(region)}: imported results table</h3>
+      <h3 class="band-head">${esc(region)}: imported results table</h3>
       <table class="sheet" style="max-width:640px">
         <thead><tr><th>Team</th><th class="n">W</th><th class="n">L</th><th class="n">Maps</th></tr></thead>
         <tbody>${Object.entries(table).sort((x, y) => (y[1].w - x[1].w) || ((y[1].f - y[1].a) - (x[1].f - x[1].a))).map(([short, r]) => `

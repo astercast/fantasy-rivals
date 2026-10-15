@@ -10,6 +10,14 @@
    on the draft room's phone tabs. No halftone, no offset shadows, no
    pill chips: role and state marks are rectangular data tags. */
 
+/* v4, "The Broadcast Finish" (2026-10-15 professional rework). The v3
+   identity stands entire; v4 is hierarchy, geometry and finish:
+   kickers name every desk, the plate tally becomes stat cells, rows
+   with scores take fixed geometry, red discipline is enforced (rank
+   numerals leave red), page titles join the display voice, focus is
+   visible on every control, the league room takes a compact plate,
+   and the pool keeps its tools stuck in reach. */
+
 @font-face {
   font-family: "Archivo";
   src: url("/assets/fonts/archivo-latin-normal-var.woff2") format("woff2-variations");
@@ -60,6 +68,10 @@ body {
 }
 a { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 3px; }
 a:hover { text-decoration-color: var(--ink); }
+/* Focus is finished: every interactive element shows it, in the one
+   red, never the browser default. Fields keep their own treatment. */
+a:focus-visible, button:focus-visible, select:focus-visible,
+[tabindex]:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
 h1, h2, h3 { line-height: 1.08; margin: 0; font-weight: 700; }
 p { margin: 0; }
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
@@ -67,6 +79,21 @@ p { margin: 0; }
 .cond { font-stretch: 74%; letter-spacing: 0.01em; }
 
 .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+/* v4 furniture: the kicker names the desk above a section head, and
+   every page title speaks in the one display voice (condensed caps),
+   retiring the ad-hoc inline title sizes the pages carried. */
+.kicker {
+  font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--ink-3); margin: 0 0 8px;
+}
+.page-title {
+  font-weight: 800; font-stretch: 76%; text-transform: uppercase;
+  font-size: 34px; letter-spacing: 0.01em; line-height: 1.05;
+}
+.page-subtitle {
+  font-weight: 800; font-stretch: 76%; text-transform: uppercase;
+  font-size: 22px; letter-spacing: 0.01em; line-height: 1.1;
+}
 .muted { color: var(--ink-2); }
 .small { font-size: 13px; }
 .fine { font-size: 12px; color: var(--ink-3); }
@@ -118,9 +145,14 @@ p { margin: 0; }
   text-decoration: none;
 }
 .btn:hover { border-color: var(--ink-3); text-decoration: none; }
-.btn-primary { background: var(--red); border-color: var(--red); color: #fff; }
+/* Manufactured finish on the primary action: a 1px lit top edge and
+   a 1px deeper foot, print-broadcast, no glow and no glass. The head
+   button's current-page marker outranks it by specificity, as before. */
+.btn-primary { background: var(--red); border-color: var(--red); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -2px 0 rgba(0, 0, 0, 0.18); }
 .btn-primary:hover { background: #f0443a; border-color: #f0443a; }
-.btn-accent { background: var(--red); border-color: var(--red); color: #fff; }
+.btn-accent { background: var(--red); border-color: var(--red); color: #fff;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22), inset 0 -2px 0 rgba(0, 0, 0, 0.18); }
 .btn-accent:hover { background: #f0443a; border-color: #f0443a; }
 .btn-ghost { background: transparent; color: var(--ink); }
 .btn-small { min-height: 44px; padding: 8px 12px; font-size: 14px; }
@@ -129,13 +161,16 @@ p { margin: 0; }
   width: 100%; background: var(--panel); border-color: var(--line-strong); color: var(--ink); font-weight: 600;
 }
 .btn-provider .glyph { font-weight: 800; width: 18px; text-align: center; }
+/* A provider that is not configured is not an action: it quiets to a
+   flat ghost so only real actions read as solid. */
+.btn-provider[aria-disabled="true"] { background: transparent; border-color: var(--line); color: var(--ink-3); }
 
 /* --- hero: full-bleed key art, type set over the art. One line, one
    action, a legibility gradient at the foot of the art and nothing
    else over it. --- */
 .hero { position: relative; background: var(--bg-2); overflow: hidden; }
 .hero img.hero-art {
-  display: block; width: 100%; height: min(76vh, 620px); min-height: 420px;
+  display: block; width: 100%; height: min(62vh, 560px); min-height: 400px;
   object-fit: cover; object-position: center 30%;
 }
 .hero-shade {
@@ -151,59 +186,126 @@ p { margin: 0; }
 }
 .hero .wordmark-big .dot { color: var(--red); }
 .hero-line { margin-top: 16px; font-size: 19px; color: var(--ink); max-width: 52ch; }
+/* The loop, stated once, in the desk's micro-type: what the product
+   does, readable in the first screen, quiet under the line. */
+.hero-loop {
+  margin-top: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-2);
+}
+.hero-loop .dot { color: var(--red); padding: 0 6px; }
 .hero .cta-row { margin-top: 24px; display: flex; gap: 16px; flex-wrap: wrap; }
 .hero .btn-ghost { border-color: rgba(242, 245, 250, 0.55); color: #fff; }
 @media (max-width: 640px) {
-  .hero img.hero-art { height: 68vh; min-height: 480px; }
+  .hero img.hero-art { height: 56vh; min-height: 360px; }
   .hero-in { padding-bottom: 24px; }
   .hero-line { font-size: 17px; margin-top: 8px; }
+  .hero-loop { margin-top: 10px; line-height: 1.7; }
   .hero .cta-row { margin-top: 16px; }
 }
 
-/* --- art blocks: the image is the content, the heading labels it. --- */
+/* --- art blocks: the image is the content, and the heading is set
+   into the art's foot over the shade (the type sits in the image's
+   space, not beside it); the words follow under it. On a phone the
+   head comes back under the image, where the crop is tight. --- */
 .art-block { margin-top: 48px; }
 .art-block:first-child { margin-top: 0; }
 .art-block img { display: block; width: 100%; height: auto; }
-.art-block .ab-head { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-top: 16px; }
+.ab-media { position: relative; }
+.ab-media::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 46%;
+  background: linear-gradient(to top, rgba(10, 18, 36, 0.88) 0%, rgba(10, 18, 36, 0.42) 55%, rgba(10, 18, 36, 0) 100%);
+  pointer-events: none;
+}
+.art-block .ab-head {
+  display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap;
+  position: absolute; left: 24px; right: 24px; bottom: 20px; z-index: 2; margin: 0;
+}
 .art-block h3 { font-stretch: 76%; text-transform: uppercase; font-size: 26px; font-weight: 800; }
-.art-block p { color: var(--ink-2); max-width: 62ch; margin-top: 8px; }
+.art-block p { color: var(--ink-2); max-width: 62ch; margin-top: 16px; }
+@media (max-width: 640px) {
+  .ab-media::after { display: none; }
+  .art-block .ab-head { position: static; margin-top: 12px; }
+  .art-block p { margin-top: 8px; }
+}
+/* --- art bands: a bright official still seats into the night on the
+   hero's own shade; a band whose subject sits low in the frame takes
+   the subject crop, so the face is in the picture, not under it. --- */
+.art-band { position: relative; }
+.art-band::after {
+  content: ""; position: absolute; inset: auto 0 0 0; height: 55%;
+  background: linear-gradient(to top, rgba(10, 18, 36, 0.6) 0%, rgba(10, 18, 36, 0) 100%);
+  pointer-events: none;
+}
 .art-band img { display: block; width: 100%; height: 240px; object-fit: cover; object-position: center 35%; }
+.art-band.subject-low img { object-position: center 68%; }
 @media (max-width: 640px) { .art-band img { height: 160px; } }
 
 /* --- the season plate: a flat block, fixed two-zone geometry. Core
    left in one order (competition, stage, state word, dates), tally
    right. The core never moves when the tally changes. --- */
-.plate { background: var(--bg-2); border-bottom: 1px solid var(--line); color: var(--ink); }
-.plate-in { padding: 24px; display: grid; grid-template-columns: minmax(0, 1fr) 200px; gap: 48px; align-items: center; }
+.plate { background: var(--bg-2); border-bottom: 1px solid var(--line); color: var(--ink); position: relative; }
+/* The scorebug tab: when the plate's state is loud, a red edge runs
+   the plate's full height at the viewport's edge. State changes by
+   cut, as ever; the word still carries the state on its own. */
+.plate:has(.plate-state.loud)::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--red); z-index: 1;
+}
+.plate-in { padding: 24px; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 48px; align-items: center; }
 .plate-core { min-width: 0; }
 .plate-comp { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); }
 .plate-stage {
   font-weight: 800; font-stretch: 76%; text-transform: uppercase;
-  font-size: 34px; letter-spacing: 0.01em; line-height: 1.05; margin-top: 8px;
+  font-size: 40px; letter-spacing: 0.01em; line-height: 1.05; margin-top: 8px;
 }
 .plate-state { font-size: 14px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink); margin-top: 8px; }
 .plate-state.loud { color: var(--red); }
-.plate-dates { color: var(--ink-2); font-size: 14px; margin-top: 8px; }
+.plate-dates { color: var(--ink-2); font-size: 14px; margin-top: 8px; font-variant-numeric: tabular-nums; }
 .plate-assist { border-left: 1px solid var(--line); padding-left: 24px; min-width: 0; }
-.plate-tally { display: flex; flex-direction: column; gap: 8px; }
-.plate-tally .t-fig { font-size: 13px; color: var(--ink-2); }
-.plate-tally .t-fig b {
-  font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; font-size: 21px; color: var(--ink);
-  display: inline-block; width: 56px; min-width: 56px;
+/* The tally as stat cells: figure over label, hairline-divided, fixed
+   slots so a tally change shifts nothing (the plate law stands). */
+.plate-tally { display: grid; grid-template-columns: repeat(3, minmax(88px, auto)); }
+.plate-tally .t-cell { padding: 0 20px; border-left: 1px solid var(--line); }
+.plate-tally .t-cell:first-child { padding-left: 0; border-left: none; }
+.plate-tally .t-cell:last-child { padding-right: 0; }
+.plate-tally .t-num {
+  display: block; font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums;
+  font-size: 30px; line-height: 1; color: var(--ink);
 }
-.plate-tally .t-note { font-size: 12px; color: var(--ink-3); line-height: 1.45; }
+.plate-tally .t-label {
+  display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3); margin-top: 6px;
+}
+.plate-tally .t-note { grid-column: 1 / -1; font-size: 12px; color: var(--ink-3); line-height: 1.45; margin-top: 12px; }
+/* The compact plate (league room): the same core on one line, no
+   tally, so the league's own name leads its page. */
+.plate-in.compact { display: flex; align-items: baseline; gap: 8px 16px; flex-wrap: wrap; padding: 12px 24px; }
+.plate-in.compact .plate-comp { margin: 0; }
+.plate-in.compact .plate-stage-s {
+  font-weight: 800; font-stretch: 76%; text-transform: uppercase; font-size: 19px; letter-spacing: 0.01em;
+}
+.plate-in.compact .plate-state { margin: 0; }
+.plate-in.compact .plate-dates { margin: 0; }
 @media (max-width: 640px) {
   .plate-in { grid-template-columns: 1fr; align-items: stretch; gap: 16px; padding: 24px; }
+  .plate-stage { font-size: 32px; }
   .plate-assist { border-left: none; border-top: 1px solid var(--line); padding: 16px 0 0; }
-  .plate-tally { flex-direction: row; flex-wrap: wrap; gap: 8px 24px; }
-  .plate-tally .t-note { flex-basis: 100%; }
+  .plate-tally { grid-template-columns: repeat(3, 1fr); }
+  .plate-tally .t-cell { padding: 0 12px; }
+  .plate-tally .t-cell:first-child { padding-left: 0; }
+  .plate-tally .t-num { font-size: 24px; }
+  .plate-in.compact { padding: 12px 24px; }
 }
 
 /* --- the wire: day or month grouped one-line rows. Names, record or
    stage inline, the state word, one appended fact. Never a card. --- */
 .wire-group { margin-top: 24px; }
 .wire-group:first-child { margin-top: 0; }
-.wire-date { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px; }
+/* A dateline: the day or month, then its rule running to the edge. */
+.wire-date {
+  display: flex; align-items: center; gap: 16px;
+  font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3); margin: 0 0 8px;
+}
+.wire-date::after { content: ""; flex: 1; border-top: 1px solid var(--line); }
 .wire-line {
   display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap;
   padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 15px; min-height: 48px; align-content: center;
@@ -211,16 +313,37 @@ p { margin: 0; }
 .wire-line:last-child { border-bottom: none; }
 .wire-line .w-name { font-weight: 700; }
 .wire-line .w-stage { color: var(--ink-2); }
-.wire-line .w-state { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); }
+/* Fixed slots: the state word and the score hold their width on every
+   row, so a wire reads as columns, not as sentences that wrap. */
+.wire-line .w-state { font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-2); flex: none; width: 92px; }
 .wire-line .w-state.live { color: var(--red); }
-.wire-line .w-score { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.wire-line .w-score { font-family: var(--mono); font-variant-numeric: tabular-nums; flex: none; width: 76px; text-align: right; }
 .wire-line .w-dates { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; }
 .wire-line .w-fact { color: var(--ink-3); font-size: 14px; }
 .wire-line .w-act { margin-left: auto; }
+/* A row with an action (the season timeline): the text runs in its own
+   column and the action pins to a right column of its own, on every
+   row, so buttons align down the page instead of wrapping ragged.
+   On a phone the action takes the row's second line, left, always. */
+.wire-line.has-act { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 16px; align-items: center; }
+.wire-line .w-main { display: flex; gap: 16px; align-items: baseline; flex-wrap: wrap; min-width: 0; }
+/* Timeline rows are uniform units: the dates always take the second
+   line of the text column, never trailing the name when they fit and
+   dropping when they do not. */
+.wire-line .w-main .w-dates { flex-basis: 100%; }
+.wire-line.has-act .w-act { margin-left: 0; }
+@media (max-width: 640px) {
+  .wire-line.has-act { grid-template-columns: 1fr; row-gap: 8px; }
+  .wire-line.has-act .w-act { justify-self: start; }
+  .wire-line .w-state { width: auto; }
+}
 
 /* --- sections and flat panels --- */
 .section { padding: 48px 0; }
 .section + .section { border-top: 1px solid var(--line); }
+/* A data band: the desk's second ground, so a long page alternates
+   ruled data bands with feature bands instead of one flat field. */
+.section.alt { background: var(--bg-2); }
 .section-head { display: flex; align-items: baseline; gap: 16px; margin-bottom: 24px; flex-wrap: wrap; }
 .section-head h2, .section-head h1 {
   font-weight: 800; font-stretch: 76%; text-transform: uppercase; font-size: 32px; letter-spacing: 0.01em;
@@ -240,6 +363,13 @@ table.sheet th {
   color: var(--ink-3); padding: 8px; border-bottom: 1px solid var(--line-strong);
 }
 table.sheet td { padding: 8px; border-bottom: 1px solid var(--line); vertical-align: middle; min-height: 48px; }
+table.sheet tbody tr:hover td { background: rgba(34, 48, 79, 0.35); }
+/* A region head over a standings table: a band, not a stray heading. */
+.band-head {
+  background: var(--panel); border: 1px solid var(--line); padding: 8px 16px;
+  font-stretch: 76%; text-transform: uppercase; font-size: 15px; font-weight: 800;
+  letter-spacing: 0.04em; margin: 24px 0 8px;
+}
 table.sheet tr:last-child td { border-bottom: none; }
 table.sheet td.n, table.sheet th.n { text-align: right; font-variant-numeric: tabular-nums; }
 table.sheet td.score, table.sheet th.score { text-align: right; font-family: var(--mono); font-variant-numeric: tabular-nums; }
@@ -340,8 +470,19 @@ select option { background: var(--panel); color: var(--ink); }
   border-bottom: 1px solid var(--line); font-size: 15px;
 }
 .lb-row:last-child { border-bottom: none; }
-.lb-row .rk { font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; color: var(--red); width: 32px; font-size: 17px; }
+/* Red discipline, enforced: the rank numeral is data, so it sits in
+   ink like every other figure; red stays LIVE and the action. The
+   role rides the row as a thin tick in its desaturated family, and
+   the board's top three take one step up in type, a podium in type
+   size only. */
+.lb-row .rk { font-weight: 800; font-stretch: 80%; font-variant-numeric: tabular-nums; color: var(--ink); width: 32px; font-size: 17px; flex: none; }
+.lb-row .tick { width: 3px; align-self: stretch; flex: none; background: var(--ink-3); }
+.lb-row .tick.van { background: #4a7d68; }
+.lb-row .tick.due { background: #96604c; }
+.lb-row .tick.str { background: #5a74a8; }
 .lb-row .who { font-weight: 650; }
+.lb-row.top .who { font-size: 17px; }
+.lb-row.top .rk { font-size: 20px; }
 .lb-row .tm { margin-left: auto; font-size: 13px; color: var(--ink-3); }
 
 /* --- hero portrait strip (players): official hero portraits, heroes
@@ -350,10 +491,13 @@ select option { background: var(--panel); color: var(--ink); }
 .hero-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 48px; }
 .hero-group h3 { font-stretch: 76%; text-transform: uppercase; font-size: 20px; font-weight: 800; }
 .hero-group .role-line { color: var(--ink-2); font-size: 14px; margin-top: 8px; max-width: 34ch; }
-.hero-portraits { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
-.hero-portraits figure { margin: 0; width: 88px; }
-.hero-portraits img { display: block; width: 88px; height: 144px; object-fit: contain; object-position: center bottom; }
-.hero-portraits figcaption { font-size: 11px; color: var(--ink-3); margin-top: 8px; line-height: 1.3; }
+.hero-portraits { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+/* Every hero stands on the same ruled plinth, name under it: the
+   roster reads as a lineup wall. The caption keeps two lines of
+   height so the plinths align down each row. */
+.hero-portraits figure { margin: 0; width: 84px; border-bottom: 2px solid var(--line-strong); padding-bottom: 8px; }
+.hero-portraits img { display: block; width: 84px; height: 140px; object-fit: contain; object-position: center bottom; }
+.hero-portraits figcaption { font-size: 11px; color: var(--ink-3); margin-top: 8px; line-height: 1.3; min-height: 29px; }
 @media (max-width: 900px) { .hero-strip { grid-template-columns: 1fr; } }
 
 /* --- team blocks (players team view) --- */
@@ -363,6 +507,17 @@ select option { background: var(--panel); color: var(--ink); }
 .roster-line { display: flex; gap: 16px; align-items: center; padding: 8px 0 8px 16px; font-size: 15px; min-height: 48px; }
 .roster-line .spacer { flex: 1; }
 .region-tag { font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); font-weight: 700; }
+
+/* --- the pool's tool bar (players page): search, team filter, role
+   tabs and the printed filter line travel together and stick under
+   the chrome, so the tool stays in reach down a 98-row pool. On a
+   phone the chrome is static, so the bar pins to the very top. --- */
+.pool-tools {
+  position: sticky; top: 57px; z-index: 25; background: var(--bg);
+  padding: 12px 0 4px; border-bottom: 1px solid var(--line); margin-bottom: 8px;
+}
+.pool-tools .filter-tabs { border-bottom: none; }
+@media (max-width: 640px) { .pool-tools { top: 0; } }
 
 /* --- pool filters: word tabs carrying counts, one search box, and a
    printed filter-state line. Nothing filters silently. --- */
@@ -400,6 +555,11 @@ select option { background: var(--panel); color: var(--ink); }
    On the clock, exactly one element is loud: the current pick cell,
    red at low strength with a solid red edge, countdown inside it. --- */
 .room { display: grid; grid-template-columns: minmax(0, 1fr) 336px; grid-template-areas: "board board" "pool rail"; gap: 24px; align-items: start; }
+/* v4: the room's zones are bands on the desk, not boxes on a page:
+   flat ground, a strong hairline over each, the zone head the only
+   furniture. The overview and standings cards keep their panels;
+   only the room flattens. */
+.room .card { background: transparent; border: none; border-top: 2px solid var(--line-strong); padding: 24px 0 0; }
 .room-board { grid-area: board; }
 .room-pool { grid-area: pool; }
 .room-rail { grid-area: rail; }
@@ -550,15 +710,19 @@ span.pick-ctl { cursor: default; }
 /* --- league rows (dashboard): one league per row, full width. --- */
 .league-row {
   display: flex; gap: 16px; align-items: center; flex-wrap: wrap;
-  padding: 16px 0; border-bottom: 1px solid var(--line); min-height: 56px; color: inherit; text-decoration: none;
+  padding: 16px 0 16px 16px; border-bottom: 1px solid var(--line); min-height: 56px; color: inherit; text-decoration: none;
+  box-shadow: inset 3px 0 0 var(--line-strong);
 }
+/* A league whose draft is live carries the red edge: state at a
+   glance, in the one colour that means it. */
+.league-row.drafting { box-shadow: inset 3px 0 0 var(--red); }
 .league-row:hover { text-decoration: none; }
 .league-row .l-name { font-weight: 700; font-size: 18px; }
 .league-row .l-meta { color: var(--ink-2); font-size: 14px; }
 .league-row .l-act { margin-left: auto; }
 
-/* --- scoring worked example --- */
-.worked { font-family: var(--mono); font-size: 13px; }
+/* --- scoring worked example: a receipt, panelled and ruled. --- */
+.worked { font-family: var(--mono); font-size: 13px; background: var(--panel); border: 1px solid var(--line); padding: 8px 16px; }
 .worked .w-row { display: flex; justify-content: space-between; gap: 16px; padding: 8px 0; border-bottom: 1px solid var(--line); }
 .worked .w-row:last-child { border-bottom: none; }
 .worked .w-total { font-weight: 700; font-size: 15px; color: var(--ink); }
