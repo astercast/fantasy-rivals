@@ -1,6 +1,6 @@
 // test-loop.mjs - the full local-loop proof, over real HTTP against the
 // dev server on a throwaway DB:
-//   dev OAuth sign-in → email signup ×4 → league FOR the live competition
+//   dev OAuth sign-in → email signup ×4 → league FOR a named competition
 //   → invite/join ×3 → snake draft (36 picks incl. squad round) → lineups
 //   → labelled DEMO results import → score 3 weeks → standings move →
 //   playoffs → final → league complete with a champion.
@@ -142,10 +142,28 @@ try {
   const [A, B, C, D] = clients;
 
   // - competition picker data -
+  // TY1: states are computed from dates, never flags — so this test
+  // derives every expected state from the competition's own window on
+  // today's clock (the same rule api/leagues/meta.js documents)
+  // instead of hard-coding whichever stage was live when the test was
+  // written. The league below still runs on Stage 2: creation takes
+  // any real competition, and the demo-results import is Stage 2's.
   const meta = await A.get("/api/leagues/meta");
+  const todayStr = new Date().toISOString().slice(0, 10);
+  const deriveState = (c) => (c.startsOn && c.endsOn)
+    ? (todayStr < c.startsOn ? "upcoming" : todayStr > c.endsOn ? "complete" : "live")
+    : c.state;
+  const dated = meta.json.competitions.filter((c) => c.startsOn && c.endsOn);
+  ok(dated.length > 0 && dated.every((c) => c.state === deriveState(c)),
+    "meta computes every dated competition's state from its window",
+    JSON.stringify(meta.json.competitions.map((c) => [c.name, c.state])));
   const stage2 = meta.json.competitions.find((c) => /Stage 2/.test(c.name));
-  ok(stage2 && stage2.state === "live", "meta names the LIVE competition (Ignite Stage 2)", JSON.stringify(stage2?.state));
-  ok(meta.json.competitions.some((c) => c.state === "upcoming"), "meta also names the NEXT competition");
+  ok(stage2 && stage2.state === deriveState(stage2),
+    `meta names Ignite Stage 2 by the calendar (${stage2 ? deriveState(stage2) : "?"} on ${todayStr})`,
+    JSON.stringify(stage2?.state));
+  ok(meta.json.competitions.some((c) => c.state === "upcoming") ===
+     dated.some((c) => deriveState(c) === "upcoming"),
+    "meta also names the NEXT competition when the calendar has one");
 
   // - create league FOR Stage 2 -
   const created = await A.post("/api/leagues", {

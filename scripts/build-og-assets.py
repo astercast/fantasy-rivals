@@ -11,6 +11,13 @@ ends, so it describes the product, never a dated state. Presented copy
 holds the dash law (no U+2014 anywhere in the card).
 
 Run: python3 scripts/build-og-assets.py   (needs Playwright + Chromium)
+
+TY7 (rotation 142): the site references assets/og-card.jpg, so the
+build also writes the deployed JPEG from the PNG master — quality
+60, progressive, 4:2:0 — a sane weight for a share card (the
+unoptimized conversion that first shipped ran 122,281 bytes; the
+rotation-142 recompress of it landed at 89,034). The PNG stays the
+master; the JPEG is what the meta tags point at.
 """
 import base64
 import os
@@ -18,6 +25,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..")
 OUT_CARD = os.path.join(ROOT, "assets", "og-card.png")
+OUT_CARD_JPG = os.path.join(ROOT, "assets", "og-card.jpg")
 OUT_ICON = os.path.join(ROOT, "assets", "apple-touch-icon.png")
 # The art rides as a data URI: a set_content page has a null origin and
 # Chromium refuses file:// subresources from it.
@@ -85,3 +93,10 @@ with sync_playwright() as p:
     b.close()
 print("wrote", OUT_CARD, os.path.getsize(OUT_CARD), "bytes")
 print("wrote", OUT_ICON, os.path.getsize(OUT_ICON), "bytes")
+
+# TY7: the deployed share image is the JPEG the meta tags name,
+# re-encoded from the PNG master at a sane weight.
+from PIL import Image
+with Image.open(OUT_CARD) as im:
+    im.convert("RGB").save(OUT_CARD_JPG, "JPEG", quality=60, optimize=True, progressive=True, subsampling=2)
+print("wrote", OUT_CARD_JPG, os.path.getsize(OUT_CARD_JPG), "bytes")

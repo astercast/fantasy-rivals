@@ -18,6 +18,18 @@ export default handler(async (req, res) => {
     const me = await getMember(league.id, user.id);
     if (!me) return fail(res, 403, "not_member", "You're not in this league.");
     const state = await draftState(league);
+    /* TY5: draft polling is cheap. The ETag is the draft's own
+       version: pick count + current pick + status. A poller sending
+       If-None-Match gets a 304 with no body when nothing changed,
+       so a 12-team draft costs almost nothing between picks. */
+    const etag = `"draft-${league.id}-${state.draft ? state.draft.status : "none"}-${state.picks.length}-${state.draft ? state.draft.currentPick : 0}"`;
+    if ((req.headers["if-none-match"] || "") === etag) {
+      res.statusCode = 304;
+      res.setHeader("ETag", etag);
+      res.end();
+      return;
+    }
+    res.setHeader("ETag", etag);
     const draftedPlayers = new Set(state.picks.map((p) => p.player_id).filter(Boolean));
     const draftedSquads = new Set(state.picks.map((p) => p.pro_team_id).filter(Boolean));
     const pool = await all(

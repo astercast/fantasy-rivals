@@ -4,47 +4,116 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Rivals Fantasy · Fantasy Marvel Rivals on the real pro season</title>
-<meta name="theme-color" content="#0a1224">
+<meta name="theme-color" content="#0C0D0F">
 <meta property="og:title" content="Rivals Fantasy · Fantasy Marvel Rivals on the real pro season">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
 <meta property="og:description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
-<meta property="og:image" content="/assets/og-card.png">
+<meta property="og:image" content="/assets/og-card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Rivals Fantasy · Fantasy Marvel Rivals on the real pro season">
 <meta name="twitter:description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
-<meta name="twitter:image" content="/assets/og-card.png">
+<meta name="twitter:image" content="/assets/og-card.jpg">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
-<link rel="preload" href="/assets/fonts/archivo-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
+<link rel="stylesheet" href="/assets/css/profile.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
 
-<!-- The front door is a working door: full-bleed current-season key
-     art, the wordmark set over it, one line, one action. Season state,
-     the top of the board, and the wire follow in that order. -->
-<section class="hero">
-  <img class="hero-art" src="/assets/img/hero-key-art.jpg" width="1920" height="620" alt="Marvel Rivals key art" fetchpriority="high">
-  <div class="hero-shade" aria-hidden="true"></div>
-  <div class="hero-in">
-    <div class="wrap">
-      <h1 class="wordmark-big">Rivals<span class="dot">·</span>Fantasy</h1>
-      <p class="hero-line">The pro season, drafted by you. Fantasy on the real Ignite season.</p>
-      <p class="hero-loop">Draft real pros<span class="dot">·</span>Set your lineup every week<span class="dot">·</span>Score from real match stats</p>
-      <div class="cta-row">
-        <a class="btn btn-primary" href="/start.html" data-hero-action>Create a league</a>
-        <a class="btn btn-ghost" href="/season.html">See the season</a>
-      </div>
+<!-- The Stage Profile (rotation 140): the whole season as one drawn
+     route line, status computed from the dates on the visitor's
+     clock by the script below, never from a stored live flag. The
+     baked words are the build-date sample only; the script is the
+     source of truth and rewrites them on every load (FA3). -->
+<section class="season" data-season data-state="break" aria-labelledby="season-h">
+  <div class="season-top">
+    <p class="season-comp">Marvel Rivals · Ignite 2026</p>
+    <h1 class="status" id="season-h">
+      <span class="status-chip" data-word>Next</span>
+      <span class="status-what" data-what>Grand Finals</span>
+      <span class="status-when" data-when>in <b>31</b> days</span>
+    </h1>
+    <p class="season-sub"><span data-sub>Stage 2 is done. Grand Finals run Nov 23 to 29 in Stockholm.</span> Draft real pros and score every week from real matches.</p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/start.html" data-hero-action>Create a league</a>
+      <a class="btn btn-quiet" href="/season.html">The full season</a>
     </div>
   </div>
+
+  <figure class="profile" aria-label="The Ignite 2026 season from March to November, with today marked">
+    <div class="profile-track">
+      <svg class="profile-svg" viewBox="0 0 1000 220" preserveAspectRatio="none" aria-hidden="true">
+        <defs>
+          <clipPath id="road-done"><rect class="done-rect" x="0" y="0" width="850.2" height="220"/></clipPath>
+          <clipPath id="road-ahead"><rect class="ahead-rect" x="850.2" y="0" width="149.8" height="220"/></clipPath>
+        </defs>
+        <line class="baseline" x1="0" y1="200" x2="1000" y2="200"/>
+        <path id="road" class="road road-done" clip-path="url(#road-done)"
+          d="M0 200 L0 160 L149.8 160 L153.8 200 L218.7 200 L222.7 135 L291.5 135 L295.5 200 L360.4 200 L364.4 110 L404.9 110 L408.9 200 L498 200 L502 70 L514.2 70 L518.2 200 L700.5 200 L704.5 135 L785.4 135 L789.5 110 L830 110 L834 200 L971.7 200 L975.7 40 L1000 40 L1000 200 Z"/>
+        <use href="#road" class="road road-ahead" clip-path="url(#road-ahead)"/>
+      </svg>
+
+      <div class="needle" data-needle style="--x: 85.02%">
+        <span class="needle-label">Today</span>
+      </div>
+
+      <ol class="stages">
+        <li style="--a: 0;    --b: 14.98" data-start="2026-03-27" data-end="2026-05-03" data-name="Preseason"><b>Preseason</b><span>Mar 27 to May 3</span></li>
+        <li style="--a: 22.27; --b: 40.49" data-start="2026-05-21" data-end="2026-07-05" data-name="Stage 1"><b>Stage 1</b><span>May 21 to Jul 5</span></li>
+        <li style="--a: 50.2; --b: 51.42" data-start="2026-07-29" data-end="2026-08-01" data-name="Mid-Season Finals" data-where="Los Angeles"><b>Mid-Season Finals</b><span>Jul 29 to Aug 1</span></li>
+        <li style="--a: 70.45; --b: 83"   data-start="2026-09-17" data-end="2026-10-18" data-name="Stage 2"><b>Stage 2</b><span>Sep 17 to Oct 18</span></li>
+        <li class="stage-last" style="--a: 97.57; --b: 100" data-start="2026-11-23" data-end="2026-11-29" data-name="Grand Finals" data-where="Stockholm"><b>Grand Finals</b><span>Nov 23 to 29</span></li>
+      </ol>
+    </div>
+  </figure>
 </section>
 
-<section class="plate" data-season-plate></section>
+<script type="module">
+  /* status from dates on the visitor's clock, never from a stale flag */
+  const sec = document.querySelector("[data-season]");
+  const items = [...sec.querySelectorAll(".stages [data-start]")];
+  const today = new Date().toLocaleDateString("en-CA");
+  const day = (s) => new Date(s + "T12:00:00");
+  const fmt = (s) => day(s).toLocaleDateString("en-US", { month: "short", day: "numeric" });
+  const first = day(items[0].dataset.start), last = day(items.at(-1).dataset.end);
+  const pct = Math.min(100, Math.max(0, (day(today) - first) / (last - first) * 100));
+  const live = items.find((li) => li.dataset.start <= today && today <= li.dataset.end);
+  const next = items.find((li) => li.dataset.start > today);
+  const prev = [...items].reverse().find((li) => li.dataset.end < today);
+  const $ = (k) => sec.querySelector(`[data-${k}]`);
+  items.forEach((li) => li.dataset.state = li === live ? "live" : li.dataset.end < today ? "done" : "ahead");
+  if (live) {
+    sec.dataset.state = "live";
+    $("word").textContent = "Live";
+    $("what").textContent = live.dataset.name;
+    $("when").innerHTML = `until <b>${fmt(live.dataset.end)}</b>`;
+    $("sub").textContent = `${live.dataset.name} is on now.`;
+  } else if (next) {
+    const n = Math.round((day(next.dataset.start) - day(today)) / 864e5);
+    sec.dataset.state = "break";
+    $("word").textContent = "Next";
+    $("what").textContent = next.dataset.name;
+    $("when").innerHTML = n === 1 ? "<b>tomorrow</b>" : `in <b>${n}</b> days`;
+    $("sub").textContent = `${prev ? prev.dataset.name + " is done. " : ""}${next.dataset.name} runs ${fmt(next.dataset.start)} to ${fmt(next.dataset.end)}${next.dataset.where ? " in " + next.dataset.where : ""}.`;
+  } else {
+    sec.dataset.state = "off";
+    $("word").textContent = "Off season";
+    $("what").textContent = "Season complete";
+    $("when").textContent = "";
+    $("sub").textContent = "The next season posts here with its dates.";
+  }
+  $("needle").style.setProperty("--x", pct + "%");
+  sec.querySelector(".done-rect").setAttribute("width", pct * 10);
+  const ahead = sec.querySelector(".ahead-rect");
+  ahead.setAttribute("x", pct * 10);
+  ahead.setAttribute("width", 1000 - pct * 10);
+</script>
 
 <section class="section">
   <div class="wrap">
@@ -70,47 +139,13 @@
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <p class="kicker">The season</p>
-    <div class="art-block">
-      <div class="ab-media">
-        <img src="/assets/img/still-playoffs.jpg" width="1440" height="810" alt="Thanos in Marvel Rivals" loading="lazy">
-        <div class="ab-head">
-          <h3>Stage 2 playoffs</h3>
-          <span class="tag-live">Live now</span>
-        </div>
-      </div>
-      <p>Oct 8 to 18, 2026. Each region's playoff winner qualifies directly for the Grand Finals, and the same results settle most of the League Points table.</p>
-    </div>
-    <div class="art-block">
-      <div class="ab-media">
-        <img src="/assets/img/still-finals.jpg" width="1440" height="810" alt="K'un-Lun arena in Marvel Rivals" loading="lazy">
-        <div class="ab-head"><h3>Grand Finals, Stockholm</h3></div>
-      </div>
-      <p>Nov 23 to 29, 2026, at DreamHack Stockholm. Twelve teams reach the finals: four from the Americas, four from EMEA, two from the Pacific, two from China.</p>
-    </div>
-    <div class="art-block">
-      <div class="ab-media">
-        <img src="/assets/img/still-pool.jpg" width="1440" height="810" alt="Iron Man in Marvel Rivals gameplay" loading="lazy">
-        <div class="ab-head">
-          <h3>The player pool</h3>
-          <span class="spacer" style="flex:1"></span>
-          <a href="/players.html" style="font-weight:600">Browse the pool</a>
-        </div>
-      </div>
-      <p>98 verified pros from 56 teams. Pick by role, run a snake draft with your friends, and score every week from the actual match stats. No spreadsheets. No honor system.</p>
-    </div>
-  </div>
-</section>
-
 <section class="section" id="games">
   <div class="wrap">
     <p class="kicker">The games</p>
     <div class="section-head"><h2>Games</h2></div>
     <div class="wire-line">
       <span class="w-name">Marvel Rivals</span>
-      <span class="w-state live">Live now</span>
+      <span class="w-state" data-game-state>On a break</span>
       <span class="w-fact">Ignite 2026 is the circuit, and it closes with the Grand Finals in Stockholm this November. Full pool, leagues open.</span>
     </div>
     <div class="wire-line">
@@ -125,7 +160,6 @@
 <script type="module">
   import { renderChrome, renderSeasonPlate, fetchJson, esc, fmtDate, api, GAME_SLUG } from "/assets/js/site.js";
   renderChrome("home");
-  renderSeasonPlate(document.querySelector("[data-season-plate]"));
   api("/api/auth/me").then(({ user }) => {
     if (!user) return;
     const a = document.querySelector("[data-hero-action]");
@@ -157,7 +191,19 @@
     for (const s of [...season.seasons].sort((a, b) => (b.startsOn || "").localeCompare(a.startsOn || ""))) {
       (groups[monthOf(s.startsOn)] ||= []).push(s);
     }
-    const stateWord = (s) => s.state === "live" ? "Live now" : s.state === "upcoming" ? "Upcoming" : "Complete";
+    /* state from the dates on the visitor's clock, never the stored
+       state field (FA2: no surface asserts a live state the dates
+       do not support) */
+    const todayStr = new Date().toLocaleDateString("en-CA");
+    const stateOf = (s) => (s.startsOn <= todayStr && todayStr <= s.endsOn) ? "live" : (s.startsOn > todayStr ? "upcoming" : "complete");
+    const stateWord = (s) => stateOf(s) === "live" ? "Live now" : stateOf(s) === "upcoming" ? "Upcoming" : "Complete";
+    const gameState = document.querySelector("[data-game-state]");
+    if (gameState) {
+      const anyLive = season.seasons.some((s) => stateOf(s) === "live");
+      const anyNext = season.seasons.some((s) => stateOf(s) === "upcoming");
+      gameState.textContent = anyLive ? "Live now" : anyNext ? "On a break" : "Season complete";
+      gameState.classList.toggle("live", anyLive);
+    }
     document.querySelector("[data-wire]").innerHTML = Object.entries(groups).map(([month, ss]) => `
       <div class="wire-group">
         <p class="wire-date">${esc(month)}</p>
@@ -165,7 +211,7 @@
           <div class="wire-line">
             <span class="w-name">${esc(s.name)}</span>
             <span class="w-stage">${esc(s.stage || "")}</span>
-            <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
+            <span class="w-state${stateOf(s) === "live" ? " live" : ""}">${stateWord(s)}</span>
             <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
             <span class="w-fact">${esc(firstFact(s.sourceNote))}</span>
           </div>`).join("")}

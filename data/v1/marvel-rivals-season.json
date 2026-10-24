@@ -4,19 +4,9 @@
     "slug": "marvel-rivals",
     "status": "active"
   },
-  "generatedAt": "2026-10-15T22:32:58.721Z",
-  "asOf": "2026-10-15",
-  "liveNow": [
-    {
-      "endsOn": "2026-10-18",
-      "name": "Marvel Rivals Ignite 2026: Stage 2",
-      "sourceNote": "Playoffs run Oct 8 to 18, 2026, staggered by region (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16), per the official Version 20260911 patch notes (marvelrivals.com, read Oct 15, 2026); Beebom's Pick'Ems coverage (Oct 9, 2026) gives the same Oct 8 to 18 envelope. The regional events run Sep 17 to Oct 18, 2026: the regular season opened Sep 17 with the Oceania and China series, the Americas and EMEA series began Sep 18, and the Asia series joined Sep 25 (official patch notes, as above; MRVL's event listings, read Oct 14, 2026, agree). The September 28 approximate start carried here first, and the September 18 opening date carried after it, are both corrected: competition began Sep 17. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7. Series results and playoff fixtures are imported in db/imports (MRVL, read Oct 14, 2026); the hub tally and schedule derive from that record.",
-      "stage": "Playoffs Oct 8 to 18, 2026 (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16); group stage complete",
-      "startsOn": "2026-09-17",
-      "status": "current",
-      "state": "live"
-    }
-  ],
+  "generatedAt": "2026-10-22T16:23:49Z",
+  "asOf": "2026-10-22",
+  "liveNow": [],
   "nextUp": {
     "endsOn": "2026-11-29",
     "name": "Marvel Rivals Ignite 2026: Grand Finals",
@@ -26,7 +16,7 @@
     "status": "upcoming",
     "state": "upcoming"
   },
-  "headline": "Marvel Rivals Ignite 2026: Stage 2 is live now - league creation is open.",
+  "headline": "Marvel Rivals Ignite 2026: Stage 2 is complete - the Grand Finals are Nov 23 to 29 at DreamHack Stockholm.",
   "seasons": [
     {
       "endsOn": "2026-10-18",
@@ -34,8 +24,8 @@
       "sourceNote": "Playoffs run Oct 8 to 18, 2026, staggered by region (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16), per the official Version 20260911 patch notes (marvelrivals.com, read Oct 15, 2026); Beebom's Pick'Ems coverage (Oct 9, 2026) gives the same Oct 8 to 18 envelope. The regional events run Sep 17 to Oct 18, 2026: the regular season opened Sep 17 with the Oceania and China series, the Americas and EMEA series began Sep 18, and the Asia series joined Sep 25 (official patch notes, as above; MRVL's event listings, read Oct 14, 2026, agree). The September 28 approximate start carried here first, and the September 18 opening date carried after it, are both corrected: competition began Sep 17. Group series are best-of-3, playoff series best-of-5, grand finals best-of-7. Series results and playoff fixtures are imported in db/imports (MRVL, read Oct 14, 2026); the hub tally and schedule derive from that record.",
       "stage": "Playoffs Oct 8 to 18, 2026 (Pacific from Oct 8, Americas and EMEA from Oct 15, China from Oct 16); group stage complete",
       "startsOn": "2026-09-17",
-      "status": "current",
-      "state": "live"
+      "status": "complete",
+      "state": "complete"
     },
     {
       "endsOn": "2026-11-29",

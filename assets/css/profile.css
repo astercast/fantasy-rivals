@@ -1,0 +1,227 @@
+/* ================================================================
+   THE STAGE PROFILE — the season layer (rotation 140, design
+   consult "The Stage Profile", graded Round 368 FA1-FA4).
+   Loaded after main.css on every page; fonts are self-hosted
+   (see assets/fonts/FONTS.md): zero remote font requests.
+   ================================================================ */
+@font-face {
+  font-family: "Saira";
+  src: url("../fonts/saira-latin-normal-var.woff2") format("woff2-variations");
+  font-weight: 400 800; font-stretch: 75% 125%; font-style: normal; font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ============ 1. TOKENS: The Stage Profile ============ */
+:root {
+  color-scheme: dark;
+
+  --arena: #0C0D0F;
+  --deck:  #16181B;
+  --line:  #2A2D31;
+  --ink:   #F3F4F2;
+  --ink-2: #A6AAAD;
+  --live:  #FF2E88;
+  --done-fill: color-mix(in oklab, var(--ink) 12%, transparent);
+  --live-wash: color-mix(in oklab, var(--live) 18%, transparent);
+
+  --font: "Saira", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --wide: 125%;
+
+  --fs-what:  clamp(2.8rem, 1rem + 7.4vw, 9rem);
+  --fs-when:  clamp(1.6rem, .9rem + 3vw, 4.25rem);
+  --fs-body:  clamp(1rem, .96rem + .2vw, 1.1rem);
+  --fs-label: .75rem;
+
+  /* space: 8px unit */
+  --s-1: .5rem;
+  --s-2: 1rem;
+  --s-3: 1.5rem;
+  --s-4: 2rem;
+  --s-5: 3rem;
+  --s-6: 5rem;
+  --gutter: clamp(1rem, .3rem + 3vw, 3rem);
+  --page: 84rem;
+
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+
+  /* old names, so every page leaves the navy */
+  --bg: var(--arena); --bg-2: var(--deck); --panel: var(--deck);
+  --line-strong: #3A3E43;
+  --ink-3: var(--ink-2);
+  --red: var(--live); --red-deep: var(--live); --red-dim: var(--live-wash);
+}
+
+/* ============ 2. BASE ============ */
+html, body { background: var(--arena); color: var(--ink); }
+body { margin: 0; font-family: var(--font); font-size: var(--fs-body); line-height: 1.5; font-variant-numeric: tabular-nums; }
+a { color: inherit; text-underline-offset: .2em; }
+:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: .5em;
+  padding: .85em 1.25em .8em;
+  font: 700 .95rem/1 var(--font);
+  font-stretch: var(--wide);
+  letter-spacing: .04em; text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid transparent; border-radius: 4px;
+  cursor: pointer;
+}
+.btn-primary { background: var(--ink); color: var(--arena); }
+.btn-primary:hover { background: #FFFFFF; }
+.btn-quiet { background: transparent; color: var(--ink); border-color: var(--line); }
+.btn-quiet:hover { border-color: var(--ink-2); }
+.btn-small { padding: .6em .9em .55em; font-size: .8rem; }
+
+/* ============ 3. HEADER ============ */
+.site-head { position: sticky; top: 0; z-index: 30; background: color-mix(in oklab, var(--arena) 94%, transparent); border-bottom: 1px solid var(--line); }
+.site-head .band {
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: var(--s-1) var(--s-5);
+  max-inline-size: var(--page);
+  margin-inline: auto;
+  padding: .75rem var(--gutter);
+}
+.wordmark {
+  font: 800 1.05rem/1 var(--font);
+  font-stretch: var(--wide);
+  letter-spacing: .06em; text-transform: uppercase;
+  text-decoration: none;
+}
+.wordmark .dot { color: var(--ink-2); margin-inline: .15em; }
+.main-nav { display: flex; gap: var(--s-4); }
+.main-nav a { font: 600 .9rem/1 var(--font); color: var(--ink-2); text-decoration: none; padding-block: .6rem; }
+.main-nav a:hover, .main-nav a[aria-current="page"] { color: var(--ink); box-shadow: inset 0 -2px var(--ink); }
+.head-right { display: flex; align-items: center; gap: var(--s-3); margin-inline-start: auto; }
+.head-link { font-size: .9rem; color: var(--ink-2); text-decoration: none; }
+.head-link:hover { color: var(--ink); }
+
+/* ============ 4. THE SEASON ============ */
+.season {
+  position: relative;
+  overflow: hidden;
+  padding: var(--s-6) var(--gutter) var(--s-5);
+  border-bottom: 1px solid var(--line);
+  isolation: isolate;
+}
+/* the key art as quiet atmosphere, fading into the right edge */
+.season::before {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: url("/assets/img/hero-key-art.jpg") right center / cover no-repeat;
+  filter: grayscale(1) contrast(1.1);
+  opacity: .28;
+  mask-image: linear-gradient(to left, #000 0%, transparent 62%);
+}
+.season-top, .profile { max-inline-size: var(--page); margin-inline: auto; }
+
+.season-comp {
+  margin: 0;
+  font: 600 var(--fs-label)/1 var(--font);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--ink-2);
+}
+.status { display: grid; justify-items: start; gap: .1em; margin: var(--s-3) 0 0; font-weight: 800; view-transition-name: season-status; }
+.status-chip {
+  display: inline-flex; align-items: center; gap: .5em;
+  padding: .45em .7em .4em;
+  font: 800 .85rem/1 var(--font);
+  font-stretch: var(--wide);
+  letter-spacing: .14em; text-transform: uppercase;
+  border: 1px solid var(--ink);
+  border-radius: 3px;
+}
+.status-what {
+  font: 800 var(--fs-what)/.9 var(--font);
+  font-stretch: var(--wide);
+  letter-spacing: -.01em;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+.status-when { font: 600 var(--fs-when)/1 var(--font); color: var(--ink-2); }
+.status-when b { color: var(--ink); font-weight: 800; }
+
+.season[data-state="live"] .status-chip { background: var(--live); border-color: var(--live); color: var(--arena); }
+.season[data-state="live"] .status-chip::before {
+  content: ""; inline-size: .55em; block-size: .55em; border-radius: 50%; background: var(--arena);
+}
+.season[data-state="off"] .status-chip { color: var(--ink-2); border-color: var(--line); }
+
+.season-sub { margin: var(--s-3) 0 0; max-inline-size: 52ch; color: var(--ink-2); }
+.season-sub [data-sub] { color: var(--ink); }
+.cta-row { display: flex; flex-wrap: wrap; gap: var(--s-2); margin-top: var(--s-4); }
+
+/* ============ 5. THE PROFILE ============ */
+.profile { margin-top: var(--s-5); margin-bottom: 0; overflow-x: auto; scrollbar-width: none; }
+.profile-track { position: relative; min-inline-size: 44rem; padding-bottom: 3.25rem; }
+.profile-svg { display: block; inline-size: 100%; block-size: clamp(7rem, 16vw, 11rem); overflow: visible; }
+.baseline { stroke: var(--line); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.road { vector-effect: non-scaling-stroke; stroke-linejoin: round; }
+.road-done { fill: var(--done-fill); stroke: var(--ink); stroke-width: 2; }
+.road-ahead { fill: none; stroke: var(--ink-2); stroke-width: 1.5; stroke-dasharray: 6 5; }
+
+.needle {
+  position: absolute; top: -1.75rem; bottom: 3.25rem;
+  left: var(--x);
+  inline-size: 2px; margin-inline-start: -1px;
+  background: var(--live);
+}
+.needle::after {
+  content: "";
+  position: absolute; top: 1.4rem; left: 50%;
+  inline-size: .7rem; block-size: .7rem;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: var(--live);
+}
+.needle-label {
+  position: absolute; top: 0; left: .6rem;
+  font: 700 var(--fs-label)/1 var(--font);
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--live);
+  white-space: nowrap;
+}
+
+.stages { list-style: none; margin: 0; padding: 0; position: absolute; inset: auto 0 0 0; block-size: 3rem; }
+.stages li {
+  position: absolute; top: .6rem;
+  left: calc(var(--a) * 1%);
+  display: grid; gap: .2rem;
+  min-inline-size: 6rem;
+  font-size: var(--fs-label);
+  white-space: nowrap;
+}
+.stages li.stage-last { left: auto; right: 0; text-align: end; }
+.stages b { font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.stages span { color: var(--ink-2); }
+.stages li[data-state="done"] b { color: var(--ink-2); }
+.stages li[data-state="live"] b { color: var(--live); }
+
+@media (width < 40rem) {
+  .stages span { display: none; }
+  .status-chip { font-size: .75rem; }
+}
+
+/* ============ 6. THE WIRE AS ONE RULED LINE (the break band) ============ */
+.wire-group { margin-bottom: var(--s-2); }
+.wire-line {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .35rem var(--s-3);
+  padding: .65rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.w-state.live { color: var(--live); font-weight: 700; }
+
+/* ============ 7. MOTION ============ */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-group(season-status) { animation-duration: 360ms; animation-timing-function: var(--ease-out); }
+
+  .done-rect { transform-box: fill-box; transform-origin: left center; animation: road-in 1.2s var(--ease-out) both; }
+  .needle { animation: needle-in 600ms var(--ease-out) 900ms both; }
+  .season[data-state="live"] .needle::after,
+  .season[data-state="live"] .status-chip::before { animation: beat 2s ease-in-out infinite; }
+}
+@keyframes road-in   { from { transform: scaleX(0); } }
+@keyframes needle-in { from { opacity: 0; translate: 0 -.75rem; } }
+@keyframes beat      { 50% { opacity: .35; } }

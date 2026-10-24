@@ -1,8 +1,13 @@
 import { handler, json, fail, readBody, methodNotAllowed } from "../../lib/http.js";
 import { findUserByEmail, verifyPassword, startSession, sessionCookie } from "../../lib/auth.js";
+import { tooManyAttempts, recordAttempt } from "../../lib/rate-limit.js";
 
 export default handler(async (req, res) => {
   if (req.method !== "POST") return methodNotAllowed(res, ["POST"]);
+  if (await tooManyAttempts(req, "login")) {
+    return fail(res, 429, "rate_limited", "Too many sign-in tries. Wait a few minutes and try again.");
+  }
+  await recordAttempt(req, "login");
   const { email, password } = await readBody(req);
   const row = email ? await findUserByEmail(email) : null;
   if (!row || !verifyPassword(String(password || ""), row.pass_salt, row.pass_hash)) {

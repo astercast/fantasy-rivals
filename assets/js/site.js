@@ -64,15 +64,15 @@ export function renderChrome(active) {
   const head = document.querySelector("[data-chrome-head]");
   if (head) {
     head.innerHTML = `
-      <div class="wrap band">
+      <div class="band">
         <a class="wordmark" href="/">Rivals<span class="dot">·</span>Fantasy</a>
-        <nav class="main-nav">
+        <nav class="main-nav" aria-label="Primary">
           <a href="/season.html" ${active === "season" ? 'aria-current="page"' : ""}>Season</a>
           <a href="/players.html" ${active === "players" ? 'aria-current="page"' : ""}>Players</a>
           <a href="/dashboard.html" ${active === "dashboard" ? 'aria-current="page"' : ""}>My Leagues</a>
         </nav>
         <div class="head-right" data-head-right>
-          <a class="small muted" href="/auth.html" ${active === "auth" ? 'aria-current="page"' : ""} style="text-decoration:none">Sign in</a>
+          <a class="head-link" href="/auth.html" ${active === "auth" ? 'aria-current="page"' : ""}>Sign in</a>
           <a class="btn btn-primary btn-small" href="/start.html" ${active === "start" ? 'aria-current="page"' : ""}>Create a league</a>
         </div>
       </div>`;
@@ -129,8 +129,13 @@ export async function renderSeasonPlate(el) {
     el.innerHTML = `<div class="wrap"><p class="muted small" style="padding:24px 0">Season status is temporarily unavailable.</p></div>`;
     return;
   }
-  const live = data.liveNow?.[0];
-  const next = data.nextUp;
+  /* FA2 (rotation 140): Live and Next are computed from the season
+     dates on the visitor's clock. The stored liveNow / nextUp fields
+     are never trusted: old data cannot claim a match is live. */
+  const todayStr = new Date().toLocaleDateString("en-CA");
+  const seasons = [...(data.seasons || [])].sort((a, b) => (a.startsOn || "").localeCompare(b.startsOn || ""));
+  const live = seasons.find((s) => s.startsOn <= todayStr && todayStr <= s.endsOn);
+  const next = seasons.find((s) => s.startsOn > todayStr);
   const focus = live || next;
   if (!focus) {
     if (compact) {

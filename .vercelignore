@@ -1,0 +1,12 @@
+# TY6 (rotation 140): docs and screenshots stay out of the deploy.
+# lib/ and scripts/ are NOT ignored: the api/ functions import lib/,
+# and internals the functions need ship with them, not as pages.
+# TY6 completed (rotation 142): db/schema.sql is the review twin of
+# lib/schema.js (both files say so on their faces) and db/imports/
+# holds raw results fixtures — neither is read at runtime or build
+# time, so both stay out. db/seed-data/ is NOT ignored: lib/seed-data.js
+# and scripts/build-site.mjs load it.
+screenshots
+*.md
+db/schema.sql
+db/imports
