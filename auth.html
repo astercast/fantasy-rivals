@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="built" content="2026-10-24T13:46:16.956Z">
 <title>Sign in · Rivals Fantasy</title>
 <meta name="theme-color" content="#0C0D0F">
 <meta name="description" content="Sign in to Rivals Fantasy with Google, X, or your email, or create an account.">
@@ -22,6 +23,8 @@
 <link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/profile.css">
+<link rel="stylesheet" href="/assets/css/status.css">
+<link rel="stylesheet" href="/assets/css/pulse.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
@@ -74,8 +77,8 @@
     </a>
     ${configured ? "" : `<p class="fine" style="margin:8px 0 4px">${note}</p>`}`;
   box.innerHTML =
-    btn("google", "Google", "G", providers.google, "Google sign-in activates at launch, email works today.") +
-    btn("x", "X", "𝕏", providers.x, "X sign-in activates at launch, email works today.") +
+    btn("google", "Google", "G", providers.google, "Google sign-in activates at launch.") +
+    btn("x", "X", "𝕏", providers.x, "X sign-in activates at launch.") +
     (providers.dev ? btn("dev", "Dev account", "⚙", true, "") : "");
 
   function setMode(mode) {
@@ -84,7 +87,7 @@
     document.querySelector("[data-signup-form]").classList.toggle("hidden", !signup);
     document.querySelector("[data-heading]").textContent = signup ? "Create your account" : "Sign in";
     document.querySelector("[data-sub]").textContent = signup
-      ? "Free. One account for every game on the site, forever."
+      ? "Free. One account for every game on the site."
       : "One click with the account you already have.";
     document.title = signup ? "Create your account · Rivals Fantasy" : "Sign in · Rivals Fantasy";
     document.querySelector("[data-switch-line]").innerHTML = signup

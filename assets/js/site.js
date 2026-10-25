@@ -62,6 +62,23 @@ export function isLoudState(live) {
 
 export function renderChrome(active) {
   const head = document.querySelector("[data-chrome-head]");
+  /* Season Status Plate mini strip + pulse (2026-10-24, fr-live): one
+     sticky line under the nav on EVERY page, state computed in the
+     browser from the season dates every second by status.js (the full
+     plate lives on home and season). Pulse is the quiet data-freshness
+     bar driven by data/v1/pulse.json. Both load from here so no page
+     can miss them; a failure removes the strip and says nothing. */
+  if (head && !document.querySelector("[data-status-mini]")) {
+    const mini = document.createElement("div");
+    mini.className = "status-mini";
+    mini.setAttribute("data-status-mini", "");
+    mini.setAttribute("role", "status");
+    head.after(mini);
+    import("/assets/js/status.js")
+      .then((m) => m.mountMini(mini, `/data/v1/${GAME_SLUG}-season.json`))
+      .catch(() => mini.remove());
+    import("/assets/js/pulse.js").catch(() => {});
+  }
   if (head) {
     head.innerHTML = `
       <div class="band">
@@ -101,6 +118,7 @@ export function renderChrome(active) {
       const right = document.querySelector("[data-head-right]");
       if (!right) return;
       if (user) {
+        document.querySelectorAll('.foot-nav a[href="/auth.html"]').forEach((a) => a.remove());
         right.innerHTML = `
           <span class="head-user">${esc(user.displayName)}</span>
           <a class="small muted head-dupe" href="/dashboard.html" style="text-decoration:none">My leagues</a>
@@ -191,6 +209,118 @@ export async function renderSeasonPlate(el) {
       </div>
     </div>`;
   fillTally(el);
+}
+
+/* --- the hero portrait system (image density pass, 2026-10-24) ---
+   The repo's portrait set is the game's 54 heroes, official art
+   (provenance: assets/img/MANIFEST.md). Portraits are heroes, never
+   pro players: beside a pro, a portrait is that pro's listed
+   signature hero from the pool data, and it renders only where the
+   data lists one — never invented for a pro who has none listed. */
+export const HERO_PORTRAITS = [
+  ["Doctor Strange", "Vanguard"], ["Magneto", "Vanguard"], ["Hulk", "Vanguard"],
+  ["Captain America", "Vanguard"], ["Angela", "Vanguard"], ["Devil Dinosaur", "Vanguard"],
+  ["Emma Frost", "Vanguard"], ["Groot", "Vanguard"], ["Peni Parker", "Vanguard"],
+  ["Rogue", "Vanguard"], ["The Hood", "Vanguard"], ["The Thing", "Vanguard"],
+  ["Thor", "Vanguard"], ["Venom", "Vanguard"],
+  ["Iron Man", "Duelist"], ["Spider-Man", "Duelist"], ["Magik", "Duelist"],
+  ["Hela", "Duelist"], ["Black Cat", "Duelist"], ["Black Panther", "Duelist"],
+  ["Black Widow", "Duelist"], ["Blade", "Duelist"], ["Cyclops", "Duelist"],
+  ["Daredevil", "Duelist"], ["Deadpool", "Duelist"], ["Elsa Bloodstone", "Duelist"],
+  ["Gorr the God Butcher", "Duelist"], ["Hawkeye", "Duelist"], ["Human Torch", "Duelist"],
+  ["Iron Fist", "Duelist"], ["Mister Fantastic", "Duelist"], ["Moon Knight", "Duelist"],
+  ["Namor", "Duelist"], ["Phoenix", "Duelist"], ["Psylocke", "Duelist"],
+  ["Scarlet Witch", "Duelist"], ["Squirrel Girl", "Duelist"], ["Star-Lord", "Duelist"],
+  ["Storm", "Duelist"], ["The Punisher", "Duelist"], ["Winter Soldier", "Duelist"],
+  ["Wolverine", "Duelist"],
+  ["Luna Snow", "Strategist"], ["Rocket Raccoon", "Strategist"], ["Adam Warlock", "Strategist"],
+  ["Jeff the Land Shark", "Strategist"], ["Cloak & Dagger", "Strategist"], ["Gambit", "Strategist"],
+  ["Invisible Woman", "Strategist"], ["Jubilee", "Strategist"], ["Loki", "Strategist"],
+  ["Mantis", "Strategist"], ["Ultron", "Strategist"], ["White Fox", "Strategist"],
+];
+const HERO_SLUG_SPECIAL = { "Cloak & Dagger": "cloakanddagger" };
+export function heroPortraitUrl(name) {
+  const slug = HERO_SLUG_SPECIAL[name] ||
+    String(name).toLowerCase().replace(/&/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+  return `/assets/img/heroes/hero-portrait-${slug}.png`;
+}
+/* The same portrait as a <picture>: generated AVIF, then WebP, with
+   the shipped PNG as the fallback <img>. Used by the block surfaces
+   (wall, ribbon, spotlight); the small face chips keep the plain PNG. */
+export function heroPictureHtml(name, { w = 154, h = 280 } = {}) {
+  const png = heroPortraitUrl(name);
+  const base = png.replace(/\.png$/, "");
+  return `<picture><source type="image/avif" srcset="${base}.avif"><source type="image/webp" srcset="${base}.webp">` +
+    `<img src="${png}" width="${w}" height="${h}" alt="${esc(name)}" loading="lazy"></picture>`;
+}
+export function heroFaceImg(heroName) {
+  if (!heroName) return "";
+  return `<img class="p-face" src="${heroPortraitUrl(heroName)}" alt="${esc(heroName)}" title="${esc(heroName)}" loading="lazy">`;
+}
+/* A pro's face chip: the portrait of the first hero the pool lists
+   for them, or nothing when the pool lists none. */
+export function playerFaceImg(player) {
+  const hero = player?.heroes?.[0];
+  return hero ? heroFaceImg(hero) : "";
+}
+export function heroStackHtml(heroNames, limit = 3) {
+  const names = [...new Set(heroNames || [])].slice(0, limit);
+  if (!names.length) return "";
+  return `<span class="p-stack" aria-hidden="true">${names.map((n) =>
+    `<img src="${heroPortraitUrl(n)}" alt="" loading="lazy">`).join("")}</span>`;
+}
+/* A pro team's stack: the signature heroes of its rostered pros, in
+   draft order, from the same teams data the pool renders from. */
+export function teamHeroStackHtml(teamsData, short, limit = 3) {
+  if (!teamsData || !short) return "";
+  const names = (teamsData.players || [])
+    .filter((p) => p.team === short && p.heroes?.length)
+    .sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999))
+    .map((p) => p.heroes[0]);
+  return heroStackHtml(names, limit);
+}
+const HERO_ROLE_LINE = {
+  Vanguard: "Vanguards hold the front line and take the space fights start from.",
+  Duelist: "Duelists deal the damage and finish the fights.",
+  Strategist: "Strategists heal and set up the team to win the fight.",
+};
+/* The full 54-hero wall, grouped by role — the same markup and
+   classes as the players-page hero strip. */
+export function heroWallHtml() {
+  return `<div class="hero-strip">${["Vanguard", "Duelist", "Strategist"].map((role) => `
+    <div class="hero-group">
+      <h3>${role}</h3>
+      <p class="role-line">${HERO_ROLE_LINE[role]}</p>
+      <div class="hero-portraits">
+        ${HERO_PORTRAITS.filter(([, r]) => r === role).map(([name]) => `
+          <figure>${heroPictureHtml(name)}<figcaption>${esc(name)}</figcaption></figure>`).join("")}
+      </div>
+    </div>`).join("")}
+  </div>`;
+}
+export function renderHeroWall(el) {
+  if (el) el.innerHTML = heroWallHtml();
+}
+/* A sideways portrait ribbon of all 54 heroes, each face a link. */
+export function heroRibbonHtml(href) {
+  return HERO_PORTRAITS.map(([name, role]) => `
+    <figure><a href="${href}" data-open-heroes title="${esc(name)} · ${esc(role)}">${heroPictureHtml(name)}</a><figcaption>${esc(name)}</figcaption></figure>`).join("");
+}
+const SPOT_ROLE_CLASS = { Vanguard: "van", Duelist: "due", Strategist: "str" };
+/* A spotlight card for one pro: the art is their listed signature
+   hero's official portrait, and the card says so on its face. */
+export function spotCardHtml(p, teamName) {
+  const hero = p.heroes?.[0];
+  if (!hero) return "";
+  return `
+    <article class="spot-card">
+      <div class="sc-art">${heroPictureHtml(hero)}</div>
+      <div class="sc-body">
+        <p class="sc-ign">${esc(p.ign)} <span class="role ${SPOT_ROLE_CLASS[p.role] || ""}">${esc(p.role)}</span></p>
+        <p class="sc-meta">#${p.draftRank ?? "·"} on the board · ${esc(teamName || p.team || "")}</p>
+        <p class="sc-hero">Signature hero: ${esc(hero)}</p>
+      </div>
+    </article>`;
 }
 
 async function fillTally(plateEl) {

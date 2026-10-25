@@ -24,7 +24,8 @@
       "maxDuration": 10
     },
     "api/health.js": {
-      "maxDuration": 10
+      "maxDuration": 10,
+      "includeFiles": "data/v1/**"
     },
     "api/leagues/draft.js": {
       "maxDuration": 10

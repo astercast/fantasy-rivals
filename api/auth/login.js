@@ -7,10 +7,10 @@ export default handler(async (req, res) => {
   if (await tooManyAttempts(req, "login")) {
     return fail(res, 429, "rate_limited", "Too many sign-in tries. Wait a few minutes and try again.");
   }
-  await recordAttempt(req, "login");
   const { email, password } = await readBody(req);
   const row = email ? await findUserByEmail(email) : null;
   if (!row || !verifyPassword(String(password || ""), row.pass_salt, row.pass_hash)) {
+    await recordAttempt(req, "login");
     return fail(res, 401, "bad_credentials", "Email or password didn't match.");
   }
   const token = await startSession(row.id);

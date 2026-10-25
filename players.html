@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="built" content="2026-10-24T13:46:16.956Z">
 <title>Players · Rivals Fantasy</title>
 <meta name="theme-color" content="#0C0D0F">
 <meta property="og:title" content="Players · Rivals Fantasy">
@@ -22,6 +23,9 @@
 <link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/profile.css">
+<link rel="stylesheet" href="/assets/css/status.css">
+<link rel="stylesheet" href="/assets/css/pulse.css">
+<link rel="stylesheet" href="/assets/css/media.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
@@ -29,87 +33,12 @@
 <section class="section">
   <div class="wrap">
     <p class="kicker">The pool</p>
-    <div class="section-head"><h1>Player pool</h1></div>
+    <div class="section-head"><h1>Player pool</h1><span class="spacer"></span><a href="#heroes" data-open-heroes style="font-weight:600">The 54 heroes</a></div>
 
-    <!-- The heroes of the game, by role: the full 54-hero roster as
-         tagged on the official heroes page. These portraits are heroes,
-         never pro players: they show the jobs the pool is drafted by.
-         Deadpool is tagged for all three roles on that page; he stands
-         once, with the Duelists. -->
-    <div class="hero-strip">
-      <div class="hero-group">
-        <h3>Vanguard</h3>
-        <p class="role-line">Vanguards hold the front line and take the space fights start from.</p>
-        <div class="hero-portraits">
-          <figure><img src="/assets/img/heroes/hero-portrait-doctor-strange.png" width="154" height="280" alt="Doctor Strange" loading="lazy"><figcaption>Doctor Strange</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-magneto.png" width="154" height="279" alt="Magneto" loading="lazy"><figcaption>Magneto</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-hulk.png" width="154" height="281" alt="Hulk" loading="lazy"><figcaption>Hulk</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-captain-america.png" width="154" height="281" alt="Captain America" loading="lazy"><figcaption>Captain America</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-angela.png" width="154" height="281" alt="Angela" loading="lazy"><figcaption>Angela</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-devil-dinosaur.png" width="154" height="281" alt="Devil Dinosaur" loading="lazy"><figcaption>Devil Dinosaur</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-emma-frost.png" width="154" height="281" alt="Emma Frost" loading="lazy"><figcaption>Emma Frost</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-groot.png" width="155" height="280" alt="Groot" loading="lazy"><figcaption>Groot</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-peni-parker.png" width="155" height="279" alt="Peni Parker" loading="lazy"><figcaption>Peni Parker</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-rogue.png" width="154" height="281" alt="Rogue" loading="lazy"><figcaption>Rogue</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-the-hood.png" width="154" height="281" alt="The Hood" loading="lazy"><figcaption>The Hood</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-the-thing.png" width="154" height="281" alt="The Thing" loading="lazy"><figcaption>The Thing</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-thor.png" width="154" height="281" alt="Thor" loading="lazy"><figcaption>Thor</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-venom.png" width="154" height="280" alt="Venom" loading="lazy"><figcaption>Venom</figcaption></figure>
-        </div>
-      </div>
-      <div class="hero-group">
-        <h3>Duelist</h3>
-        <p class="role-line">Duelists deal the damage and finish the fights.</p>
-        <div class="hero-portraits">
-          <figure><img src="/assets/img/heroes/hero-portrait-iron-man.png" width="154" height="280" alt="Iron Man" loading="lazy"><figcaption>Iron Man</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-spider-man.png" width="154" height="280" alt="Spider-Man" loading="lazy"><figcaption>Spider-Man</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-magik.png" width="155" height="279" alt="Magik" loading="lazy"><figcaption>Magik</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-hela.png" width="155" height="280" alt="Hela" loading="lazy"><figcaption>Hela</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-black-cat.png" width="154" height="281" alt="Black Cat" loading="lazy"><figcaption>Black Cat</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-black-panther.png" width="154" height="280" alt="Black Panther" loading="lazy"><figcaption>Black Panther</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-black-widow.png" width="154" height="281" alt="Black Widow" loading="lazy"><figcaption>Black Widow</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-blade.png" width="154" height="281" alt="Blade" loading="lazy"><figcaption>Blade</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-cyclops.png" width="154" height="281" alt="Cyclops" loading="lazy"><figcaption>Cyclops</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-daredevil.png" width="154" height="281" alt="Daredevil" loading="lazy"><figcaption>Daredevil</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-deadpool.png" width="154" height="280" alt="Deadpool" loading="lazy"><figcaption>Deadpool</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-elsa-bloodstone.png" width="154" height="281" alt="Elsa Bloodstone" loading="lazy"><figcaption>Elsa Bloodstone</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-gorr-the-god-butcher.png" width="154" height="281" alt="Gorr the God Butcher" loading="lazy"><figcaption>Gorr the God Butcher</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-hawkeye.png" width="154" height="280" alt="Hawkeye" loading="lazy"><figcaption>Hawkeye</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-human-torch.png" width="154" height="281" alt="Human Torch" loading="lazy"><figcaption>Human Torch</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-iron-fist.png" width="154" height="281" alt="Iron Fist" loading="lazy"><figcaption>Iron Fist</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-mister-fantastic.png" width="154" height="280" alt="Mister Fantastic" loading="lazy"><figcaption>Mister Fantastic</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-moon-knight.png" width="154" height="281" alt="Moon Knight" loading="lazy"><figcaption>Moon Knight</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-namor.png" width="154" height="281" alt="Namor" loading="lazy"><figcaption>Namor</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-phoenix.png" width="154" height="281" alt="Phoenix" loading="lazy"><figcaption>Phoenix</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-psylocke.png" width="154" height="281" alt="Psylocke" loading="lazy"><figcaption>Psylocke</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-scarlet-witch.png" width="154" height="281" alt="Scarlet Witch" loading="lazy"><figcaption>Scarlet Witch</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-squirrel-girl.png" width="154" height="281" alt="Squirrel Girl" loading="lazy"><figcaption>Squirrel Girl</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-star-lord.png" width="154" height="280" alt="Star-Lord" loading="lazy"><figcaption>Star-Lord</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-storm.png" width="154" height="281" alt="Storm" loading="lazy"><figcaption>Storm</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-the-punisher.png" width="155" height="280" alt="The Punisher" loading="lazy"><figcaption>The Punisher</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-winter-soldier.png" width="154" height="281" alt="Winter Soldier" loading="lazy"><figcaption>Winter Soldier</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-wolverine.png" width="154" height="281" alt="Wolverine" loading="lazy"><figcaption>Wolverine</figcaption></figure>
-        </div>
-      </div>
-      <div class="hero-group">
-        <h3>Strategist</h3>
-        <p class="role-line">Strategists heal and set up the team to win the fight.</p>
-        <div class="hero-portraits">
-          <figure><img src="/assets/img/heroes/hero-portrait-luna-snow.png" width="155" height="281" alt="Luna Snow" loading="lazy"><figcaption>Luna Snow</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-rocket-raccoon.png" width="154" height="279" alt="Rocket Raccoon" loading="lazy"><figcaption>Rocket Raccoon</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-adam-warlock.png" width="154" height="280" alt="Adam Warlock" loading="lazy"><figcaption>Adam Warlock</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-jeff-the-land-shark.png" width="154" height="281" alt="Jeff the Land Shark" loading="lazy"><figcaption>Jeff the Land Shark</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-cloakanddagger.png" width="154" height="281" alt="Cloak & Dagger" loading="lazy"><figcaption>Cloak & Dagger</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-gambit.png" width="154" height="281" alt="Gambit" loading="lazy"><figcaption>Gambit</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-invisible-woman.png" width="154" height="280" alt="Invisible Woman" loading="lazy"><figcaption>Invisible Woman</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-jubilee.png" width="154" height="281" alt="Jubilee" loading="lazy"><figcaption>Jubilee</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-loki.png" width="154" height="280" alt="Loki" loading="lazy"><figcaption>Loki</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-mantis.png" width="153" height="279" alt="Mantis" loading="lazy"><figcaption>Mantis</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-ultron.png" width="154" height="281" alt="Ultron" loading="lazy"><figcaption>Ultron</figcaption></figure>
-          <figure><img src="/assets/img/heroes/hero-portrait-white-fox.png" width="154" height="281" alt="White Fox" loading="lazy"><figcaption>White Fox</figcaption></figure>
-        </div>
-      </div>
-    </div>
+    <div data-spotlight style="margin-bottom:32px"></div>
+
+    <p class="kicker">Hero index</p>
+    <div class="hero-ribbon" data-hero-ribbon style="margin-bottom:24px"></div>
 
     <div class="pool-tools">
       <div style="display:flex; gap:16px; flex-wrap:wrap; align-items:center; margin-bottom:8px">
@@ -123,15 +52,107 @@
     </div>
     <div data-team-view></div>
     <div data-pool></div>
-    <p class="fine" style="margin-top:16px">Draft order is the pool's consensus rank, compiled from current rosters and recent results. Only verified starters are in the pool: a player enters when their roster spot is confirmed by a published source. A player's rank is their identity in the pool: it never renumbers when the list is filtered. Rosters as published for the 2026 season; teams marked roster pending are confirmed in the competition and enter the pool when their lineups are verified.</p>
+    <p class="fine" style="margin-top:16px">Draft order is the pool's starting order. It is not built from player stats, because no stat lines are in yet. Only verified starters are in the pool: a player enters when their roster spot is confirmed by a published source. A player's rank is their identity in the pool: it never renumbers when the list is filtered. Rosters as published for the 2026 season; teams marked roster pending are confirmed in the competition and enter the pool when their lineups are verified.</p>
+    <!-- The heroes of the game, by role: the full 54-hero roster as
+         tagged on the official heroes page. These portraits are heroes,
+         never pro players. Deadpool is tagged for all three roles on
+         that page; he stands once, with the Duelists. Folded shut so
+         the pool is the first thing on the page. -->
+    <details class="heroes-fold" id="heroes">
+      <summary><span class="hf-title">The 54 heroes</span><span class="hf-note">Game characters, not players. Pros pick these to fill each role.</span></summary>
+    <div class="hero-strip">
+      <div class="hero-group">
+        <h3>Vanguard</h3>
+        <p class="role-line">Vanguards hold the front line and take the space fights start from.</p>
+        <div class="hero-portraits">
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-doctor-strange.avif"><img src="/assets/img/heroes/hero-portrait-doctor-strange.webp" width="154" height="280" alt="Doctor Strange" loading="lazy"></picture><figcaption>Doctor Strange</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-magneto.avif"><img src="/assets/img/heroes/hero-portrait-magneto.webp" width="154" height="279" alt="Magneto" loading="lazy"></picture><figcaption>Magneto</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-hulk.avif"><img src="/assets/img/heroes/hero-portrait-hulk.webp" width="154" height="281" alt="Hulk" loading="lazy"></picture><figcaption>Hulk</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-captain-america.avif"><img src="/assets/img/heroes/hero-portrait-captain-america.webp" width="154" height="281" alt="Captain America" loading="lazy"></picture><figcaption>Captain America</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-angela.avif"><img src="/assets/img/heroes/hero-portrait-angela.webp" width="154" height="281" alt="Angela" loading="lazy"></picture><figcaption>Angela</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-devil-dinosaur.avif"><img src="/assets/img/heroes/hero-portrait-devil-dinosaur.webp" width="154" height="281" alt="Devil Dinosaur" loading="lazy"></picture><figcaption>Devil Dinosaur</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-emma-frost.avif"><img src="/assets/img/heroes/hero-portrait-emma-frost.webp" width="154" height="281" alt="Emma Frost" loading="lazy"></picture><figcaption>Emma Frost</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-groot.avif"><img src="/assets/img/heroes/hero-portrait-groot.webp" width="155" height="280" alt="Groot" loading="lazy"></picture><figcaption>Groot</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-peni-parker.avif"><img src="/assets/img/heroes/hero-portrait-peni-parker.webp" width="155" height="279" alt="Peni Parker" loading="lazy"></picture><figcaption>Peni Parker</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-rogue.avif"><img src="/assets/img/heroes/hero-portrait-rogue.webp" width="154" height="281" alt="Rogue" loading="lazy"></picture><figcaption>Rogue</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-the-hood.avif"><img src="/assets/img/heroes/hero-portrait-the-hood.webp" width="154" height="281" alt="The Hood" loading="lazy"></picture><figcaption>The Hood</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-the-thing.avif"><img src="/assets/img/heroes/hero-portrait-the-thing.webp" width="154" height="281" alt="The Thing" loading="lazy"></picture><figcaption>The Thing</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-thor.avif"><img src="/assets/img/heroes/hero-portrait-thor.webp" width="154" height="281" alt="Thor" loading="lazy"></picture><figcaption>Thor</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-venom.avif"><img src="/assets/img/heroes/hero-portrait-venom.webp" width="154" height="280" alt="Venom" loading="lazy"></picture><figcaption>Venom</figcaption></figure>
+        </div>
+      </div>
+      <div class="hero-group">
+        <h3>Duelist</h3>
+        <p class="role-line">Duelists deal the damage and finish the fights.</p>
+        <div class="hero-portraits">
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-iron-man.avif"><img src="/assets/img/heroes/hero-portrait-iron-man.webp" width="154" height="280" alt="Iron Man" loading="lazy"></picture><figcaption>Iron Man</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-spider-man.avif"><img src="/assets/img/heroes/hero-portrait-spider-man.webp" width="154" height="280" alt="Spider-Man" loading="lazy"></picture><figcaption>Spider-Man</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-magik.avif"><img src="/assets/img/heroes/hero-portrait-magik.webp" width="155" height="279" alt="Magik" loading="lazy"></picture><figcaption>Magik</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-hela.avif"><img src="/assets/img/heroes/hero-portrait-hela.webp" width="155" height="280" alt="Hela" loading="lazy"></picture><figcaption>Hela</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-black-cat.avif"><img src="/assets/img/heroes/hero-portrait-black-cat.webp" width="154" height="281" alt="Black Cat" loading="lazy"></picture><figcaption>Black Cat</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-black-panther.avif"><img src="/assets/img/heroes/hero-portrait-black-panther.webp" width="154" height="280" alt="Black Panther" loading="lazy"></picture><figcaption>Black Panther</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-black-widow.avif"><img src="/assets/img/heroes/hero-portrait-black-widow.webp" width="154" height="281" alt="Black Widow" loading="lazy"></picture><figcaption>Black Widow</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-blade.avif"><img src="/assets/img/heroes/hero-portrait-blade.webp" width="154" height="281" alt="Blade" loading="lazy"></picture><figcaption>Blade</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-cyclops.avif"><img src="/assets/img/heroes/hero-portrait-cyclops.webp" width="154" height="281" alt="Cyclops" loading="lazy"></picture><figcaption>Cyclops</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-daredevil.avif"><img src="/assets/img/heroes/hero-portrait-daredevil.webp" width="154" height="281" alt="Daredevil" loading="lazy"></picture><figcaption>Daredevil</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-deadpool.avif"><img src="/assets/img/heroes/hero-portrait-deadpool.webp" width="154" height="280" alt="Deadpool" loading="lazy"></picture><figcaption>Deadpool</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-elsa-bloodstone.avif"><img src="/assets/img/heroes/hero-portrait-elsa-bloodstone.webp" width="154" height="281" alt="Elsa Bloodstone" loading="lazy"></picture><figcaption>Elsa Bloodstone</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-gorr-the-god-butcher.avif"><img src="/assets/img/heroes/hero-portrait-gorr-the-god-butcher.webp" width="154" height="281" alt="Gorr the God Butcher" loading="lazy"></picture><figcaption>Gorr the God Butcher</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-hawkeye.avif"><img src="/assets/img/heroes/hero-portrait-hawkeye.webp" width="154" height="280" alt="Hawkeye" loading="lazy"></picture><figcaption>Hawkeye</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-human-torch.avif"><img src="/assets/img/heroes/hero-portrait-human-torch.webp" width="154" height="281" alt="Human Torch" loading="lazy"></picture><figcaption>Human Torch</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-iron-fist.avif"><img src="/assets/img/heroes/hero-portrait-iron-fist.webp" width="154" height="281" alt="Iron Fist" loading="lazy"></picture><figcaption>Iron Fist</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-mister-fantastic.avif"><img src="/assets/img/heroes/hero-portrait-mister-fantastic.webp" width="154" height="280" alt="Mister Fantastic" loading="lazy"></picture><figcaption>Mister Fantastic</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-moon-knight.avif"><img src="/assets/img/heroes/hero-portrait-moon-knight.webp" width="154" height="281" alt="Moon Knight" loading="lazy"></picture><figcaption>Moon Knight</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-namor.avif"><img src="/assets/img/heroes/hero-portrait-namor.webp" width="154" height="281" alt="Namor" loading="lazy"></picture><figcaption>Namor</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-phoenix.avif"><img src="/assets/img/heroes/hero-portrait-phoenix.webp" width="154" height="281" alt="Phoenix" loading="lazy"></picture><figcaption>Phoenix</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-psylocke.avif"><img src="/assets/img/heroes/hero-portrait-psylocke.webp" width="154" height="281" alt="Psylocke" loading="lazy"></picture><figcaption>Psylocke</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-scarlet-witch.avif"><img src="/assets/img/heroes/hero-portrait-scarlet-witch.webp" width="154" height="281" alt="Scarlet Witch" loading="lazy"></picture><figcaption>Scarlet Witch</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-squirrel-girl.avif"><img src="/assets/img/heroes/hero-portrait-squirrel-girl.webp" width="154" height="281" alt="Squirrel Girl" loading="lazy"></picture><figcaption>Squirrel Girl</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-star-lord.avif"><img src="/assets/img/heroes/hero-portrait-star-lord.webp" width="154" height="280" alt="Star-Lord" loading="lazy"></picture><figcaption>Star-Lord</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-storm.avif"><img src="/assets/img/heroes/hero-portrait-storm.webp" width="154" height="281" alt="Storm" loading="lazy"></picture><figcaption>Storm</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-the-punisher.avif"><img src="/assets/img/heroes/hero-portrait-the-punisher.webp" width="155" height="280" alt="The Punisher" loading="lazy"></picture><figcaption>The Punisher</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-winter-soldier.avif"><img src="/assets/img/heroes/hero-portrait-winter-soldier.webp" width="154" height="281" alt="Winter Soldier" loading="lazy"></picture><figcaption>Winter Soldier</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-wolverine.avif"><img src="/assets/img/heroes/hero-portrait-wolverine.webp" width="154" height="281" alt="Wolverine" loading="lazy"></picture><figcaption>Wolverine</figcaption></figure>
+        </div>
+      </div>
+      <div class="hero-group">
+        <h3>Strategist</h3>
+        <p class="role-line">Strategists heal and set up the team to win the fight.</p>
+        <div class="hero-portraits">
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-luna-snow.avif"><img src="/assets/img/heroes/hero-portrait-luna-snow.webp" width="155" height="281" alt="Luna Snow" loading="lazy"></picture><figcaption>Luna Snow</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-rocket-raccoon.avif"><img src="/assets/img/heroes/hero-portrait-rocket-raccoon.webp" width="154" height="279" alt="Rocket Raccoon" loading="lazy"></picture><figcaption>Rocket Raccoon</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-adam-warlock.avif"><img src="/assets/img/heroes/hero-portrait-adam-warlock.webp" width="154" height="280" alt="Adam Warlock" loading="lazy"></picture><figcaption>Adam Warlock</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-jeff-the-land-shark.avif"><img src="/assets/img/heroes/hero-portrait-jeff-the-land-shark.webp" width="154" height="281" alt="Jeff the Land Shark" loading="lazy"></picture><figcaption>Jeff the Land Shark</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-cloakanddagger.avif"><img src="/assets/img/heroes/hero-portrait-cloakanddagger.webp" width="154" height="281" alt="Cloak & Dagger" loading="lazy"></picture><figcaption>Cloak & Dagger</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-gambit.avif"><img src="/assets/img/heroes/hero-portrait-gambit.webp" width="154" height="281" alt="Gambit" loading="lazy"></picture><figcaption>Gambit</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-invisible-woman.avif"><img src="/assets/img/heroes/hero-portrait-invisible-woman.webp" width="154" height="280" alt="Invisible Woman" loading="lazy"></picture><figcaption>Invisible Woman</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-jubilee.avif"><img src="/assets/img/heroes/hero-portrait-jubilee.webp" width="154" height="281" alt="Jubilee" loading="lazy"></picture><figcaption>Jubilee</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-loki.avif"><img src="/assets/img/heroes/hero-portrait-loki.webp" width="154" height="280" alt="Loki" loading="lazy"></picture><figcaption>Loki</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-mantis.avif"><img src="/assets/img/heroes/hero-portrait-mantis.webp" width="153" height="279" alt="Mantis" loading="lazy"></picture><figcaption>Mantis</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-ultron.avif"><img src="/assets/img/heroes/hero-portrait-ultron.webp" width="154" height="281" alt="Ultron" loading="lazy"></picture><figcaption>Ultron</figcaption></figure>
+          <figure><picture><source type="image/avif" srcset="/assets/img/heroes/hero-portrait-white-fox.avif"><img src="/assets/img/heroes/hero-portrait-white-fox.webp" width="154" height="281" alt="White Fox" loading="lazy"></picture><figcaption>White Fox</figcaption></figure>
+        </div>
+      </div>
+    </div>
+    </details>
+
   </div>
 </section>
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, fetchJson, esc, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, fetchJson, esc, GAME_SLUG, heroRibbonHtml, playerFaceImg, spotCardHtml, teamHeroStackHtml } from "/assets/js/site.js";
+  import { hero, teamPlate, ROLE_CLASS } from "/assets/js/media.js";
   renderChrome("players");
+  document.querySelector("[data-hero-ribbon]").innerHTML = heroRibbonHtml("#heroes");
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-teams.json`);
+  /* Spotlight: the ten highest-ranked pros the pool lists a
+     signature hero for, as portrait cards above the pool. */
+  document.querySelector("[data-spotlight]").innerHTML =
+    `<p class="kicker">Spotlight</p><div class="spot-grid">${[...data.players]
+      .sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999))
+      .filter((p) => p.heroes?.length).slice(0, 10)
+      .map((p) => spotCardHtml(p, (data.teams.find((t) => t.short === p.team) || {}).name)).join("")}</div>`;
   const teamByShort = Object.fromEntries(data.teams.map((t) => [t.short, t]));
   const teamName = Object.fromEntries(data.teams.map((t) => [t.short, t.name]));
   const teamRegion = Object.fromEntries(data.teams.map((t) => [t.short, t.region]));
@@ -172,6 +193,7 @@
       tv.innerHTML = `
         <div class="team-block">
           <div class="tb-head">
+            ${teamHeroStackHtml(data, team, 6)}
             <h3>${esc(t.name || team)}</h3>
             <span class="region-tag">${esc(t.region || "")}</span>
             ${t.partner ? `<span class="role partner">Partner</span>` : ""}
@@ -181,16 +203,21 @@
     } else {
       tv.innerHTML = "";
     }
-    document.querySelector("[data-pool]").innerHTML = shown.length ? shown.map((p) => `
-      <div class="pool2-row">
-        <span class="rk">${p.draftRank ?? "·"}</span>
-        <span class="who">${esc(p.ign)}</span>${p.realName ? ` <span class="fine">${esc(p.realName)}</span>` : ""}
-        <span class="role ${roleClass(p.role)}">${esc(p.role)}</span>
-        <span class="muted small">${esc(teamName[p.team] || p.team || "")}${teamRegion[p.team] ? ` · ${esc(teamRegion[p.team])}` : ""}</span>
-        <span class="marg">${(p.heroes || []).map(esc).join(" · ")}</span>
-      </div>`).join("")
+    const card = (p, i) => {
+      const rc = ROLE_CLASS[p.role] || "", h = (p.heroes || [])[0];
+      return `<article class="pcard ${rc}">
+        <span class="pc-mark">${esc(p.role)}</span><span class="pc-rank">${p.draftRank ?? ""}</span>
+        <span class="pc-ign" aria-hidden="true">${esc(p.ign)}</span>
+        <div class="pc-art">${h ? hero(h, { eager: i < 6 }) : `<span class="role-badge" aria-hidden="true"><span>${esc(p.role[0])}</span></span>`}</div>
+        <div class="pc-foot"><span class="pc-name">${esc(p.ign)}${p.realName ? ` <span class="fine" style="text-transform:none;font-weight:500">${esc(p.realName)}</span>` : ""}</span>
+          <span class="pc-team">${teamPlate(p.team, teamName[p.team])}<span class="tn">${esc(teamName[p.team] || p.team || "")}${teamRegion[p.team] ? ` · ${esc(teamRegion[p.team])}` : ""}</span></span>
+          ${(p.heroes || []).length ? `<span class="pc-plays">Plays ${(p.heroes || []).map(esc).join(" · ")}</span>` : ""}</div></article>`;
+    };
+    document.querySelector("[data-pool]").innerHTML = shown.length ? `<div class="pwall">${shown.map(card).join("")}</div>`
       : `<p class="muted small" style="padding:16px 0">No players match that filter line. Clear a filter above to see the whole pool.</p>`;
   }
+  document.querySelectorAll("[data-open-heroes]").forEach((a) =>
+    a.addEventListener("click", () => { document.getElementById("heroes").open = true; }));
   draw();
   teamFilter.addEventListener("change", draw);
   document.getElementById("poolSearch").addEventListener("input", draw);

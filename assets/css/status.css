@@ -1,0 +1,32 @@
+.season-plate{--c:#8a8f98;display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"w n k" "w t k";align-items:center;gap:2px 28px;border:2px solid var(--c);background:#0b0c0f;color:#f3f4f6;font-family:inherit}
+.season-plate[data-state=live]{--c:var(--live,#ff2e7a)}
+.season-plate[data-state=next],.season-plate[data-state=between]{--c:#f3f4f6}
+.season-plate[data-state=complete]{--c:#6b7078}
+.sp-word{grid-area:w;align-self:stretch;display:flex;align-items:center;padding:14px 22px;background:var(--c);color:#0b0c0f;font-weight:900;font-size:clamp(18px,2.6vw,28px);letter-spacing:.06em;max-width:11ch;line-height:1.05}
+.season-plate[data-state=live] .sp-word{color:#fff}
+.season-plate[data-state=live] .sp-word::before{content:"";width:10px;height:10px;border-radius:50%;background:#fff;margin-right:12px;flex:none;animation:sp-beat 1.2s steps(2,jump-none) infinite}
+@keyframes sp-beat{50%{opacity:.15}}
+.sp-name{grid-area:n;font-weight:800;font-size:clamp(16px,2vw,22px);text-transform:uppercase;letter-spacing:.03em;padding-top:12px}
+.sp-note{grid-area:t;color:#9aa0a8;font-size:14px;padding-bottom:12px;max-width:60ch;text-wrap:pretty}
+.sp-clock{grid-area:k;display:flex;gap:16px;padding:0 22px 0 0}
+.sp-clock span{display:grid;justify-items:center;min-width:3.2ch}
+.sp-clock b{font-variant-numeric:tabular-nums lining-nums;font-size:clamp(26px,4vw,44px);font-weight:900;line-height:1}
+.sp-clock i{font-style:normal;font-size:10px;letter-spacing:.14em;color:#8a8f98;margin-top:4px}
+.season-plate[data-state=live] .sp-clock b{color:var(--live,#ff2e7a)}
+@media(max-width:700px){.season-plate{grid-template-columns:1fr;grid-template-areas:"w" "n" "t" "k"}.sp-word{max-width:none;padding:10px 16px}.sp-name,.sp-note,.sp-clock{padding-left:16px;padding-right:16px}.sp-clock{padding-bottom:14px}}
+@media(prefers-reduced-motion:reduce){.sp-word::before{animation:none}}
+
+/* Fleet reconciliation additions: the live colour token, plate band
+   spacing on home/season, and the sticky mini strip under the nav. */
+:root{--live:#ff2e7a}
+.plate-band{padding:20px 0 4px}
+.status-mini{position:sticky;top:0;z-index:40;display:flex;gap:10px;align-items:center;padding:7px 16px;background:#0b0c0f;border-bottom:2px solid #8a8f98;color:#f3f4f6;font-size:13px}
+.status-mini[data-state=live]{border-bottom-color:var(--live)}
+.status-mini[data-state=next],.status-mini[data-state=between]{border-bottom-color:#f3f4f6}
+.status-mini[data-state=complete]{border-bottom-color:#6b7078}
+.status-mini .sm-dot{width:8px;height:8px;flex:none;background:#8a8f98}
+.status-mini[data-state=live] .sm-dot{background:var(--live);border-radius:50%;animation:sp-beat 1.2s steps(2,jump-none) infinite}
+.status-mini .sm-word{font-weight:900;letter-spacing:.08em;white-space:nowrap}
+.status-mini .sm-name{text-transform:uppercase;font-weight:700;color:#b9c3d6;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.status-mini .sm-clock{margin-left:auto;font-variant-numeric:tabular-nums;color:#9aa0a8;white-space:nowrap}
+@media(prefers-reduced-motion:reduce){.status-mini .sm-dot{animation:none}}

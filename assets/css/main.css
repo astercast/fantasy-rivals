@@ -727,6 +727,45 @@ span.pick-ctl { cursor: default; }
 .worked .w-row:last-child { border-bottom: none; }
 .worked .w-total { font-weight: 700; font-size: 15px; color: var(--ink); }
 
+/* --- visual density (2026-10-24): portrait faces, hero stacks,
+   ribbons, walls and spotlight cards. One portrait system across
+   every surface: a face is always a hero's official portrait — on
+   its own in a wall or ribbon, or beside a pro as that pro's listed
+   signature hero. Flat ground, hairline rules, sharp corners, the
+   same finish as the hero strip. --- */
+.p-face {
+  width: 26px; height: 34px; object-fit: contain; object-position: center bottom;
+  background: var(--bg-2); border-bottom: 2px solid var(--line-strong);
+  vertical-align: -9px; margin-right: 8px;
+}
+.lb-row .p-face { width: 30px; height: 40px; }
+table.board .p-face { width: 20px; height: 26px; vertical-align: -6px; margin-right: 5px; }
+.p-stack { display: inline-flex; align-items: flex-end; margin-right: 10px; vertical-align: -8px; }
+.p-stack img {
+  width: 24px; height: 32px; object-fit: contain; object-position: center bottom;
+  background: var(--bg-2); border: 1px solid var(--line); margin-left: -8px;
+}
+.p-stack img:first-child { margin-left: 0; }
+
+/* The ribbon: all 54 faces on one sideways scroll, the same gesture
+   as the home season profile. Name under each face. */
+.hero-ribbon { display: flex; gap: 10px; overflow-x: auto; padding: 8px 0 16px; scrollbar-width: thin; }
+.hero-ribbon figure { margin: 0; flex: none; width: 64px; border-bottom: 2px solid var(--line-strong); padding-bottom: 8px; }
+.hero-ribbon img { display: block; width: 64px; height: 110px; object-fit: contain; object-position: center bottom; }
+.hero-ribbon figcaption { font-size: 10px; color: var(--ink-3); margin-top: 6px; line-height: 1.25; min-height: 25px; }
+.hero-ribbon a { display: block; }
+
+/* Spotlight cards: one pro per card, the signature hero's portrait
+   standing full-height over the name plate. */
+.spot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(158px, 1fr)); gap: 16px; }
+.spot-card { background: var(--panel); border: 1px solid var(--line); }
+.spot-card .sc-art { background: var(--bg-2); border-bottom: 1px solid var(--line); }
+.spot-card .sc-art img { display: block; width: 100%; height: 180px; object-fit: contain; object-position: center bottom; }
+.spot-card .sc-body { padding: 12px; }
+.spot-card .sc-ign { font-weight: 700; font-size: 16px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+.spot-card .sc-meta { font-size: 12px; color: var(--ink-3); margin-top: 6px; }
+.spot-card .sc-hero { font-size: 12px; color: var(--ink-2); margin-top: 2px; }
+
 /* --- motion: still by default. State changes appear by cut. The
    countdown numerals tick (content, not animation), the phone tab
    swap fades once, and under reduced motion even that holds still. --- */

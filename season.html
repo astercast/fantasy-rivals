@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="built" content="2026-10-24T13:46:16.956Z">
 <title>Season · Rivals Fantasy</title>
 <meta name="theme-color" content="#0C0D0F">
 <meta property="og:title" content="Season · Rivals Fantasy">
@@ -22,15 +23,16 @@
 <link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/profile.css">
+<link rel="stylesheet" href="/assets/css/status.css">
+<link rel="stylesheet" href="/assets/css/pulse.css">
+<link rel="stylesheet" href="/assets/css/media.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
 
-<section class="plate" data-season-plate></section>
+<section class="plate-band"><div class="wrap"><div class="season-plate" data-status-plate></div><div class="plate-tally" data-tally style="margin-top:16px"></div></div></section>
 
-<div class="art-band">
-  <img src="/assets/img/season-key-art.jpg" width="1438" height="810" alt="Marvel Rivals key art">
-</div>
+<div class="art-band rich" id="season-art"></div>
 
 <section class="section">
   <div class="wrap">
@@ -40,7 +42,11 @@
   </div>
 </section>
 
-<section class="section alt">
+<div class="art-band rich">
+  <picture><source type="image/avif" srcset="/assets/img/still-playoffs-640.avif 640w, /assets/img/still-playoffs-1024.avif 1024w, /assets/img/still-playoffs-1440.avif 1440w" sizes="100vw"><source type="image/webp" srcset="/assets/img/still-playoffs-640.webp 640w, /assets/img/still-playoffs-1024.webp 1024w, /assets/img/still-playoffs-1440.webp 1440w" sizes="100vw"><img src="/assets/img/still-playoffs-1024.webp" width="1440" height="810" alt="Thanos with the Infinity Gauntlet in Marvel Rivals" loading="lazy" decoding="async"></picture>
+</div>
+
+<section class="section alt" id="results">
   <div class="wrap">
     <p class="kicker">Results</p>
     <div class="section-head"><h2>Schedule and results</h2></div>
@@ -55,6 +61,19 @@
     <div data-standings></div>
   </div>
 </section>
+
+<section class="section alt">
+  <div class="wrap">
+    <p class="kicker">The heroes</p>
+    <div class="section-head"><h2>The 54 heroes</h2><span class="spacer"></span><a href="/players.html#heroes" style="font-weight:600">Heroes on the players page</a></div>
+    <p class="muted" style="max-width:64ch; margin-bottom:24px">Game characters, not players. The pros in the pool play these heroes; a portrait beside a team above is a signature hero of one of that team's pros, shown only where the pool lists one.</p>
+    <div data-hero-wall></div>
+  </div>
+</section>
+
+<div class="art-band rich">
+  <picture><source type="image/avif" srcset="/assets/img/still-pool-640.avif 640w, /assets/img/still-pool-1024.avif 1024w, /assets/img/still-pool-1440.avif 1440w" sizes="100vw"><source type="image/webp" srcset="/assets/img/still-pool-640.webp 640w, /assets/img/still-pool-1024.webp 1024w, /assets/img/still-pool-1440.webp 1440w" sizes="100vw"><img src="/assets/img/still-pool-1024.webp" width="1440" height="810" alt="Iron Man in play in Marvel Rivals" loading="lazy" decoding="async"></picture>
+</div>
 
 <section class="section">
   <div class="wrap">
@@ -88,7 +107,7 @@
   <div class="wrap">
     <p class="kicker">Scoring</p>
     <div class="section-head"><h2>Scoring</h2></div>
-    <p class="muted" style="max-width:64ch">Your players score from their real match stats. Eliminations and assists are worth the most, deaths cost a little, and damage, blocking and healing add up per thousand. When a player's team wins the series, the player gets a win bonus, and a 25-elimination series earns a carry bonus. Your drafted Squad (one pro org) scores its own results: a point per map, two per series, two more for a clean sweep. Every league can tune its own table; this is the standard one, modelled on Fantasy LCS's published table.</p>
+    <p class="muted" style="max-width:64ch"><strong>Scoring is not live yet.</strong> No player stat lines are in, so no points exist. When they are added, your players score from their real match stats. Eliminations and assists are worth the most, deaths cost a little, and damage, blocking and healing add up per thousand. When a player's team wins the series, the player gets a win bonus, and a 25-elimination series earns a carry bonus. Your drafted Squad (one pro org) scores its own results: a point per map, two per series, two more for a clean sweep. Every league can tune its own table; this is the standard one, modelled on Fantasy LCS's published table.</p>
     <div class="grid grid-2" style="margin-top:24px">
       <div>
         <h3 style="margin-bottom:8px">Players</h3>
@@ -126,34 +145,56 @@
         </div>
       </div>
     </div>
-    <p class="fine" style="margin-top:24px">Results enter through one import pipeline from published sources (series results from MRVL (mrvl.net), named on every row; official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Player points rest on per-player box scores: a player's line prints only when it has been extracted from the official broadcast record with its source (the VOD and timestamp) named. No box-score lines have landed yet, so no player averages or form lines are shown anywhere on this site. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
+    <p class="fine" style="margin-top:24px">Results come from published sources (series results from MRVL (mrvl.net), named on every row; official broadcast box scores). Every import names its source, and every week's breakdown is visible on the matchup. Player points rest on per-player box scores: a player's line prints only when it has been extracted from the official broadcast record with its source (the VOD and timestamp) named. No box-score lines have been added yet, so no player averages or form lines are shown anywhere on this site. Art on this page: Marvel Rivals key art by Marvel and NetEase.</p>
   </div>
 </section>
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, renderSeasonPlate, fetchJson, fmtDate, esc, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, fetchJson, fmtDate, esc, GAME_SLUG, renderHeroWall, teamHeroStackHtml } from "/assets/js/site.js";
+  import { pic, teamPlate, stageArt, matchArt } from "/assets/js/media.js";
+  import { mountStatus } from "/assets/js/status.js";
+  document.getElementById("season-art").innerHTML = pic("season-key-art", { eager: true, w: 1438, h: 810, alt: "Marvel Rivals key art" });
+  mountStatus(document.querySelector("[data-status-plate]"), `/data/v1/${GAME_SLUG}-season.json`).catch(() => {});
   renderChrome("season");
-  renderSeasonPlate(document.querySelector("[data-season-plate]"));
+  renderHeroWall(document.querySelector("[data-hero-wall]"));
 
   const data = await fetchJson(`/data/v1/${GAME_SLUG}-season.json`);
+  /* The season tally, kept from the old plate as its own line. */
+  Promise.all([
+    fetchJson(`/data/v1/${GAME_SLUG}-teams.json`),
+    fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`),
+  ]).then(([td, sd]) => {
+    const played = (sd.matches || []).filter((m) => m.status === "final").length;
+    document.querySelector("[data-tally]").innerHTML =
+      `<div class="t-cell"><span class="t-num">${td.teams.length}</span><span class="t-label">Teams in</span></div>` +
+      `<div class="t-cell"><span class="t-num">${td.players.length}</span><span class="t-label">Players rostered</span></div>` +
+      `<div class="t-cell"><span class="t-num">${played}</span><span class="t-label">Fixtures played</span></div>`;
+  }).catch(() => {});
   document.querySelector("[data-asof]").textContent = `State as of ${fmtDate(data.asOf)}`;
   /* The timeline: one line per event, live first, then upcoming, then
-     complete. Scope, event, dates, state word. */
+     complete. Scope, event, dates, state word. State is computed from
+     the dates on the visitor's clock, never from the stored state
+     field, so a competition whose window has closed (Stage 2 ended
+     Oct 18) can never read as live off a stale data file. */
+  const todayStr = new Date().toLocaleDateString("en-CA");
+  const stateOf = (s) => (s.startsOn && s.endsOn)
+    ? ((s.startsOn <= todayStr && todayStr <= s.endsOn) ? "live" : (s.startsOn > todayStr ? "upcoming" : "complete"))
+    : (s.state || "upcoming");
   const order = { live: 0, upcoming: 1, complete: 2 };
-  const stateWord = (s) => s.state === "live" ? "Live now" : s.state === "upcoming" ? "Upcoming" : "Complete";
+  const stateWord = (s) => stateOf(s) === "live" ? "Live now" : stateOf(s) === "upcoming" ? "Upcoming" : "Complete";
   const sorted = [...data.seasons].sort((a, b) =>
-    (order[a.state] - order[b.state]) || (a.startsOn || "").localeCompare(b.startsOn || ""));
+    (order[stateOf(a)] - order[stateOf(b)]) || (a.startsOn || "").localeCompare(b.startsOn || ""));
   document.querySelector("[data-timeline]").innerHTML = sorted.map((s) => `
-    <div class="wire-line${s.state !== "complete" ? " has-act" : ""}">
+    <div class="tl-row"><div class="tl-pic">${pic(stageArt(s.name), { sizes: "168px", alt: "" })}</div><div class="wire-line${stateOf(s) !== "complete" ? " has-act" : ""}">
       <span class="w-main">
         <span class="w-name">${esc(s.name)}</span>
         <span class="w-stage">${esc(s.stage || "")}</span>
-        <span class="w-state${s.state === "live" ? " live" : ""}">${stateWord(s)}</span>
+        <span class="w-state${stateOf(s) === "live" ? " live" : ""}">${stateWord(s)}</span>
         <span class="w-dates">${fmtDate(s.startsOn)} to ${fmtDate(s.endsOn)}</span>
       </span>
-      ${s.state !== "complete" ? `<span class="w-act"><a class="btn btn-small" href="/start.html">Create a league for this</a></span>` : ""}
-    </div>`).join("") + `
+      ${stateOf(s) !== "complete" ? `<span class="w-act"><a class="btn btn-small" href="/start.html">Create a league for this</a></span>` : ""}
+    </div></div>`).join("") + `
     <p class="fine" style="margin-top:16px">You create a league <strong>for</strong> one named competition. If a competition is live, its remaining weeks are your fantasy season. If the next one has not started, you can set up in advance: draft now, score when play begins.</p>`;
 
   /* Schedule and results: day-grouped one-line rows. Teams, record
@@ -175,19 +216,19 @@
     for (const m of [...sched.matches].sort((a, b) => String(a.startsAt).localeCompare(String(b.startsAt)))) {
       (byDay[dayOf(m.startsAt)] ||= []).push(m);
     }
+    let mi = 0;
     fx.innerHTML = Object.entries(byDay).map(([day, ms]) => `
       <div class="wire-group">
         <p class="wire-date">${esc(day)}</p>
-        ${ms.map((m) => `
-          <div class="wire-line">
-            <span class="w-name">${esc(teamName[m.teamA] || m.teamA)} vs ${esc(teamName[m.teamB] || m.teamB)}</span>
-            <span class="w-stage">${esc(m.roundLabel || "")}</span>
-            <span class="w-state">${m.status === "final" ? "Final" : "Scheduled"}</span>
-            ${m.scoreA == null ? "" : `<span class="w-score">${m.scoreA} to ${m.scoreB}</span>`}
-            <span class="w-fact">Fantasy week ${esc(m.week)} · ${esc(m.source || "")}</span>
-          </div>`).join("")}
+        <div class="mgrid">${ms.map((m) => `
+          <article class="mcard">${pic(matchArt(mi++), { sizes: "(min-width: 900px) 33vw, 100vw", alt: "" })}
+            <div class="mc-top"><span>${esc(m.roundLabel || "")}</span><span>${m.status === "final" ? "Final" : String(m.startsAt).slice(0, 10) < todayStr ? "Played, result not added yet" : "Scheduled"}</span></div>
+            <div class="mc-side ${m.scoreA > m.scoreB ? "mc-win" : ""}">${teamPlate(m.teamA, teamName[m.teamA]).replace('tplate"', 'tplate lg"')}<b>${esc(teamName[m.teamA] || m.teamA)}</b></div>
+            <div class="mc-score">${m.scoreA == null ? "vs" : `${m.scoreA}<i>:</i>${m.scoreB}`}</div>
+            <div class="mc-side ${m.scoreB > m.scoreA ? "mc-win" : ""}">${teamPlate(m.teamB, teamName[m.teamB]).replace('tplate"', 'tplate lg"')}<b>${esc(teamName[m.teamB] || m.teamB)}</b></div>
+            <span class="mc-fact">Fantasy week ${esc(m.week)} · ${esc(m.source || "")}</span></article>`).join("")}</div>
       </div>`).join("") + `
-      <p class="fine" style="margin-top:16px">Series are imported through the results pipeline (payloads in db/imports), each with its source named above. Unplayed series list as fixtures and never count as played. Per-map lines are not published by the sources read, so series carry series scores only.</p>`;
+      <p class="fine" style="margin-top:16px">Each series names its source. A series that is still ahead lists as a fixture. A series whose date has passed and has no score says so, and it never counts. The sources do not publish per-map lines, so series show series scores only. Portraits beside a team are the signature heroes its pros are listed on in the pool, where listed.</p>`;
     /* Standings derive from the imported finals, grouped by region.
        The table is the imported record so far, and says so: it is
        partial until every played series is imported. */
@@ -208,10 +249,10 @@
       <table class="sheet" style="max-width:640px">
         <thead><tr><th>Team</th><th class="n">W</th><th class="n">L</th><th class="n">Maps</th></tr></thead>
         <tbody>${Object.entries(table).sort((x, y) => (y[1].w - x[1].w) || ((y[1].f - y[1].a) - (x[1].f - x[1].a))).map(([short, r]) => `
-          <tr><td>${esc(teamName[short] || short)}</td><td class="n">${r.w}</td><td class="n">${r.l}</td><td class="n">${r.f} to ${r.a}</td></tr>`).join("")}
+          <tr><td>${teamHeroStackHtml(teamsData, short)}${esc(teamName[short] || short)}</td><td class="n">${r.w}</td><td class="n">${r.l}</td><td class="n">${r.f} to ${r.a}</td></tr>`).join("")}
         </tbody>
       </table>`).join("") + `
-      <p class="fine" style="margin-top:8px">Computed from the ${finals.length} imported final series above, as of ${fmtDate(sched.generatedAt)}. Partial: the EMEA group stage ran more series than the imported record carries, and no Americas, Pacific or China finals are imported yet, so this table is the imported record so far, not the group table. The two series reported unresolved in rotation 24 (Virtus.pro over Disband, Sep 26; CrownFall over Vengeful, Oct 4) are folded in: both teams entered the directory in rotation 25 with sourced identities, named in the import record. Inside a league, your table is live from the first scored week.</p>`;
+      <p class="fine" style="margin-top:8px">Computed from the ${finals.length} imported final series above, as of ${fmtDate(sched.generatedAt)}. Partial: the EMEA group stage ran more series than the imported record carries, and no Americas, Pacific or China finals are imported yet, so this table is the imported record so far, not the group table. Inside a league, your table is live from the first scored week.</p>`;
   }
 </script>
 </body>

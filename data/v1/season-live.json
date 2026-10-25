@@ -1,0 +1,27 @@
+{
+  "format": "season-live/1",
+  "asOf": "2026-10-24",
+  "generated_at": "2026-10-24T13:46:16.956Z",
+  "seasons": [
+    {
+      "name": "Marvel Rivals Ignite 2026: Stage 2",
+      "state": "complete"
+    },
+    {
+      "name": "Marvel Rivals Ignite 2026: Grand Finals",
+      "state": "upcoming"
+    },
+    {
+      "name": "Marvel Rivals Ignite 2026: Mid-Season Finals",
+      "state": "complete"
+    },
+    {
+      "name": "Marvel Rivals Ignite 2026: Stage 1",
+      "state": "complete"
+    },
+    {
+      "name": "Marvel Rivals Ignite 2026: Preseason",
+      "state": "complete"
+    }
+  ]
+}

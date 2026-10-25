@@ -3,43 +3,52 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="built" content="2026-10-24T13:46:16.956Z">
 <title>Rivals Fantasy · Fantasy Marvel Rivals on the real pro season</title>
 <meta name="theme-color" content="#0C0D0F">
 <meta property="og:title" content="Rivals Fantasy · Fantasy Marvel Rivals on the real pro season">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Rivals Fantasy">
-<meta property="og:description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
+<meta property="og:description" content="Draft real Marvel Rivals pros by role and set your lineup every week. Points start when real player stats are added. Free private leagues for you and your friends.">
 <meta property="og:image" content="/assets/og-card.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Rivals Fantasy · Fantasy Marvel Rivals on the real pro season">
-<meta name="twitter:description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
+<meta name="twitter:description" content="Draft real Marvel Rivals pros by role and set your lineup every week. Points start when real player stats are added. Free private leagues for you and your friends.">
 <meta name="twitter:image" content="/assets/og-card.jpg">
 <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
-<meta name="description" content="Draft real Marvel Rivals pros by role, set your lineup every week, and score from real match stats. Free private leagues for you and your friends.">
+<meta name="description" content="Draft real Marvel Rivals pros by role and set your lineup every week. Points start when real player stats are added. Free private leagues for you and your friends.">
 <link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/profile.css">
+<link rel="stylesheet" href="/assets/css/status.css">
+<link rel="stylesheet" href="/assets/css/pulse.css">
+<link rel="stylesheet" href="/assets/css/media.css">
+<link rel="preload" as="image" type="image/avif" href="/assets/img/hero-key-art-1440.avif" imagesrcset="/assets/img/hero-key-art-640.avif 640w, /assets/img/hero-key-art-1024.avif 1024w, /assets/img/hero-key-art-1440.avif 1440w" imagesizes="100vw" fetchpriority="high">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
+
+<section class="plate-band"><div class="wrap"><div class="season-plate" data-status-plate></div></div></section>
 
 <!-- The Stage Profile (rotation 140): the whole season as one drawn
      route line, status computed from the dates on the visitor's
      clock by the script below, never from a stored live flag. The
      baked words are the build-date sample only; the script is the
      source of truth and rewrites them on every load (FA3). -->
-<section class="season" data-season data-state="break" aria-labelledby="season-h">
+<section class="season has-art" data-season data-state="break" aria-labelledby="season-h">
+  <div class="art" aria-hidden="true" id="hero-art"></div>
   <div class="season-top">
     <p class="season-comp">Marvel Rivals · Ignite 2026</p>
     <h1 class="status" id="season-h">
-      <span class="status-chip" data-word>Next</span>
-      <span class="status-what" data-what>Grand Finals</span>
-      <span class="status-when" data-when>in <b>31</b> days</span>
+      <span class="status-chip" data-word>Season</span>
+      <span class="status-what" data-what></span>
+      <span class="status-when" data-when></span>
     </h1>
-    <p class="season-sub"><span data-sub>Stage 2 is done. Grand Finals run Nov 23 to 29 in Stockholm.</span> Draft real pros and score every week from real matches.</p>
+    <p class="season-sub"><span data-sub>Loading the season…</span> Draft real pros and set your lineup now.</p>
+    <p class="season-state-note">Points are not live yet. No player stat lines are in, so every score starts at zero until they are added.</p>
     <div class="cta-row">
       <a class="btn btn-primary" href="/start.html" data-hero-action>Create a league</a>
       <a class="btn btn-quiet" href="/season.html">The full season</a>
@@ -109,11 +118,34 @@
     $("sub").textContent = "The next season posts here with its dates.";
   }
   $("needle").style.setProperty("--x", pct + "%");
+  /* On a phone the silhouette is wider than the window and scrolls
+     sideways from the left, which leaves the Today needle off screen.
+     Once loaded, scroll the track so Today is in view. */
+  addEventListener("load", () => {
+    const f = document.querySelector(".profile"), n = f && f.querySelector(".needle");
+    if (f && n && f.scrollWidth > f.clientWidth)
+      requestAnimationFrame(() => {
+        f.scrollLeft = n.offsetLeft - f.clientWidth * 0.62;
+      });
+  });
   sec.querySelector(".done-rect").setAttribute("width", pct * 10);
   const ahead = sec.querySelector(".ahead-rect");
   ahead.setAttribute("x", pct * 10);
   ahead.setAttribute("width", 1000 - pct * 10);
 </script>
+
+<section class="section" style="padding-top:32px">
+  <div class="wrap">
+    <p class="kicker">The heroes</p>
+    <div class="section-head">
+      <h2>Heroes in play</h2>
+      <span class="spacer"></span>
+      <a href="/players.html#heroes" style="font-weight:600">All 54 heroes</a>
+    </div>
+    <p class="muted small" style="max-width:64ch; margin-bottom:8px">The game's 54 heroes, official portraits. Pros play these heroes; a face beside a pro on this page is that pro's listed signature hero.</p>
+    <div class="hero-ribbon" data-hero-marquee></div>
+  </div>
+</section>
 
 <section class="section">
   <div class="wrap">
@@ -124,10 +156,39 @@
       <a href="/players.html" style="font-weight:600">Full player pool</a>
     </div>
     <div data-board><p class="fine" style="padding:8px 0">Loading the pool…</p></div>
+    <p class="credit-line">Cards show the player's role and team. A hero shows only where we have recorded that the player uses it, and is art of the hero, not of the player.</p>
   </div>
 </section>
 
 <section class="section alt">
+  <div class="wrap">
+    <p class="kicker">The stages</p>
+    <div class="section-head"><h2>Five stages, one season</h2><span class="spacer"></span><a href="/season.html" style="font-weight:600">Season page</a></div>
+    <div class="stagerail" data-stagerail></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="kicker">The results</p>
+    <div class="section-head"><h2>Latest results</h2><span class="spacer"></span><a href="/season.html#results" style="font-weight:600">All results</a></div>
+    <div class="mgrid" data-latest></div>
+  </div>
+</section>
+
+<section class="section alt">
+  <div class="wrap">
+    <p class="kicker">Spotlight</p>
+    <div class="section-head">
+      <h2>Player spotlight</h2>
+      <span class="spacer"></span>
+      <a href="/players.html" style="font-weight:600">Full player pool</a>
+    </div>
+    <div data-spotlight><p class="fine" style="padding:8px 0">Loading the spotlight…</p></div>
+  </div>
+</section>
+
+<section class="section">
   <div class="wrap">
     <p class="kicker">The wire</p>
     <div class="section-head">
@@ -143,6 +204,9 @@
   <div class="wrap">
     <p class="kicker">The games</p>
     <div class="section-head"><h2>Games</h2></div>
+    <div class="art-band rich" style="margin-bottom:24px">
+      <picture><source type="image/avif" srcset="/assets/img/still-pool-640.avif 640w, /assets/img/still-pool-1024.avif 1024w, /assets/img/still-pool-1440.avif 1440w" sizes="100vw"><source type="image/webp" srcset="/assets/img/still-pool-640.webp 640w, /assets/img/still-pool-1024.webp 1024w, /assets/img/still-pool-1440.webp 1440w" sizes="100vw"><img src="/assets/img/still-pool-1024.webp" width="1440" height="810" alt="Iron Man in play in Marvel Rivals" loading="lazy" decoding="async"></picture>
+    </div>
     <div class="wire-line">
       <span class="w-name">Marvel Rivals</span>
       <span class="w-state" data-game-state>On a break</span>
@@ -158,8 +222,13 @@
 
 <footer class="site-foot" data-chrome-foot></footer>
 <script type="module">
-  import { renderChrome, renderSeasonPlate, fetchJson, esc, fmtDate, api, GAME_SLUG } from "/assets/js/site.js";
+  import { renderChrome, renderSeasonPlate, fetchJson, esc, fmtDate, api, GAME_SLUG, heroRibbonHtml, playerFaceImg, spotCardHtml } from "/assets/js/site.js";
+  import { pic, hero, teamPlate, stageArt, matchArt, ROLE_CLASS } from "/assets/js/media.js";
+  import { mountStatus } from "/assets/js/status.js";
+  document.getElementById("hero-art").innerHTML = pic("hero-key-art", { eager: true, w: 1920, h: 620, alt: "" });
+  mountStatus(document.querySelector("[data-status-plate]"), `/data/v1/${GAME_SLUG}-season.json`).catch(() => {});
   renderChrome("home");
+  document.querySelector("[data-hero-marquee]").innerHTML = heroRibbonHtml("/players.html#heroes");
   api("/api/auth/me").then(({ user }) => {
     if (!user) return;
     const a = document.querySelector("[data-hero-action]");
@@ -171,14 +240,37 @@
   if (teamsData) {
     const top = [...teamsData.players].sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999)).slice(0, 8);
     const teamShort = Object.fromEntries(teamsData.teams.map((t) => [t.short, t]));
-    document.querySelector("[data-board]").innerHTML = top.map((p, i) => `
-      <div class="lb-row${i < 3 ? " top" : ""}">
-        <span class="rk">${p.draftRank}</span>
-        <span class="tick ${roleClass[p.role] || ""}"></span>
-        <span class="who">${esc(p.ign)}</span>
-        <span class="role ${roleClass[p.role] || ""}">${esc(p.role)}</span>
-        <span class="tm">${esc(teamShort[p.team]?.name || p.team)}</span>
-      </div>`).join("");
+    document.querySelector("[data-board]").innerHTML = `<div class="pwall board">` + top.map((p, i) => {
+      const rc = ROLE_CLASS[p.role] || "";
+      const h = (p.heroes || [])[0];
+      return `<article class="pcard ${rc}">
+        <span class="pc-mark">${esc(p.role)}</span><span class="pc-rank">${p.draftRank}</span>
+        <span class="pc-ign" aria-hidden="true">${esc(p.ign)}</span>
+        <div class="pc-art">${h ? hero(h, { eager: i < 4 }) : `<span class="role-badge" aria-hidden="true"><span>${esc(p.role[0])}</span></span>`}</div>
+        <div class="pc-foot"><span class="pc-name">${esc(p.ign)}</span>
+          <span class="pc-team">${teamPlate(p.team, teamShort[p.team]?.name)}<span class="tn">${esc(teamShort[p.team]?.name || p.team)}</span></span>
+          ${h ? `<span class="pc-plays">Plays ${esc(h)}</span>` : ""}</div></article>`;
+    }).join("") + `</div>`;
+  const sched = await fetchJson(`/data/v1/${GAME_SLUG}-schedule.json`).catch(() => null);
+  if (sched && teamsData) {
+    const tn = Object.fromEntries(teamsData.teams.map((t) => [t.short, t.name]));
+    const last = sched.matches.filter((m) => m.status === "final").sort((a, b) => String(b.startsAt).localeCompare(String(a.startsAt))).slice(0, 6);
+    document.querySelector("[data-latest]").innerHTML = last.map((m, i) => `
+      <article class="mcard">${pic(matchArt(i), { sizes: "(min-width: 900px) 33vw, 100vw", alt: "" })}
+        <div class="mc-top"><span>${esc(m.roundLabel || "")}</span><span>${fmtDate(m.startsAt)}</span></div>
+        <div class="mc-side ${m.scoreA > m.scoreB ? "mc-win" : ""}">${teamPlate(m.teamA, tn[m.teamA]).replace('tplate"', 'tplate lg"')}<b>${esc(tn[m.teamA] || m.teamA)}</b></div>
+        <div class="mc-score">${m.scoreA}<i>:</i>${m.scoreB}</div>
+        <div class="mc-side ${m.scoreB > m.scoreA ? "mc-win" : ""}">${teamPlate(m.teamB, tn[m.teamB]).replace('tplate"', 'tplate lg"')}<b>${esc(tn[m.teamB] || m.teamB)}</b></div></article>`).join("");
+  }
+
+    /* Spotlight: the highest-ranked pros the pool lists a signature
+       hero for, as portrait cards. The art is the hero's, the card
+       is the pro's, and it says so on its face. */
+    const spotlight = [...teamsData.players]
+      .sort((a, b) => (a.draftRank ?? 999) - (b.draftRank ?? 999))
+      .filter((p) => p.heroes?.length).slice(0, 6);
+    document.querySelector("[data-spotlight]").innerHTML =
+      `<div class="spot-grid">${spotlight.map((p) => spotCardHtml(p, teamShort[p.team]?.name)).join("")}</div>`;
   }
 
   /* The wire: every competition as one line (name, stage, state word,
@@ -204,6 +296,13 @@
       gameState.textContent = anyLive ? "Live now" : anyNext ? "On a break" : "Season complete";
       gameState.classList.toggle("live", anyLive);
     }
+    document.querySelector("[data-stagerail]").innerHTML = [...season.seasons].sort((a, b) => (a.startsOn || "").localeCompare(b.startsOn || "")).map((x) => {
+      const nm = x.name.replace(/^Marvel Rivals Ignite 2026:\s*/, "");
+      return `<a class="scard" href="/season.html" data-state="${stateOf(x)}">
+        ${pic(stageArt(x.name), { sizes: "(min-width: 900px) 20vw, 100vw", w: 1440, h: 810, alt: "" })}
+        <span class="sc-s">${stateWord(x)}</span>
+        <span class="sc-t"><span class="sc-n">${esc(nm)}</span><span class="sc-d">${fmtDate(x.startsOn)} to ${fmtDate(x.endsOn)}</span></span></a>`;
+    }).join("");
     document.querySelector("[data-wire]").innerHTML = Object.entries(groups).map(([month, ss]) => `
       <div class="wire-group">
         <p class="wire-date">${esc(month)}</p>
@@ -218,5 +317,7 @@
       </div>`).join("");
   }
 </script>
+  <script src="/assets/js/fleet-live.js"></script>
+  <script src="/assets/js/fleet-bar.js" data-site="fantasy-rivals"></script>
 </body>
 </html>

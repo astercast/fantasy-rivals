@@ -1,0 +1,21 @@
+{
+ "format": "pulse/1",
+ "generated_at": "2026-10-24T13:47:12Z",
+ "healthy": true,
+ "sources_ok": 1,
+ "sources_total": 1,
+ "sources": [
+  {
+   "id": "liquipedia",
+   "label": "Liquipedia pages",
+   "url": "https://liquipedia.net/marvelrivals/",
+   "ok": true,
+   "items": 6,
+   "checked_at": "2026-10-24T13:47:12Z",
+   "last_ok_at": "2026-10-24T13:47:12Z",
+   "error": null,
+   "fails_in_a_row": 0
+  }
+ ],
+ "changes": []
+}

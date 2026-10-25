@@ -1,8 +1,29 @@
 /* league.js, the league room: overview, draft, lineup, standings, commish. */
-import { renderChrome, renderSeasonPlate, api, esc, fmtDate } from "/assets/js/site.js";
+import { renderChrome, renderSeasonPlate, api, esc, fmtDate, fetchJson, GAME_SLUG, heroFaceImg, playerFaceImg, teamHeroStackHtml, renderHeroWall } from "/assets/js/site.js";
 
 renderChrome("");
 renderSeasonPlate(document.querySelector("[data-season-plate]"));
+renderHeroWall(document.querySelector("[data-hero-wall]"));
+
+/* Signature-hero faces for surfaces whose rows carry only an ign
+   (picks, rosters, lineups, week detail): the map comes from the
+   same static teams data the pool was seeded from, and a face
+   renders only for a pro that data lists a hero for. The draft
+   pool's own rows carry their heroes and need no map. */
+let teamsDataCache = null;
+const heroByIgn = new Map();
+const shortByTeamName = new Map();
+fetchJson(`/data/v1/${GAME_SLUG}-teams.json`).then((d) => {
+  teamsDataCache = d;
+  for (const p of d.players) if (p.heroes?.length) heroByIgn.set(p.ign, p.heroes[0]);
+  for (const t of d.teams) shortByTeamName.set(t.name, t.short);
+  if (lastState) renderDraft(lastState);
+}).catch(() => {});
+const faceForIgn = (ign) => {
+  const h = heroByIgn.get(ign);
+  return h ? heroFaceImg(h) : "";
+};
+const stackForTeamName = (name) => teamHeroStackHtml(teamsDataCache, shortByTeamName.get(name), 3);
 const params = new URLSearchParams(location.search);
 const leagueId = params.get("id");
 const alertBox = document.querySelector("[data-alert]");
@@ -40,7 +61,7 @@ async function loadLeague() {
   document.querySelector("[data-season-line]").textContent =
     `${season ? season.name : ""}${season?.stage ? " · " + season.stage : ""}`;
   document.querySelector("[data-league-sub]").textContent =
-    `${statusText[league.status] || league.status} · ${members.length}/${league.size} teams · your team: ${me.team_name}`;
+    `${(league.status === "forming" && members.length >= league.size) ? "Full, ready to draft" : (statusText[league.status] || league.status)} · ${members.length} / ${league.size} teams · your team: ${me.team_name}`;
   if (isCommissioner) document.querySelector("[data-comm-tab]").classList.remove("hidden");
 
   document.querySelector("[data-members]").innerHTML = members.map((m) => `
@@ -207,7 +228,7 @@ function renderDraft(state) {
   document.querySelector("[data-picks]").innerHTML = picks?.length
     ? [...picks].reverse().map((p) => `
       <div class="pick-row"><span class="mono fine">#${p.pick_no + 1}</span>
-        <strong>${esc(p.ign || p.squad_name || "")}</strong>
+        <strong>${p.ign ? faceForIgn(p.ign) : stackForTeamName(p.squad_name)}${esc(p.ign || p.squad_name || "")}</strong>
         <span class="muted small">${esc(p.role || (p.squad_name ? "Squad" : ""))}</span>
         <span class="spacer"></span><span class="small">${esc(p.team_name)}</span>${p.auto ? ' <span class="fine">auto</span>' : ""}</div>`).join("")
     : `<p class="muted small">No picks yet.</p>`;
@@ -288,7 +309,7 @@ function renderBoard(state) {
           `<span class="b-meta">Pick ${pickNo + 1} of ${draft.totalPicks} · on the clock</span>` +
           `${memberId === myMemberId && autoPick ? ' <span class="b-auto">AUTO</span>' : ""}</td>`;
       } else if (p) {
-        cells += `<td class="${p.member_id === myMemberId ? "mine" : ""}"><span class="b-ign">${esc(p.ign || p.squad_name || "")}</span>` +
+        cells += `<td class="${p.member_id === myMemberId ? "mine" : ""}"><span class="b-ign">${p.ign ? faceForIgn(p.ign) : ""}${esc(p.ign || p.squad_name || "")}</span>` +
           `<span class="b-meta">${esc(p.role || (p.squad_name ? "Squad" : ""))}${p.auto ? " · auto" : ""}</span></td>`;
       } else {
         cells += `<td class="empty">Pick ${pickNo + 1}</td>`;
@@ -312,7 +333,7 @@ function renderPool(state) {
     poolEl.innerHTML = (squads || []).map((s) => `
       <div class="pool2-row">
         ${mine ? `<button class="pick-ctl live" data-pick-squad="${s.id}" title="Claim ${esc(s.name)}" aria-label="Claim ${esc(s.name)}">+</button>` : `<span class="pick-ctl" aria-hidden="true">+</span>`}
-        <span class="who">${esc(s.name)}</span>
+        <span class="who">${teamHeroStackHtml(teamsDataCache, s.short, 3)}${esc(s.name)}</span>
         <span class="role">${esc(s.region || "")}</span>
         <span class="marg">${esc(s.short || "")}</span>
       </div>`).join("");
@@ -357,7 +378,7 @@ function renderPool(state) {
     <div class="pool2-row">
       ${mine ? `<button class="pick-ctl live" data-pick-player="${p.id}" title="Draft ${esc(p.ign)}" aria-label="Draft ${esc(p.ign)}">+</button>` : `<span class="pick-ctl" aria-hidden="true">+</span>`}
       <span class="rk">${p.draft_rank}</span>
-      <span class="who">${esc(p.ign)}</span>
+      <span class="who">${playerFaceImg(p)}${esc(p.ign)}</span>
       <span class="role ${roleClass(p.role)}">${esc(p.role)}</span>
       <span class="muted small">${esc(p.pro_team_name || "")}</span>
       <span class="marg">${(p.heroes || []).map(esc).join(" · ")}</span>
@@ -412,7 +433,7 @@ function renderQueue(state) {
           <span class="next-pick-tag">Next pick</span>
           <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
             <span class="drag" aria-hidden="true">⠿</span>
-            <span class="q-name">${esc(p.ign)}</span>
+            <span class="q-name">${playerFaceImg(p)}${esc(p.ign)}</span>
             ${controls(p, i)}
           </div>
         </div>
@@ -420,7 +441,7 @@ function renderQueue(state) {
     }
     return `<div class="queue-row" draggable="true" data-queue-row="${i}">
       <span class="drag" aria-hidden="true">⠿</span>
-      <span class="q-name">${esc(p.ign)}</span>
+      <span class="q-name">${playerFaceImg(p)}${esc(p.ign)}</span>
       ${controls(p, i)}
     </div>`;
   }).join("");
@@ -478,7 +499,7 @@ function renderRoster(state) {
   const mine = (state.picks || []).filter((p) => p.member_id === state.myMemberId);
   el.innerHTML = mine.length
     ? mine.map((p) => `
-      <div class="pick-row"><strong>${esc(p.ign || p.squad_name || "")}</strong>
+      <div class="pick-row"><strong>${p.ign ? faceForIgn(p.ign) : stackForTeamName(p.squad_name)}${esc(p.ign || p.squad_name || "")}</strong>
         <span class="muted small">${esc(p.role || (p.squad_name ? "Squad" : ""))}</span>
         <span class="spacer"></span><span class="mono fine">Pick ${p.pick_no + 1}</span></div>`).join("")
     : `<p class="muted small" style="padding:8px 2px">Nothing drafted yet. Your roster fills in here as your picks land.</p>`;
@@ -577,13 +598,13 @@ async function loadLineup() {
     const players = data.roster.filter((r) => r.player_id);
     const squad = data.roster.find((r) => r.pro_team_id);
     document.querySelector("[data-lineup-rows]").innerHTML = players.map((r) => `
-      <tr><td><strong>${esc(r.ign)}</strong></td>
+      <tr><td><strong>${faceForIgn(r.ign)}${esc(r.ign)}</strong></td>
         <td><span class="role ${r.role === "Vanguard" ? "van" : r.role === "Duelist" ? "due" : "str"}">${esc(r.role)}</span></td>
         <td class="muted">${esc(r.pro_team_name || "")}</td>
         <td><select data-slot-for="${r.player_id}" ${data.locked ? "disabled" : ""} style="padding:8px; border:1px solid var(--line-strong); border-radius:0; font:inherit; width:100%; min-height:44px">
           ${["VAN", "DUE", "STR", "FLEX", "BENCH"].map((s) => `<option value="${s}" ${saved[r.player_id] === s ? "selected" : ""}>${s === "BENCH" ? "Bench" : s}</option>`).join("")}
         </select></td></tr>`).join("") +
-      (squad ? `<tr><td><strong>${esc(squad.squad_name)}</strong></td><td><span class="role">Squad</span></td><td class="muted">scores its own series</td><td class="muted small">Always on</td></tr>` : "");
+      (squad ? `<tr><td><strong>${stackForTeamName(squad.squad_name)}${esc(squad.squad_name)}</strong></td><td><span class="role">Squad</span></td><td class="muted">scores its own series</td><td class="muted small">Always on</td></tr>` : "");
     // Default unassigned players to BENCH in the UI (validator requires full assignment of starters only;
     // unselected roster players default to bench server-side by omission).
     document.querySelectorAll("[data-slot-for]").forEach((sel) => {
@@ -620,12 +641,16 @@ async function loadStandings() {
       for (let w = 1; w <= weeks; w++) detailSel.add(new Option(`Week ${w}`, w));
     }
     const data = await api(`/api/leagues/standings?leagueId=${leagueId}&week=${detailSel.value || 1}`);
+    /* No real results yet: show blanks, not zeros and not a ranking. */
+    const hasResults = data.standings.some((s) => Number(s.points_for) > 0 || Number(s.points_against) > 0 || s.wins + s.losses > 0);
+    const blank = "·";
     document.querySelector("[data-standings-rows]").innerHTML = data.standings.length
       ? data.standings.map((s, i) => `
-        <tr class="${s.member_id === L.me.id ? "me" : ""}"><td class="n">${i + 1}</td><td>${esc(s.team_name)}</td>
-          <td class="score">${Number(s.points_for).toFixed(1)}</td>
-          <td class="n">${s.wins}-${s.losses}</td>
-          <td class="score">${Number(s.points_against).toFixed(1)}</td></tr>`).join("")
+        <tr class="${s.member_id === L.me.id ? "me" : ""}"><td class="n">${hasResults ? i + 1 : blank}</td><td>${esc(s.team_name)}</td>
+          <td class="score">${hasResults ? Number(s.points_for).toFixed(1) : blank}</td>
+          <td class="n">${hasResults ? `${s.wins}-${s.losses}` : blank}</td>
+          <td class="score">${hasResults ? Number(s.points_against).toFixed(1) : blank}</td></tr>`).join("")
+        + (hasResults ? "" : `<tr><td colspan="5" class="muted small">No real results are added yet, so there is no table. Teams are listed in no order.</td></tr>`)
       : `<tr><td colspan="5" class="muted">No table yet, the draft comes first.</td></tr>`;
     const byWeek = {};
     for (const m of data.matchups) (byWeek[m.week] ||= []).push(m);
@@ -633,28 +658,29 @@ async function loadStandings() {
       ? Object.entries(byWeek).map(([w, ms]) => `
         <p class="kicker" style="margin:14px 0 6px">${ms[0].is_playoff ? "Playoff · " : ""}Week ${w}</p>
         ${ms.map((m) => {
-          const played = m.score_a != null && m.score_b != null;
+          const played = hasResults && m.score_a != null && m.score_b != null;
           const aWin = played && Number(m.score_a) > Number(m.score_b);
           const bWin = played && Number(m.score_b) > Number(m.score_a);
           return `<div class="versus">
-            <div class="side ${aWin ? "win" : ""}"><span class="t-name">${esc(m.team_a)}</span><span class="t-score">${m.score_a == null ? "·" : Number(m.score_a).toFixed(1)}</span></div>
+            <div class="side ${aWin ? "win" : ""}"><span class="t-name">${esc(m.team_a)}</span><span class="t-score">${!played ? "·" : Number(m.score_a).toFixed(1)}</span></div>
             <div class="vs-mid"><span class="vs-badge">${m.team_b ? "VS" : "BYE"}</span></div>
-            <div class="side right ${bWin ? "win" : ""}"><span class="t-name">${m.team_b ? esc(m.team_b) : "Bye week"}</span><span class="t-score">${m.score_b == null ? "·" : Number(m.score_b).toFixed(1)}</span></div>
+            <div class="side right ${bWin ? "win" : ""}"><span class="t-name">${m.team_b ? esc(m.team_b) : "Bye week"}</span><span class="t-score">${!played ? "·" : Number(m.score_b).toFixed(1)}</span></div>
           </div>`;
         }).join("")}`).join("")
       : `<p class="muted small">Matchups generate when the draft completes.</p>`;
     const detail = document.querySelector("[data-week-detail]");
-    const rows = data.playerScores.map((s) => `
-      <div class="pick-row"><strong>${esc(s.ign)}</strong><span class="role ${s.role === "Vanguard" ? "van" : s.role === "Duelist" ? "due" : "str"}">${esc(s.role)}</span>
+    const weekHasData = data.playerScores.some((s) => (s.breakdown?.series ?? 0) > 0) || data.squadScores.some((s) => Number(s.points) > 0);
+    const rows = !weekHasData ? "" : data.playerScores.map((s) => `
+      <div class="pick-row"><strong>${faceForIgn(s.ign)}${esc(s.ign)}</strong><span class="role ${s.role === "Vanguard" ? "van" : s.role === "Duelist" ? "due" : "str"}">${esc(s.role)}</span>
       <span class="muted small">${esc(s.team_name)} · ${s.breakdown?.series ?? 0} series, ${s.breakdown?.seriesWon ?? 0} won</span>
-      <span class="spacer"></span><span class="mono">${Number(s.points).toFixed(1)}</span></div>`).join("");
+      <span class="spacer"></span><span class="mono">${(s.breakdown?.series ?? 0) > 0 ? Number(s.points).toFixed(1) : "·"}</span></div>`).join("");
     const squads = data.squadScores.map((s) => `
-      <div class="pick-row"><strong>${esc(s.squad_name)}</strong><span class="role">Squad</span>
+      <div class="pick-row"><strong>${stackForTeamName(s.squad_name)}${esc(s.squad_name)}</strong><span class="role">Squad</span>
       <span class="muted small">${esc(s.team_name)} · ${s.breakdown?.seriesWins ?? 0} series wins, ${s.breakdown?.sweeps ?? 0} sweeps</span>
       <span class="spacer"></span><span class="mono">${Number(s.points).toFixed(1)}</span></div>`).join("");
-    detail.innerHTML = rows || squads
+    detail.innerHTML = weekHasData
       ? rows + squads
-      : `<p class="muted small" style="padding-top:10px">Week ${data.week} hasn't been scored yet.</p>`;
+      : `<p class="muted small" style="padding-top:10px">No real results are added for week ${data.week} yet, so there are no points to show.</p>`;
   } catch (err) { showError(err.message); }
 }
 document.querySelector("[data-detail-week]")?.addEventListener("change", loadStandings);
@@ -669,7 +695,11 @@ document.querySelector("[data-score-week]")?.addEventListener("click", async () 
       method: "POST",
       body: JSON.stringify({ leagueId, week, generatePlayoffs: gen }),
     });
-    info.textContent = `Week ${week} scored across ${r.matchups} matchups.${r.playoffs ? " Playoff bracket seeded." : ""}`;
+    const chk = await api(`/api/leagues/standings?leagueId=${leagueId}&week=${week}`).catch(() => null);
+    const got = chk && (chk.playerScores.some((s) => (s.breakdown?.series ?? 0) > 0) || chk.squadScores.some((s) => Number(s.points) > 0));
+    info.textContent = got
+      ? `Week ${week} scored across ${r.matchups} matchups.${r.playoffs ? " Playoff bracket seeded." : ""}`
+      : `No real results are added for week ${week} yet, so nobody earned points. Run this again after the results are added.${r.playoffs ? " Playoff bracket seeded." : ""}`;
     info.classList.add("show");
     await loadLeague();
   } catch (err) {

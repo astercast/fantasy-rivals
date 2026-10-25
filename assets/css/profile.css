@@ -225,3 +225,57 @@ a { color: inherit; text-underline-offset: .2em; }
 @keyframes road-in   { from { transform: scaleX(0); } }
 @keyframes needle-in { from { opacity: 0; translate: 0 -.75rem; } }
 @keyframes beat      { 50% { opacity: .35; } }
+
+/* ============ 8. ROUND 3 FIXES ============ */
+
+/* One left edge: the header, the season block, the plate and every
+   section start at the same line. */
+.season { padding-inline: 0; }
+.season-top, .profile { padding-inline: var(--gutter); }
+.section .wrap, .site-foot .wrap { max-inline-size: var(--page); padding-inline: var(--gutter); }
+.plate-in { max-inline-size: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+.wrap[style*="max-width"] { margin-inline: auto; }
+
+/* The hero says plainly what is not live yet. */
+.season-state-note {
+  margin: var(--s-2) 0 0; max-inline-size: 52ch; font-size: .9rem; color: var(--ink-2);
+  border-inline-start: 2px solid var(--ink-2); padding-inline-start: var(--s-2);
+}
+
+/* The state word on every plate is a chip, the same mark as home. */
+.plate-state, .plate-in.compact .plate-state {
+  display: inline-block; border: 1px solid var(--ink); border-radius: 3px;
+  padding: .45em .7em .4em; font-size: .8rem; line-height: 1; letter-spacing: .14em;
+}
+.plate-state.loud { background: var(--live); border-color: var(--live); color: var(--arena); }
+
+/* Art bands follow the home hero: grey, quiet, no blue wash. */
+.art-band img { filter: grayscale(1) contrast(1.05); opacity: .8; }
+.art-band::after { background: linear-gradient(to top, var(--arena) 0%, transparent 70%); }
+
+/* Heroes sit in a closed fold under the pool. */
+.heroes-fold { margin-top: var(--s-5); border-top: 1px solid var(--line); }
+.heroes-fold summary {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: .25rem 1rem;
+  padding: var(--s-3) 0; cursor: pointer; list-style: none;
+}
+.heroes-fold summary::-webkit-details-marker { display: none; }
+.heroes-fold summary::after {
+  content: "Show"; margin-inline-start: auto;
+  font: 700 .75rem/1 var(--font); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2);
+}
+.heroes-fold[open] summary::after { content: "Hide"; }
+.hf-title { font: 800 1.25rem/1 var(--font); font-stretch: var(--wide); text-transform: uppercase; }
+.hf-note { color: var(--ink-2); }
+.heroes-fold .hero-strip { padding-top: var(--s-2); margin-bottom: 0; }
+
+/* Phone: the stage names no longer run into each other. */
+@media (width < 40rem) {
+  .profile-track { padding-bottom: 5rem; }
+  .stages { block-size: 4.75rem; }
+  .stages li { white-space: normal; min-inline-size: 0; max-inline-size: 5.5rem; line-height: 1.2; }
+  .stages li:nth-child(even) { top: 2.4rem; }
+}
+
+/* Buttons are flat: no inset bevel. */
+.btn, .btn-primary { box-shadow: none; }

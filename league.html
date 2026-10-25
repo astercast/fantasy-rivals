@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="built" content="2026-10-24T13:46:16.956Z">
 <title>League · Rivals Fantasy</title>
 <meta name="theme-color" content="#0C0D0F">
 <meta name="description" content="The league room: draft board, lineups, weekly matchups, standings and the activity feed.">
@@ -22,12 +23,15 @@
 <link rel="preload" href="/assets/fonts/saira-latin-normal-var.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/css/main.css">
 <link rel="stylesheet" href="/assets/css/profile.css">
+<link rel="stylesheet" href="/assets/css/status.css">
+<link rel="stylesheet" href="/assets/css/pulse.css">
+<link rel="stylesheet" href="/assets/css/media.css">
 </head>
 <body>
 <header class="site-head" data-chrome-head></header>
 <section class="plate" data-season-plate data-plate-compact></section>
-<div class="art-band subject-low">
-  <img src="/assets/img/league-art.jpg" width="1440" height="810" alt="Jeff the Land Shark in Marvel Rivals">
+<div class="art-band rich">
+  <picture><source type="image/avif" srcset="/assets/img/still-finals-640.avif 640w, /assets/img/still-finals-1024.avif 1024w, /assets/img/still-finals-1440.avif 1440w" sizes="100vw"><source type="image/webp" srcset="/assets/img/still-finals-640.webp 640w, /assets/img/still-finals-1024.webp 1024w, /assets/img/still-finals-1440.webp 1440w" sizes="100vw"><img src="/assets/img/still-finals-1024.webp" width="1440" height="810" alt="The K'un-Lun arena in Marvel Rivals" fetchpriority="high" decoding="async"></picture>
 </div>
 
 <section class="section" style="padding-top:24px">
@@ -196,17 +200,20 @@
           <div class="alert info" data-comm-info style="margin-top:16px"></div>
         </div>
         <div class="card">
-          <h3>Importing results</h3>
-          <p class="muted small">Results enter through the import API with a named source, never typed into the standings by hand. Payload per series: week, both teams, map score, and each player's line (eliminations / deaths / assists / final hits / damage / blocked / healing).</p>
-          <pre class="mono" style="font-size:12px; background:var(--bg-2); padding:16px; overflow:auto; margin-top:16px">POST /api/admin/import-results
-{ "seasonId": "…", "source": "Liquipedia series result; player lines from the official broadcast VOD scoreboard",
-  "matches": [{ "week": 1, "teamA": "SEN",
-    "teamB": "100T", "scoreA": 3, "scoreB": 1,
-    "status": "final", "stats": [ … ] }] }</pre>
-          <p class="fine" style="margin-top:8px">Admins and the pipeline key can import. Unresolved teams/players are reported back, never guessed.</p>
+          <h3>Where scores come from</h3>
+          <p class="muted small">Scores come from the real pro matches. When a week's series have been added to the site, press Score week and the standings update. Nobody types scores by hand.</p>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <p class="kicker">The heroes</p>
+    <div class="section-head"><h2>The 54 heroes</h2><span class="spacer"></span><a href="/players.html#heroes" style="font-weight:600">Heroes on the players page</a></div>
+    <p class="muted" style="max-width:64ch; margin-bottom:24px">Game characters, not players. A portrait beside a pro in the draft room is that pro's listed signature hero, and it appears only where the pool lists one.</p>
+    <div data-hero-wall></div>
   </div>
 </section>
 
